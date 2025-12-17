@@ -1880,8 +1880,9 @@ Class.blunderbuss = {
                 ANGLE: 9,
             },
             PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.blunderbuss]),
                 TYPE: "bullet",
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.blunderbuss])
+                LABEL: "Pellet"
             }
         },
         {
@@ -1892,8 +1893,9 @@ Class.blunderbuss = {
                 ANGLE: 6,
             },
             PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.blunderbuss]),
                 TYPE: "bullet",
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.blunderbuss])
+                LABEL: "Pellet"
             }
         },
         {
@@ -1904,8 +1906,9 @@ Class.blunderbuss = {
                 ANGLE: 3,
             },
             PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.blunderbuss]),
                 TYPE: "bullet",
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.blunderbuss])
+                LABEL: "Pellet"
             }
         }], 0),
         {
@@ -1914,8 +1917,8 @@ Class.blunderbuss = {
                 WIDTH: 7
             },
             PROPERTIES: {
-                TYPE: "bullet",
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle])
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle]),
+                TYPE: "bullet"
             }
         },
         {
