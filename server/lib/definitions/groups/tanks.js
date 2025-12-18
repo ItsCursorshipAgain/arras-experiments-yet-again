@@ -3,7 +3,33 @@ const { base, dfltskl, smshskl, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
 
 // Presets
-const hybridTankOptions = {count: 1, independent: true, cycle: false}
+const hybrid_options = {count: 1, independent: true, cycle: false}
+const triAngle_propeller = weaponMirror({
+    POSITION: {
+        LENGTH: 16,
+        WIDTH: 8,
+        ANGLE: 150,
+        DELAY: 0.1
+    },
+    PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
+        TYPE: "bullet",
+        LABEL: "thruster"
+    }
+})
+const triAngle_propeller2 = weaponMirror([{
+    POSITION: {
+        LENGTH: 14,
+        WIDTH: 8,
+        ANGLE: 135,
+        DELAY: 0.6
+    },
+    PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
+        TYPE: "bullet",
+        LABEL: "thruster"
+    }
+}])
 
 // Basic Tank
 Class.basic = {
@@ -496,14 +522,7 @@ Class.flangle = {
     LABEL: "Flangle",
     DANGER: 6,
     STAT_NAMES: statnames.mixed,
-    GUNS: weaponMirror({
-        POSITION: [16, 8, 1, 0, 0, 150, 0.1],
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-            TYPE: "bullet",
-            LABEL: "thruster"
-        }
-    }),
+    GUNS: triAngle_propeller,
     TURRETS: [{
         POSITION: [6, 10, 0, 0, 190, 0],
         TYPE: ["flailBolt3", {
@@ -912,7 +931,6 @@ Class.monsoon_bent = {
         }
     ], { delayIncrement: 0.5 })
 }
-
 Class.overseer = {
     PARENT: "genericTank",
     LABEL: "Overseer",
@@ -1199,19 +1217,7 @@ Class.triAngle = {
                 LABEL: "Front"
             }
         },
-        ...weaponMirror({
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 8,
-                ANGLE: 150,
-                DELAY: 0.1
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        })
+        ...triAngle_propeller
     ]
 }
 Class.triTrapper = {
@@ -1442,19 +1448,7 @@ Class.ambulance = {
                 LABEL: "Front"
             }
         },
-        ...weaponMirror({
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 8,
-                ANGLE: 150,
-                DELAY: 0.1
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        })
+        ...triAngle_propeller
     ]
 }
 Class.annihilator = {
@@ -1474,7 +1468,7 @@ Class.annihilator = {
         }
     ]
 }
-Class.armsman = makeOver("rifle", "Armsman", hybridTankOptions)
+Class.armsman = makeOver("rifle", "Armsman", hybrid_options)
 Class.architect = makeRadialAuto("architectGun", {isTurret: true, danger: 7, size: 12, label: "Architect", body: {SPEED: 1.1 * base.SPEED}})
 Class.assembler = {
     PARENT: "genericTank",
@@ -1773,7 +1767,7 @@ Class.bentDouble = {
         }
     ], 2)
 }
-Class.bentHybrid = makeOver("tripleShot", "Bent Hybrid", hybridTankOptions)
+Class.bentHybrid = makeOver("tripleShot", "Bent Hybrid", hybrid_options)
 Class.bigCheese = {
     PARENT: "genericTank",
     LABEL: "Big Cheese",
@@ -2045,32 +2039,8 @@ Class.booster = {
                 LABEL: "Front"
             }
         },
-        ...weaponMirror([{
-            POSITION: {
-                LENGTH: 14,
-                WIDTH: 8,
-                ANGLE: 135,
-                DELAY: 0.6
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 8,
-                ANGLE: 150,
-                DELAY: 0.1
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        }])
+        ...triAngle_propeller2,
+        ...triAngle_propeller
     ]
 }
 Class.bulwark = {
@@ -2391,7 +2361,7 @@ Class.construct = { // it's "construct" and not "constructor" because "construct
         }
     ]
 }
-Class.cropDuster = makeOver('minigun', "Crop Duster", hybridTankOptions)
+Class.cropDuster = makeOver('minigun', "Crop Duster", hybrid_options)
 Class.crossbow = {
     PARENT: "genericTank",
     LABEL: "Crossbow",
@@ -2814,20 +2784,8 @@ Class.fighter = {
                 TYPE: "bullet",
                 LABEL: "Side"
             }
-        },
-        {
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 8,
-                ANGLE: 150,
-                DELAY: 0.1
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        }])
+        }]),
+        ...triAngle_propeller
     ]
 }
 Class.flace = {
@@ -2835,14 +2793,7 @@ Class.flace = {
     LABEL: "Flace",
     DANGER: 7,
     STAT_NAMES: statnames.mixed,
-    GUNS: weaponMirror({
-        POSITION: [16, 8, 1, 0, 0, 150, 0.1],
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-            TYPE: "bullet",
-            LABEL: "thruster"
-        }
-    }),
+    GUNS: triAngle_propeller,
     TURRETS: [{
         POSITION: [6, 10, 0, 0, 190, 0],
         TYPE: ["maceBolt3", {
@@ -2856,24 +2807,10 @@ Class.flooster = {
     LABEL: "Flooster",
     DANGER: 7,
     STAT_NAMES: statnames.mixed,
-    GUNS: weaponMirror([
-        {
-            POSITION: [13, 8, 1, 0, -1, 140, 0.6],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        },
-        {
-            POSITION: [16, 8, 1, 0, 0, 150, 0.1],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        }
-    ]),
+    GUNS: [
+        ...triAngle_propeller2,
+        ...triAngle_propeller
+    ],
     TURRETS: [{
         POSITION: [6, 10, 0, 0, 190, 0],
         TYPE: ["flailBolt3", {
@@ -3142,7 +3079,7 @@ Class.hexaWhirl.GUNS.push(...weaponArray({
         TYPE: "bullet"
     }
 }, 6, 0.5))
-Class.hybrid = makeOver('destroyer', "Hybrid", hybridTankOptions)
+Class.hybrid = makeOver('destroyer', "Hybrid", hybrid_options)
 Class.infestor = {
     PARENT: "genericTank",
     LABEL: "Infestor",
@@ -3410,15 +3347,8 @@ Class.master = {
                 TYPE: "bullet",
                 LABEL: "thruster"
             }
-        },
-        {
-            POSITION: [16, 8, 1, 0, 0, 150, 0.1],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        }])
+        }]),
+        ...triAngle_propeller
     ]
 }
 Class.medic = {
@@ -4179,7 +4109,7 @@ Class.pentaShot = {
     ]
 }
 Class.phoenix = makeBird("sprayer", "Phoenix")
-Class.poacher = makeOver('hunter', "Poacher", hybridTankOptions)
+Class.poacher = makeOver('hunter', "Poacher", hybrid_options)
 Class.predator = {
     PARENT: "genericTank",
     LABEL: "Predator",
@@ -4634,14 +4564,7 @@ Class.rocket = {
                 LABEL: "Front"
             }
         },
-        ...weaponMirror({
-            POSITION: [14, 8, 1, 0, -1, 140, 0.1],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        })
+        ...triAngle_propeller2
     ],
     ON: [
         {
@@ -5200,20 +5123,8 @@ Class.surfer = {
                 TYPE: "autoswarm",
                 STAT_CALCULATOR: "swarm"
             }
-        },
-        {
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 8,
-                ANGLE: 150,
-                DELAY: 0.1
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-                TYPE: "bullet",
-                LABEL: "thruster"
-            }
-        }])
+        }]),
+        ...triAngle_propeller
     ]
 }
 Class.surgeon = {
