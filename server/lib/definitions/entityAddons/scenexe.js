@@ -536,7 +536,7 @@ Class.scenexeGunner = {
                 TYPE: "bullet"
             }
         }
-    ], { delayIncrement: 0.25 }))
+    ], { delayIncrement: 0.25 })
 }
 Class.scenexeArc = {
     PARENT: "scenexeNode",
