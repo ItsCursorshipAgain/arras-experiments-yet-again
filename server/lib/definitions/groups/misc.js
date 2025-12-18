@@ -1,4 +1,4 @@
-const { combineStats, skillSet, makeAuto, weaponArray, weaponMirror } = require('../facilitators.js')
+const { combineStats, skillSet, makeAuto, weaponArray, weaponMirror2 } = require('../facilitators.js')
 const { base, statnames, dfltskl, smshskl } = require('../constants.js')
 require('./generics.js')
 require('./tanks.js')
@@ -449,14 +449,14 @@ Class.sentinelSwarm = {
     LABEL: "Sentinel",
     UPGRADE_LABEL: "Swarm Sentinel",
     UPGRADE_COLOR: "pink",
-    GUNS: weaponMirror({
+    GUNS: weaponMirror2({
         POSITION: [7, 10, 0.6, 7, 5.5, 180, 0],
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.swarm, { recoil: 1.15, range: 0.9 }]),
             TYPE: "swarm",
             STAT_CALCULATOR: "swarm",
         },
-    })
+    }, { delayIncrement: 0.5 })
 }
 Class.sentinelGun = makeAuto("sentry", "Sentinel", {
     type: "ultraAutoTankGun",
