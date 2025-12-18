@@ -8,7 +8,7 @@ const integrate_healers = false
 const use_original_tree = false // Set to true to enable the original arras.io Arms Race tree and level cap, with some minor bugfixes.
 
 // Presets
-const hybridTankOptions = {count: 1, independent: true, cycle: false}
+const hybrid_options = {count: 1, independent: true, cycle: false}
 const driveHat = {
     TYPE: "squareHat",
     POSITION: {
@@ -514,8 +514,8 @@ Class.charger_AR = {
         }
     ]
 }
-Class.coalesce_AR = makeOver("wark_AR", "Coalesce", hybridTankOptions)
-Class.cobbler_AR = makeOver("mech_AR", "Cobbler", hybridTankOptions)
+Class.coalesce_AR = makeOver("wark_AR", "Coalesce", hybrid_options)
+Class.cobbler_AR = makeOver("mech_AR", "Cobbler", hybrid_options)
 Class.cog_AR = {
     PARENT: "genericTank",
     LABEL: "Cog",
@@ -696,7 +696,7 @@ Class.deathStar_AR = {
     ], 3)
 }
 Class.defect_AR = makeBird("tripleShot", "Defect")
-Class.deviation_AR = makeOver("machineTrapper_AR", "Deviation", hybridTankOptions)
+Class.deviation_AR = makeOver("machineTrapper_AR", "Deviation", hybrid_options)
 Class.dieselTrapper_AR = {
     PARENT: "genericTank",
     LABEL: "Diesel Trapper",
@@ -1022,7 +1022,7 @@ Class.expeller_AR = {
         }
     ], { delayIncrement: 0.5 })
 }
-Class.fashioner_AR = makeOver("builder", "Fashioner", hybridTankOptions)
+Class.fashioner_AR = makeOver("builder", "Fashioner", hybrid_options)
 Class.faucet_AR = {
     PARENT: "genericTank",
     LABEL: "Faucet",
@@ -1139,7 +1139,7 @@ Class.foctillery_AR = {
         }
     ]
 }
-Class.force_AR = makeOver("artillery", "Force", hybridTankOptions)
+Class.force_AR = makeOver("artillery", "Force", hybrid_options)
 Class.forger_AR = {
     PARENT: "genericTank",
     LABEL: "Forger",
@@ -1220,7 +1220,7 @@ Class.frother_AR = {
         }
     ]
 }
-Class.hitman_AR = makeOver("assassin", "Hitman", hybridTankOptions)
+Class.hitman_AR = makeOver("assassin", "Hitman", hybrid_options)
 Class.helicopter_AR = {
     PARENT: "genericTank",
     LABEL: "Helicopter",
@@ -1327,8 +1327,8 @@ Class.incarcerator_AR = {
         }
     ]
 }
-Class.integrator_AR = makeOver("triAngle", "Integrator", hybridTankOptions)
-Class.interner_AR = makeOver("pen_AR", "Interner", hybridTankOptions)
+Class.integrator_AR = makeOver("triAngle", "Integrator", hybrid_options)
+Class.interner_AR = makeOver("pen_AR", "Interner", hybrid_options)
 Class.jalopy_AR = {
     PARENT: "genericTank",
     LABEL: "Jalopy",
@@ -1621,7 +1621,7 @@ Class.pentaseer_AR = {
         }
     })
 }
-Class.polluter_AR = makeOver("diesel_AR", "Polluter", hybridTankOptions)
+Class.polluter_AR = makeOver("diesel_AR", "Polluter", hybrid_options)
 Class.prober_AR = {
     PARENT: "genericTank",
     LABEL: "Prober",
@@ -1958,7 +1958,7 @@ Class.scientist_AR = {
         }
     ]
 }
-Class.shower_AR = makeOver("sprayer", "Shower", hybridTankOptions)
+Class.shower_AR = makeOver("sprayer", "Shower", hybrid_options)
 Class.sniper3_AR = makeRadialAuto("sniper3gun", {isTurret: true, danger: 7, size: 13, label: "Sniper-3", body: {SPEED: 0.8 * base.SPEED, FOV: 1.25 * base.FOV}})
 Class.soother_AR = {
     PARENT: "genericHealer",

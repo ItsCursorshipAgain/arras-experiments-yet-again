@@ -6104,7 +6104,7 @@ Class.machineShot = {
 Class.meDoingYourMom = {
     PARENT: "genericTank",
     LABEL: "Me doing your mom",
-    UPGRADE_LABEL: "MDYM",
+    UPGRADE_LABEL: "M.D.Y.M.",
     DANGER: 7,
     BODY: {
         SPEED: 0.8 * base.SPEED,
@@ -6131,7 +6131,7 @@ Class.meDoingYourMom = {
         }
     ]
 }
-Class.momwtdym = {
+Class.meOnMyWayToDoYourMom = {
     PARENT: "genericTank",
     LABEL: "Me on my way to do your mom",
     UPGRADE_LABEL: "MOMWTDYM",

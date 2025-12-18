@@ -314,7 +314,7 @@ Class.menu_fun.UPGRADES_TIER_0 = [
     "heptaAutoBasic",
     "machineShot",
     "meDoingYourMom",
-    "momwtdym",
+    "meOnMyWayToDoYourMom",
     //"quadCyclone",
     "rapture",
     "riptide",
