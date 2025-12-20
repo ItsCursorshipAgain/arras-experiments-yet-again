@@ -3371,7 +3371,7 @@ Class.toothlessBase = {
         HEALTH: 6 * base.HEALTH,
         DAMAGE: 2 * base.DAMAGE,
     },
-    level_cap: 45,
+    LEVEL_CAP: 45,
     EXTRA_SKILL: 78, // 120 - 42
     SHAPE: 3,
     VALUE: 30e3,
@@ -3722,7 +3722,7 @@ Class.AEMKShipBoss = {
         RECURSION: 3,
     },
     DANGER: 10,
-    level_cap: 45,
+    LEVEL_CAP: 45,
     LEVEL: 45,
     SIZE: Class.genericTank.SIZE * (17 / 3),
     SHAPE: 16,

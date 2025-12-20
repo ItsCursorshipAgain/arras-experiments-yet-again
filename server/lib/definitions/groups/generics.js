@@ -203,7 +203,7 @@ Class.food = {
     MOTION_TYPE: "drift",
     FACING_TYPE: "turnWithSpeed",
     IS_IMMUNE_TO_TILES: false,
-    level_cap: 1,
+    LEVEL_CAP: 1,
     BODY: {
         STEALTH: 30,
         PUSHABILITY: 1,

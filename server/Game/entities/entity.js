@@ -394,8 +394,8 @@ class Entity extends EventEmitter {
             }
             this.refreshBodyAttributes();
         }
-        if (set.level_cap != null) {
-            this.levelCap = set.level_cap;
+        if (set.LEVEL_CAP != null) {
+            this.levelCap = set.LEVEL_CAP;
         }
         const SKILL_ORDER = [
             "RELOAD",

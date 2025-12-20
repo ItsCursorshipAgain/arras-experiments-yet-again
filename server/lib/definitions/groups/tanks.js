@@ -74,8 +74,7 @@ Class.basic = {
                 NEGATIVE_RECOIL: false
             }
         }
-    ],
-    UPGRADES_TIER_3: []
+    ]
 }
 
 // Tier 1

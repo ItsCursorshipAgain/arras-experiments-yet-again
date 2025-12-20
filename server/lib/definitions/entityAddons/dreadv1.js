@@ -53,15 +53,24 @@ g.dreadv1Trap = {
 }
 
 // Comment out the line below to enable this addon, uncomment it to disable this addon.
-// return console.log('--- Dreadnoughts v1 addon [dreadv1.js] is disabled. See lines 32-33 to enable it. ---');
+//return console.log('--- Dreadnoughts v1 addon [dreadv1.js] is disabled. See lines 32-33 to enable it. ---');
 
-// Set the below variable to true to enable the Medicare and Medicaid healing bodies.
-const enableHealers = true;
+// Set the below variable to true to enable the Medicare/Medicaid healing bodies.
+const enable_medicare_branch = true
+
+// Set the below variable to true to make Dreadnoughts use the Rogues color instead of the Hexagon color.
+const old_dreadnought_color = true
+
+// Set the below variable to true to make Octagons use the nest tile color.
+const old_octagon_color = true
+
+// Set the below variable to true to make Octagons use their original (misspelled) name.
+const old_octagon_name = false
 
 // Food
 Class.hexagonOfficialV1 = {
-	PARENT: 'food',
-	COLOR: 'magenta',
+	PARENT: "food",
+	COLOR: "magenta",
 	LABEL: "Hexagon",
 	BODY: {
         DAMAGE: 2 * basePolygonDamage,
@@ -79,8 +88,8 @@ Class.hexagonOfficialV1 = {
     GIVE_KILL_MESSAGE: true,
 }
 Class.heptagonOfficialV1 = {
-	PARENT: 'food',
-	COLOR: 'green',
+	PARENT: "food",
+	COLOR: "green",
 	LABEL: "Heptagon",
 	BODY: {
         DAMAGE: 2 * basePolygonDamage,
@@ -98,9 +107,9 @@ Class.heptagonOfficialV1 = {
     GIVE_KILL_MESSAGE: true,
 }
 Class.octagonOfficialV1 = {
-	PARENT: 'food',
-	COLOR: 'hexagon',
-	LABEL: "Octagon",
+	PARENT: "food",
+	COLOR: "hexagon",
+	LABEL: "Octagon", // misspelled as "Octogon" in arras
 	BODY: {
         DAMAGE: 2 * basePolygonDamage,
         DENSITY: 80,
@@ -116,9 +125,11 @@ Class.octagonOfficialV1 = {
 	DRAW_HEALTH: true,
     GIVE_KILL_MESSAGE: true,
 }
+if (old_octagon_color) { Class.octagonOfficialV1.COLOR = "nest" }
+if (old_octagon_name) { Class.octagonOfficialV1.LABEL = "Octogon" }
 Class.nonagonOfficialV1 = {
-	PARENT: 'food',
-	COLOR: 'white',
+	PARENT: "food",
+	COLOR: "white",
 	LABEL: "Nonagon",
 	BODY: {
         DAMAGE: 2 * basePolygonDamage,
@@ -257,11 +268,12 @@ Class.genericDreadnought1 = {
 	PARENT: "genericTank",
 	BODY: dreadnoughtBody,
 	SHAPE: 6,
-	COLOR: 'hexagon',
+	COLOR: "hexagon",
 	SIZE: 22.5,
 	SKILL_CAP: Array(10).fill(smshskl+3),
 	REROOT_UPGRADE_TREE: "dreadOfficialV1",
 }
+if (old_dreadnought_color) { Class.genericDreadnought1.COLOR = "darkGrey" }
 // Turret damage modifiers:
 // Automation secondary: 1x
 // Automation main: 1.6x
@@ -381,7 +393,7 @@ Class.invaderOfficialV1 = {
 Class.centaurOfficialV1 = {
 	PARENT: "genericDreadnought1",
 	LABEL: "Centaur",
-	UPGRADE_TOOLTIP: "Traps",
+	UPGRADE_TOOLTIP: "Thrown Traps",
 	GUNS: weaponArray([
 		{
 			POSITION: [13, 7, 1, 0, 0, 0, 0],
@@ -424,7 +436,7 @@ Class.juggernautOfficialV1 = {
 	},
 	TURRETS: [{
 		POSITION: [22, 0, 0, 0, 0, 0],
-		TYPE: 'hexagon'
+		TYPE: ['hexagon', { COLOR: "black", MIRROR_MASTER_ANGLE: true }]
 	}]
 }
 Class.medicareOfficialV1 = {
@@ -603,7 +615,7 @@ Class.infiltratorOfficialV1 = {
 Class.cerberusOfficialV1 = {
 	PARENT: "genericDreadnought1",
 	LABEL: "Cerberus",
-	UPGRADE_TOOLTIP: "Trap Spam",
+	UPGRADE_TOOLTIP: "Thrown Trap Spam",
 	GUNS: weaponArray([
 		{
 			POSITION: [13.25, 2.25, 1, 0, 4, 0, 0]
@@ -638,7 +650,7 @@ Class.cerberusOfficialV1 = {
 Class.minotaurOfficialV1 = {
 	PARENT: "genericDreadnought1",
 	LABEL: "Minotaur",
-	UPGRADE_TOOLTIP: "Blocks",
+	UPGRADE_TOOLTIP: "Set Traps",
 	GUNS: weaponArray([
 		{
 			POSITION: [13, 9.5, 1, 0, 0, 0, 0],
@@ -655,7 +667,7 @@ Class.minotaurOfficialV1 = {
 Class.sirenOfficialV1 = {
 	PARENT: "genericDreadnought1",
 	LABEL: "Siren",
-	UPGRADE_TOOLTIP: "Auto-Traps",
+	UPGRADE_TOOLTIP: "Auto-Thrown Traps",
 	GUNS: weaponArray([
 		{
 			POSITION: [6, 7, -1.5, 7, 0, 0, 0],
@@ -699,7 +711,7 @@ Class.behemothOfficialV1 = {
 	},
 	TURRETS: [{
 		POSITION: [23.5, 0, 0, 0, 0, 0],
-		TYPE: 'hexagon'
+		TYPE: ['hexagon', { COLOR: "black", MIRROR_MASTER_ANGLE: true }]
 	}]
 }
 Class.medicaidOfficialV1 = {
@@ -731,7 +743,7 @@ Class.menu_addons.UPGRADES_TIER_0.push("dreadOfficialV1");
 		Class.medicareOfficialV1.UPGRADES_TIER_M1 = ["medicaidOfficialV1"];
 
 const t1Bodies = [ "swordOfficialV1", "pacifierOfficialV1", "invaderOfficialV1", "centaurOfficialV1", "medicareOfficialV1", "automationOfficialV1", "juggernautOfficialV1" ];
-if (!enableHealers) {
+if (!enable_medicare_branch) {
 	t1Bodies.splice(4, 1); // Remove Medicare if healers are disabled
 }
 
@@ -746,7 +758,7 @@ function mergeDreads(dread1, dread2, sourceDread, tier) {
 		TURRETS = [],
 		LABEL = `${dread1.LABEL}-${dread2.LABEL}`,
 		BODY = JSON.parse(JSON.stringify(dreadnoughtBody)),
-		UPGRADE_TOOLTIP = `${dread1.UPGRADE_TOOLTIP ?? ""}+${dread2.UPGRADE_TOOLTIP ?? ""}`;
+		UPGRADE_TOOLTIP = `${dread1.UPGRADE_TOOLTIP ?? ""} + ${dread2.UPGRADE_TOOLTIP ?? ""}`;
 
 	// Label it
 	if (dread1.LABEL == dread2.LABEL) LABEL = dread1.LABEL + " II";

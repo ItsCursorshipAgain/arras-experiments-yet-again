@@ -916,14 +916,14 @@ exports.makeRelic = (type, scale = 1, gem, SIZE, yBase = 8.25) => {
     let relicCasing = {
         PARENT: 'genericEntity',
         LABEL: 'Relic Casing',
-        level_cap: 45,
+        LEVEL_CAP: 45,
         COLOR: type.COLOR,
         MIRROR_MASTER_ANGLE: true,
         SHAPE: [[-0.4,-1],[0.4,-0.25],[0.4,0.25],[-0.4,1]].map(r => r.map(s => s * scale))
     }, relicBody = {
         PARENT: 'genericEntity',
         LABEL: 'Relic Mantle',
-        level_cap: 45,
+        LEVEL_CAP: 45,
         COLOR: type.COLOR,
         MIRROR_MASTER_ANGLE: true,
         SHAPE: type.SHAPE
