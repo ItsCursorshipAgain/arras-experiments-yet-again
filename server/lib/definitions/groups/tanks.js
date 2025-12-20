@@ -1,9 +1,80 @@
-const { combineStats, makeAuto, makeBird, makeDrive, makeOver, makeRadialAuto, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
+const { combineStats, makeAuto, makeDrive, makeOver, makeRadialAuto, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
 const { base, dfltskl, smshskl, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
 
-// Presets
+// Function Presets
 const hybrid_options = {count: 1, independent: true, cycle: false}
+
+// Gun Presets
+const bird_rear = [
+    ...weaponMirror({
+        POSITION: {
+            LENGTH: 16,
+            WIDTH: 9,
+            ANGLE: 153,
+            DELAY: 0.1
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    }),
+    {
+        POSITION: {
+            LENGTH: 18,
+            WIDTH: 9,
+            ANGLE: 180,
+            DELAY: 0.6
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    }
+]
+const birdSuper_rear = [
+    ...weaponMirror([{
+        POSITION: {
+            LENGTH: 14,
+            WIDTH: 9,
+            ANGLE: 133,
+            DELAY: 0.1
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    },
+    {
+        POSITION: {
+            LENGTH: 16,
+            WIDTH: 9,
+            ANGLE: 153,
+            DELAY: 0.35
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    }]),
+    {
+        POSITION: {
+            LENGTH: 18,
+            WIDTH: 8,
+            ANGLE: 180,
+            DELAY: 0.6
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    }
+]
 const trapGuard_rear = [
     {
         POSITION: {
@@ -2667,7 +2738,25 @@ Class.duplicator = {
         },
     ]
 }
-Class.eagle = makeBird("pounder", "Eagle")
+Class.eagle = {
+    PARENT: "genericTank",
+    LABEL: "Eagle",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 20.5,
+                WIDTH: 12
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder]),
+                TYPE: "bullet",
+                ALT_FIRE: true
+            }
+        },
+        ...bird_rear
+    ]
+}
 Class.engineer = {
     PARENT: "genericTank",
     DANGER: 7,
@@ -2756,7 +2845,36 @@ Class.factory = {
         }
     ]
 }
-Class.falcon = makeBird("assassin", "Falcon")
+Class.falcon = {
+    PARENT: "genericTank",
+    LABEL: "Falcon",
+    DANGER: 7,
+    BODY: {
+        SPEED: 0.85 * base.SPEED,
+        FOV: 1.4 * base.FOV
+    },
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 27,
+                WIDTH: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin]),
+                TYPE: "bullet",
+                ALT_FIRE: true
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 13,
+                WIDTH: 8,
+                ASPECT: -2.2
+            }
+        },
+        ...bird_rear
+    ]
+}
 Class.fieldGun = {
     PARENT: "genericTank",
     LABEL: "Field Gun",
@@ -4117,7 +4235,38 @@ Class.pentaShot = {
         }
     ]
 }
-Class.phoenix = makeBird("sprayer", "Phoenix")
+Class.phoenix = {
+    PARENT: "genericTank",
+    LABEL: "Phoenix",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 23,
+                WIDTH: 7
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.lowPower, g.pelleter, { recoil: 1.15 }]),
+                TYPE: "bullet",
+                ALT_FIRE: true
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 12,
+                WIDTH: 10,
+                ASPECT: 1.4,
+                X: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun]),
+                TYPE: "bullet",
+                ALT_FIRE: true
+            }
+        },
+        ...bird_rear
+    ]
+}
 Class.poacher = makeOver('hunter', "Poacher", hybrid_options)
 Class.predator = {
     PARENT: "genericTank",
@@ -5672,8 +5821,9 @@ Class.vortex_old = {
         return output
     })()
 }
-Class.vulture = makeBird({
+Class.vulture = {
     PARENT: "genericTank",
+    LABEL: "Vulture",
     DANGER: 7,
     BODY: {
         FOV: base.FOV * 1.2
@@ -5687,7 +5837,8 @@ Class.vulture = makeBird({
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.minigun]),
-                TYPE: "bullet"
+                TYPE: "bullet",
+                ALT_FIRE: true
             }
         },
         {
@@ -5699,7 +5850,8 @@ Class.vulture = makeBird({
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.minigun, {size: 7/7.5}]),
-                TYPE: "bullet"
+                TYPE: "bullet",
+                ALT_FIRE: true
             }
         },
         {
@@ -5711,11 +5863,13 @@ Class.vulture = makeBird({
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.minigun, {size: 7/8}]),
-                TYPE: "bullet"
+                TYPE: "bullet",
+                ALT_FIRE: true
             }
-        }
+        },
+        ...bird_rear
     ]
-}, "Vulture")
+}
 Class.whirlGuard = {
     PARENT: "genericTank",
     LABEL: "Whirl Guard",

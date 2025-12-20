@@ -1,4 +1,4 @@
-const { combineStats, makeAuto, makeBird, makeDrive, makeOver, makeRadialAuto, makeTurret, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
+const { combineStats, makeAuto, makeDrive, makeOver, makeRadialAuto, makeTurret, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
 const { base, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
 
@@ -7,8 +7,38 @@ const enable_addon = false
 const integrate_healers = false
 const use_original_tree = false // Set to true to enable the original arras.io Arms Race tree and level cap, with some minor bugfixes.
 
-// Presets
+// Function Presets
 const hybrid_options = {count: 1, independent: true, cycle: false}
+
+// Gun Presets
+const bird_rear = [
+    ...weaponMirror({
+        POSITION: {
+            LENGTH: 16,
+            WIDTH: 9,
+            ANGLE: 153,
+            DELAY: 0.1
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    }),
+    {
+        POSITION: {
+            LENGTH: 18,
+            WIDTH: 9,
+            ANGLE: 180,
+            DELAY: 0.6
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    }
+]
 const pelleter_rear = [
     ...weaponMirror({
         POSITION: {
@@ -603,7 +633,29 @@ Class.cog_AR = {
         }
     ], { delayIncrement: 0.5 })
 }
-Class.cockatiel_AR = makeBird("pen_AR", "Cockatiel")
+Class.cockatiel_AR = {
+    PARENT: "genericTank",
+    LABEL: "Cockatiel",
+    DANGER: 7,
+    STAT_NAMES: statnames.trap,
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 20,
+                WIDTH: 8
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 4,
+                WIDTH: 8,
+                ASPECT: 1.7,
+                X: 13
+            }
+        },
+        ...bird_rear
+    ]
+}
 Class.combo_AR = {
     PARENT: "genericTank",
     LABEL: "Combo",
@@ -749,7 +801,40 @@ Class.deathStar_AR = {
         }
     ], 3)
 }
-Class.defect_AR = makeBird("tripleShot", "Defect")
+Class.defect_AR = {
+    PARENT: "genericTank",
+    LABEL: "Defect",
+    DANGER: 7,
+    BODY: {
+        SPEED: base.SPEED * 0.9
+    },
+    GUNS: [
+        ...weaponMirror({
+            POSITION: {
+                LENGTH: 19,
+                WIDTH: 8,
+                Y: 2,
+                ANGLE: 18,
+                DELAY: 0.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
+                TYPE: "bullet"
+            }
+        }),
+        {
+            POSITION: {
+                LENGTH: 22,
+                WIDTH: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
+                TYPE: "bullet"
+            }
+        },
+        ...bird_rear
+    ]
+}
 Class.deviation_AR = makeOver("machineTrapper_AR", "Deviation", hybrid_options)
 Class.dieselTrapper_AR = {
     PARENT: "genericTank",
