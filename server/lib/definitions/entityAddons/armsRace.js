@@ -39,6 +39,47 @@ const bird_rear = [
         }
     }
 ]
+const birdSuper_rear = [
+    ...weaponMirror([{
+        POSITION: {
+            LENGTH: 14,
+            WIDTH: 9,
+            ANGLE: 133,
+            DELAY: 0.1
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    },
+    {
+        POSITION: {
+            LENGTH: 16,
+            WIDTH: 9,
+            ANGLE: 153,
+            DELAY: 0.35
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    }]),
+    {
+        POSITION: {
+            LENGTH: 18,
+            WIDTH: 8,
+            ANGLE: 180,
+            DELAY: 0.6
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+            TYPE: "bullet",
+            LABEL: "Thruster"
+        }
+    }
+]
 const pelleter_rear = [
     ...weaponMirror({
         POSITION: {
