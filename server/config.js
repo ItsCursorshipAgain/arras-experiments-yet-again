@@ -22,9 +22,9 @@ module.exports = {
 
             region: "local", // The region the server is on.
             gamemode: ["tdm"], // The selected gamemode.
-            player_cap: 80, // The maximum number of players that can join the server. Not including bots.
+            player_cap: 0, // Not including bots. Set to 0 to disable.
 
-            properties: { // This overrides settings in the config.js file, providing the selected gamemode doesn't also override it.
+            properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 2,
                 bot_cap: 32,
             }
@@ -41,9 +41,9 @@ module.exports = {
 
             region: "local", // The region the server is on.
             gamemode: ["ffa"], // The selected gamemode.
-            player_cap: 80, // Not including bots.
+            player_cap: 80, // Not including bots. Set to 0 to disable.
 
-            properties: { // This overrides settings in the config.js file, providing the selected gamemode doesn't also override it.
+            properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 bot_cap: 16,
                 daily_tank: {
                     tank: "whirlwind",

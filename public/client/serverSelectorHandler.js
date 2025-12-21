@@ -46,7 +46,11 @@ global.loadServerSelector = (serverData, text) => {
             td2.classList.add("tdCenter");
             td2.textContent = `${server.gameMode}`;
             const td3 = document.createElement("td");
-            td3.textContent = `${server.players}/${server.maxPlayers}`;
+            if (server.maxPlayers < 1) {
+                td3.textContent = `${server.players}`;
+            } else {
+                td3.textContent = `${server.players}/${server.maxPlayers}`;
+            }
             tr.appendChild(td1);
             tr.appendChild(td2);
             tr.appendChild(td3);
