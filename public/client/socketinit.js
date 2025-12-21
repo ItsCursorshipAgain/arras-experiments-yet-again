@@ -853,7 +853,7 @@ let incoming = async function(message, socket) {
                 global.player.roomAnim.y.add(m[1]);
                 global.roomSetup = JSON.parse(m[2]);
             } break;
-            case "bansussy": {
+            case "temporaryban": {
                 global.message = "You have been temporarily banned from the game. You will be able to rejoin after a server restart.";
             } break;
             case "permanentban": {

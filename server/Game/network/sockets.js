@@ -223,8 +223,8 @@ class socketManager {
                 )
                 let b = bans.find((ban) => ban.ip === socket.ip);
                 if (b) {
-                    socket.talk("bansussy"); // Important, kick the user after calling bansussy in order to see the ban message.
-                    socket.kick("temp-Banned player detected!");
+                    socket.talk("temporaryban"); // Important, kick the user after calling temporaryban in order to see the ban message.
+                    socket.kick("Temporarily banned player detected!");
                     return 1;
                   }
                 let permB = permBans.find(
@@ -232,7 +232,7 @@ class socketManager {
                 );
                 if (permB) {
                     socket.talk("permanentban");
-                    socket.permaban("Permanent Banned player found!");
+                    socket.permaban("Permanently banned player found!");
                   return 1;
                 }
                 // Get data
