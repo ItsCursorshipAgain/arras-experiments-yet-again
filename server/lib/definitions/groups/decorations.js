@@ -43,12 +43,7 @@ Class.typhoonDeco = makeDeco(10)
 Class.typhoonDeco.CONTROLLERS = [["spin", { independent: true, speed: 0.128 }]]
 
 // Custom Hats
-Class.healerHat = {
-    LABEL: "Healer Hat",
-    SHAPE: [[0.3, -0.3],[1,-0.3],[1,0.3],[0.3,0.3],[0.3,1],[-0.3,1],[-0.3,0.3],[-1,0.3],[-1,-0.3],[-0.3,-0.3],[-0.3,-1],[0.3,-1]],
-    COLOR: "red",
-    SIZE: 13
-}
+Class.healerHat = makeDeco([[0.3, -0.3],[1,-0.3],[1,0.3],[0.3,0.3],[0.3,1],[-0.3,1],[-0.3,0.3],[-1,0.3],[-1,-0.3],[-0.3,-0.3],[-0.3,-1],[0.3,-1]], "red")
 
 // Bodies
 
