@@ -58,7 +58,7 @@ module.exports = {
 		desmos: {
 			BULLET_SPEED: 'Wave Frequency',
 		},
-		whirlwind: {
+		satellite: {
 			BULLET_SPEED: 'Orbit Speed',
 			BULLET_HEALTH: 'Satellite Health',
 			BULLET_PEN: 'Satellite Penetration',
