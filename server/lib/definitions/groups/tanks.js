@@ -576,7 +576,7 @@ Class.flangle = {
     PARENT: "genericFlail",
     LABEL: "Flangle",
     DANGER: 6,
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     GUNS: triAngle_propeller,
     TURRETS: [{
         POSITION: [6, 10, 0, 0, 190, 0],
@@ -1238,7 +1238,7 @@ Class.trapGuard = {
     PARENT: "genericTank",
     LABEL: "Trap Guard",
     DANGER: 6,
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     GUNS: [
         {
             POSITION: {
@@ -2104,7 +2104,7 @@ Class.booster = {
 Class.bulwark = {
     PARENT: "genericTank",
     LABEL: "Bulwark",
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     DANGER: 7,
     GUNS: weaponMirror([
         {
@@ -2370,7 +2370,7 @@ Class.conqueror = {
     PARENT: "genericTank",
     DANGER: 7,
     LABEL: "Conqueror",
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     BODY: {
         SPEED: 0.8 * base.SPEED
     },
@@ -2917,7 +2917,7 @@ Class.flace = {
     PARENT: "genericFlail",
     LABEL: "Flace",
     DANGER: 7,
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     GUNS: triAngle_propeller,
     TURRETS: [{
         POSITION: [6, 10, 0, 0, 190, 0],
@@ -2931,7 +2931,7 @@ Class.flooster = {
     PARENT: "genericFlail",
     LABEL: "Flooster",
     DANGER: 7,
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     GUNS: booster_propeller,
     TURRETS: [{
         POSITION: [6, 10, 0, 0, 190, 0],
@@ -3002,7 +3002,7 @@ Class.fortress = {
     PARENT: "genericTank",
     LABEL: "Fortress",
     DANGER: 7,
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     BODY: {
         SPEED: 0.8 * base.SPEED,
         FOV: 1.2 * base.FOV
@@ -3050,7 +3050,7 @@ Class.gunnerTrapper = {
     PARENT: "genericTank",
     LABEL: "Gunner Trapper",
     DANGER: 7,
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     BODY: {
         FOV: 1.25 * base.FOV
     },
@@ -4070,7 +4070,7 @@ Class.overtrapper = makeOver({
     PARENT: "genericTank",
     LABEL: "Trapper",
     DANGER: 6,
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     BODY: {
         SPEED: base.SPEED * 0.8,
         FOV: base.FOV * 1.2
@@ -4275,7 +4275,7 @@ Class.prodigy = {
     PARENT: "genericTank",
     LABEL: "Prodigy",
     DANGER: 7,
-    STAT_NAMES: statnames.mixedNecro,
+    STAT_NAMES: statnames.genericNecro,
     SHAPE: 6,
     BODY: {
         SPEED: 0.8 * base.SPEED,
@@ -5711,7 +5711,7 @@ Class.vortex = {
     ANGLE: 90,
     CONTROLLERS: ["whirlwind"],
     HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     TURRETS: [
         {
             TYPE: "tornadoDeco",

@@ -24,24 +24,6 @@ module.exports = {
 	// stat names
 	statnames: {
 		generic: {
-			BODY_DAMAGE: 'Body Damage',
-			MAX_HEALTH: 'Max Health',
-			BULLET_SPEED: 'Bullet Speed',
-			BULLET_HEALTH: 'Bullet Health',
-			BULLET_PEN: 'Bullet Penetration',
-			BULLET_DAMAGE: 'Bullet Damage',
-			RELOAD: 'Reload',
-			MOVE_SPEED: 'Movement Speed',
-			SHIELD_REGEN: 'Shield Regeneration',
-			SHIELD_CAP: 'Shield Capacity',
-		},
-		bullet: { // placeholder
-			BULLET_SPEED: 'Bullet Speed',
-			BULLET_HEALTH: 'Bullet Health',
-			BULLET_PEN: 'Bullet Penetration',
-			BULLET_DAMAGE: 'Bullet Damage',
-		},
-		mixed: {
 			BULLET_SPEED: 'Weapon Speed',
 			BULLET_HEALTH: 'Weapon Health',
 			BULLET_PEN: 'Weapon Penetration',
@@ -67,7 +49,7 @@ module.exports = {
 			BULLET_DAMAGE: 'Drone Damage',
 			RELOAD: 'Max Drone Count',
 		},
-		mixedNecro: {
+		genericNecro: {
 			BULLET_SPEED: 'Weapon Speed',
 			BULLET_HEALTH: 'Weapon Health',
 			BULLET_PEN: 'Weapon Penetration',

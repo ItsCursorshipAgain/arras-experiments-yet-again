@@ -1112,7 +1112,7 @@ Class.vanquisher = {
     PARENT: "genericTank",
     DANGER: 8,
     LABEL: "Vanquisher",
-    STAT_NAMES: statnames.mixed,
+    STAT_NAMES: statnames.generic,
     CONTROLLERS: ['stackGuns'],
     BODY: {
         SPEED: 0.8 * base.SPEED,

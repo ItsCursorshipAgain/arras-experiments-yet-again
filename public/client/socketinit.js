@@ -21,18 +21,18 @@ startSettings = {
 gui = {
     getStatNames: data => {
         return [
-                data?.body_damage ?? 'Body Damage',
-                data?.max_health ?? 'Max Health',
-                data?.bullet_speed ?? 'Bullet Speed',
-                data?.bullet_health ?? 'Bullet Health',
-                data?.bullet_pen ?? 'Bullet Penetration',
-                data?.bullet_damage ?? 'Bullet Damage',
-                data?.reload ?? 'Reload',
-                data?.move_speed ?? 'Movement Speed',
-                data?.shield_regen ?? 'Shield Regeneration',
-                data?.shield_cap ?? 'Shield Capacity',
-            ]
-        },
+            data?.body_damage ?? 'Body Damage',
+            data?.max_health ?? 'Max Health',
+            data?.bullet_speed ?? 'Bullet Speed',
+            data?.bullet_health ?? 'Bullet Health',
+            data?.bullet_pen ?? 'Bullet Penetration',
+            data?.bullet_damage ?? 'Bullet Damage',
+            data?.reload ?? 'Reload',
+            data?.move_speed ?? 'Movement Speed',
+            data?.shield_regen ?? 'Shield Regeneration',
+            data?.shield_cap ?? 'Shield Capacity',
+        ]
+    },
     skills: [
         { amount: 0, color: 'purple', cap: 1, softcap: 1 },
         { amount: 0, color: 'pink'  , cap: 1, softcap: 1 },
