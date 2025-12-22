@@ -30,7 +30,6 @@ class bulletEntity { // Basically an (Entity) but with heavy limitations to impr
         this.activation = new Activation(this);
         this.controllers = [];
         // Initalize
-        this.guns = [];
         this.skill = new Skill();
         this.health = new HealthType(1, 'static', 0);
         this.shield = new HealthType(0, 'dynamic');
@@ -499,8 +498,13 @@ class bulletEntity { // Basically an (Entity) but with heavy limitations to impr
     destroy() {
         // Remove this from views
         global.gameManager.views.forEach(v => v.remove(this));
-        // Remove bullet from bullet list if needed and the only reason it exists is for bacteria.
-        if (this.bulletparent != null) util.remove(this.bulletparent.bulletchildren, this.bulletparent.bulletchildren.indexOf(this))
+        // Remove from bullet lists if needed
+        if (this.bulletparent != null) {
+            util.remove(this.bulletparent.bulletchildren, this.bulletparent.bulletchildren.indexOf(this)); // the only reason this exists is for bacteria.
+            for (let gun of this.bulletparent.guns.values()) {
+                util.remove(gun.bulletchildren, gun.bulletchildren.indexOf(this));
+            }
+        }
         // Remove from parent lists if needed
         if (this.parent != null) util.remove(this.parent.children, this.parent.children.indexOf(this));
         // Kill all of its children
@@ -519,6 +523,15 @@ class bulletEntity { // Basically an (Entity) but with heavy limitations to impr
                 if (this.master.label !== "Bacteria") {
                     instance.kill();
                     instance.master = instance;
+                }
+            }
+        }
+        // Clear all of the gun bullet children
+        for (const gun of this.guns.values()) {
+            for (const bullet of gun.bulletchildren) {
+                if (bullet.isDead()) {
+                    bullet.collisionArray.splice(0, bullet.collisionArray.length);
+                    bullet.destroy(); // idk if i need to
                 }
             }
         }
