@@ -133,7 +133,18 @@ Class.genericFlail = {
     PARENT: "genericTank",
     STAT_NAMES: statnames.flail,
     SYNC_WITH_TANK: true,
-    SKILL_CAP: [dfltskl, dfltskl, dfltskl, dfltskl, 0, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl],
+    SKILL_CAP: {
+        RELOAD: dfltskl,
+        PENETRATION: dfltskl,
+        BULLET_HEALTH: 0,
+        BULLET_DAMAGE: dfltskl,
+        BULLET_SPEED: 0,
+        SHIELD_CAPACITY: dfltskl,
+        BODY_DAMAGE: dfltskl,
+        MAX_HEALTH: dfltskl,
+        SHIELD_REGENERATION: dfltskl,
+        MOVEMENT_SPEED: dfltskl
+    },
 }
 Class.genericHealer = {
     PARENT: "genericTank",

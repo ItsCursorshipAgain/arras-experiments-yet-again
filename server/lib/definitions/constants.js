@@ -25,10 +25,9 @@ module.exports = {
 	statnames: {
 		desmos: { BULLET_SPEED: "Wave Frequency" },
 		flail: {
-			BULLET_HEALTH: "Mace Longevity", // remove this, bullet health isn't a concern for flails
 			BULLET_PEN: "Mace Penetration",
 			BULLET_DAMAGE: "Mace Damage",
-			RELOAD: "Mace Density" // maybe remove this too?
+			RELOAD: "Mace Density"
 		},
 		healer: {
 			BULLET_PEN: "Heal Precision",
