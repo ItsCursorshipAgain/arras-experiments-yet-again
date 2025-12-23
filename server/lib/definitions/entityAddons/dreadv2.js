@@ -416,7 +416,6 @@ Class.supermissile = {
 
 // Bodies
 Class.colossusBody_dreadsV2 = makeHat([[0.8838834762573242,0.8838834762573242],[0,1.25],[-0.8838834762573242,0.8838834762573242],[-1.25,0],[-0.8838834762573242,-0.8838834762573242],[0,-1.25],[0.8838834762573242,-0.8838834762573242],[1.25,0]], { color: "black" })
-Class.goliathBody_dreadsV2 = makeHat(3.5, { color: "black" })
 
 // Miscellaneous
 Class.hexagonLeviathanTop_dreadsV2 = {
