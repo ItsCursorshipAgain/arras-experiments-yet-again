@@ -31,8 +31,8 @@ Class.arrasMenu_gameAdmin.UPGRADES_TIER_0 = [
     "spectator",
     "guillotine",
     "banHammer", // not sure which order banhammer and guillotine go in, so i'm just using a guess based on gameMod
-    "arrasMenu_nostalgia",
-    "arrasMenu_scrapped",
+    //"arrasMenu_nostalgia", // existed here at one point
+    //"arrasMenu_scrapped", // existed here at one point
 ]
 
 Class.arrasMenu_gameMod = makeMenu("Game Mod Menu") // (BT 2)
@@ -41,15 +41,15 @@ Class.arrasMenu_gameMod.UPGRADES_TIER_0 = [
     "arrasMenu_betaTester",
     "spectator",
     "guillotine",
-    "arrasMenu_nostalgia",
-    "arrasMenu_scrapped",
+    //"arrasMenu_nostalgia", // existed here at one point
+    //"arrasMenu_scrapped", // existed here at one point
 ]
 
 Class.arrasMenu_betaTester = makeMenu("Beta Tester Menu") // (BT 1)
 Class.arrasMenu_betaTester.UPGRADES_TIER_0 = [
     Config.spawn_class,
     //"arrasMenu_betaTesterB", // todo: check if beta tester b actually existed here
-    "spectator",
+    //"spectator", // existed here at one point
     "arrasMenu_tankChanges",
     //"arrasMenu_nostalgia", // existed here at one point
     //"arrasMenu_scrapped", // existed here at one point
@@ -58,6 +58,7 @@ Class.arrasMenu_betaTester.UPGRADES_TIER_0 = [
 Class.arrasMenu_tankChanges = makeMenu("Tank Changes Menu") // (Trial BT?)
 Class.arrasMenu_tankChanges.UPGRADES_TIER_0 = [
     "arrasMenu_betaTester",
+    Config.spawn_class,
 ]
 
 Class.arrasMenu_betaTesterB = makeMenu("Beta Tester B") // (Trial BT?) documented, though likely no longer exists
@@ -103,8 +104,7 @@ Class.arrasMenu_healers = makeMenu("Healer Menu", "mirror", 0, overrideGuns = [
             NO_LIMITATIONS: true
         }
     }
-])
-Class.arrasMenu_healers.TURRETS = [
+], overrideTurrets = [
     {
         POSITION: {
             SIZE: 13,
@@ -113,7 +113,7 @@ Class.arrasMenu_healers.TURRETS = [
         },
         TYPE: "healerHat"
     }
-]
+])
 Class.arrasMenu_healers.UPGRADES_TIER_0 = [
     "healer",
     "medic",
@@ -248,11 +248,41 @@ Class.arrasMenu_misc.UPGRADES_TIER_0 = [
 
 Class.arrasMenu_digdig = makeMenu("DigDig")
 Class.arrasMenu_digdig.UPGRADES_TIER_0 = [
-    //"digSmile",
-    //"digSmile_kirk",
-    //"digFrown",
-    //"digFrown_kirk",
+    "digDigSmile",
+    "digDigSmile_kirk",
+    "digDigFrown",
+    "digDigFrown_kirk",
 ]
+
+// DigDig (WIP)
+Class.genericDigDig = {
+    PARENT: "genericSmasher",
+    LABEL: "Digger",
+    COLOR: "grey",
+    SIZE: Class.genericTank.SIZE * 3,
+    TURRETS: [
+        {
+            TYPE: "digDigBody",
+            POSITION: { SIZE: 27 }
+        }
+    ]
+}
+Class.digDigSmile = {
+    PARENT: "genericDigDig",
+    PROPS: []
+}
+Class.digDigSmile_kirk = {
+    PARENT: "genericDigDig",
+    PROPS: []
+}
+Class.digDigFrown = {
+    PARENT: "genericDigDig",
+    PROPS: []
+}
+Class.digDigFrown_kirk = {
+    PARENT: "genericDigDig",
+    PROPS: []
+}
 
 // Shiny Member Menu
 Class.arrasMenu_shinyMember = makeMenu("Shiny Member Menu")
@@ -292,7 +322,8 @@ Class.arrasMenu_youtuber = {
         {
             TYPE: "youtuberHat",
             POSITION: {
-                SIZE: 9
+                SIZE: 7,
+                LAYER: 1
             },
             ANGLE: 0
         }

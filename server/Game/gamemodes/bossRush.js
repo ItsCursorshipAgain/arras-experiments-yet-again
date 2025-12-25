@@ -138,7 +138,7 @@ class bossRush {
     defineProperties() {
         this.length = Config.use_limited_waves ? this.waveCodes.length : Config.wave_cap;
         this.waves = this.generateWaves();
-        this.waveId = 52;
+        this.waveId = 0;
         this.gameActive = false;
         this.timer = 0;
         this.remainingEnemies = 0;
@@ -273,6 +273,7 @@ class bossRush {
     spawnWave(waveId) {
         //yell at everyone
         global.gameManager.socketManager.broadcast(`Wave ${waveId + 1} has started!`);
+        console.log(`Wave ${waveId + 1} has started!`)
 
         //spawn bosses
         for (let boss of this.waves[waveId]) {
@@ -311,10 +312,11 @@ class bossRush {
             let string = Class.basic.UPGRADES_TIER_2[i];
             if (string === "smasher") {
                 Class.basic.UPGRADES_TIER_2[i] = "healer"
-                for (let i = 0; i < Class.menu_unused.UPGRADES_TIER_0.length; i++) {
-                    let string = Class.menu_unused.UPGRADES_TIER_0[i];
+                for (let i = 0; i < Class.menu_tanks.UPGRADES_TIER_0.length; i++) {
+                    let string = Class.menu_tanks.UPGRADES_TIER_0[i];
                     if (string === "healer") {
-                        Class.menu_unused.UPGRADES_TIER_0[i] = "smasher"
+                        Class.menu_tanks.UPGRADES_TIER_0[i] = "smasher"
+                        Class.menu_tanks.UPGRADES_TIER_0.splice([i+1], 0, "underseer")
                     }
                 }
             }
@@ -323,7 +325,6 @@ class bossRush {
             let string = Class.director.UPGRADES_TIER_2[i];
             if (string === "underseer") {
                 Class.director.UPGRADES_TIER_2.splice(i, 1)
-                Class.menu_unused.UPGRADES_TIER_0.push("underseer")
             }
         }
         for (let tile of this.room.spawnable[TEAM_BLUE]) {

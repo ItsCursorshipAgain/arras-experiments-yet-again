@@ -6361,6 +6361,7 @@ Class.tetraGunner = {
 Class.undercoverCop = {
     PARENT: "booster",
     LABEL: "Undercover Cop",
+    UPGRADE_COLOR: 20,
     UPGRADE_TOOLTIP: "WOOP WOOP! That's the sound of da police!",
     TURRETS: [
         {
@@ -6399,7 +6400,7 @@ Class.undercoverCop = {
 }
 Class.worstTank = {
     PARENT: "genericTank",
-    LABEL: "Machine Gunner",
+    LABEL: "Worst Tank",
     DANGER: 7,
     BODY: Class.machineGunner.BODY,
     GUNS: [

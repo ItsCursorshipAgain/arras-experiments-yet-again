@@ -543,7 +543,7 @@ exports.setTurretProjectileRecoil = (type, recoilFactor) => {
 }
 
 // misc functions
-exports.makeMenu = (name = -1, color = "mirror", shape = 0, overrideLabel = false, overrideGuns = false) => {
+exports.makeMenu = (name = -1, color = "mirror", shape = 0, overrideLabel = false, overrideGuns = false, overrideTurrets = false) => {
     let defaultGun = {
         POSITION: {
             LENGTH: 18,
@@ -559,6 +559,7 @@ exports.makeMenu = (name = -1, color = "mirror", shape = 0, overrideLabel = fals
         PARENT: "genericTank",
         LABEL: name == -1 ? undefined : name,
         GUNS: overrideGuns ? overrideGuns : [defaultGun],
+        TURRETS: overrideTurrets,
         COLOR: color == "mirror" ? null : color,
         UPGRADE_COLOR: color == "mirror" ? null : color,
         SHAPE: shape,
@@ -715,7 +716,7 @@ for (let i = 3; i < 17; i++) {
     let circum = (2 * Math.PI) / i;
     pslazyRealSizes.push(Math.sqrt(circum * (1 / Math.sin(circum))));
 }
-exports.makePolySVG = (options = {}) => {
+exports.makePolygon = (options = {}) => {
     let svgPoints = [];
     let svgPoints2 = [];
     let svgPoints3 = [];

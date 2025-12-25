@@ -21,7 +21,7 @@ module.exports = {
             featured: false,
 
             region: "local", // The region the server is on.
-            gamemode: ["sandbox"], // The selected gamemode.
+            gamemode: ["siege_og"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.

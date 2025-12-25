@@ -218,49 +218,41 @@ Class.menu_tanks = makeMenu("Tanks")
 Class.menu_tanks.UPGRADES_TIER_0 = [
     Config.spawn_class,
     "menu_unused",
-    "arenaCloser",
+    "menu_removed",
     "menu_mapEntities",
     "menu_motherships",
-    "undercoverCop",
+    "menu_fun",
+    "healer",
+    //"undercoverCop",
+    "arenaCloser"
 ]
 
 Class.menu_unused = makeMenu("Unused")
-Class.menu_unused.UPGRADE_TOOLTIP = "Tanks that aren't used by the game, for whatever reason."
+Class.menu_unused.UPGRADE_TOOLTIP = "Tanks that were fully created and likely intended to be added, but never were."
 Class.menu_unused.UPGRADES_TIER_0 = [
-    "healer",
-    "menu_unreleased",
-    "menu_removed",
-    "menu_fun",
-    "spiral",
-    "repeater",
+    "menu_unused_T1",
+    "menu_unused_T2",
+    "menu_unused_T3",
 ]
 
-Class.menu_unreleased = makeMenu("Unreleased")
-Class.menu_unreleased.UPGRADE_TOOLTIP = "Tanks that were fully created and likely intended to be added, but never were."
-Class.menu_unreleased.UPGRADES_TIER_0 = [
-    "menu_unreleased_T1",
-    "menu_unreleased_T2",
-    "menu_unreleased_T3",
-]
-
-Class.menu_unreleased_T1 = makeMenu("Unreleased (Tier 1)")
-Class.menu_unreleased_T1.UPGRADE_LABEL = "Tier 1 (Lv.15)"
-Class.menu_unreleased_T1.UPGRADES_TIER_0 = [
+Class.menu_unused_T1 = makeMenu("Unused (Tier 1)")
+Class.menu_unused_T1.UPGRADE_LABEL = "Tier 1 (Lv.15)"
+Class.menu_unused_T1.UPGRADES_TIER_0 = [
     "flail",
     "whirlwind_bent",
 ]
 
-Class.menu_unreleased_T2 = makeMenu("Unreleased (Tier 2)")
-Class.menu_unreleased_T2.UPGRADE_LABEL = "Tier 2 (Lv.30)"
-Class.menu_unreleased_T2.UPGRADES_TIER_0 = [
+Class.menu_unused_T2 = makeMenu("Unused (Tier 2)")
+Class.menu_unused_T2.UPGRADE_LABEL = "Tier 2 (Lv.30)"
+Class.menu_unused_T2.UPGRADES_TIER_0 = [
     "autoTrapper",
     "volute",
     "whirlwind_old",
 ]
 
-Class.menu_unreleased_T3 = makeMenu("Unreleased (Tier 3)")
-Class.menu_unreleased_T3.UPGRADE_LABEL = "Tier 3 (Lv.45)"
-Class.menu_unreleased_T3.UPGRADES_TIER_0 = [
+Class.menu_unused_T3 = makeMenu("Unused (Tier 3)")
+Class.menu_unused_T3.UPGRADE_LABEL = "Tier 3 (Lv.45)"
+Class.menu_unused_T3.UPGRADES_TIER_0 = [
     "blunderbuss",
     "cocci",
     "dreadnought_old",
@@ -296,36 +288,6 @@ Class.menu_dailyTanks.UPGRADES_TIER_0 = [
     "rocketeer_AR", // dec 18
     "jumpSmasher", // dec 19/20
     "rapture" // dec 25
-]
-
-Class.menu_fun = makeMenu("Fun")
-Class.menu_fun.UPGRADE_TOOLTIP = "Tanks that, let's be honest, aren't used for a good reason.\n" +
-                                 //"\n" +
-                                 "DISCLAIMER: Some of the content in here may be in poor taste. Blame the arras.io devs, not us."
-Class.menu_fun.UPGRADES_TIER_0 = [
-    //"alas",
-    //"average4tdmScore",
-    //"averageL39Hunt",
-    //"beeman",
-    "bigBalls",
-    "cxATMG",
-    "damoclone",
-    "fat456",
-    "heptaAutoBasic",
-    "machineShot",
-    "meDoingYourMom",
-    "meOnMyWayToDoYourMom",
-    //"quadCyclone",
-    "rapture",
-    "riptide",
-    //"schoolShooter",
-    //"smasher3",
-    "tetraGunner",
-    //"theAmalgamation",
-    //"theConglomerate",
-    "tracker3",
-    "wifeBeater",
-    "worstTank",
 ]
 
 Class.menu_mapEntities = makeMenu("Map Entities")
@@ -382,6 +344,37 @@ Class.menu_motherships.UPGRADES_TIER_0 = [
     "mothership",
     "flagship",
     "turkey",
+]
+
+Class.menu_fun = makeMenu("Fun")
+Class.menu_fun.UPGRADE_TOOLTIP = "Tanks that, let's be honest, aren't used for a good reason.\n" +
+                                 //"\n" +
+                                 "DISCLAIMER: Some of the content in here may be in poor taste. Blame the arras.io devs, not us."
+Class.menu_fun.UPGRADES_TIER_0 = [
+    //"alas",
+    //"average4tdmScore",
+    //"averageL39Hunt",
+    //"beeman",
+    "bigBalls",
+    "cxATMG",
+    "damoclone",
+    "fat456",
+    "heptaAutoBasic",
+    "machineShot",
+    "meDoingYourMom",
+    "meOnMyWayToDoYourMom",
+    //"quadCyclone",
+    "rapture",
+    "riptide",
+    //"schoolShooter",
+    //"smasher3",
+    "tetraGunner",
+    //"theAmalgamation",
+    //"theConglomerate",
+    "tracker3",
+    "undercoverCop",
+    "wifeBeater",
+    "worstTank",
 ]
 
 // Boss Menu(s)
