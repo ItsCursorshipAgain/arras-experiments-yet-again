@@ -2885,7 +2885,7 @@ import * as socketStuff from "./socketinit.js";
         let watermarkText = "Open Source Arras";
         let length = Math.max(measureText(watermarkText, 32)) / 12;
         let watermarkTextPos1 = Math.round(x + len / 2) + 0.5;
-        let watermarkColor = gameDraw.getColor({gradient: true, asset: [{color: `${color.blue}`}, {color: `${color.green}`}]}, ctx[2], watermarkTextPos1 - length, length * 0.07, watermarkTextPos1 + length, 0);
+        let watermarkColor = gameDraw.getColor({gradient: true, asset: [{color: `${color.blue}`}, {color: `${color.green}`}]}, ctx[2], watermarkTextPos1 - length, length * 0.085, watermarkTextPos1 + length, 0);
         if (global.showDebug) {
             let getRenderingInfo = (data, isTurret) => {
                 isTurret ? global.renderingInfo.turretEntities += data.length : global.renderingInfo.entities += data.length;
