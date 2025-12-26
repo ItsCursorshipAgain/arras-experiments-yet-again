@@ -654,8 +654,8 @@ class socketManager {
                 socket.talk("T");
             } break;
             case "DTA": {
-                if (player.body && player.body.skill.level >= Config.tier_multiplier * Config.daily_tank.tier && Config.daily_tank.ads.enabled && !socket.status.daily_tank_watched_ad) {
-                    let chosenAd = ran.choose(Config.daily_tank.ads.source);
+                if (player.body && player.body.skill.level >= Config.tier_multiplier * Config.daily_tank.tier && Config.daily_tank.ads && !socket.status.daily_tank_watched_ad) {
+                    let chosenAd = ran.choose(Config.daily_tank.ad_sources);
                     let isImage = chosenAd.file.endsWith(".png") || chosenAd.file.endsWith(".jpg") || chosenAd.file.endsWith(".jpeg")
                     socket.talk("DTA", JSON.stringify({src: chosenAd.file, normalAdSize: chosenAd.use_regular_ad_size ?? true, waitTime: isImage ? chosenAd.image_wait_time : "isVideo"}));
                     if (isImage) {
@@ -894,7 +894,7 @@ class socketManager {
             if (b.skill.level >= Config.tier_multiplier * Config.daily_tank.tier && b.defs.includes(Config.spawn_class)) {
                 dailyTank = Config.daily_tank_INDEX;
             }
-            gui.dailyTank.update(JSON.stringify([dailyTank, Config.daily_tank.ads.enabled && !b.socket.status.daily_tank_watched_ad ? true : false]));
+            gui.dailyTank.update(JSON.stringify([dailyTank, Config.daily_tank.ads && !b.socket.status.daily_tank_watched_ad ? true : false]));
         }
         // Update the stats and skills
         gui.stats.update();

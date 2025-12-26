@@ -816,7 +816,7 @@ class Entity extends EventEmitter {
         let upgraded = false;
         if (number.isDailyUpgrade) {
             let hasWatchedAd = this.socket.status.daily_tank_watched_ad;
-            if (!Config.daily_tank.ads.enabled) hasWatchedAd = true;
+            if (!Config.daily_tank.ads) hasWatchedAd = true;
             let requestedIndex = parseInt(number.tank);
             if (requestedIndex === ensureIsClass(Config.daily_tank.tank).index && this.skill.level >= Config.tier_multiplier * Config.daily_tank.tier) {
                 if (hasWatchedAd) {

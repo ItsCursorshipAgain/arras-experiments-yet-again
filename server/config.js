@@ -29,20 +29,18 @@ module.exports = {
                 daily_tank: {
                     tank: "whirlwind",
                     tier: 3,
-                    ads: {
-                        enabled: true,
-                        source: [
-                            {
-                                file: "testadvideo.mp4",
-                                use_regular_ad_size: true,
-                            },
-                            {
-                                file: "testadimage.png",
-                                image_wait_time: 3,
-                                use_regular_ad_size: true,
-                            }
-                        ]
-                    }
+                    ads: false,
+                    ad_sources: [
+                        {
+                            file: "testadvideo.mp4",
+                            use_regular_ad_size: true,
+                        },
+                        {
+                            file: "testadimage.png",
+                            image_wait_time: 3,
+                            use_regular_ad_size: true,
+                        }
+                    ]
                 },
             }
         },
@@ -92,7 +90,7 @@ module.exports = {
     level_cap_cheat: 45, // Maximum level via the level-up key and auto-level-up.
 
     skill_cap: 9, // Default skill caps.
-    tier_cap: 9, // Amount of tank tiers.
+    tier_cap: 15, // Amount of tank tiers.
     tier_multiplier: 15, // Level difference between each tier.
 
     // Bots
