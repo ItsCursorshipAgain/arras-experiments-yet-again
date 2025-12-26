@@ -13,7 +13,7 @@ let oldGroups = {
     eternals: [ "legionaryCrasher", "kronos", "odin" ],
 };
 
-class bossRush {
+class Siege {
     constructor() {
         this.room = global.gameManager.room;
         this.waveCodes = [
@@ -256,7 +256,7 @@ class bossRush {
         enemy.refreshSkills();
         enemy.refreshBodyAttributes();
         enemy.isBoss = true;
-        if (Config.fortress || Config.citadel) enemy.controllers.push(new ioTypes.bossRushAI(enemy, {}, global.gameManager));
+        if (Config.fortress || Config.citadel) enemy.controllers.push(new ioTypes.siegeAI(enemy, {}, global.gameManager));
         this.remainingEnemies++;
         enemy.on('dead', () => {
             //this enemy has been killed, decrease the remainingEnemies counter
@@ -392,4 +392,4 @@ class bossRush {
     }
 }
 
-module.exports = { bossRush };
+module.exports = { Siege };

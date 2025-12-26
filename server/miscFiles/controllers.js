@@ -99,7 +99,7 @@ class IO {
         }
     }
 }
-class io_bossRushAI extends IO {
+class io_siegeAI extends IO {
     constructor(body, opts = {}) {
         super(body);
         this.enabled = true;
@@ -1241,7 +1241,7 @@ let ioTypes = {
     //movement related
     canRepel: io_canRepel,
     mapTargetToGoal: io_mapTargetToGoal,
-    bossRushAI: io_bossRushAI,
+    siegeAI: io_siegeAI,
     moveInCircles: io_moveInCircles,
     boomerang: io_boomerang,
     formulaTarget: io_formulaTarget,

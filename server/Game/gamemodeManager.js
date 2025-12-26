@@ -1,4 +1,4 @@
-const { bossRush } = require("./gamemodes/bossRush.js");
+const { Siege } = require("./gamemodes/siege.js");
 const { Assault } = require("./gamemodes/assault.js");
 const { Tag } = require("./gamemodes/tag.js");
 const { Domination } = require("./gamemodes/dominator.js");
@@ -7,11 +7,11 @@ const { Sandbox } = require("./gamemodes/sandbox.js");
 const { Train } = require("./gamemodes/trainwars.js");
 const { Maze } = require("./gamemodes/maze.js");
 const { Outbreak } = require("./gamemodes/outbreak.js");
-const { ClanWars } = require("./gamemodes/clanwars.js");
+const { ClanWars } = require("./gamemodes/clan_wars.js");
 
 class gamemodeManager {
     constructor() {
-        this.gameSiege = new bossRush(global.gameManager);
+        this.gameSiege = new Siege(global.gameManager);
         this.gameAssault = new Assault(global.gameManager);
         this.gameTag = new Tag(global.gameManager);
         this.gameDomination = new Domination(global.gameManager);

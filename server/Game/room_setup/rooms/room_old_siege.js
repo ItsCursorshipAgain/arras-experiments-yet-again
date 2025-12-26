@@ -8,7 +8,7 @@ const {
 } = tileClass;
  
 
-let room_siege_og = [
+let room_old_siege = [
     [ X__X, X__X, X__X, X__X, X__X, X__X, X__X, spwn, spwn, X__X, X__X, X__X, X__X, X__X, X__X, X__X, ],
     [ X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, ],
     [ X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, X__X, ],
@@ -27,4 +27,4 @@ let room_siege_og = [
     [ X__X, X__X, X__X, X__X, X__X, X__X, X__X, spwn, spwn, X__X, X__X, X__X, X__X, X__X, X__X, X__X, ],
 ];
 
-module.exports = room_siege_og;
+module.exports = room_old_siege;
