@@ -488,7 +488,7 @@ g.pentaMegabyte = {reload: 1.05, health: 0.95, speed: 0.9, maxSpeed: 0.9};
 Class.dreadnought_dreadsV2 = {
 	PARENT: "genericEggnought",
 	LABEL: "Dreadnought",
-	UPGRADE_LABEL: "Dreads V2",
+	//UPGRADE_LABEL: "Dreads V2",
 	LEVEL: 90,
 	EXTRA_SKILL: 18,
 }

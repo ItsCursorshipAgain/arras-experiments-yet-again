@@ -341,7 +341,7 @@ Class.turretedTrap.BODY.RECOIL_MULTIPLIER = 0;
 Class.dreadnought_dreadsV1 = {
 	PARENT: "genericDreadnought1",
 	LABEL: "Dreadnought",
-	UPGRADE_LABEL: "Dreads V1",
+	//UPGRADE_LABEL: "Dreads V1",
 	EXTRA_SKILL: 18,
 }
 
