@@ -4131,9 +4131,9 @@ import * as socketStuff from "./socketinit.js";
         let ratio = util.getScreenRatio();
         scaleScreenRatio(ratio, true);
         clearScreen(gameDraw.mixColors(color.black, color.guiblack, 0.3), 0.25, ctx[2]);
-        drawText("Error!", global.screenWidth / 2, global.screenHeight / 2, 30, color.red, "center");
-        drawText("The client ran into an error, try to move away from the glitched entity.", global.screenWidth / 2, global.screenHeight / 2 + 30, 15, color.guiwhite, "center");
-        drawText("Press F12 if you're on PC, check the console logs, and report it to the developers.", global.screenWidth / 2, global.screenHeight / 2 + 60, 15, color.guiwhite, "center");
+        drawText("Client error detected!", global.screenWidth / 2, global.screenHeight / 2, 30, color.red, "center");
+        drawText("If this is because of an entity, try to move away from it.", global.screenWidth / 2, global.screenHeight / 2 + 30, 15, color.guiwhite, "center");
+        drawText("Check your browser's console logs and report whatever you see to the developers.", global.screenWidth / 2, global.screenHeight / 2 + 60, 15, color.guiwhite, "center");
     }
     let animationFrame =
     (!/Chrome\/8[4-6]\.0\.41([4-7][0-9]|8[0-3])\./.test(navigator.userAgent) &&
