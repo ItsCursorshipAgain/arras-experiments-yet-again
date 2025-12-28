@@ -202,6 +202,24 @@ exports.makeOver = (type, name = -1, options = {}) => {
 
 // turret functions
 exports.makeAuto = (type, name = -1, options = {}) => {
+
+    /*
+    - type: what turret (or regular Class) to use as the mounted turret
+
+    Available options:
+    - color: turret body color
+    - size: turret size
+    - x: turret X position
+    - y: turret Y position
+    - angle: turret offset angle
+    - arc: turret FOV arc
+    - layer: turret layer
+    - total: number of turrets
+    - independent: whether the turret ignores parent tank inputs
+    - clearProps: whether to clear the parent tank's existing props or not (recommended for -drive tanks)
+    - clearTurrets: whether to clear the parent tank's existing turrets or not
+    */
+
     type = ensureIsClass(type);
     let output = exports.dereference(type);
     let autogun = exports.weaponArray({
@@ -224,6 +242,11 @@ exports.makeAuto = (type, name = -1, options = {}) => {
     }, options.total ??= 1);
     if (type.GUNS != null) {
         output.GUNS = type.GUNS;
+    }
+    if (type.PROPS == null || options.clearProps == true) {
+        output.PROPS = [];
+    } else {
+        output.PROPS = [...type.PROPS];
     }
     if (type.TURRETS == null || options.clearTurrets == true) {
         output.TURRETS = [...autogun];

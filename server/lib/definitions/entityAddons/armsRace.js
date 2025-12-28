@@ -5,11 +5,12 @@ const g = require('../gunvals.js')
 // Settings
 const enable_addon = true
 const integrate_healers = false
-const use_original_tree = false // Set to true to enable the original arras.io Arms Race tree and level cap, with some minor bugfixes.
+const use_original_tree = true // Set to true to enable the original arras.io Arms Race tree and level cap, with some minor bugfixes.
 
 // Function Presets
-const driveAuto_options = {type: "driveAutoTurret", size: 9, clearTurrets: true}
+const driveAuto_options = {type: "driveAutoTurret_AR", size: 9, clearTurrets: true}
 const hybrid_options = {count: 1, independent: true, cycle: false}
+const storm_options = {type: "stormAutoTurret_AR", size: 12, hatType: "stormSquare_AR"}
 
 // Gun Presets
 const bird_rear = [
@@ -116,8 +117,8 @@ Class.pentachip = {
 }
 
 // Turrets
-Class.driveAutoTurret = { PARENT: "autoTurret", SHAPE: 4 }
-Class.healerAutoTankGun = makeTurret({
+Class.driveAutoTurret_AR = {PARENT: "autoTurret", SHAPE: 4}
+Class.healerAutoTankGun_AR = makeTurret({
     GUNS: [
         {
             POSITION: {
@@ -148,7 +149,7 @@ Class.healerAutoTankGun = makeTurret({
         }
     ],
 }, {canRepel: true, limitFov: true, fov: 3})
-Class.stormSquare = makeTurret({
+Class.stormAutoTurret_AR = makeTurret({
     GUNS: weaponMirror({
         POSITION: {
             LENGTH: 9,
@@ -162,6 +163,22 @@ Class.stormSquare = makeTurret({
             TYPE: "swarm",
             STAT_CALCULATOR: "swarm"
         }
+    })
+}, {label: "Turret", fov: 0.8, extraStats: []})
+Class.stormSquare_AR = makeTurret({
+    GUNS: weaponMirror({
+        POSITION: {
+            LENGTH: 9,
+            WIDTH: 8.2,
+            ASPECT: 0.6,
+            X: 5,
+            ANGLE: 90
+        }/*,
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.swarm]),
+            TYPE: "swarm",
+            STAT_CALCULATOR: "swarm"
+        }*/
     })
 }, {label: "Storm Square", shape: 4, fov: 0.8, extraStats: []})
 
@@ -940,7 +957,7 @@ Class.dieselTrapper_AR = {
         }
     ]
 }
-Class.directorstorm_AR = makeDrive("director", "Directorstorm", { hatType: "stormSquare" })
+Class.directorstorm_AR = makeDrive("director", "Directorstorm", storm_options)
 Class.discharger_AR = {
     PARENT: "genericTank",
     LABEL: "Discharger",
@@ -3691,7 +3708,7 @@ Class.healer3_AR = {
     FACING_TYPE: ["spin", {speed: 0.02}],
     TURRETS: [
         ...weaponArray({
-            TYPE: "healerAutoTankGun",
+            TYPE: "healerAutoTankGun_AR",
             POSITION: {
                 SIZE: 11,
                 X: 8,
