@@ -291,35 +291,17 @@ function toPascalCase(input) {
 }
 exports.makeDrive = (type, options = {}) => {
     type = ensureIsClass(type);
+    let output = exports.dereference(type)
 
     options.label ??= -1
-
-    options.type ??= "droneAutoTurret"
     options.suffix ??= "drive"
 
-    options.hatType ??= "squareHat"
-    options.hatColor ??= "grey"
-    options.hatSize ??= 9
-    options.hatAngle ??= 0
-
-    let turret = {
-        type: options.type ??= "droneAutoTurret",
-        independent: options.independent ??= true,
-        color: options.color ??= "grey",
-        total: options.total ??= 1,
-        size: options.size ??= 10,
-        x: options.x ??= 0,
-        y: options.y ??= 0,
-        angle: options.angle ??= 180
-    }
-
-    let output = exports.dereference(type)
     let hat = [
         {
-            TYPE: [options.hatType, { COLOR: options.hatColor }],
+            TYPE: [options.hatType ??= "squareHat", {COLOR: options.hatColor ??= "grey"}],
             POSITION: {
-                SIZE: options.hatSize,
-                ANGLE: options.hatAngle,
+                SIZE: options.hatSize ??= 9,
+                ANGLE: options.hatAngle ??= 0,
                 LAYER: 1
             }
         }
@@ -332,7 +314,20 @@ exports.makeDrive = (type, options = {}) => {
         projectile = exports.dereference(gun.PROPERTIES.TYPE)
 
         const name = (Array.isArray(gun.PROPERTIES.TYPE) ? gun.PROPERTIES.TYPE[0][0] : gun.PROPERTIES.TYPE) + "_drivenProjectile"
-        Class[name] = exports.makeAuto(gun.PROPERTIES.TYPE, "Auto-" + projectile.LABEL, turret)
+        Class[name] = exports.makeAuto(
+            gun.PROPERTIES.TYPE,
+            "Auto-" + projectile.LABEL,
+            {
+                type: options.type ??= "droneAutoTurret",
+                independent: options.independent ??= true,
+                color: options.color ??= "grey",
+                total: options.total ??= 1,
+                size: options.size ??= 10,
+                x: options.x ??= 0,
+                y: options.y ??= 0,
+                angle: options.angle ??= 180
+            }
+        )
         gun.PROPERTIES.TYPE = name
     }
 
@@ -351,7 +346,7 @@ exports.makeDrive = (type, options = {}) => {
         output.LABEL = options.label;
         output.UPGRADE_LABEL = options.label;
     }
-    output.DANGER = type.DANGER + 1;
+    output.DANGER = options.danger ??= type.DANGER + 1;
     return output;
 }
 exports.makeRadialAuto = (type, options = {}) => {
