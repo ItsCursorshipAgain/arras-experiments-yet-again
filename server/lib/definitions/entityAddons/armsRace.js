@@ -3,11 +3,12 @@ const { base, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
 
 // Settings
-const enable_addon = false
+const enable_addon = true
 const integrate_healers = false
 const use_original_tree = false // Set to true to enable the original arras.io Arms Race tree and level cap, with some minor bugfixes.
 
 // Function Presets
+const driveAuto_options = {type: "driveAutoTurret", size: 9, clearTurrets: true}
 const hybrid_options = {count: 1, independent: true, cycle: false}
 
 // Gun Presets
@@ -360,7 +361,7 @@ Class.autoArtillery_AR = makeAuto("artillery")
 Class.autoAuto3_AR = makeAuto("auto3")
 Class.autoDestroyer_AR = makeAuto("destroyer")
 Class.autoDiesel_AR = makeAuto("diesel_AR")
-Class.autoDirectordrive_AR = makeAuto("directordrive_AR", "Auto-Directordrive", { type: "driveAutoTurret", size: 9 })
+Class.autoDirectordrive_AR = makeAuto("directordrive_AR", "Auto-Directordrive", driveAuto_options)
 Class.autoDoper_AR = makeAuto("doper_AR")
 Class.autoHelix_AR = makeAuto("helix")
 Class.autoHexaTank_AR = makeAuto("hexaTank")
@@ -4708,7 +4709,7 @@ Config.level_cap_cheat = 60
         Class.builder.UPGRADES_TIER_3.push("forger_AR", "stall_AR", "fashioner_AR", "charger_AR")
         Class.triTrapper.UPGRADES_TIER_3.push("triPen_AR", "triMech_AR", "triMachine_AR", "triTrapGuard_AR")
         Class.trapGuard.UPGRADES_TIER_3.push("peashooter_AR", "incarcerator_AR", "mechGuard_AR", "autoTrapGuard_AR", "machineGuard_AR", "triTrapGuard_AR")
-        Class.pen_AR.UPGRADES_TIER_3 = ["stall_AR", "triPen_AR", "encircler_AR", "incarcerator_AR", "operator_AR", "cockatiel_AR", "hutch_AR", "interner_AR", "autoPen_AR"]
+        Class.pen_AR.UPGRADES_TIER_3 = ["stall", "triPen", "encircler", "incarcerator", "operator", "cockatiel", "hutch", "interner", "autoPen"].map(x => x + "_AR")
         Class.mech_AR.UPGRADES_TIER_3 = ["engineer", "triMech_AR", "machineMech_AR", "mechGuard_AR", "operator_AR", "cog_AR", "cobbler_AR", "autoMech_AR"]
         Class.machineTrapper_AR.UPGRADES_TIER_3 = ["dieselTrapper_AR", "barricade", "equalizer_AR", "frother_AR", "machineGuard_AR", "encircler_AR", "machineMech_AR", "triMachine_AR", "expeller_AR", "autoMachineTrapper_AR", "deviation_AR"]
         Class.wark_AR.UPGRADES_TIER_3 = ["warkwark_AR", "waarrk_AR", "equalizer_AR", "hexaTrapper", "hutch_AR", "cog_AR", "expeller_AR", "bulwark", "coalesce_AR", "autoWark_AR"]
@@ -4831,10 +4832,9 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
         Class.builder.UPGRADES_TIER_3 = ["construct", "autoBuilder", "engineer", "boomer", "architect", "conqueror", "forger_AR", "stall_AR", "fashioner_AR", "charger_AR"]
         Class.triTrapper.UPGRADES_TIER_3 = ["fortress", "hexaTrapper", "septaTrapper", "architect", "triPen_AR", "triMech_AR", "triMachine_AR", "triTrapGuard_AR"]
         Class.trapGuard.UPGRADES_TIER_3 = ["bushwhacker", "gunnerTrapper", "bomber", "conqueror", "bulwark", "peashooter_AR", "incarcerator_AR", "mechGuard_AR", "autoTrapGuard_AR", "machineGuard_AR", "triTrapGuard_AR"]
-        Class.pen_AR.UPGRADES_TIER_3 = ["hutch_AR", "interner_AR", "autoPen_AR"]
-        Class.mech_AR.UPGRADES_TIER_3 = ["engineer", "cog_AR", "cobbler_AR", "autoMech_AR"]
+        Class.pen_AR.UPGRADES_TIER_3 = ["stall", "triPen", "encircler", "incarcerator", "operator", "cockatiel", "hutch", "interner", "autoPen"].map(x => x + "_AR")
+        Class.mech_AR.UPGRADES_TIER_3 = ["engineer", "triMech_AR", "machineMech_AR", "mechGuard_AR", "operator_AR", "cog_AR", "cobbler_AR", "autoMech_AR"]
         Class.machineTrapper_AR.UPGRADES_TIER_3 = ["dieselTrapper_AR", "barricade", "equalizer_AR", "machineGuard_AR", "encircler_AR", "machineMech_AR", "triMachine_AR", "expeller_AR", "autoMachineTrapper_AR", "deviation_AR"]
             //Class.machineTrapper_AR.UPGRADES_TIER_3.push("frother_AR")
         Class.wark_AR.UPGRADES_TIER_3 = ["warkwark_AR", "waarrk_AR", "equalizer_AR", "hexaTrapper", "hutch_AR", "cog_AR", "expeller_AR", "bulwark", "coalesce_AR", "autoWark_AR"]
-
 }

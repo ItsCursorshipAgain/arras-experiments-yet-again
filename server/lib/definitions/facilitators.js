@@ -203,41 +203,29 @@ exports.makeOver = (type, name = -1, options = {}) => {
 // turret functions
 exports.makeAuto = (type, name = -1, options = {}) => {
     type = ensureIsClass(type);
-
-    options.type ??= "autoTurret"
-    options.independent ??= true
-    options.color ??= "grey"
-    options.total ??= 1
-    options.size ??= 10
-    options.x ??= 0
-    options.y ??= 0
-    options.angle ??= 180
-    options.arc ??= 360
-    options.layer ??= 1
-
     let output = exports.dereference(type);
     let autogun = exports.weaponArray({
         POSITION: {
-            SIZE: options.size, // 10 = 1, 6.5 = 3
-            ANGLE: options.angle,
-            X: options.x, // 0 = 1, 5.2 = 3
-            Y: options.y,
-            ARC: options.arc,
-            LAYER: options.layer
+            SIZE: options.size ??= 10,
+            ANGLE: options.angle ??= 180,
+            X: options.x ??= 0,
+            Y: options.y ??= 0,
+            ARC: options.arc ??= 360,
+            LAYER: options.layer ??= 1
         },
         TYPE: [
-            options.type,
+            options.type ??= "autoTurret",
             {
                 CONTROLLERS: ["nearestDifferentMaster"],
-                INDEPENDENT: options.independent,
-                COLOR: options.color
+                INDEPENDENT: options.independent ??= true,
+                COLOR: options.color ??= "grey"
             }
         ]
-    }, options.total);
+    }, options.total ??= 1);
     if (type.GUNS != null) {
         output.GUNS = type.GUNS;
     }
-    if (type.TURRETS == null) {
+    if (type.TURRETS == null || options.clearTurrets == true) {
         output.TURRETS = [...autogun];
     } else {
         output.TURRETS = [...type.TURRETS, ...autogun];
