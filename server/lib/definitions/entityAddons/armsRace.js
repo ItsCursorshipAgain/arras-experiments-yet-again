@@ -7,11 +7,16 @@ const enable_addon = true
 const integrate_healers = false
 const use_original_tree = false // Set to true to enable the original arras.io Arms Race tree and level cap, with some minor bugfixes.
 
-// Function Presets
-const cruiserdrive_options = {hatType: "triangleHat", hatSize: 8, hatAngle: 180}
+// Function Presets (makeAuto)
 const driveAuto_options = {type: "driveAutoTurret_AR", size: 9, clearTurrets: true}
+const stormAuto_options = {type: "stormAutoTurret_AR", size: 9, clearTurrets: true}
+
+// Function Presets (makeDrive)
+const cruiserdrive_options = {hatType: "triangleHat", hatSize: 8, hatAngle: 180}
+const storm_options = {suffix: "storm", type: "swarmAutoTurret_AR", size: 12, hatType: "stormSquare_AR"}
+
+// Function Presets (makeOver)
 const hybrid_options = {count: 1, independent: true, cycle: false}
-const storm_options = {type: "stormAutoTurret_AR", size: 12, hatType: "stormSquare_AR"}
 
 // Gun Presets
 const bird_rear = [
@@ -107,8 +112,33 @@ const trapGuard_rear = [
 // - u/SkyShredder89: Default Tier 3/4 Sprayer upgrades
 
 // Hats
-Class.crusierdriveHat_AR = makeHat(3.5, { color: "grey" })
+Class.crusierdriveHat_AR = makeHat(3.5, {color: "grey"})
 Class.healerHat_spin = makeHat([[0.3, -0.3],[1,-0.3],[1,0.3],[0.3,0.3],[0.3,1],[-0.3,1],[-0.3,0.3],[-1,0.3],[-1,-0.3],[-0.3,-0.3],[-0.3,-1],[0.3,-1]], { color: "red", rotationSpeed: 0.16 })
+Class.stormSquare_AR = {
+    PARENT: "squareHat",
+    LABEL: "Storm Square",
+    COLOR: "grey",
+    GUNS: weaponMirror({
+        POSITION: {
+            LENGTH: 9,
+            WIDTH: 8.2,
+            ASPECT: 0.6,
+            X: 5,
+            ANGLE: 90
+        }
+    }, {delayIncrement: 0.5})
+}
+Class.vortexSquare_AR = {
+    PARENT: "stormSquare_AR",
+    GUNS: weaponArray({
+        POSITION: {
+            LENGTH: 9,
+            WIDTH: 8.2,
+            ASPECT: 0.6,
+            X: 5
+        }
+    }, 4)
+}
 
 // Projectiles
 Class.pentachip = {
@@ -119,6 +149,14 @@ Class.pentachip = {
 
 // Turrets
 Class.driveAutoTurret_AR = {PARENT: "autoTurret", SHAPE: 4}
+Class.stormAutoTurret_AR = {
+    PARENT: "driveAutoTurret_AR",
+    GUNS: [
+        ...Class.autoTurret.GUNS,
+        ...Class.stormSquare_AR.GUNS
+    ]
+}
+
 Class.healerAutoTankGun_AR = makeTurret({
     GUNS: [
         {
@@ -150,7 +188,8 @@ Class.healerAutoTankGun_AR = makeTurret({
         }
     ],
 }, {canRepel: true, limitFov: true, fov: 3})
-Class.stormAutoTurret_AR = makeTurret({
+
+Class.swarmAutoTurret_AR = makeTurret({
     GUNS: weaponMirror({
         POSITION: {
             LENGTH: 9,
@@ -166,20 +205,6 @@ Class.stormAutoTurret_AR = makeTurret({
         }
     })
 }, {label: "Turret", fov: 0.8, extraStats: []})
-Class.stormSquare_AR = {
-    PARENT: "squareHat",
-    LABEL: "Storm Square",
-    COLOR: "grey",
-    GUNS: weaponMirror({
-        POSITION: {
-            LENGTH: 9,
-            WIDTH: 8.2,
-            ASPECT: 0.6,
-            X: 5,
-            ANGLE: 90
-        }
-    }, {delayIncrement: 0.5})
-}
 Class.vortexAutoTurret_AR = makeTurret({
     GUNS: weaponArray({
         POSITION: {
@@ -195,17 +220,6 @@ Class.vortexAutoTurret_AR = makeTurret({
         }
     }, 4, 0.25)
 }, {label: "Turret", fov: 0.8, extraStats: []})
-Class.vortexSquare_AR = {
-    PARENT: "stormSquare_AR",
-    GUNS: weaponArray({
-        POSITION: {
-            LENGTH: 9,
-            WIDTH: 8.2,
-            ASPECT: 0.6,
-            X: 5
-        }
-    }, 4)
-}
 
 // Tier 2
 Class.diesel_AR = {
@@ -895,7 +909,7 @@ Class.crowbar_AR = {
         }
     ]
 }
-Class.cruiserdrive_AR = makeDrive("cruiser", {label: "Cruiserdrive", ...cruiserdrive_options})
+Class.cruiserdrive_AR = makeDrive("cruiser", cruiserdrive_options)
 Class.deathStar_AR = {
     PARENT: "genericTank",
     LABEL: "Death Star",
@@ -982,7 +996,7 @@ Class.dieselTrapper_AR = {
         }
     ]
 }
-Class.directorstorm_AR = makeDrive("director", {label: "Directorstorm", ...storm_options})
+Class.directorstorm_AR = makeDrive("director", storm_options)
 Class.discharger_AR = {
     PARENT: "genericTank",
     LABEL: "Discharger",
@@ -3307,6 +3321,7 @@ Class.antidote_AR = {
     ], { delayIncrement: 0.5 })
 }
 Class.autoCoil_AR = makeAuto("coil")
+Class.autoDirectorstorm_AR = makeAuto("directorstorm_AR", "Auto-Directorstorm", stormAuto_options)
 Class.autoDoubleHelix_AR = makeAuto("doubleHelix_AR")
 Class.autoDuplicator_AR = makeAuto("duplicator")
 Class.autoIterator_AR = makeAuto("iterator")
@@ -4082,7 +4097,7 @@ Class.ointment_AR = {
         }
     ]
 }
-Class.overstorm_AR = makeDrive("overseer", {label: "Overstorm", ...storm_options})
+Class.overstorm_AR = makeDrive("overseer", {...storm_options, label: "Overstorm"})
 Class.physician_AR = {
     PARENT: "genericSmasher",
     LABEL: "Physician",
@@ -4458,6 +4473,7 @@ Class.sootherdrive_AR = {
         }
     ]
 }
+Class.spawnerstorm_AR = makeDrive("spawner", storm_options)
 Class.spiker_AR = {
     PARENT: "genericHealer",
     LABEL: "Spiker",
@@ -4673,7 +4689,7 @@ Class.vulcan_AR = {
 }
 
 // Class Tree
-if (!enable_addon) { return console.log('--- Arms Race addon [armsRace.js] is disabled. See line 6 to enable it. ---') }
+if (!enable_addon) {return console.log('--- Arms Race addon [armsRace.js] is disabled. See line 6 to enable it. ---')}
 
 if (!use_original_tree) {
 Config.level_cap = 60
@@ -4703,7 +4719,7 @@ Config.level_cap_cheat = 60
 
     Class.twin.UPGRADES_TIER_2.push("wark_AR")
         Class.twin.UPGRADES_TIER_3.splice(1, 1) //remove bulwark
-        Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin_AR", "doubleGunner_AR", "doubleHelix_AR", "warkwark_AR")
+        Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin_AR", "doubleGunner_AR"/*, "doubleHelix_AR"*/, "warkwark_AR")
         Class.tripleShot.UPGRADES_TIER_3.push("splitShot_AR", "autoTripleShot_AR", "bentGunner_AR", "bentMinigun_AR", "defect_AR", "waarrk_AR")
         Class.gunner.UPGRADES_TIER_3.push("battery_AR", "buttbuttin_AR", "blower_AR", "rimfire_AR", "volley_AR", "doubleGunner_AR", "bentGunner_AR", "equalizer_AR")
 
@@ -4735,7 +4751,7 @@ Config.level_cap_cheat = 60
             //Class.foundry_AR.UPGRADES_TIER_4 = ["endeavor", "stocker", "foundrydrive", "megaFoundry", "fabrication", "shopper", "autoFoundry", "barn", "topBanana", "plant"].map(x => x + "_AR")
             //Class.issuer_AR.UPGRADES_TIER_4 = ["circulator", "facility", "autoIssuer", "megaIssuer", "inducer", "issuerdrive", "mogul", "reposit", "slogger", "plant"].map(x => x + "_AR")
         Class.directordrive_AR.UPGRADES_TIER_3 = ["directorstorm_AR", "overdrive", "cruiserdrive_AR", "underdrive_AR", "spawnerdrive_AR", "autoDirectordrive_AR", "honchodrive_AR", "doperdrive_AR"]
-            Class.directorstorm_AR.UPGRADES_TIER_4 = ["vortex"].map(x => x + "_AR")
+            Class.directorstorm_AR.UPGRADES_TIER_4 = ["vortex", "overstorm", "spawnerstorm", "autoDirectorstorm"].map(x => x + "_AR")
         Class.honcho_AR.UPGRADES_TIER_3 = ["bigCheese", "foreman_AR", "baltimore_AR", "foundry_AR", "autoHoncho_AR", "honchodrive_AR", "junkie_AR"]
             //Class.junkie_AR.UPGRADES_TIER_4 = ["addict", "ganger", "harbor", "plant", "stoner", "junkiedrive", "autoJunkie"].map(x => x + "_AR")
         Class.doper_AR.UPGRADES_TIER_3 = ["brisker", "dopeseer", "mosey", "issuer", "junkie", "doperdrive", "autoDoper"].map(x => x + "_AR")
@@ -4759,20 +4775,20 @@ Config.level_cap_cheat = 60
         Class.machineTrapper_AR.UPGRADES_TIER_3 = ["dieselTrapper_AR", "barricade", "equalizer_AR", "frother_AR", "machineGuard_AR", "encircler_AR", "machineMech_AR", "triMachine_AR", "expeller_AR", "autoMachineTrapper_AR", "deviation_AR"]
         Class.wark_AR.UPGRADES_TIER_3 = ["warkwark_AR", "waarrk_AR", "equalizer_AR", "hexaTrapper", "hutch_AR", "cog_AR", "expeller_AR", "bulwark", "coalesce_AR", "autoWark_AR"]
 
-    Class.desmos.UPGRADES_TIER_2.splice(0, 0, "volute")
-    Class.desmos.UPGRADES_TIER_2.push("spiral", "repeater")
-        Class.desmos.UPGRADES_TIER_3 = ["bender"]
-        Class.volute.UPGRADES_TIER_3.push("oroboros", "autoVolute_AR")
-        Class.helix.UPGRADES_TIER_3.push("coil", "duplicator", "doubleHelix_AR", "autoHelix_AR")
+//    Class.desmos.UPGRADES_TIER_2.splice(0, 0, "volute")
+//    Class.desmos.UPGRADES_TIER_2.push("spiral", "repeater")
+//        Class.desmos.UPGRADES_TIER_3 = ["bender"]
+//        Class.volute.UPGRADES_TIER_3.push("oroboros", "autoVolute_AR")
+//        Class.helix.UPGRADES_TIER_3.push("coil", "duplicator", "doubleHelix_AR", "autoHelix_AR")
             //Class.triplex.UPGRADES_TIER_4 = ["quintuplex_AR", "doubleTriplex_AR", "autoTriplex_AR"]
             //Class.quadruplex.UPGRADES_TIER_4 = ["hextuplex_AR", "autoQuadruplex_AR"]
             //Class.doubleHelix_AR.UPGRADES_TIER_4 = ["tripleHelix_AR", "doubleTriplex_AR", "doubleCoil_AR", "doubleDuplicator_AR", "autoDoubleHelix_AR"]
             //Class.autoHelix_AR.UPGRADES_TIER_4 = ["autoTriplex_AR", "autoQuadruplex_AR", "autoCoil_AR", "autoDuplicator_AR", "autoDoubleHelix_AR"]
-        Class.spiral.UPGRADES_TIER_3.push(/*"wrangler", */"oroboros", "cocci", /*"rocket", */"autoSpiral_AR")
+//        Class.spiral.UPGRADES_TIER_3.push(/*"wrangler", */"oroboros", "cocci", /*"rocket", */"autoSpiral_AR")
             //Class.superSpiral.UPGRADES_TIER_4 = ["autoSuperSpiral_AR"]
             //Class.coil.UPGRADES_TIER_4 = ["doubleCoil_AR", "autoCoil_AR"]
             //Class.autoSpiral_AR.UPGRADES_TIER_4 = ["autoSuperSpiral_AR", "autoCoil_AR"]
-        Class.repeater.UPGRADES_TIER_3.push("autoRepeater_AR")
+//        Class.repeater.UPGRADES_TIER_3.push("autoRepeater_AR")
             //Class.iterator.UPGRADES_TIER_4 = ["autoIterator_AR"]
             //Class.duplicator.UPGRADES_TIER_4 = ["doubleDuplicator_AR", "autoDuplicator_AR"]
             //Class.autoRepeater_AR.UPGRADES_TIER_4 = ["autoIterator_AR", "autoDuplicator_AR"]

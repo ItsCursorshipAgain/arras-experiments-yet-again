@@ -295,13 +295,7 @@ exports.makeDrive = (type, options = {}) => {
     options.label ??= -1
 
     options.type ??= "droneAutoTurret"
-    options.independent ??= true
-    options.color ??= "grey"
-    options.total ??= 1
-    options.size ??= 10
-    options.x ??= 0
-    options.y ??= 0
-    options.angle ??= 180
+    options.suffix ??= "drive"
 
     options.hatType ??= "squareHat"
     options.hatColor ??= "grey"
@@ -309,14 +303,14 @@ exports.makeDrive = (type, options = {}) => {
     options.hatAngle ??= 0
 
     let turret = {
-        type: options.type,
-        independent: options.independent,
-        color: options.color,
-        total: options.total,
-        size: options.size,
-        x: options.x,
-        y: options.y,
-        angle: options.angle
+        type: options.type ??= "droneAutoTurret",
+        independent: options.independent ??= true,
+        color: options.color ??= "grey",
+        total: options.total ??= 1,
+        size: options.size ??= 10,
+        x: options.x ??= 0,
+        y: options.y ??= 0,
+        angle: options.angle ??= 180
     }
 
     let output = exports.dereference(type)
@@ -351,8 +345,8 @@ exports.makeDrive = (type, options = {}) => {
         output.TURRETS = [...type.TURRETS, ...hat];
     }
     if (options.label == -1) {
-        output.LABEL = type.LABEL + "drive";
-        output.UPGRADE_LABEL = type.LABEL + "drive";
+        output.LABEL = type.LABEL + options.suffix;
+        output.UPGRADE_LABEL = type.LABEL + options.suffix;
     } else {
         output.LABEL = options.label;
         output.UPGRADE_LABEL = options.label;
