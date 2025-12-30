@@ -498,8 +498,8 @@ exports.makeTurret = (type, options = {}) => {
 }
 exports.makeAura = (damageFactor = 1, sizeFactor = 1, opacity = 0.3, auraColor) => {
     let isHeal = damageFactor < 0;
-    let auraType = isHeal ? "healAura" : "damageAura";
-    let symbolType = isHeal ? "healerHat" : "auraHat";
+    let auraType = isHeal ? "healAura" : "aura";
+    let symbolType = isHeal ? "healerHat" : "auraSymbol";
     auraColor = auraColor ?? (isHeal ? 12 : 0);
     return {
         PARENT: "genericTank",
@@ -1043,7 +1043,7 @@ const labyRarityToHealth = {
     5: 10
 };
 
-exports.makeTieredFood = (type, tier, rarity, level, baseScale = 1) => {
+exports.makeLaby = (type, tier, rarity, level, baseScale = 1) => {
     type = ensureIsClass(type);
     let usableSHAPE = Math.max(type.SHAPE, 3),
         downscale = Math.cos(Math.PI / usableSHAPE),
@@ -1125,7 +1125,7 @@ exports.makePresent = (outcolor, wrapcolor) => {
         PROPS: [
             {
                 POSITION: [19.5, 0, 0, 0, 360, 1],
-                TYPE: ["healerHat", {COLOR: wrapcolor}],
+                TYPE: wrapcolor+"wrap",
             }
         ]
     }

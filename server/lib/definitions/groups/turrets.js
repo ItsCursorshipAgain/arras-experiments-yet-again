@@ -1833,21 +1833,3 @@ Class.hwEye = {
         },
     ]
 }
-
-// Auras
-Class.damageAura = {
-    PARENT: "genericAura",
-    COLOR: "teal",
-    BODY: {
-        DAMAGE: 0.4
-    }
-}
-Class.healAura = {
-    PARENT: "genericAura",
-    LABEL: "Heal Aura",
-    HEALER: true,
-    COLOR: "red",
-    BODY: {
-        DAMAGE: 0.4 / 3
-    }
-}

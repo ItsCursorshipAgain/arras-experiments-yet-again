@@ -1,7 +1,7 @@
-const { makeCrasher, makePresent, makeRarities, makeRelic, makeTieredFood } = require('../facilitators.js')
+const { makeCrasher, makeLaby, makePresent, makeRarities, makeRelic } = require('../facilitators.js')
 const { basePolygonDamage, basePolygonHealth } = require('../constants.js')
 
-// Eggs
+// EGGS
 Class.egg = {
     PARENT: "food",
     LABEL: "Egg",
@@ -18,8 +18,9 @@ Class.egg = {
         PENETRATION: 1,
         PUSHABILITY: 0,
         ACCELERATION: 0.015
-    }
-}
+    },
+    DRAW_HEALTH: false,
+};
 Class.gem = {
     PARENT: "food",
     LABEL: "Gem",
@@ -38,8 +39,8 @@ Class.gem = {
     },
     DRAW_HEALTH: true,
     INTANGIBLE: false,
-    GIVE_KILL_MESSAGE: true
-}
+    GIVE_KILL_MESSAGE: true,
+};
 Class.jewel = {
     PARENT: "food",
     LABEL: "Jewel",
@@ -58,11 +59,11 @@ Class.jewel = {
     },
     DRAW_HEALTH: true,
     INTANGIBLE: false,
-    GIVE_KILL_MESSAGE: true
-}
-makeRarities("egg")
+    GIVE_KILL_MESSAGE: true,
+};
+makeRarities("egg");
 
-// Squares
+// SQUARES
 Class.square = {
     PARENT: "food",
     LABEL: "Square",
@@ -78,11 +79,11 @@ Class.square = {
         ACCELERATION: 0.0075
     },
     DRAW_HEALTH: true,
-    INTANGIBLE: false
-}
-makeRarities("square")
+    INTANGIBLE: false,
+};
+makeRarities("square");
 
-// Triangles
+// TRIANGLES
 Class.triangle = {
     PARENT: "food",
     LABEL: "Triangle",
@@ -98,11 +99,11 @@ Class.triangle = {
         PENETRATION: 1.5,
         ACCELERATION: 0.005
     },
-    DRAW_HEALTH: true
-}
-makeRarities("triangle")
+    DRAW_HEALTH: true,
+};
+makeRarities("triangle");
 
-// Pentagons
+// PENTAGONS
 Class.pentagon = {
     PARENT: "food",
     LABEL: "Pentagon",
@@ -118,8 +119,11 @@ Class.pentagon = {
         PENETRATION: 1.1,
         ACCELERATION: 0.0035
     },
-    DRAW_HEALTH: true
-}
+    DRAW_HEALTH: true,
+};
+makeRarities("pentagon");
+
+// BETA PENTAGONS
 Class.betaPentagon = {
     PARENT: "food",
     LABEL: "Beta Pentagon",
@@ -137,8 +141,11 @@ Class.betaPentagon = {
         ACCELERATION: 0.003
     },
     DRAW_HEALTH: true,
-    GIVE_KILL_MESSAGE: true
-}
+    GIVE_KILL_MESSAGE: true,
+};
+makeRarities("betaPentagon");
+
+// ALPHA PENTAGONS
 Class.alphaPentagon = {
     PARENT: "food",
     LABEL: "Alpha Pentagon",
@@ -156,13 +163,11 @@ Class.alphaPentagon = {
         ACCELERATION: 0.0025
     },
     DRAW_HEALTH: true,
-    GIVE_KILL_MESSAGE: true
-}
-makeRarities("pentagon")
-makeRarities("betaPentagon")
-makeRarities("alphaPentagon")
+    GIVE_KILL_MESSAGE: true,
+};
+makeRarities("alphaPentagon");
 
-// Hexagons
+// HEXAGONS
 Class.hexagon = {
     PARENT: "food",
     LABEL: "Hexagon",
@@ -179,11 +184,11 @@ Class.hexagon = {
         PENETRATION: 1.1,
         ACCELERATION: 0.003
     },
-    DRAW_HEALTH: true
-}
-makeRarities("hexagon")
+    DRAW_HEALTH: true,
+};
+makeRarities("hexagon");
 
-// 3D
+// 3D POLYGONS
 Class.sphere = {
     PARENT: "food",
     LABEL: "The Sphere",
@@ -224,7 +229,7 @@ Class.sphere = {
         POSITION: [6, 3, -3, 0, 1],
         TYPE: ["egg", { COLOR: { BRIGHTNESS_SHIFT: 9 }, BORDERLESS: true }]
     }]
-}
+};
 Class.cube = {
     PARENT: "food",
     LABEL: "The Cube",
@@ -242,8 +247,8 @@ Class.cube = {
     },
     DRAW_HEALTH: true,
     INTANGIBLE: false,
-    GIVE_KILL_MESSAGE: true
-}
+    GIVE_KILL_MESSAGE: true,
+};
 Class.tetrahedron = {
     PARENT: "food",
     LABEL: "The Tetrahedron",
@@ -261,7 +266,7 @@ Class.tetrahedron = {
     },
     DRAW_HEALTH: true,
     GIVE_KILL_MESSAGE: true
-}
+};
 Class.octahedron = {
     PARENT: "food",
     LABEL: "The Octahedron",
@@ -279,7 +284,7 @@ Class.octahedron = {
     },
     DRAW_HEALTH: true,
     GIVE_KILL_MESSAGE: true
-}
+};
 Class.dodecahedron = {
     PARENT: "food",
     LABEL: "The Dodecahedron",
@@ -296,8 +301,8 @@ Class.dodecahedron = {
         ACCELERATION: 0.002
     },
     DRAW_HEALTH: true,
-    GIVE_KILL_MESSAGE: true
-}
+    GIVE_KILL_MESSAGE: true,
+};
 Class.icosahedron = {
     PARENT: "food",
     LABEL: "The Icosahedron",
@@ -314,41 +319,35 @@ Class.icosahedron = {
         ACCELERATION: 0.002
     },
     DRAW_HEALTH: true,
-    GIVE_KILL_MESSAGE: true
-}
+    GIVE_KILL_MESSAGE: true,
+};
 
-// 4D
-Class.tesseract = {
-    PARENT: "food",
-    LABEL: "The Tesseract",
-    VALUE: 42e7,
-    SIZE: 25,
-    COLOR: "egg",
-    SHAPE: "M 0.47 -0.375 L 0.71 -0.615 L 0.71 0.615 L 0.47 0.375 Z M -0.375 -0.47 L -0.615 -0.71 L 0.615 -0.71 L 0.375 -0.47 Z M -0.47 0.375 L -0.71 0.615 L -0.71 -0.615 L -0.47 -0.375 Z M 0.375 0.47 L 0.615 0.71 L -0.615 0.71 L -0.375 0.47 Z M 0.35 0.35 L 0.35 -0.35 L -0.35 -0.35 L -0.35 0.35 Z",
-    BODY: {
-        DAMAGE: 10,
-        DENSITY: 40,
-        RESIST: 1.25,
-        HEALTH: 200,
-        PENETRATION: 50,
-        ACCELERATION: 0.003
-    },
-    DRAW_HEALTH: true,
-    GIVE_KILL_MESSAGE: true
+// PRESENTS
+Class.yellowwrap = {
+    PARENT: "healerHat",
+    COLOR: "yellow",
 }
-
-// Presents
+Class.purplewrap = {
+    PARENT: "healerHat",
+    COLOR: "purple",
+}
+Class.whitewrap = {
+    PARENT: "healerHat",
+    COLOR: "white",
+}
 Class.presentRY = makePresent("red", "yellow")
 Class.presentRP = makePresent("red", "purple")
 Class.presentRW = makePresent("red", "white")
+
 Class.presentGY = makePresent("green", "yellow")
 Class.presentGP = makePresent("green", "purple")
 Class.presentGW = makePresent("green", "white")
+
 Class.presentBY = makePresent("blue", "yellow")
 Class.presentBP = makePresent("blue", "purple")
 Class.presentBW = makePresent("blue", "white")
 
-// Relics
+// RELICS
 for (let [gemColor, name] of [
     [undefined, ""],
     ["powerGem", "Power"],
@@ -377,7 +376,27 @@ for (let [gemColor, name] of [
     Class[name + "HexagonRelic"] = makeRelic("hexagon", -0.4, gem, undefined, 6.25);
 }
 
-// Tiered Food
+// 4D
+Class.tesseract = {
+    PARENT: "food",
+    LABEL: "The Tesseract",
+    VALUE: 42e7,
+    SIZE: 25,
+    COLOR: "egg",
+    SHAPE: "M 0.47 -0.375 L 0.71 -0.615 L 0.71 0.615 L 0.47 0.375 Z M -0.375 -0.47 L -0.615 -0.71 L 0.615 -0.71 L 0.375 -0.47 Z M -0.47 0.375 L -0.71 0.615 L -0.71 -0.615 L -0.47 -0.375 Z M 0.375 0.47 L 0.615 0.71 L -0.615 0.71 L -0.375 0.47 Z M 0.35 0.35 L 0.35 -0.35 L -0.35 -0.35 L -0.35 0.35 Z",
+    BODY: {
+        DAMAGE: 10,
+        DENSITY: 40,
+        RESIST: 1.25,
+        HEALTH: 200,
+        PENETRATION: 50,
+        ACCELERATION: 0.003
+    },
+    DRAW_HEALTH: true,
+    GIVE_KILL_MESSAGE: true
+};
+
+// LABY
 let polyNames = ['egg', 'square', 'triangle', 'pentagon', 'hexagon'],
     shinyNames = ['', 'shiny', 'legendary', 'shadow', 'rainbow', 'trans'];
 for (let tier = 0; tier < 6; tier++) {
@@ -390,7 +409,7 @@ for (let tier = 0; tier < 6; tier++) {
             let food = shinyName + polyName;
             food = food[0].toLowerCase() + food.slice(1);
 
-            Class[`laby_${poly}_${tier}_${shiny}_0`] = makeTieredFood(
+            Class[`laby_${poly}_${tier}_${shiny}_0`] = makeLaby(
                 Class[food],
                 parseInt(poly),
                 parseInt(shiny),

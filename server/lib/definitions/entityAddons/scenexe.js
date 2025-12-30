@@ -235,7 +235,7 @@ Class.hearthDeco = makeHat(0, { color: "red"})
 
 makeHearth = (damageFactor = 1, sizeFactor = 1, opacity = 0.3, auraColor) => {
     let isHeal = damageFactor < 0;
-    let auraType = isHeal ? "healAura" : "damageAura";
+    let auraType = isHeal ? "healAura" : "aura";
     auraColor = auraColor ?? (isHeal ? "green" : "red");
     return {
         PARENT: ["genericTank"],
