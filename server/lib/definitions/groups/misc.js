@@ -1,4 +1,4 @@
-const { combineStats, skillSet, makeAuto, makePolyhedron, weaponArray, weaponMirror } = require('../facilitators.js')
+const { combineStats, skillSet, makeAuto, weaponArray, weaponMirror } = require('../facilitators.js')
 const { base, statnames, dfltskl, smshskl } = require('../constants.js')
 require('./generics.js')
 require('./tanks.js')
@@ -913,28 +913,7 @@ Class.cxATMG = {
     PARENT: "dominator",
     LABEL: "CX-ATMG",
     UPGRADE_LABEL: "CX-ATMG",
-    SHAPE: makePolyhedron({
-        VERTEXES: [
-            [1, 1, 1],
-            [-1, 1, 1],
-            [-1, -1, 1],
-            [1, -1, 1],
-            [1, 1, -1],
-            [-1, 1, -1],
-            [-1, -1, -1],
-            [1, -1, -1]
-        ],
-        FACES: [
-            [0, 1, 2, 3],
-            [4, 5, 6, 7],
-            [1, 2, 6, 5],
-            [0, 3, 7, 4],
-            [0, 1, 5, 4],
-            [2, 3, 7, 6]
-        ],
-        SCALE: 7.5,
-        VERTEXES_SCALE: 0.1
-    }),
+    SHAPE: Class.cube.SHAPE,
     SIZE: 12,
     BODY: {
         RESIST: 2,
