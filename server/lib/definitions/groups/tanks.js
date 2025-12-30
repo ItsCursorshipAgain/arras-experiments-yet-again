@@ -3,10 +3,10 @@ const { base, dfltskl, smshskl, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
 
 // Function Presets
-const hybrid_options = {count: 1, independent: true, cycle: false}
+hybrid_options = {count: 1, independent: true, cycle: false}
 
 // Gun Presets
-const bird_rear = [
+bird_rear = [
     ...weaponMirror({
         POSITION: {
             LENGTH: 16,
@@ -34,7 +34,7 @@ const bird_rear = [
         }
     }
 ]
-const trapGuard_rear = [
+trapGuard_rear = [
     {
         POSITION: {
             LENGTH: 13,
@@ -57,7 +57,7 @@ const trapGuard_rear = [
         }
     }
 ]
-const triAngle_propeller = weaponMirror({
+triAngle_propeller = weaponMirror({
     POSITION: {
         LENGTH: 16,
         WIDTH: 8,
@@ -70,7 +70,7 @@ const triAngle_propeller = weaponMirror({
         LABEL: "thruster"
     }
 })
-const booster_propeller = [
+booster_propeller = [
     ...weaponMirror({
         POSITION: {
             LENGTH: 14,
@@ -5594,8 +5594,8 @@ Class.tripleTwin = {
 }
 Class.triplet = {
     PARENT: "genericTank",
-    DANGER: 7,
     LABEL: "Triplet",
+    DANGER: 7,
     BODY: {
         FOV: 1.05 * base.FOV
     },

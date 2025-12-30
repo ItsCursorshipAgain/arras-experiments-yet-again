@@ -110,46 +110,63 @@ exports.makeOver = (type, name = -1, options = {}) => {
     type = ensureIsClass(type);
     let output = exports.dereference(type);
 
+    let angle = 180 - (options.angle ?? 125)
+    let count = options.count ?? 2
+    let independent = options.independent ?? false
+    let cycle = options.cycle ?? true
+    let maxChildren = options.maxDrones ?? 3
+    let stats = options.extraStats ?? []
+
+    options.spawnerType ??= "drone"
     options.inFront ??= true
 
-    let angle = 180 - (options.angle ?? 125);
-    let count = options.count ?? 2;
-    let independent = options.independent ?? false;
-    let cycle = options.cycle ?? true;
-    let maxChildren = options.maxDrones ?? 3;
-    let stats = options.extraStats ?? [];
-    let spawnerType = options.spawnerType;
-
     let spawners = [];
-    if (spawnerType == "swarm") {
+    if (options.spawnerType == "swarm") {
         let spawnerProperties = {
             SHOOT_SETTINGS: exports.combineStats([g.swarm, ...stats]),
             TYPE: independent ? "autoswarm" : "swarm",
             STAT_CALCULATOR: "swarm",
         }
         if (count % 2 == 1) {
-            spawners.push({
-                POSITION: [7, 7.5, 0.6, 7, 4, 180, 0],
-                PROPERTIES: spawnerProperties,
-            }, {
-                POSITION: [7, 7.5, 0.6, 7, -4, 180, 0.5],
-                PROPERTIES: spawnerProperties,
-            })
+            spawners.push(
+                ...exports.weaponMirror({
+                    POSITION: {
+                        LENGTH: 9,
+                        WIDTH: 8.2,
+                        ASPECT: 0.6,
+                        X: 5,
+                        Y: 4,
+                        ANGLE: 180
+                    },
+                    PROPERTIES: spawnerProperties,
+                }, {delayIncrement: 0.5})
+            )
         }
         for (let i = 2; i <= (count - count % 2); i += 2) {
-            spawners.push({
-                POSITION: [7, 7.5, 0.6, 7, 4, 180 - angle * i / 2, 0],
-                PROPERTIES: spawnerProperties,
-            }, {
-                POSITION: [7, 7.5, 0.6, 7, -4, 180 - angle * i / 2, 0.5],
-                PROPERTIES: spawnerProperties,
-            }, {
-                POSITION: [7, 7.5, 0.6, 7, 4, 180 + angle * i / 2, 0],
-                PROPERTIES: spawnerProperties,
-            }, {
-                POSITION: [7, 7.5, 0.6, 7, -4, 180 + angle * i / 2, 0.5],
-                PROPERTIES: spawnerProperties,
-            })
+            spawners.push(
+                ...exports.weaponMirror({
+                    POSITION: {
+                        LENGTH: 9,
+                        WIDTH: 8.2,
+                        ASPECT: 0.6,
+                        X: 5,
+                        Y: 4,
+                        ANGLE: 180 - angle * i / 2
+                    },
+                    PROPERTIES: spawnerProperties,
+                },
+                {
+                    POSITION: {
+                        LENGTH: 9,
+                        WIDTH: 8.2,
+                        ASPECT: 0.6,
+                        X: 5,
+                        Y: 4,
+                        ANGLE: 180 + angle * i / 2
+                    },
+                    PROPERTIES: spawnerProperties,
+                }, {delayIncrement: 0.5})
+            )
         }
     } else {
         let spawnerProperties = {
@@ -174,7 +191,7 @@ exports.makeOver = (type, name = -1, options = {}) => {
             })
         }
         for (let i = 2; i <= (count - count % 2); i += 2) {
-            spawners.push({
+            spawners.push(...exports.weaponMirror({
                 POSITION: {
                     LENGTH: 6,
                     WIDTH: 11,
@@ -183,17 +200,7 @@ exports.makeOver = (type, name = -1, options = {}) => {
                     ANGLE: 180 - angle * i / 2
                 },
                 PROPERTIES: spawnerProperties
-            },
-            {
-                POSITION: {
-                    LENGTH: 6,
-                    WIDTH: 11,
-                    ASPECT: 1.2,
-                    X: 8,
-                    ANGLE: 180 + angle * i / 2
-                },
-                PROPERTIES: spawnerProperties
-            })
+            }))
         }
     }
     if (options.inFront == false) {
@@ -1123,3 +1130,108 @@ exports.makePresent = (outcolor, wrapcolor) => {
         ]
     }
 }
+
+// denisc
+exports.makePolyhedron = function (info) {
+    let vertexes, faces;
+
+    if (info.VERTEXES) vertexes = info.VERTEXES;
+
+    if (!info.FACES) {
+        throw new Error('FACES are not set');
+    } else if (!vertexes) {
+        vertexes = [];
+        faces = [];
+        for (const face of info.FACES) {
+            const current = [];
+            for (const vertex of face) {
+                let index = vertexes.findIndex(
+                    x => x[0] == vertex[0] && x[1] == vertex[1] && x[2] == vertex[2]
+                );
+                if (index == -1) {
+                    index = vertexes.push(vertex) - 1;
+                }
+                current.push(index);
+            }
+            faces.push(current);
+        }
+    } else {
+        faces = info.FACES;
+    }
+
+    const vertScale = info.VERTEXES_SCALE || 1;
+
+    if (vertScale != 1) {
+        vertexes = vertexes.map(x => [
+            x[0] * vertScale,
+            x[1] * vertScale,
+            x[2] * vertScale
+        ]);
+    }
+
+    return (
+        '3d=' +
+        vertexes.flat().join(',') +
+        '/' +
+        faces.map(i => i.join(',')).join(';') +
+        '/' +
+        (info.SCALE || 1)
+    );
+};
+
+/**
+ * @param {{
+ *   VERTEXES?: [number, number, number, number][],
+ *   FACES: number[] | [number, number, number, number][][],
+ *   SCALE?: number,
+ *   VERTEXES_SCALE?: number
+ * }} info
+ * @returns {`4d=${string}`}
+ */
+exports.makePolychoron = function (info) {
+    let vertexes, faces;
+
+    if (info.VERTEXES) vertexes = info.VERTEXES;
+
+    if (!info.FACES) {
+        throw new Error('FACES are not set');
+    } else if (!vertexes) {
+        vertexes = [];
+        faces = [];
+        for (const face of info.FACES) {
+            const current = [];
+            for (const vertex of face) {
+                let index = vertexes.findIndex(
+                    x => x[0] == vertex[0] && x[1] == vertex[1] && x[2] == vertex[2] && x[3] == vertex[3]
+                );
+                if (index == -1) {
+                    index = vertexes.push(vertex) - 1;
+                }
+                current.push(index);
+            }
+            faces.push(current);
+        }
+    } else {
+        faces = info.FACES;
+    }
+
+    const vertScale = info.VERTEXES_SCALE || 1;
+
+    if (vertScale != 1) {
+        vertexes = vertexes.map(x => [
+            x[0] * vertScale,
+            x[1] * vertScale,
+            x[2] * vertScale,
+            x[3] * vertScale
+        ]);
+    }
+
+    return (
+        '4d=' +
+        vertexes.flat().join(',') +
+        '/' +
+        faces.map(i => i.join(',')).join(';') +
+        '/' +
+        (info.SCALE || 1)
+    );
+};
