@@ -22,7 +22,7 @@ function init() {
         }
     }
 
-    Class.auraBase.GLOW = {};
+    Class.genericAura.GLOW = {};
 }
 // uncomment line below to enable (these drop your FPS a FUCK TON)
 

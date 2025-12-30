@@ -2,6 +2,41 @@ const { combineStats, weaponArray, weaponMirror } = require('../facilitators.js'
 const g = require('../gunvals.js')
 
 // Bullets
+Class.bullet = {
+    PARENT: "genericProjectile",
+    LABEL: "Bullet",
+    TYPE: "bullet",
+    BODY: {
+        PENETRATION: 1,
+        SPEED: 3.75,
+        RANGE: 90,
+        DENSITY: 1.25,
+        HEALTH: 0.165,
+        DAMAGE: 6,
+        PUSHABILITY: 0.3,
+    },
+    FACING_TYPE: "smoothWithMotion",
+    CAN_GO_OUTSIDE_ROOM: true,
+    HITS_OWN_TYPE: "never",
+}
+Class.healerBullet = {
+    PARENT: "bullet",
+    HITS_OWN_TYPE: "push",
+    BODY: {
+        PENETRATION: Class.bullet.BODY.PENETRATION,
+        SPEED: Class.bullet.BODY.SPEED,
+        RANGE: Class.bullet.BODY.RANGE,
+        DENSITY: Class.bullet.BODY.DENSITY,
+        HEALTH: Class.bullet.BODY.HEALTH,
+        DAMAGE: Class.bullet.BODY.DAMAGE + 20,
+        PUSHABILITY: Class.bullet.BODY.PENETRATION,
+    },
+    HEALER: true
+}
+Class.healerSanctuaryBullet = {
+    PARENT: "healerBullet",
+    HITS_OWN_TYPE: "never"
+}
 Class.casing = {
     PARENT: "bullet",
     LABEL: "Shell",
@@ -471,50 +506,43 @@ Class.autoSmasherMissile = {
     ],
 }
 
-// Healer Projectiles
-Class.healerBullet = {
-    PARENT: "bullet",
-    HITS_OWN_TYPE: "push",
-    BODY: {
-        PENETRATION: Class.bullet.BODY.PENETRATION,
-        SPEED: Class.bullet.BODY.SPEED,
-        RANGE: Class.bullet.BODY.RANGE,
-        DENSITY: Class.bullet.BODY.DENSITY,
-        HEALTH: Class.bullet.BODY.HEALTH,
-        DAMAGE: Class.bullet.BODY.DAMAGE + 20,
-        PUSHABILITY: Class.bullet.BODY.PENETRATION,
-    },
-    HEALER: true
-}
-Class.healerSatellite = {
-    PARENT: "satellite",
-    HITS_OWN_TYPE: "push",
-    BODY: {
-        PENETRATION: Class.satellite.BODY.PENETRATION,
-        SPEED: Class.satellite.BODY.SPEED,
-        RANGE: Class.satellite.BODY.RANGE,
-        DENSITY: Class.satellite.BODY.DENSITY,
-        HEALTH: Class.satellite.BODY.HEALTH,
-        DAMAGE: Class.satellite.BODY.DAMAGE + 20,
-        PUSHABILITY: Class.satellite.BODY.PENETRATION,
-    },
-    HEALER: true,
-    TURRETS: [
-        {
-            POSITION: {
-                SIZE: 13,
-                LAYER: 1
-            },
-            TYPE: "healerHat"
-        }
-    ]
-}
-Class.healerSanctuaryBullet = {
-    PARENT: "healerBullet",
-    HITS_OWN_TYPE: "never"
-}
-
 // Drones
+Class.drone = {
+    PARENT: "genericProjectile",
+    LABEL: "Drone",
+    TYPE: "drone",
+    DANGER: 2,
+    CONTROL_RANGE: 0,
+    SHAPE: 3,
+    MOTION_TYPE: "chase",
+    FACING_TYPE: "smoothToTarget",
+    CONTROLLERS: [
+        "nearestDifferentMaster",
+        "canRepel",
+        "mapTargetToGoal",
+        "hangOutNearMaster",
+    ],
+    AI: {
+        BLIND: true,
+    },
+    BODY: {
+        PENETRATION: 1.2,
+        PUSHABILITY: 0.6,
+        ACCELERATION: 0.085,
+        HEALTH: 0.3,
+        DAMAGE: 3.375,
+        SPEED: 3.8,
+        RANGE: 200,
+        DENSITY: 0.03,
+        RESIST: 1.5,
+        FOV: 0.5,
+    },
+    HITS_OWN_TYPE: "droneCollision",
+    DRAW_HEALTH: false,
+    CLEAR_ON_MASTER_UPGRADE: true,
+    BUFF_VS_FOOD: true,
+    DIE_AT_RANGE: false
+}
 Class.bigBall = { PARENT: "drone", SHAPE: 8 }
 Class.sunchip = {
     PARENT: "drone",
@@ -674,41 +702,57 @@ Class.desmosMinion = {
         })
     ]
 }
-Class.sentrySwarmMinion = {
-    PARENT: 'drone',
-    LABEL: 'sentry',
-    COLOR: 'pink',
-    UPGRADE_COLOR: "pink",
-    DRAW_HEALTH: true,
-    HAS_NO_RECOIL: true,
-    GUNS: Class.sentrySwarm.GUNS
-}
-Class.sentryGunMinion = {
-    PARENT: 'drone',
-    LABEL: 'sentry',
-    COLOR: 'pink',
-    UPGRADE_COLOR: "pink",
-    DRAW_HEALTH: true,
-    HAS_NO_RECOIL: true,
-    TURRETS: [{
-        POSITION: [12, 0, 0, 0, 360, 1],
-        TYPE: ['megaAutoTankGun', {GUN_STAT_SCALE: {health: 0.8}}]
-    }]
-}
-Class.sentryTrapMinion = {
-    PARENT: 'drone',
-    LABEL: 'sentry',
-    COLOR: 'pink',
-    UPGRADE_COLOR: "pink",
-    DRAW_HEALTH: true,
-    HAS_NO_RECOIL: true,
-    TURRETS: [{
-        POSITION: [12, 0, 0, 0, 360, 1],
-        TYPE: 'trapTurret'
-    }]
-}
 
 // Satellites
+Class.satellite = {
+    PARENT: "genericProjectile",
+    LABEL: "Satellite",
+    TYPE: "satellite",
+    DANGER: 2,
+    LAYER: 13,
+    CONTROLLERS: ['orbit'],
+    FACING_TYPE: "spin",
+    BODY: {
+        PENETRATION: 1.2,
+        PUSHABILITY: 0.6,
+        ACCELERATION: 0.75,
+        HEALTH: 0.3,
+        DAMAGE: 3.375,
+        SPEED: 10,
+        RANGE: 200,
+        DENSITY: 0.03,
+        RESIST: 1.5,
+        FOV: 0.5,
+    },
+    DRAW_HEALTH: false,
+    CLEAR_ON_MASTER_UPGRADE: true,
+    BUFF_VS_FOOD: true,
+    MOTION_TYPE: 'motor',
+    DIE_AT_RANGE: false
+}
+Class.healerSatellite = {
+    PARENT: "satellite",
+    HITS_OWN_TYPE: "push",
+    BODY: {
+        PENETRATION: Class.satellite.BODY.PENETRATION,
+        SPEED: Class.satellite.BODY.SPEED,
+        RANGE: Class.satellite.BODY.RANGE,
+        DENSITY: Class.satellite.BODY.DENSITY,
+        HEALTH: Class.satellite.BODY.HEALTH,
+        DAMAGE: Class.satellite.BODY.DAMAGE + 20,
+        PUSHABILITY: Class.satellite.BODY.PENETRATION,
+    },
+    HEALER: true,
+    TURRETS: [
+        {
+            POSITION: {
+                SIZE: 13,
+                LAYER: 1
+            },
+            TYPE: "healerHat"
+        }
+    ]
+}
 Class.satellite_old = {
     PARENT: "satellite",
     TURRETS: [
@@ -721,6 +765,23 @@ Class.satellite_old = {
 Class.squareSatellite = { PARENT: "satellite", SHAPE: 4 }
 
 // Traps
+Class.trap = {
+    PARENT: "genericProjectile",
+    LABEL: "Thrown Trap",
+    TYPE: "trap",
+    SHAPE: -3,
+    MOTION_TYPE: "glide",
+    FACING_TYPE: "turnWithSpeed",
+    HITS_OWN_TYPE: "push",
+    BODY: {
+        HEALTH: 0.5,
+        DAMAGE: 3,
+        RANGE: 450,
+        DENSITY: 2.5,
+        RESIST: 2.5,
+        SPEED: 0
+    }
+}
 Class.satelliteTrap = {
     PARENT: "trap",
     ANGLE: 60,
@@ -864,6 +925,29 @@ Class.medkit = {
 }
 
 // Swarms
+Class.swarm = {
+    PARENT: "genericProjectile",
+    LABEL: "Swarm Drone",
+    TYPE: "swarm",
+    SHAPE: 3,
+    MOTION_TYPE: "swarm",
+    FACING_TYPE: "smoothWithMotion",
+    CONTROLLERS: ["nearestDifferentMaster", "mapTargetToGoal"],
+    CRAVES_ATTENTION: true,
+    BODY: {
+        ACCELERATION: 3,
+        PENETRATION: 1.5,
+        HEALTH: 0.175,
+        DAMAGE: 2.25,
+        SPEED: 4.5,
+        RESIST: 1.6,
+        RANGE: 225,
+        DENSITY: 12,
+        PUSHABILITY: 0.6,
+        FOV: 1.5,
+    },
+    BUFF_VS_FOOD: true
+}
 Class.autoswarm = {
     PARENT: "swarm",
     AI: {

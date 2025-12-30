@@ -2,6 +2,7 @@ const { combineStats, makeAura, makeAuto, makeHat, makeTurret, LayeredBoss, setT
 const { base, smshskl, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
 require('./generics.js')
+require('./projectiles.js')
 require('./tanks.js')
 require('./turrets.js')
 
@@ -3004,7 +3005,7 @@ Class.trplnrBossVulnerableForm = {
 }
 
 Class.frostAuraSmall = {
-	PARENT: "aura",
+	PARENT: "damageAura",
 	LAYER: 30,
 	FACING_TYPE: ["spin", {speed: -0.04}],
     BORDERLESS: true,
@@ -3015,7 +3016,7 @@ Class.frostAuraSmall = {
     }]
 }
 Class.frostAuraSmallOutline = {
-    PARENT: "aura",
+    PARENT: "damageAura",
 	MIRROR_MASTER_ANGLE: true,
     DRAW_FILL: false,
 	SHAPE: "M 1 0 L 0.715 0.519 L 0.309 0.951 L -0.273 0.84 L -0.809 0.588 L -0.883 0 L -0.809 -0.588 L -0.273 -0.84 L 0.309 -0.951 L 0.715 -0.519 L 1 0" + 
@@ -3023,7 +3024,7 @@ Class.frostAuraSmallOutline = {
 		"L 0 0 L 0.309 0.951 M 0 0 L -0.809 0.588 M 0 0 L -0.809 -0.588 M 0 0 L 0.309 -0.951",
 }
 Class.frostAuraLarge = {
-	PARENT: "aura",
+	PARENT: "damageAura",
 	LAYER: 30,
 	FACING_TYPE: ["spin", {speed: -0.04}],
 	BORDERLESS: true,
@@ -3034,7 +3035,7 @@ Class.frostAuraLarge = {
     }]
 }
 Class.frostAuraLargeOutline = {
-    PARENT: "aura",
+    PARENT: "damageAura",
 	MIRROR_MASTER_ANGLE: true,
     DRAW_FILL: false,
 	SHAPE: "M 1 0 L 0.988 0.156 L 0.951 0.309 L 0.891 0.454 L 0.809 0.588 L 0.707 0.707 L 0.588 0.809 L 0.454 0.891 L 0.309 0.951 L 0.156 0.988 L 0 1 L -0.156 0.988 L -0.309 0.951 L -0.454 0.891 L -0.588 0.809 L -0.707 0.707 L -0.809 0.588 L -0.891 0.454 L -0.951 0.309 L -0.988 0.156 L -1 0 L -0.988 -0.156 L -0.951 -0.309 L -0.891 -0.454 L -0.809 -0.588 L -0.707 -0.707 L -0.588 -0.809 L -0.454 -0.891 L -0.309 -0.951 L -0.156 -0.988 L 0 -1 L 0.156 -0.988 L 0.309 -0.951 L 0.454 -0.891 L 0.588 -0.809 L 0.707 -0.707 L 0.809 -0.588 L 0.891 -0.454 L 0.951 -0.309 L 0.988 -0.156 L 1 0" + 
