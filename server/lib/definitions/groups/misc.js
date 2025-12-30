@@ -1,4 +1,4 @@
-const { combineStats, skillSet, makeAuto, weaponArray, weaponMirror } = require('../facilitators.js')
+const { combineStats, skillSet, makeAuto, makePolyhedron, weaponArray, weaponMirror } = require('../facilitators.js')
 const { base, statnames, dfltskl, smshskl } = require('../constants.js')
 require('./generics.js')
 require('./tanks.js')
@@ -876,6 +876,46 @@ Class.antiTankMachineGun = {
 
 // CX-ATMG
 Class.cxATMGBullet = { PARENT: "bullet", SHAPE: Class.cube.SHAPE }
+Class.cxATMGArm = {
+    PARENT: "genericTank",
+    COLOR: "white",
+    SHAPE: Class.cube.SHAPE,
+    SKILL_CAP: Array(10).fill(15),
+    SKILL: Array(10).fill(15),
+    GUNS: [
+        {
+            POSITION: [15, 2.5, 1, 0, 2, 0, 0.2],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, {reload: 0.5}]),
+                TYPE: "cxATMGBullet",
+            }
+        },
+        {
+            POSITION: [15, 2.5, 1, 0, -2, 0, 0.2],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, {reload: 0.5}]),
+                TYPE: "cxATMGBullet",
+            }
+        },
+        {
+            POSITION: [1, 2.5, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, {reload: 0.5}]),
+                TYPE: "cxATMGBullet",
+            }
+        },
+        {
+            POSITION: [16.5, 3.5, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, {reload: 0.5}]),
+                TYPE: "cxATMGBullet",
+            }
+        },
+        {
+            POSITION: [5.5, 6.5, -1.8, 6.5, 0, 0, 0]
+        }
+    ],
+}
 Class.cxATMG = {
     PARENT: "dominator",
     LABEL: "CX-ATMG",

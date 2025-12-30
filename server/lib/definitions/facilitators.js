@@ -1124,8 +1124,11 @@ exports.makePresent = (outcolor, wrapcolor) => {
         DRAW_HEALTH: true,
         PROPS: [
             {
-                POSITION: [19.5, 0, 0, 0, 360, 1],
-                TYPE: wrapcolor+"wrap",
+                TYPE: ["healerHat", {COLOR: wrapcolor}],
+                POSITION: {
+                    SIZE: 19.5,
+                    LAYER: 1
+                }
             }
         ]
     }
@@ -1141,7 +1144,7 @@ exports.makePresent = (outcolor, wrapcolor) => {
  * }} info
  * @returns {`3d=${string}`}
  */
-exports.encode3d = function (info) {
+exports.makePolyhedron = function (info) {
     let vertexes, faces;
 
     if (info.VERTEXES) vertexes = info.VERTEXES;
@@ -1180,6 +1183,63 @@ exports.encode3d = function (info) {
 
     return (
         '3d=' +
+        vertexes.flat().join(',') +
+        '/' +
+        faces.map(i => i.join(',')).join(';') +
+        '/' +
+        (info.SCALE || 1)
+    );
+};
+
+/**
+ * @param {{
+ *   VERTEXES?: [number, number, number, number][],
+ *   FACES: number[] | [number, number, number, number][][],
+ *   SCALE?: number,
+ *   VERTEXES_SCALE?: number
+ * }} info
+ * @returns {`4d=${string}`}
+ */
+exports.makePolychoron = function (info) {
+    let vertexes, faces;
+
+    if (info.VERTEXES) vertexes = info.VERTEXES;
+
+    if (!info.FACES) {
+        throw new Error('FACES are not set');
+    } else if (!vertexes) {
+        vertexes = [];
+        faces = [];
+        for (const face of info.FACES) {
+            const current = [];
+            for (const vertex of face) {
+                let index = vertexes.findIndex(
+                    x => x[0] == vertex[0] && x[1] == vertex[1] && x[2] == vertex[2] && x[3] == vertex[3]
+                );
+                if (index == -1) {
+                    index = vertexes.push(vertex) - 1;
+                }
+                current.push(index);
+            }
+            faces.push(current);
+        }
+    } else {
+        faces = info.FACES;
+    }
+
+    const vertScale = info.VERTEXES_SCALE || 1;
+
+    if (vertScale != 1) {
+        vertexes = vertexes.map(x => [
+            x[0] * vertScale,
+            x[1] * vertScale,
+            x[2] * vertScale,
+            x[3] * vertScale
+        ]);
+    }
+
+    return (
+        '4d=' +
         vertexes.flat().join(',') +
         '/' +
         faces.map(i => i.join(',')).join(';') +
