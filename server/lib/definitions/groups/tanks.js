@@ -3277,7 +3277,7 @@ Class.hexaWhirl = {
     ANGLE: 90,
     CONTROLLERS: ["whirlwind"],
     HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
+    STAT_NAMES: statnames.mixed,
     TURRETS: [
         {
             POSITION: [8, 0, 0, 0, 360, 1],
@@ -3305,16 +3305,7 @@ Class.hexaWhirl = {
         return output
     })()
 }
-Class.hexaWhirl.GUNS.push(...weaponArray({
-    POSITION: {
-        LENGTH: 18,
-        WIDTH: 8
-    },
-    PROPERTIES: {
-        SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard]),
-        TYPE: "bullet"
-    }
-}, 6, 0.5))
+Class.hexaWhirl.GUNS.push(...Class.hexaTank.GUNS)
 Class.hybrid = makeOver('destroyer', "Hybrid", hybrid_options)
 Class.infestor = {
     PARENT: "genericTank",
@@ -3856,33 +3847,7 @@ Class.munition = {
         return output
     })()
 }
-Class.munition.GUNS.push(
-    ...weaponMirror({
-        POSITION: {
-            LENGTH: 17,
-            WIDTH: 5,
-            Y: -5,
-            ANGLE: -7,
-            DELAY: 0.25
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]),
-            TYPE: "bullet",
-            LABEL: "Secondary"
-        }
-    }, { delayIncrement: 0.5 }),
-    {
-        POSITION: {
-            LENGTH: 19,
-            WIDTH: 12
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery]),
-            TYPE: "bullet",
-            LABEL: "Heavy"
-        }
-    }
-)
+Class.munition.GUNS.push(...Class.artillery.GUNS)
 Class.musket = {
     PARENT: "genericTank",
     LABEL: "Musket",
@@ -4466,25 +4431,7 @@ Class.prophet = {
         return output
     })()
 }
-Class.prophet.GUNS.push(...weaponArray({
-    POSITION: {
-        LENGTH: 6,
-        WIDTH: 12,
-        ASPECT: 1.2,
-        X: 7.4,
-        ANGLE: 90
-    },
-    PROPERTIES: {
-        SHOOT_SETTINGS: combineStats([g.drone, g.sunchip, {reload: 0.8}]),
-        TYPE: "sunchip",
-        AUTOFIRE: true,
-        SYNCS_SKILLS: true,
-        STAT_CALCULATOR: "necro",
-        WAIT_TO_CYCLE: true,
-        DELAY_SPAWN: false,
-        MAX_CHILDREN: 7
-    }
-}, 2))
+Class.prophet.GUNS.push(...Class.underseer.GUNS)
 Class.quadBuilder = {
     PARENT: "genericTank",
     LABEL: "Quad Builder",
@@ -5843,26 +5790,7 @@ Class.vortex = {
         return output
     })()
 }
-Class.vortex.GUNS.push(
-    {
-        POSITION: {
-            LENGTH: 19.2,
-            WIDTH: 13,
-            ASPECT: 0.7
-        }
-    },
-    {
-        POSITION: {
-            LENGTH: 17,
-            WIDTH: 13
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher]),
-            TYPE: "minimissile",
-            STAT_CALCULATOR: "sustained"
-        }
-    }
-)
+Class.vortex.GUNS.push(...Class.launcher.GUNS)
 Class.vortex_old = {
     PARENT: "genericTank",
     LABEL: "Vortex",
@@ -5979,26 +5907,7 @@ Class.whirlGuard = {
         return output
     })()
 }
-Class.whirlGuard.GUNS.push(
-    {
-        POSITION: [20, 8, 1, 0, 0, 0, 0],
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard]),
-            TYPE: "bullet"
-        }
-    },
-    {
-        POSITION: [13, 8, 1, 0, 0, 180, 0]
-    },
-    {
-        POSITION: [4, 8, 1.7, 13, 0, 180, 0],
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.trap]),
-            TYPE: "trap",
-            STAT_CALCULATOR: "trap"
-        }
-    }
-)
+Class.whirlGuard.GUNS.push(...Class.trapGuard.GUNS)
 Class.whirl3 = {
     PARENT: "genericTank",
     LABEL: "Whirl-3",
@@ -6013,18 +5922,7 @@ Class.whirl3 = {
             POSITION: [8, 0, 0, 0, 360, 1],
             TYPE: ["squareHat_spin", { COLOR: "grey" }]
         },
-        {
-            POSITION: [11, 8, 0, 0, 190, 0],
-            TYPE: "autoTankGun",
-        },
-        {
-            POSITION: [11, 8, 0, 120, 190, 0],
-            TYPE: "autoTankGun",
-        },
-        {
-            POSITION: [11, 8, 0, 240, 190, 0],
-            TYPE: "autoTankGun",
-        }
+        ...Class.auto3.TURRETS
     ],
     AI: {
         SPEED: 2, 

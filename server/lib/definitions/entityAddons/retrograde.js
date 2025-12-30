@@ -277,7 +277,8 @@ Class.deathStar_RG = {
             POSITION: {
                 LENGTH: 20.5,
                 WIDTH: 12,
-                ANGLE: 180
+                ANGLE: 180,
+                DELAY: 0.5
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.flankGuard, g.flankGuard]),
