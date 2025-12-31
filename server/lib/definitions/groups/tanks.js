@@ -1,4 +1,4 @@
-const { combineStats, makeAuto, makeDrive, makeOver, makeRadialAuto, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
+const { combineStats, makeAuto, makeDrive, makeOver, makeRadialAuto, makeWhirlwind, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
 const { base, dfltskl, smshskl, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
 
@@ -315,55 +315,7 @@ Class.twin = {
         }
     }, { delayIncrement: 0.5 })
 }
-Class.whirlwind = {
-    PARENT: "genericTank",
-    LABEL: "Whirlwind",
-    ANGLE: 60,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    TURRETS: [
-        {
-            POSITION: {
-                SIZE: 8,
-                LAYER: 1
-            },
-            TYPE: ["hexagonHat_spin", { COLOR: "grey" }]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 6; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 60}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })(),
-    UPGRADES_TIER_2: [
-        "tornado",
-        "hurricane",
-    ],
-    UPGRADES_TIER_3: [
-        "hexaWhirl",
-        "munition",
-        "whirl3",
-        "whirlGuard",
-        "prophet",
-        "vortex",
-    ]
-}
+Class.whirlwind = makeWhirlwind("genericTank", {hat: "hexagonHat_spin", satellites: 6, label: "Whirlwind", danger: 5})
 Class.whirlwind_bent = {
     PARENT: "genericTank",
     LABEL: "Whirlwind",
@@ -748,45 +700,7 @@ Class.hunter = {
         }
     ]
 }
-Class.hurricane = {
-    PARENT: "genericTank",
-    LABEL: "Hurricane",
-    DANGER: 6,
-    ANGLE: 45,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    TURRETS: [
-        {
-            TYPE: ["octagonHat_spin", { COLOR: "grey" }],
-            POSITION: [8, 0, 0, 0, 360, 1],
-        },
-    ],
-    AI: {
-        SPEED: 2, 
-    }, 
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 8; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 45}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })(),
-    UPGRADES_TIER_3: [
-        "typhoon",
-        "blizzard",
-    ]
-}
+Class.hurricane = makeWhirlwind("genericTank", {hat: "octagonHat_spin", satellites: 8, label: "Hurricane"})
 Class.hurricane_bent = {
     PARENT: "genericTank",
     LABEL: "Hurricane",
@@ -1194,46 +1108,7 @@ Class.tempest_bent = {
         }
     ]
 }
-Class.tornado = {
-    PARENT: "genericTank",
-    LABEL: "Tornado",
-    DANGER: 6,
-    TURRETS: [
-        {
-            POSITION: [10, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }],
-        },
-    ],
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    AI: {
-        SPEED: 2, 
-    }, 
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })(),
-    UPGRADES_TIER_3: [
-        "megaTornado",
-        "tempest",
-        "thunderbolt",
-    ]
-}
+Class.tornado = makeWhirlwind("genericTank", {hat: "squareHat_spin", hatSize: 10, satellites: 4, satelliteSize: 12, extraStats: [g.pounder], label: "Tornado"})
 Class.trapGuard = {
     PARENT: "genericTank",
     LABEL: "Trap Guard",
@@ -1433,48 +1308,9 @@ Class.volute = {
         "sidewinder",
     ]
 }
-Class.whirlwind_old = {
-    PARENT: "genericTank",
-    LABEL: "Whirlwind",
-    UPGRADE_LABEL: "Old Whirlwind",
-    ANGLE: 60,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    TURRETS: [
-        {
-            POSITION: [24, 0, 0, 0, 360, 0],
-            TYPE: "genericEntity"
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 6; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite_old", {ANGLE: i * 60}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })(),
-    UPGRADES_TIER_3: [
-        "monsoon",
-        "maelstrom",
-        "tornado_old",
-        "typhoon_old",
-        "vortex_old",
-    ]
-}
+Class.whirlwind_old = makeWhirlwind("genericTank", {hat: "circleHat", hatSize: 24, hatLayer: 0, satellites: 6, satelliteType: "satellite_old", label: "Whirlwind"})
+Class.whirlwind_old.UPGRADE_LABEL = "Old Whirlwind"
+Class.whirlwind_old.UPGRADES_TIER_3 = ["monsoon", "maelstrom", "tornado_old", "typhoon_old", "vortex_old"]
 
 // Tier 3
 Class.ambulance = {
@@ -1864,58 +1700,7 @@ Class.bigMama = {
         }]
     }]
 }
-Class.blizzard = {
-    PARENT: "genericTank",
-    LABEL: "Blizzard",
-    DANGER: 7,
-    TURRETS: [
-        {
-            TYPE: ["pentagonHat_spin", { COLOR: "grey" }],
-            POSITION: [8, 0, 0, 0, 360, 1]
-        },
-        {
-            TYPE: ["pentagonHat_spinReverse", { COLOR: "grey" }],
-            POSITION: [6, 0, 0, 180, 360, 1]
-        },
-    ],
-    ANGLE: 72,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    AI: {
-        SPEED: 2, 
-    }, 
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 5; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 72}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        for (let i = 0; i < 5; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", { ANGLE: i * 72, CONTROLLERS: [['orbit', {invert: true}]] }], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
+Class.blizzard = makeWhirlwind("genericTank", {dualLayer: true, hat: "pentagonHat_spin", hat2: "pentagonHat_spinReverse", satellites: 5, label: "Blizzard", danger: 7})
 Class.blunderbuss = {
     PARENT: "genericTank",
     LABEL: "Blunderbuss",
@@ -2440,7 +2225,7 @@ Class.construct = { // it's "construct" and not "constructor" because "construct
         }
     ]
 }
-Class.cropDuster = makeOver('minigun', "Crop Duster", hybrid_options)
+Class.cropDuster = makeOver("minigun", "Crop Duster", hybrid_options)
 Class.crossbow = {
     PARENT: "genericTank",
     LABEL: "Crossbow",
@@ -3210,7 +2995,7 @@ Class.gunnerTrapper = {
         }
     ]
 }
-Class.heptaAutoBasic = makeAuto("basic", "Hepta Auto-Basic", { size: 4, x: 6.5, angle: 0, total: 7 })
+Class.heptaAutoBasic = makeAuto("basic", "Hepta Auto-Basic", {size: 4, x: 6.5, angle: 0, total: 7})
 Class.hewnDouble = {
     PARENT: "genericTank",
     LABEL: "Hewn Double",
@@ -3271,43 +3056,8 @@ Class.hexaTrapper = makeAuto({
         }
     ], 6, 0.5),
 }, "Hexa-Trapper")
-Class.hexaWhirl = {
-    PARENT: "genericTank",
-    LABEL: "Hexa Whirl",
-    DANGER: 7,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.mixed,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.hexaWhirl.GUNS.push(...Class.hexaTank.GUNS)
-Class.hybrid = makeOver('destroyer', "Hybrid", hybrid_options)
+Class.hexaWhirl = makeWhirlwind("hexaTank", {label: "Hexa Whirl"})
+Class.hybrid = makeOver("destroyer", "Hybrid", hybrid_options)
 Class.infestor = {
     PARENT: "genericTank",
     LABEL: "Infestor",
@@ -3622,41 +3372,7 @@ Class.megaSmasher = {
         }
     ]
 }
-Class.megaTornado = {
-    PARENT: "genericTank",
-    LABEL: "Mega-Tornado",
-    DANGER: 7,
-    TURRETS: [
-        {
-            TYPE: ["diamondHat_spin", { COLOR: "grey" }],
-            POSITION: [16, 0, 0, 0, 360, 1],
-        },
-    ],
-    ANGLE: 180,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    AI: {
-        SPEED: 2, 
-    }, 
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 2; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 16, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder, g.destroyer]), 
-                    TYPE: ["satellite", {ANGLE: i * 180}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
+Class.megaTornado = makeWhirlwind("genericTank", {hat: "diamondHat_spin", hatSize: 16, satellites: 2, satelliteSize: 16, extraStats: [g.pounder, g.destroyer], label: "Mega-Tornado", danger: 7})
 Class.mender = {
     PARENT: "genericTank",
     LABEL: "Mender",
@@ -3723,50 +3439,15 @@ Class.mender = {
         }
     ]
 }
-Class.monsoon = {
+Class.monsoon = makeWhirlwind({
     PARENT: "genericTank",
-    LABEL: "Monsoon",
-    ANGLE: 60,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    IS_SMASHER: true,
-    BODY: {
-        FOV: 1.05 * base.FOV,
-        DENSITY: 2 * base.DENSITY
-    },
-    STAT_NAMES: statnames.satellite,
-    SKILL_CAP: Array(10).fill(smshskl),
     TURRETS: [
         {
-            POSITION: [26, 0, 0, 0, 360, 0],
-            TYPE: ["hexagonHat_spin", { COLOR: "black" }]
-        },
-        {
-            POSITION: { SIZE: 24 },
-            TYPE: "genericEntity"
+            TYPE: ["hexagonHat_spin", { COLOR: "black" }],
+            POSITION: {SIZE: 26}
         }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 6; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite_old", {ANGLE: i * 60}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
+    ]
+}, {hat: "circleHat", hatSize: 24, hatLayer: 0, satellites: 6, satelliteType: "satellite_old", label: "Monsoon", danger: 7})
 Class.mortar = {
     PARENT: "genericTank",
     LABEL: "Mortar",
@@ -3813,42 +3494,7 @@ Class.mortar = {
         }
     ]
 }
-Class.munition = {
-    PARENT: "genericTank",
-    LABEL: "Munition",
-    DANGER: 7,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.munition.GUNS.push(...Class.artillery.GUNS)
+Class.munition = makeWhirlwind("artillery", {label: "Munition"})
 Class.musket = {
     PARENT: "genericTank",
     LABEL: "Musket",
@@ -4295,7 +3941,7 @@ Class.phoenix = {
         ...bird_rear
     ]
 }
-Class.poacher = makeOver('hunter', "Poacher", hybrid_options)
+Class.poacher = makeOver("hunter", "Poacher", hybrid_options)
 Class.predator = {
     PARENT: "genericTank",
     LABEL: "Predator",
@@ -4391,48 +4037,7 @@ Class.prodigy = {
         }], 3)
     ],
 }
-Class.prophet = {
-    PARENT: "genericTank",
-    LABEL: "Prophet",
-    DANGER: 7,
-    BODY: {
-        SPEED: base.SPEED * 0.9,
-        FOV: base.FOV * 1.1,
-    },
-    SHAPE: 4,
-    NECRO: true,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["squareSatellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.prophet.GUNS.push(...Class.underseer.GUNS)
+Class.prophet = makeWhirlwind("underseer", {label: "Prophet", satelliteType: "squareSatellite"})
 Class.quadBuilder = {
     PARENT: "genericTank",
     LABEL: "Quad Builder",
@@ -5381,128 +4986,9 @@ Class.swarmer = {
         }
     ]
 }
-Class.tempest = {
-    PARENT: "genericTank",
-    LABEL: "Tempest",
-    DANGER: 7,
-    TURRETS: [
-        {
-            TYPE: ["triangleHat_spin", { COLOR: "grey" }],
-            POSITION: [8, 0, 0, 0, 360, 1]
-        },
-        {
-            TYPE: ["triangleHat_spinReverse", { COLOR: "grey" }],
-            POSITION: [4, 0, 0, 180, 360, 1]
-        }
-    ],
-    ANGLE: 120,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    AI: {
-        SPEED: 2, 
-    }, 
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 3; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder]), 
-                    TYPE: ["satellite", {ANGLE: i * 120}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        for (let i = 0; i < 3; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder]), 
-                    TYPE: ["satellite", { ANGLE: i * 120, CONTROLLERS: [['orbit', {invert: true}]] }], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.thunderbolt = {
-    PARENT: "genericTank",
-    LABEL: "Thunderbolt",
-    DANGER: 7,
-    TURRETS: [
-        {
-            POSITION: [10, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spinFast", { COLOR: "grey" }]
-        },
-    ],
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    AI: {
-        SPEED: 2.5, 
-    }, 
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.tornado_old = {
-    PARENT: "genericTank",
-    LABEL: "Tornado",
-    DANGER: 7,
-    TURRETS: [
-        {
-            POSITION: { SIZE: 30 },
-            TYPE: "genericEntity"
-        }
-    ],
-    ANGLE: 360,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    AI: {
-        SPEED: 2, 
-    }, 
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 1; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder, g.destroyer, g.annihilator]), 
-                    TYPE: ["satellite_old", {ANGLE: i * 360}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
+Class.tempest = makeWhirlwind("genericTank", {dualLayer: true, hat: "triangleHat_spin", hat2: "triangleHat_spinReverse", hat2Size: 4, satellites: 3, satelliteSize: 12, extraStats: [g.pounder], label: "Tempest", danger: 7})
+Class.thunderbolt = makeWhirlwind("genericTank", {hat: "squareHat_spinFast", hatSize: 10, satellites: 4, satelliteSize: 12, satelliteSpeed: 2.5, extraStats: [g.pounder], label: "Thunderbolt", danger: 7})
+Class.tornado_old = makeWhirlwind("genericTank", {hat: "circleHat", hatSize: 30, hatLayer: 0, satellites: 1, satelliteSize: 16, satelliteType: "satellite_old", extraStats: [g.pounder, g.destroyer], label: "Tornado", danger: 7})
 Class.tripleFlail = {
     PARENT: "genericFlail",
     LABEL: "Triple Flail",
@@ -5666,164 +5152,10 @@ Class.twister = {
         },
     ],
 }
-Class.typhoon = {
-    PARENT: "genericTank",
-    LABEL: "Typhoon",
-    DANGER: 7,
-    ANGLE: 36,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    TURRETS: [
-        {
-            TYPE: ["decagonHat_spin", { COLOR: "grey" }],
-            POSITION: [8, 0, 0, 0, 360, 1],
-        },
-    ],
-    AI: {
-        SPEED: 2, 
-    }, 
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 10; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 36}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.typhoon_old = {
-    PARENT: "genericTank",
-    LABEL: "Typhoon",
-    DANGER: 7,
-    TURRETS: [
-        {
-            POSITION: [28, 0, 0, 0, 360, 0],
-            TYPE: "genericEntity"
-        },
-        {
-            POSITION: [24, 0, 0, 0, 360, 0],
-            TYPE: "genericEntity"
-        }
-    ],
-    ANGLE: 60,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    AI: {
-        SPEED: 2, 
-    }, 
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 6; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite_old", { ANGLE: i * 60 }], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        for (let i = 0; i < 6; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite_old", { ANGLE: i * 60, CONTROLLERS: [['orbit', {invert: true}]] }], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.vortex = {
-    PARENT: "genericTank",
-    LABEL: "Vortex",
-    DANGER: 7,
-    BODY: {
-        FOV: base.FOV * 1.1,
-    },
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.mixed,
-    TURRETS: [
-        {
-            TYPE: ["squareHat_spin", { COLOR: "grey" }],
-            POSITION: [8, 0, 0, 0, 360, 1]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.vortex.GUNS.push(...Class.launcher.GUNS)
-Class.vortex_old = {
-    PARENT: "genericTank",
-    LABEL: "Vortex",
-    ANGLE: 36,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    TURRETS: weaponArray({
-        TYPE: ["pentagonHat_spin", { COLOR: "grey" }],
-        POSITION: { SIZE: 21.5 }
-    }, 2),
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 10; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite_old", {ANGLE: i * 36}], 
-                    MAX_CHILDREN: 1,   
-                    AUTOFIRE: true,  
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
+Class.typhoon = makeWhirlwind("genericTank", {hat: "decagonHat_spin", satellites: 10, label: "Typhoon", danger: 7})
+Class.typhoon_old = makeWhirlwind("genericTank", {dualLayer: true, hat: "circleHat", hatSize: 28, hatLayer: 0, hat2: "circleHat", hat2Size: 24, hat2Layer: 0, satellites: 6, satelliteType: "satellite_old", label: "Typhoon"})
+Class.vortex = makeWhirlwind("launcher", {label: "Vortex"})
+Class.vortex_old = makeWhirlwind("genericTank", {enableHat2: true, hat: "pentagonHat_spin", hatSize: 21.5, hatLayer: 0, hat2: "pentagonHat_spin", hat2Size: 21.5, hat2Layer: 0, satellites: 10, satelliteType: "satellite_old", label: "Vortex"})
 Class.vulture = {
     PARENT: "genericTank",
     LABEL: "Vulture",
@@ -5873,79 +5205,8 @@ Class.vulture = {
         ...bird_rear
     ]
 }
-Class.whirlGuard = {
-    PARENT: "genericTank",
-    LABEL: "Whirl Guard",
-    DANGER: 7,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.whirlGuard.GUNS.push(...Class.trapGuard.GUNS)
-Class.whirl3 = {
-    PARENT: "genericTank",
-    LABEL: "Whirl-3",
-    DANGER: 7,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    FACING_TYPE: "spin",
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        },
-        ...Class.auto3.TURRETS
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
+Class.whirlGuard = makeWhirlwind("trapGuard", {label: "Whirl Guard"})
+Class.whirl3 = makeWhirlwind("auto3", {label: "Whirl-3"})
 Class.wrangler = { // old bender, fires train minions with 3 bodies (though only one of them has a gun)
     PARENT: "genericTank",
     LABEL: "Wrangler", //"Ranch",
@@ -6022,6 +5283,42 @@ Class.xHunter = {
 }
 
 // Tierless / Fun
+Class.alas = {
+    PARENT: "genericTank",
+    LABEL: "Alas",
+    DANGER: 9,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        FOV: base.FOV * 1.1
+    },
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 5,
+                WIDTH: 11,
+                ASPECT: 1.3,
+                X: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, {speed: 5}]),
+                TYPE: "drone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: "drone",
+                MAX_CHILDREN: 6,
+                WAIT_TO_CYCLE: true
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 9,
+                WIDTH: 0.125,
+                ASPECT: -5,
+                X: 8
+            }
+        }
+    ]
+}
 Class.bigBalls = {
     PARENT: "genericTank",
     LABEL: "BIG Balls",
@@ -6391,6 +5688,11 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
         Class.builder.UPGRADES_TIER_3 = ["construct", "autoBuilder", "engineer", "boomer", "assembler", "architect", "conqueror"]
         Class.triTrapper.UPGRADES_TIER_3 = ["fortress", "hexaTrapper", "septaTrapper", "architect"]
         Class.trapGuard.UPGRADES_TIER_3 = ["bushwhacker", "gunnerTrapper", "bomber", "conqueror", "bulwark"]
+
+    Class.whirlwind.UPGRADES_TIER_2 = ["tornado", "hurricane"]
+        Class.whirlwind.UPGRADES_TIER_3 = ["hexaWhirl", "munition", "whirl3", "whirlGuard", "prophet", "vortex"]
+        Class.tornado.UPGRADES_TIER_3 = ["megaTornado", "tempest", "thunderbolt"]
+        Class.hurricane.UPGRADES_TIER_3 = ["typhoon", "blizzard"]
 
     Class.desmos.UPGRADES_TIER_2 = ["helix"/*, "spiral", "repeater"*/]
         //Class.desmos.UPGRADES_TIER_3 = ["bender"]

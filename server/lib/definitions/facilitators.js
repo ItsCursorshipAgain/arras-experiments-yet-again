@@ -1,4 +1,5 @@
-const { skill_cap } = require("../../config.js")
+const {skill_cap} = require('../../config.js')
+const {statnames} = require('./constants.js')
 const g = require('./gunvals.js')
 const { basePolygonDamage, basePolygonHealth, dfltskl } = require("./constants")
 let skcnv = {
@@ -267,10 +268,14 @@ exports.makeAuto = (type, name = -1, options = {}) => {
     }
     if (name == -1) {
         output.LABEL = "Auto-" + type.LABEL;
-        output.UPGRADE_LABEL = "Auto-" + type.LABEL;
+        if (type.UPGRADE_LABEL !== undefined) {
+            output.UPGRADE_LABEL = "Auto-" + type.LABEL;
+        }
     } else {
         output.LABEL = name;
-        output.UPGRADE_LABEL = name;
+        if (type.UPGRADE_LABEL !== undefined) {
+            output.UPGRADE_LABEL = name;
+        }
     }
     output.DANGER = type.DANGER + 1;
     return output;
@@ -290,6 +295,76 @@ exports.makeHat = (shape = 0, options = {}) => {
         COLOR: options.color,
         INDEPENDENT: true
     }
+}
+exports.makeWhirlwind = (type, options = {}) => {
+    type = ensureIsClass(type);
+    let output = exports.dereference(type);
+    options.satellites ??= 4
+    let hat = [
+        {
+            POSITION: {SIZE: options.hatSize ??= 8, LAYER: options.hatLayer ??= 1},
+            TYPE: [options.hat ??= "squareHat_spin", {COLOR: options.hatColor ??= "grey"}]
+        }
+    ]
+    if (options.dualLayer || options.enableHat2) {
+        hat.push(
+            {
+                POSITION: {SIZE: options.hat2Size ??= 6, ANGLE: 180, LAYER: options.hat2Layer ??= 2},
+                TYPE: [options.hat2 ??= "squareHat_spin", {COLOR: options.hat2Color ??= "grey"}]
+            }
+        )
+    }
+    let satellites = (() => {
+        let output = []
+        for (let i = 0; i < options.satellites; i++) { 
+            output.push({
+                POSITION: {WIDTH: options.satelliteSize ??= 8, LENGTH: 1, DELAY: i * 0.25},
+                PROPERTIES: {
+                    SHOOT_SETTINGS: exports.combineStats([g.satellite, ...options.extraStats ??= [{}], {recoil: 0}]), 
+                    TYPE: [options.satelliteType ??= "satellite", {ANGLE: i * (360 / options.satellites)}], 
+                    MAX_CHILDREN: 1,
+                    AUTOFIRE: true,
+                    SYNCS_SKILLS: false,
+                    WAIT_TO_CYCLE: true
+                }
+            })
+        }
+        if (options.dualLayer) {
+            for (let i = 0; i < options.satellites; i++) { 
+                output.push({
+                    POSITION: {WIDTH: options.satelliteSize ??= 8, LENGTH: 1, DELAY: i * 0.25},
+                    PROPERTIES: {
+                        SHOOT_SETTINGS: exports.combineStats([g.satellite, ...options.extraStats ??= [{}], {recoil: 0}]), 
+                        TYPE: [options.satelliteType ??= "satellite", {ANGLE: i * (360 / options.satellites), CONTROLLERS: [['orbit', {invert: true}]]}], 
+                        MAX_CHILDREN: 1,
+                        AUTOFIRE: true,
+                        SYNCS_SKILLS: false,
+                        WAIT_TO_CYCLE: true
+                    }
+                })
+            }
+        }
+        return output
+    })()
+    if (type.GUNS == null) {output.GUNS = [...satellites]} else {output.GUNS = [...type.GUNS, ...satellites]}
+    if (type.TURRETS == null) {output.TURRETS = [...hat]} else {output.TURRETS = [...type.TURRETS, ...hat]}
+    if (type == Class.genericTank) {output.STAT_NAMES = statnames.satellite} else {output.STAT_NAMES = statnames.mixed}
+    output.AI = {SPEED: options.satelliteSpeed ??= 2}
+    output.ANGLE = (360 / options.satellites)
+    output.CONTROLLERS = ["whirlwind"]
+    output.DANGER = options.danger ??= type.DANGER + 1
+    if (options.label == -1) {
+        output.LABEL = "Whirl " + type.LABEL;
+        if (type.UPGRADE_LABEL !== undefined) {
+            output.UPGRADE_LABEL = "Whirl " + type.LABEL;
+        }
+    } else {
+        output.LABEL = options.label;
+        if (type.UPGRADE_LABEL !== undefined) {
+            output.UPGRADE_LABEL = options.label;
+        }
+    }
+    return output;
 }
 function toPascalCase(input) {
     if (!input) {
@@ -353,10 +428,14 @@ exports.makeDrive = (type, options = {}) => {
     }
     if (options.label == -1) {
         output.LABEL = type.LABEL + options.suffix;
-        output.UPGRADE_LABEL = type.LABEL + options.suffix;
+        if (type.UPGRADE_LABEL !== undefined) {
+            output.UPGRADE_LABEL = type.LABEL + options.suffix;
+        }
     } else {
         output.LABEL = options.label;
-        output.UPGRADE_LABEL = options.label;
+        if (type.UPGRADE_LABEL !== undefined) {
+            output.UPGRADE_LABEL = options.label;
+        }
     }
     output.DANGER = options.danger ??= type.DANGER + 1;
     return output;

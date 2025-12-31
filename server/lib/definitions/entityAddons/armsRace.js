@@ -1,9 +1,9 @@
-const { combineStats, makeAuto, makeDrive, makeHat, makeOver, makeRadialAuto, makeTurret, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
+const { combineStats, makeAuto, makeDrive, makeHat, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
 const { base, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
 
 // Settings
-const enable_addon = true
+const enable_addon = false
 
 const enable_whirlwind = false
 const integrate_healers = false
@@ -14,10 +14,10 @@ const use_original_tree = false // Set to true to enable the original arras.io A
 driveAuto_options = {type: "driveAutoTurret_AR", size: 9, clearTurrets: true}
 megaAuto_options = {type: "megaAutoTurret", size: 12}
 stormAuto_options = {type: "stormAutoTurret_AR", size: 9, clearTurrets: true}
-if (use_original_tree == false) {
-    tripleAuto_options = {size: 6.5, x: 5.2, total: 3}
-} else {
+if (use_original_tree) {
     tripleAuto_options = {size: 6.5, x: 5.2, angle: 0, total: 3}
+} else {
+    tripleAuto_options = {size: 6.5, x: 5.2, total: 3}
 }
 whirlAuto_options = {type: "driveAutoTurret_AR", size: 8, clearTurrets: true}
 
@@ -334,6 +334,15 @@ Class.doper_AR = {
                 WIDTH: 11,
                 ASPECT: 1.3,
                 X: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, {speed: 2}]),
+                TYPE: "drone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: "drone",
+                MAX_CHILDREN: 6,
+                WAIT_TO_CYCLE: true
             }
         },
         {
@@ -699,6 +708,15 @@ Class.brisker_AR = {
                 WIDTH: 11,
                 ASPECT: 1.3,
                 X: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, {speed: 3}]),
+                TYPE: "drone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: "drone",
+                MAX_CHILDREN: 6,
+                WAIT_TO_CYCLE: true
             }
         },
         {
@@ -3313,42 +3331,10 @@ Class.PLACEHOLDER_healerUnderseer_AR = {
         }
     }, 2)
 }
-Class.PLACEHOLDER_whirlFieldGun_AR = {
-    PARENT: "genericTank",
-    LABEL: "",
-    DANGER: 8,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.mixed,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.PLACEHOLDER_whirlFieldGun_AR.GUNS.push(...Class.fieldGun.GUNS)
+Class.PLACEHOLDER_whirlBanshee_AR = makeWhirlwind("banshee", {label: ""})
+Class.PLACEHOLDER_whirlFieldGun_AR = makeWhirlwind("fieldGun", {label: ""})
+Class.PLACEHOLDER_whirlMortar_AR = makeWhirlwind("mortar", {label: ""})
+Class.PLACEHOLDER_whirlSniper3_AR = makeWhirlwind("sniper3_AR", {label: ""})
 Class.accountant_AR = {
     PARENT: "genericHealer",
     LABEL: "Accountant",
@@ -3413,6 +3399,42 @@ Class.actuary_AR = {
             POSITION: {
                 LENGTH: 17,
                 WIDTH: 8
+            }
+        }
+    ]
+}
+Class.adderall_AR = {
+    PARENT: "genericTank",
+    LABEL: "Adderall",
+    DANGER: 8,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        FOV: base.FOV * 1.1
+    },
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 5,
+                WIDTH: 11,
+                ASPECT: 1.3,
+                X: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, {speed: 4}]),
+                TYPE: "drone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: "drone",
+                MAX_CHILDREN: 6,
+                WAIT_TO_CYCLE: true
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 8,
+                WIDTH: 0.25,
+                ASPECT: -5,
+                X: 8
             }
         }
     ]
@@ -3639,43 +3661,7 @@ Class.clinician_AR = {
         }
     ], { delayIncrement: 0.5 }), 2)
 }
-Class.comboWhirl_AR = {
-    PARENT: "genericTank",
-    LABEL: "Combo Whirl",
-    DANGER: 8,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.mixed,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        },
-        ...Class.combo_AR.TURRETS
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.comboWhirl_AR.GUNS.push(...Class.combo_AR.GUNS)
+Class.comboWhirl_AR = makeWhirlwind("combo_AR", {label: "Combo Whirl"})
 Class.cruiserstorm_AR = makeDrive("cruiser", cruiserstorm_options)
 Class.doctor_AR = {
     PARENT: "genericHealer",
@@ -4573,42 +4559,7 @@ Class.megaWhirl3_AR = {
     })()
 }
 Class.necrodrive_AR = makeDrive("necromancer", {label: "Necrodrive"})
-Class.octoWhirl_AR = {
-    PARENT: "genericTank",
-    LABEL: "Octo Whirl",
-    DANGER: 8,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.mixed,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.octoWhirl_AR.GUNS.push(...Class.octoTank.GUNS)
+Class.octoWhirl_AR = makeWhirlwind("octoTank", {label: "Octo Whirl"})
 Class.ointment_AR = {
     PARENT: "genericHealer",
     LABEL: "Ointment",
@@ -4657,42 +4608,7 @@ Class.overstorm_AR = makeDrive("overseer", {...storm_options, label: "Overstorm"
 Class.overtrapperdrive_AR = makeDrive("overtrapper")
 Class.overtrapGuard_AR = makeOver("trapGuard", "Overtrap Guard", sideOver_options)
 Class.overwark_AR = makeOver("wark_AR", "Overwark")
-Class.peaceMoon_AR = {
-    PARENT: "genericTank",
-    LABEL: "Peace Moon",
-    DANGER: 8,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.mixed,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.peaceMoon_AR.GUNS.push(...Class.deathStar_AR.GUNS)
+Class.peaceMoon_AR = makeWhirlwind("deathStar_AR", {label: "Peace Moon"})
 Class.pentadrive_AR = makeDrive("pentaseer_AR", {label: "Pentadrive"})
 Class.physician_AR = {
     PARENT: "genericSmasher",
@@ -5172,42 +5088,7 @@ Class.tommy_AR = {
         ...trapGuard_rear
     ]
 }
-Class.triWhirlGuard_AR = {
-    PARENT: "genericTank",
-    LABEL: "Tri-Whirl Guard",
-    DANGER: 8,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.mixed,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        }
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.triWhirlGuard_AR.GUNS.push(...Class.triTrapGuard_AR.GUNS)
+Class.triWhirlGuard_AR = makeWhirlwind("triTrapGuard_AR", {label: "Tri-Whirl Guard"})
 Class.tripleAutoDouble_AR = makeAuto("doubleTwin", "Triple Auto-Double", tripleAuto_options)
 Class.tripleAutoMarksman_AR = makeAuto("marksman", "Triple Auto-Marksman", tripleAuto_options)
 Class.tripleFlankTwin_AR = {
@@ -5539,44 +5420,7 @@ Class.whirl5_AR = {
         return output
     })()
 }
-Class.whirlbar_AR = {
-    PARENT: "genericTank",
-    LABEL: "Whirlbar",
-    DANGER: 8,
-    ANGLE: 90,
-    CONTROLLERS: ["whirlwind"],
-    HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.satellite,
-    BODY: Class.crowbar_AR.BODY,
-    TURRETS: [
-        {
-            POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: ["squareHat_spin", { COLOR: "grey" }]
-        },
-        ...Class.crowbar_AR.TURRETS
-    ],
-    AI: {
-        SPEED: 2, 
-    },
-    GUNS: (() => { 
-        let output = []
-        for (let i = 0; i < 4; i++) { 
-            output.push({ 
-                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 90}], 
-                    MAX_CHILDREN: 1,
-                    AUTOFIRE: true,
-                    SYNCS_SKILLS: false,
-                    WAIT_TO_CYCLE: true
-                }
-            }) 
-        }
-        return output
-    })()
-}
-Class.whirlbar_AR.GUNS.push(...Class.crowbar_AR.GUNS)
+Class.whirlbar_AR = makeWhirlwind("crowbar_AR", {label: "Whirlbar"})
 
 // Class Tree
 if (!enable_addon) {return console.log('--- Arms Race addon [armsRace.js] is disabled. See line 6 to enable it. ---')}
@@ -5695,6 +5539,7 @@ Config.level_cap_cheat = 60
         Class.destroyer.UPGRADES_TIER_3.push("blower_AR", "megaTrapper_AR", "queller_AR", "autoDestroyer_AR", "hurler_AR", "slinker_AR")
         Class.artillery.UPGRADES_TIER_3.push("queller_AR", "forger_AR", "force_AR", "autoArtillery_AR", "foctillery_AR", "discharger_AR")
         Class.launcher.UPGRADES_TIER_3.push("rocketeer_AR", "pitcher_AR", "cluster_AR", "projector_AR", "heaver_AR", "autoLauncher_AR", "hurler_AR", "inception_AR")
+            Class.mortar.UPGRADES_TIER_4 = []
             Class.fieldGun.UPGRADES_TIER_4 = []
             //UPGRADES_TIER_4 = ["shaver", "bazooka", "catapult", "myriad", "leviathan", "bulker", "bombard", "python", "claimant", "incline", "autoHurler", "mongrel", "bunger", "deliverer", "slingshot"].map(x => x + "_AR")
 
@@ -5712,8 +5557,8 @@ Config.level_cap_cheat = 60
     //Class.whirlwind.UPGRADES_TIER_2
         //Class.whirlwind.UPGRADES_TIER_3
             Class.hexaWhirl.UPGRADES_TIER_4 = ["octoWhirl", "peaceMoon", "autoHexaWhirl", "comboWhirl"].map(x => x + "_AR")
-            Class.munition.UPGRADES_TIER_4 = ["PLACEHOLDER_whirlFieldGun", "autoMunition"].map(x => x + "_AR")
-            Class.whirl3.UPGRADES_TIER_4 = ["whirl5", "megaWhirl3", "whirl4", "whirlbar", "autoWhirl3", "comboWhirl"].map(x => x + "_AR")
+            Class.munition.UPGRADES_TIER_4 = ["PLACEHOLDER_whirlMortar", "PLACEHOLDER_whirlFieldGun", "autoMunition"].map(x => x + "_AR")
+            Class.whirl3.UPGRADES_TIER_4 = ["whirl5", "megaWhirl3", "whirl4", "PLACEHOLDER_whirlBanshee", "PLACEHOLDER_whirlSniper3", "whirlbar", "autoWhirl3", "comboWhirl"].map(x => x + "_AR")
             Class.whirlGuard.UPGRADES_TIER_4 = ["autoWhirlGuard", "triWhirlGuard"].map(x => x + "_AR")
             Class.prophet.UPGRADES_TIER_4 = ["autoProphet"].map(x => x + "_AR")
             Class.vortex.UPGRADES_TIER_4 = ["PLACEHOLDER_whirlFieldGun", "autoVortex"].map(x => x + "_AR")
@@ -5739,6 +5584,8 @@ Config.level_cap_cheat = 60
             //Class.autoRepeater_AR.UPGRADES_TIER_4 = ["autoIterator_AR", "autoDuplicator_AR"]
 
 if (enable_whirlwind) {
+Class.vortex_AR.LABEL = "Directive"
+
 Class.basic.UPGRADES_TIER_1.push("whirlwind")
     //Class.flankGuard.UPGRADES_TIER_2
         Class.hexaTank.UPGRADES_TIER_3.splice(3, 0, "hexaWhirl")
@@ -5749,8 +5596,8 @@ Class.basic.UPGRADES_TIER_1.push("whirlwind")
             Class.auto5.UPGRADES_TIER_4.push("whirl5_AR")
             Class.mega3.UPGRADES_TIER_4.push("megaWhirl3_AR")
             Class.auto4.UPGRADES_TIER_4.push("whirl4_AR")
-            Class.banshee.UPGRADES_TIER_4.push()
-            Class.sniper3_AR.UPGRADES_TIER_4.push()
+            Class.banshee.UPGRADES_TIER_4.push("PLACEHOLDER_whirlBanshee_AR")
+            Class.sniper3_AR.UPGRADES_TIER_4.push("PLACEHOLDER_whirlSniper3_AR")
             Class.crowbar_AR.UPGRADES_TIER_4.push("whirlbar_AR")
             Class.autoAuto3_AR.UPGRADES_TIER_4.push("autoWhirl3_AR")
             Class.combo_AR.UPGRADES_TIER_4.push("comboWhirl_AR")
@@ -5765,6 +5612,7 @@ Class.basic.UPGRADES_TIER_1.push("whirlwind")
             Class.pentaseer_AR.UPGRADES_TIER_4.push()
     //Class.pounder.UPGRADES_TIER_2
         Class.artillery.UPGRADES_TIER_3.splice(4, 0, "munition")
+            Class.mortar.UPGRADES_TIER_4.push("PLACEHOLDER_whirlMortar_AR")
         Class.launcher.UPGRADES_TIER_3.splice(5, 0, "vortex")
             Class.fieldGun.UPGRADES_TIER_4.push("PLACEHOLDER_whirlFieldGun_AR")
 }

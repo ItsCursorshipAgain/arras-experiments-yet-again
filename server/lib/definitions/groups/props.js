@@ -1,10 +1,10 @@
 const { makeHat, makePolygon } = require('../facilitators.js')
 
 // Presets
-const spin = { rotationSpeed: 0.16 }
-const spinFast = { rotationSpeed: 0.2 }
-const spinFaster = { rotationSpeed: 0.32 }
-const spinReverse = { rotationSpeed: -0.16 }
+const spin = {rotationSpeed: 0.16}
+const spinFast = {rotationSpeed: 0.2}
+const spinFaster = {rotationSpeed: 0.32}
+const spinReverse = {rotationSpeed: -0.16}
 
 // Circle Hats
 Class.circleHat = makeHat()
