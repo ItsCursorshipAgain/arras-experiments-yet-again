@@ -90,8 +90,8 @@ booster_propeller = [
 // Basic Tank
 Class.basic = {
     PARENT: "genericTank",
-    LABEL: "Basic",
-    DANGER: 4,
+    LABEL: "Basic", // Tank Label
+    DANGER: 4, // AI priority target level
     BODY: {
         ACCELERATION: base.ACCEL * 1,
         SPEED: base.SPEED * 1,
@@ -117,17 +117,17 @@ Class.basic = {
                 DELAY: 0
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic]),
-                TYPE: "bullet",
-                COLOR: 16,
-                LABEL: "",
+                SHOOT_SETTINGS: combineStats([g.basic]), // Gun/projectile stats
+                TYPE: "bullet", // What the gun shoots
+                COLOR: "grey", // Gun colour
+                LABEL: "", // Gun label (shows up in death messages)
                 STAT_CALCULATOR: 0,
                 WAIT_TO_CYCLE: false,
-                AUTOFIRE: false,
+                AUTOFIRE: false, // Whether the gun fires on its own
                 SYNCS_SKILLS: false,
-                MAX_CHILDREN: 0,
-                ALT_FIRE: false,
-                NEGATIVE_RECOIL: false
+                MAX_CHILDREN: 0, // Number of projectiles from this gun that can be alive at once
+                ALT_FIRE: false, // Whether the gun requires RMB/Shift to fire instead of LMB/Space
+                NEGATIVE_RECOIL: false // Whether the gun pulls instead of pushes when firing
             }
         }
     ]
@@ -1848,6 +1848,7 @@ Class.bigCheese = {
                 SYNCS_SKILLS: true,
                 STAT_CALCULATOR: "drone",
                 MAX_CHILDREN: 1,
+                WAIT_TO_CYCLE: true,
             },
         },
     ],
