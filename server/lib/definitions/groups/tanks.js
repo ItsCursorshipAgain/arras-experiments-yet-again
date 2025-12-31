@@ -197,12 +197,7 @@ Class.flail = {
         TYPE: ["flailBolt3", {
             INDEPENDENT: true
         }]
-    }],
-    UPGRADES_TIER_2: [
-        "doubleFlail",
-        "mace",
-        "flangle",
-    ]
+    }]
 }
 Class.flankGuard = {
     PARENT: "genericTank",
@@ -493,20 +488,12 @@ Class.doubleFlail = {
     PARENT: "genericFlail",
     LABEL: "Double Flail",
     DANGER: 6,
-    TURRETS: [{
+    TURRETS: weaponArray({
         POSITION: [6, 10, 0, 0, 190, 0],
         TYPE: ["flailBolt3", {
             INDEPENDENT: true
         }]
-    }, {
-        POSITION: [6, 10, 0, 180, 190, 0],
-        TYPE: ["flailBolt3", {
-            INDEPENDENT: true
-        }]
-    }],
-    UPGRADES_TIER_3: [
-        "tripleFlail",
-    ]
+    }, 2)
 }
 Class.doubleTwin = {
     PARENT: "genericTank",
@@ -536,11 +523,7 @@ Class.flangle = {
             INDEPENDENT: true
         }]
     }],
-    SKILL_CAP: [dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl],
-    UPGRADES_TIER_3: [
-        "flooster",
-        "flace",
-    ]
+    SKILL_CAP: [dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl]
 }
 Class.gunner = {
     PARENT: "genericTank",
@@ -762,12 +745,7 @@ Class.mace = {
         TYPE: ["maceBolt3", {
             INDEPENDENT: true
         }]
-    }],
-    UPGRADES_TIER_3: [
-        "bigMama",
-        "itHurtsDontTouchIt",
-        "flace",
-    ]
+    }]
 }
 Class.maelstrom_bent = {
     PARENT: "genericTank",
@@ -945,10 +923,6 @@ Class.repeater = {
         {
             POSITION: [3.75, 10, 2.125, 0, -4.75, 50, 0]
         }])
-    ],
-    UPGRADES_TIER_3: [
-        "iterator",
-        "duplicator",
     ]
 }
 Class.rifle = {
@@ -1282,9 +1256,6 @@ Class.undertow = {
         ...weaponMirror({
             POSITION: [11.25, 8, 0.15, 4.25, 4, 13.5, 0]
         })
-    ],
-    UPGRADES_TIER_3: [
-        //"riptide",
     ]
 }
 Class.volute = {
@@ -4993,22 +4964,12 @@ Class.tripleFlail = {
     PARENT: "genericFlail",
     LABEL: "Triple Flail",
     DANGER: 7,
-    TURRETS: [{
+    TURRETS: weaponArray({
         POSITION: [6, 10, 0, 0, 190, 0],
         TYPE: ["flailBolt3", {
             INDEPENDENT: true
         }]
-    }, {
-        POSITION: [6, 10, 0, 120, 190, 0],
-        TYPE: ["flailBolt3", {
-            INDEPENDENT: true
-        }]
-    }, {
-        POSITION: [6, 10, 0, 240, 190, 0],
-        TYPE: ["flailBolt3", {
-            INDEPENDENT: true
-        }]
-    }]
+    }, 3)
 }
 Class.tripleTwin = {
     PARENT: "genericTank",
@@ -5677,7 +5638,7 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
         Class.underseer.UPGRADES_TIER_3 = ["necromancer", "maleficitor", "infestor"]
         Class.spawner.UPGRADES_TIER_3 = ["factory", "autoSpawner"/*, "bender"*/]
 
-    Class.pounder.UPGRADES_TIER_2 = ["destroyer", "builder", "artillery", "launcher"]
+    Class.pounder.UPGRADES_TIER_2 = ["destroyer", "builder", "artillery", "launcher"/*, "volute"*/]
         Class.pounder.UPGRADES_TIER_3 = ["shotgun", "eagle"]
         Class.destroyer.UPGRADES_TIER_3 = ["conqueror", "annihilator", "hybrid", "construct"]
         Class.artillery.UPGRADES_TIER_3 = ["mortar", "ordnance", "beekeeper", "fieldGun"]
@@ -5694,7 +5655,15 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
         Class.tornado.UPGRADES_TIER_3 = ["megaTornado", "tempest", "thunderbolt"]
         Class.hurricane.UPGRADES_TIER_3 = ["typhoon", "blizzard"]
 
-    Class.desmos.UPGRADES_TIER_2 = ["helix"/*, "spiral", "repeater"*/]
-        //Class.desmos.UPGRADES_TIER_3 = ["bender"]
+    Class.flail.UPGRADES_TIER_2 = ["doubleFlail", "mace", "flangle"]
+        Class.doubleFlail.UPGRADES_TIER_3 = ["tripleFlail"]
+        Class.mace.UPGRADES_TIER_3 = ["bigMama", "itHurtsDontTouchIt", "flace"]
+        Class.flangle.UPGRADES_TIER_3 = ["flooster", "flace"]
+
+    Class.desmos.UPGRADES_TIER_2 = [/*"volute", */"helix"/*, "spiral", "undertow", "repeater"*/]
+        Class.desmos.UPGRADES_TIER_3 = [/*"bender"*/]
+        Class.volute.UPGRADES_TIER_3 = ["sidewinder"]
         Class.helix.UPGRADES_TIER_3 = ["triplex", "quadruplex"]
-        Class.spiral.UPGRADES_TIER_3 = ["coil", "superSpiral"/*, "wrangler", "oroboros", "cocci", "rocket",*/]
+        Class.spiral.UPGRADES_TIER_3 = ["coil", "superSpiral"/*, "wrangler", "oroboros", "cocci", "rocket"*/]
+        Class.undertow.UPGRADES_TIER_3 = [/*"riptide"*/]
+        Class.repeater.UPGRADES_TIER_3 = ["iterator", "duplicator"]

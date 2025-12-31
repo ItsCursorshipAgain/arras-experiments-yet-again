@@ -1326,3 +1326,4 @@ exports.makePolychoron = function (info) {
         (info.SCALE || 1)
     );
 };
+
