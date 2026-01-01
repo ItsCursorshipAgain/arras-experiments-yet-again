@@ -49,7 +49,7 @@ global.getTeamColor = (team, fixMode = false) => {
 global.isPlayerTeam = team => team < 0 || team > -11;
 global.getWeakestTeam = () => {
     let teamCounts = {};
-    for (let i = -Config.TEAMS; i < 0; i++) {
+    for (let i = -Config.teams; i < 0; i++) {
         if (global.defeatedTeams.includes(i)) continue;
         teamCounts[i] = 0;
     }
@@ -66,7 +66,7 @@ global.getWeakestTeam = () => {
 
     // Convert the `teamCounts` into an array and at the same time calculate with the team_weights.
     teamCounts = Object.entries(teamCounts).map(([teamId, amount]) => {
-        let weight = teamId in Config.TEAM_WEIGHTS ? Config.TEAM_WEIGHTS[teamId] : 1;
+        let weight = teamId in Config.team_weights ? Config.team_weights[teamId] : 1;
         return [teamId, amount / weight];
     });
 
@@ -86,7 +86,7 @@ global.getWeakestTeam = () => {
                 }
             };
         }
-    return parseInt(!entries.length ? -Math.ceil(Math.random() * Config.TEAMS) : ran.choose(entries)[0]);
+    return parseInt(!entries.length ? -Math.ceil(Math.random() * Config.teams) : ran.choose(entries)[0]);
 };
 global.getRandomTeam = () => -Math.floor(Math.random() * 3000) + 1;
 
