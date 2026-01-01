@@ -21,7 +21,7 @@ module.exports = {
             featured: false,
 
             region: "local", // The region the server is on.
-            gamemode: ["tdm"], // The selected gamemode.
+            gamemode: ["arms_race", "tdm"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
@@ -57,7 +57,7 @@ module.exports = {
 
             region: "local", // The region the server is on.
             gamemode: ["tdm"], // The selected gamemode.
-            player_cap: 80, // Not including bots. Set to 0 to disable.
+            player_cap: 50, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 2,
@@ -78,6 +78,25 @@ module.exports = {
                         }
                     ]
                 },
+            }
+        },
+        {
+            load_on_mainserver: false, // Only one server at a time can have this enabled.
+            // The above is required if your VM (the machine that hosts the website stuff) doesn't support multi-ports and forces everything through the main server.
+            // This also overrides the below host and port settings to be identical to the main server's host/port (by default, 3000).
+
+            host: "localhost:3003", // Server host location.
+            port: 3003, // The port on the server.
+            id: "loe", // (<host>/#<id>)
+            featured: false,
+
+            region: "local", // The region the server is on.
+            gamemode: ["sandbox"], // The selected gamemode.
+            player_cap: 16, // Not including bots. Set to 0 to disable.
+
+            properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
+                teams: 4,
+                bot_cap: 0,
             }
         },
     ],
@@ -144,6 +163,9 @@ module.exports = {
     regenerate_tick: 100,
 
     // Food
+    enable_food: true,
+    tiered_food: true, // Enables tiered (norm/Beta/Alpha/Omega) food, overrides the below arrays
+
     food_types: [ // Possible food types outside the nest
         [1, [
             [65, "egg"], [64, "triangle"], [45, "square"], [7, "pentagon"]//, [1, "hexagon"]
@@ -209,13 +231,11 @@ module.exports = {
 
     // These are the default values for gamemode related things.
     // If you want to change them, copy the values you want to change to the server's properties. Changing them here could break stuff!
-    enable_food: true,
     gamemode_name_prefixes: [],
     special_boss_spawns: false,
     use_limited_waves: false,
     mothership: false,
     domination: false,
-    tiered_food: true,
     arena_shape: "rect",
     blackout: false,
     space_physics: false,
@@ -223,6 +243,7 @@ module.exports = {
     clan_wars: false,
     growth: false,
     groups: false,
+    retrograde: false,
     train: false,
     mode: "ffa",
     tag: false,

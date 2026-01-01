@@ -1,11 +1,8 @@
-const { combineStats, makeAuto, makeDrive, makeHat, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
-const { base, statnames } = require('../constants.js')
+const {combineStats, makeAuto, makeDrive, makeHat, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../facilitators.js')
+const {base, statnames} = require('../constants.js')
 const g = require('../gunvals.js')
 
 // Settings
-const enable_addon = false
-
-const enable_whirlwind = false
 const integrate_healers = false
 
 const use_original_tree = false // Set to true to enable the original arras.io Arms Race tree and level cap, with some minor bugfixes.
@@ -14,11 +11,7 @@ const use_original_tree = false // Set to true to enable the original arras.io A
 driveAuto_options = {type: "driveAutoTurret_AR", size: 9, clearTurrets: true}
 megaAuto_options = {type: "megaAutoTurret", size: 12}
 stormAuto_options = {type: "stormAutoTurret_AR", size: 9, clearTurrets: true}
-if (use_original_tree) {
-    tripleAuto_options = {size: 6.5, x: 5.2, angle: 0, total: 3}
-} else {
-    tripleAuto_options = {size: 6.5, x: 5.2, total: 3}
-}
+tripleAuto_options = {size: 6.5, x: 5.2, angle: 0, total: 3}
 whirlAuto_options = {type: "blankAutoTurret_AR", size: 8}
 
 // Function Presets (makeDrive)
@@ -2887,40 +2880,16 @@ Class.subverter_AR = {
     BODY: {
         FOV: base.FOV * 1.2
     },
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 21,
-                WIDTH: 14
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.minigun]),
-                TYPE: "bullet"
-            }
+    GUNS: weaponStack({
+        POSITION: {
+            LENGTH: 21,
+            WIDTH: 14
         },
-        {
-            POSITION: {
-                LENGTH: 19,
-                WIDTH: 14,
-                DELAY: 1/3
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.minigun]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 17,
-                WIDTH: 14,
-                DELAY: 2/3
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.minigun]),
-                TYPE: "bullet"
-            }
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.minigun]),
+            TYPE: "bullet"
         }
-    ]
+    }, 3, { lengthOffset: 2, delayIncrement: 1/3 })
 }
 Class.triHealer_AR = {
     PARENT: "genericHealer",
@@ -3518,6 +3487,7 @@ Class.autoDoubleFlank_AR = makeAuto("doubleFlankTwin_AR", "Auto-Double Flank")
 Class.autoDoubleGunner_AR = makeAuto("doubleGunner_AR")
 Class.autoDoubleHelix_AR = makeAuto("doubleHelix_AR")
 Class.autoDuplicator_AR = makeAuto("duplicator")
+Class.autoFocal_AR = makeAuto("focal")
 Class.autoFork_AR = makeAuto("fork")
 Class.autoHexaWhirl_AR = makeWhirlwind(makeAuto("hexaTank", "", whirlAuto_options), {label: "Auto-Hexa Whirl"})
 Class.autoHewnDouble_AR = makeAuto("hewnDouble", "Auto-Hewn Double")
@@ -5769,10 +5739,10 @@ Class.custodian_AR = {
 }
 
 // Class Tree
-if (!enable_addon) {return console.log('[armsRace.js]: Addon disabled. See line 6 to enable it.')}
+if (!Config.arms_race == true) {return}
 if (!use_original_tree) {
-Config.level_cap = 60
-Config.level_cap_cheat = 60
+//Config.level_cap = 60
+//Config.level_cap_cheat = 60
 /*for (let i = 0; i < Class.assassin.UPGRADES_TIER_3.length; i++) {
     let string = Class.assassin.UPGRADES_TIER_3[i];
     if (string === "single") {
@@ -5784,54 +5754,55 @@ Config.level_cap_cheat = 60
     //Class.basic.UPGRADES_TIER_2
         //Class.basic.UPGRADES_TIER_3 = ["single"]
         Class.smasher.UPGRADES_TIER_3.push(/*"cocci", */"bonker_AR", "banger_AR", "drifter_AR")
-            //Class.megaSmasher.UPGRADES_TIER_4 = [/*"megaCocci"*/].map(x => x + "_AR")
-            //Class.spike.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            //Class.autoSmasher.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            //Class.landmine.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            //Class.cocci.UPGRADES_TIER_4 = ["megaCocci"].map(x => x + "_AR")
-            //Class.bonker_AR.UPGRADES_TIER_4 = ["decoy", "spear", "autoBonker", "megaBonker", "basher", "thwacker", "bundler"].map(x => x + "_AR")
-            //Class.banger_AR.UPGRADES_TIER_4 = ["megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"].map(x => x + "_AR")
-            //Class.drifter_AR.UPGRADES_TIER_4 = ["buncher", "megaDrifter", "autoDrifter", "vessel", "cauldron", "sharper", "bundler"].map(x => x + "_AR")
+            Class.megaSmasher.UPGRADES_TIER_3 = [/*"megaCocci"*/].map(x => x + "_AR")
+            Class.spike.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.autoSmasher.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.landmine.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            //Class.cocci.UPGRADES_TIER_3 = ["megaCocci"].map(x => x + "_AR")
+            //Class.bonker_AR.UPGRADES_TIER_3 = ["decoy", "spear", "autoBonker", "megaBonker", "basher", "thwacker", "bundler"].map(x => x + "_AR")
+            //Class.banger_AR.UPGRADES_TIER_3 = ["megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"].map(x => x + "_AR")
+            //Class.drifter_AR.UPGRADES_TIER_3 = ["buncher", "megaDrifter", "autoDrifter", "vessel", "cauldron", "sharper", "bundler"].map(x => x + "_AR")
         Class.healer.UPGRADES_TIER_3 = ["nurse_AR", "medic", "psychiatrist_AR", "triHealer_AR", "soother_AR", "analyzer_AR", "scientist_AR", "recalibrator_AR"]
-            Class.healer.UPGRADES_TIER_4 = ["physician", "renovator"].map(x => x + "_AR")
-            Class.nurse_AR.UPGRADES_TIER_4 = ["clinician_AR", "paramedic", "therapist_AR", "hexaHealer_AR", "geneticist_AR", "kraw_AR"]
-            Class.medic.UPGRADES_TIER_4 = ["intern", "injection", "actuary", "ointment"].map(x => x + "_AR")
-            Class.psychiatrist_AR.UPGRADES_TIER_4 = ["guru", "actuary", "therapist", "PLACEHOLDER_healerSprayer"/*, [DIESEL HEALER], [MACHTRAP HEALER]*/].map(x => x + "_AR")
-            Class.triHealer_AR.UPGRADES_TIER_4 = ["hexaHealer_AR", "ambulance", "healer3_AR", "professor_AR", "chemist_AR"]
-            Class.soother_AR.UPGRADES_TIER_4 = ["PLACEHOLDER_healerOverseer", "antidote", "PLACEHOLDER_healerUnderseer", "medicare", "sootherdrive", "doctor", "spiker"].map(x => x + "_AR")
-            Class.analyzer_AR.UPGRADES_TIER_4 = ["accountant_AR", "surgeon", "guru_AR", "clerk_AR"]
-            Class.scientist_AR.UPGRADES_TIER_4 = ["surgeon", "chemist_AR", "professor_AR", "scribble_AR"/*, [MECH HEALER], [MACHTRAP HEALER]*/, "kraw_AR"]
-            Class.recalibrator_AR.UPGRADES_TIER_4 = ["geneticist"].map(x => x + "_AR")
+            Class.healer.UPGRADES_TIER_3.push("physician_AR", "renovator_AR")
+            Class.nurse_AR.UPGRADES_TIER_3 = ["clinician_AR", "paramedic", "therapist_AR", "hexaHealer_AR", "geneticist_AR", "kraw_AR"]
+            Class.medic.UPGRADES_TIER_3 = ["intern", "injection", "actuary", "ointment"].map(x => x + "_AR")
+            Class.psychiatrist_AR.UPGRADES_TIER_3 = ["guru", "actuary", "therapist", "PLACEHOLDER_healerSprayer"/*, [DIESEL HEALER], [MACHTRAP HEALER]*/].map(x => x + "_AR")
+            Class.triHealer_AR.UPGRADES_TIER_3 = ["hexaHealer_AR", "ambulance", "healer3_AR", "professor_AR", "chemist_AR"]
+            Class.soother_AR.UPGRADES_TIER_3 = ["PLACEHOLDER_healerOverseer", "antidote", "PLACEHOLDER_healerUnderseer", "medicare", "sootherdrive", "doctor", "spiker"].map(x => x + "_AR")
+            Class.analyzer_AR.UPGRADES_TIER_3 = ["accountant_AR", "surgeon", "guru_AR", "clerk_AR"]
+            Class.scientist_AR.UPGRADES_TIER_3 = ["surgeon", "chemist_AR", "professor_AR", "scribble_AR"/*, [MECH HEALER], [MACHTRAP HEALER]*/, "kraw_AR"]
+            Class.recalibrator_AR.UPGRADES_TIER_3 = ["geneticist"].map(x => x + "_AR")
 
     Class.twin.UPGRADES_TIER_2.push("wark_AR")
         Class.twin.UPGRADES_TIER_3.splice(1, 1) //remove bulwark
-            Class.twin.UPGRADES_TIER_4 = ["duo"].map(x => x + "_AR")
+            Class.twin.UPGRADES_TIER_3.push("duo_AR")
         Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin_AR", "doubleGunner_AR"/*, "doubleHelix_AR"*/, "warkwark_AR")
-            Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTriple", "bentTriple", "hewnTriple", "tripleFlankTwin", "tripleGunner"/*, "tripleHelix"*/, "warkwarkwark"].map(x => x + "_AR")
-            Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble"].map(x => x + "_AR")
-            Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDouble", "tripleAutoDouble", "autoTriple", "autoHewnDouble", "autoBentDouble", "autoDoubleFlank", "autoDoubleGunner", "autoWarkwark"].map(x => x + "_AR")
-            Class.bentDouble.UPGRADES_TIER_4 = ["bentTriple", "autoBentDouble", "doubleTriplet"].map(x => x + "_AR")
-            Class.doubleFlankTwin_AR.UPGRADES_TIER_4 = ["tripleFlankTwin", "autoDoubleFlank"].map(x => x + "_AR")
-            Class.doubleGunner_AR.UPGRADES_TIER_4 = ["tripleGunner", "autoDoubleGunner"].map(x => x + "_AR")
-            Class.warkwark_AR.UPGRADES_TIER_4 = ["warkwarkwark", "autoWarkwark"].map(x => x + "_AR")
+            Class.tripleTwin.UPGRADES_TIER_3 = ["quadTwin", "autoTriple", "bentTriple", "hewnTriple", "tripleFlankTwin", "tripleGunner"/*, "tripleHelix"*/, "warkwarkwark"].map(x => x + "_AR")
+            Class.hewnDouble.UPGRADES_TIER_3 = ["hewnTriple", "autoHewnDouble"].map(x => x + "_AR")
+            Class.autoDouble.UPGRADES_TIER_3 = ["megaAutoDouble", "tripleAutoDouble", "autoTriple", "autoHewnDouble", "autoBentDouble", "autoDoubleFlank", "autoDoubleGunner", "autoWarkwark"].map(x => x + "_AR")
+            Class.bentDouble.UPGRADES_TIER_3 = ["bentTriple", "autoBentDouble", "doubleTriplet"].map(x => x + "_AR")
+            Class.doubleFlankTwin_AR.UPGRADES_TIER_3 = ["tripleFlankTwin", "autoDoubleFlank"].map(x => x + "_AR")
+            Class.doubleGunner_AR.UPGRADES_TIER_3 = ["tripleGunner", "autoDoubleGunner"].map(x => x + "_AR")
+            Class.warkwark_AR.UPGRADES_TIER_3 = ["warkwarkwark", "autoWarkwark"].map(x => x + "_AR")
         Class.tripleShot.UPGRADES_TIER_3.push("splitShot_AR", "autoTripleShot_AR", "bentGunner_AR", "bentMinigun_AR", "defect_AR", "waarrk_AR")
+            Class.pentaShot.UPGRADES_TIER_3 = []
         Class.gunner.UPGRADES_TIER_3.push("battery_AR", "buttbuttin_AR", "blower_AR", "rimfire_AR", "volley_AR", "doubleGunner_AR", "bentGunner_AR", "equalizer_AR")
 
     //Class.sniper.UPGRADES_TIER_2
         Class.sniper.UPGRADES_TIER_3.push("railgun_AR")
-            Class.sniper.UPGRADES_TIER_4 = ["sharpshooter"].map(x => x + "_AR")
+            Class.sniper.UPGRADES_TIER_3.push("sharpshooter_AR")
         Class.assassin.UPGRADES_TIER_3.push("buttbuttin_AR", "hitman_AR", "sniper3_AR", "enforcer_AR", "courser_AR")
-            Class.ranger.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.stalker.UPGRADES_TIER_4 = ["spy"].map(x => x + "_AR")
-            Class.falcon.UPGRADES_TIER_4 = ["avian"].map(x => x + "_AR")
-            Class.autoAssassin.UPGRADES_TIER_4 = ["autoSingle", "autoDeadeye"].map(x => x + "_AR")
-            Class.single.UPGRADES_TIER_4 = ["mono", "duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker"/*, [DESMOS SINGLE]*/, "avian", "spy", "autoSingle", "cyclops", "orifice", "assistant", "pistol", "subduer"].map(x => x + "_AR") // custodian is overtiered garbage :fire:
-                //Class.ternion.UPGRADES_TIER_5 = ["custodian"].map(x => x + "_AR")
-                //Class.tricker.UPGRADES_TIER_5 = ["custodian"].map(x => x + "_AR")
-            Class.buttbuttin_AR.UPGRADES_TIER_4 = ["orifice"].map(x => x + "_AR")
-            Class.hitman_AR.UPGRADES_TIER_4 = ["assistant"].map(x => x + "_AR")
-            Class.enforcer_AR.UPGRADES_TIER_4 = ["pistol"].map(x => x + "_AR")
-            Class.courser_AR.UPGRADES_TIER_4 = ["subduer"].map(x => x + "_AR")
+            Class.ranger.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.stalker.UPGRADES_TIER_3 = ["spy"].map(x => x + "_AR")
+            Class.falcon.UPGRADES_TIER_3 = ["avian"].map(x => x + "_AR")
+            Class.autoAssassin.UPGRADES_TIER_3 = ["autoSingle", "autoDeadeye"].map(x => x + "_AR")
+            Class.single.UPGRADES_TIER_3 = ["mono", "duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker"/*, [DESMOS SINGLE]*/, "avian", "spy", "autoSingle", "cyclops", "orifice", "assistant", "pistol", "subduer"].map(x => x + "_AR") // custodian is overtiered garbage :fire:
+                //Class.ternion.UPGRADES_TIER_3 = ["custodian"].map(x => x + "_AR")
+                //Class.tricker.UPGRADES_TIER_3 = ["custodian"].map(x => x + "_AR")
+            Class.buttbuttin_AR.UPGRADES_TIER_3 = ["orifice"].map(x => x + "_AR")
+            Class.hitman_AR.UPGRADES_TIER_3 = ["assistant"].map(x => x + "_AR")
+            Class.enforcer_AR.UPGRADES_TIER_3 = ["pistol"].map(x => x + "_AR")
+            Class.courser_AR.UPGRADES_TIER_3 = ["subduer"].map(x => x + "_AR")
         Class.hunter.UPGRADES_TIER_3.push("autoHunter_AR", "megaHunter_AR", "prober_AR", "courser_AR")
             Class.autoHunter_AR.UPGRADES_TIER_4 = ["autoNimrod"].map(x => x + "_AR")
         Class.rifle.UPGRADES_TIER_3.push("autoRifle_AR", "enforcer_AR", "prober_AR")
@@ -5845,88 +5816,102 @@ Config.level_cap_cheat = 60
             Class.autoMarksman_AR.UPGRADES_TIER_4 = ["megaAutoMarksman", "tripleAutoMarksman", "autoDeadeye", "autoNimrod", "autoRevolver", "autoFork", "PLACEHOLDER_autoHybridMarksman"].map(x => x + "_AR")
 
     Class.machineGun.UPGRADES_TIER_2.push("diesel_AR", "machineTrapper_AR")
-            Class.machineGun.UPGRADES_TIER_4 = ["gadgetGun"].map(x => x + "_AR")
+            Class.machineGun.UPGRADES_TIER_3 = ["gadgetGun_AR"]
         Class.minigun.UPGRADES_TIER_3.push("subverter_AR", "zipper_AR", "bentMinigun_AR", "autoMinigun_AR", "widget_AR")
+            Class.autoMinigun_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.sprayer.UPGRADES_TIER_3.push("frother_AR", "foamer_AR", "faucet_AR", "shower_AR", "autoSprayer_AR", "stormer_AR")
+            Class.redistributor.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.phoenix.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.atomizer.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.focal.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.frother_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.foamer_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.faucet_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.shower_AR.UPGRADES_TIER_3 = ["oversprayer"].map(x => x + "_AR")
+            Class.autoSprayer_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.stormer_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.diesel_AR.UPGRADES_TIER_3 = ["jalopy_AR", "machineGunner", "foamer_AR", "dieselTrapper_AR", "polluter_AR", "autoDiesel_AR"]
+            Class.polluter_AR.UPGRADES_TIER_3 = ["overdiesel"].map(x => x + "_AR")
+            Class.autoDiesel_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
 
     //Class.flankGuard.UPGRADES_TIER_2
-            Class.flankGuard.UPGRADES_TIER_4 = ["ternion"].map(x => x + "_AR")
+            Class.flankGuard.UPGRADES_TIER_3.push("ternion_AR")
         Class.hexaTank.UPGRADES_TIER_3.push("deathStar_AR", "autoHexaTank_AR", "mingler_AR", "combo_AR")
-            Class.hexaTank.UPGRADES_TIER_4 = ["tripleFlankTwin"].map(x => x + "_AR")
-            Class.octoTank.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.cyclone.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.deathStar_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.autoHexaTank_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.mingler_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
+            Class.hexaTank.UPGRADES_TIER_3.push("tripleFlankTwin_AR")
+            Class.octoTank.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.cyclone.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.deathStar_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.autoHexaTank_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.mingler_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.triAngle.UPGRADES_TIER_3.push("cockatiel_AR", "integrator_AR", "defect_AR", "quadAngle_AR")
         Class.auto3.UPGRADES_TIER_3.push("sniper3_AR", "crowbar_AR", "autoAuto3_AR", "combo_AR")
-            Class.auto5.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.mega3.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.auto4.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.banshee.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.sniper3_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.crowbar_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.autoAuto3_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.combo_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
+            Class.auto5.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.mega3.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.auto4.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.banshee.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.sniper3_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.crowbar_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.autoAuto3_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.combo_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
 
     Class.director.UPGRADES_TIER_2.push("directordrive_AR", "honcho_AR", "doper_AR")
         Class.director.UPGRADES_TIER_3.splice(1, 1) //remove bigCheese
-            Class.director.UPGRADES_TIER_4 = ["coordinator"].map(x => x + "_AR")
-            Class.manager.UPGRADES_TIER_4 = ["leader", "inspector", "managerdrive", "autoManager"].map(x => x + "_AR")
+            Class.director.UPGRADES_TIER_3.push("coordinator_AR")
+            Class.manager.UPGRADES_TIER_3 = ["leader", "inspector", "managerdrive", "autoManager"].map(x => x + "_AR")
         Class.overseer.UPGRADES_TIER_3.push("captain_AR", "foreman_AR", "dopeseer_AR")
-            Class.overseer.UPGRADES_TIER_4 = ["inspector", "overdoubleTwin", "overshot", "overassassin", "overhunter", "overminigun", "overrifle", "overmarksman", "overartillery", "oversprayer", "overdiesel", "overangle", "overdestroyer", "overlauncher"].map(x => x + "_AR")
-            Class.overtrapper.UPGRADES_TIER_4 = ["kingpin", "overmach", "autoOvertrapper", "overtrapperdrive"/*, "battletrapper", "captrapper", "foretrapper"*/, "overbuilder", "overtrapGuard", "overpen", "overmech", "overwark"].map(x => x + "_AR")
-            //Class.dopeseer_AR.UPGRADES_TIER_4 = ["briskseer", "dopelord", "autoDopeseer", "dopeseerdrive", "adjurer", "mogul", "ganger"].map(x => x + "_AR")
+            Class.overseer.UPGRADES_TIER_3.push("inspector_AR", "overdoubleTwin_AR", "overshot_AR", "overassassin_AR", "overhunter_AR", "overminigun_AR", "overrifle_AR", "overmarksman_AR", "overartillery_AR", "oversprayer_AR", "overdiesel_AR", "overangle_AR", "overdestroyer_AR", "overlauncher_AR")
+            Class.overtrapper.UPGRADES_TIER_3 = ["kingpin", "overmach", "autoOvertrapper", "overtrapperdrive"/*, "battletrapper", "captrapper", "foretrapper"*/, "overbuilder", "overtrapGuard", "overpen", "overmech", "overwark"].map(x => x + "_AR")
+            //Class.dopeseer_AR.UPGRADES_TIER_3 = ["briskseer", "dopelord", "autoDopeseer", "dopeseerdrive", "adjurer", "mogul", "ganger"].map(x => x + "_AR")
         Class.cruiser.UPGRADES_TIER_3.push("productionist_AR", "cruiserdrive_AR", "hangar_AR", "zipper_AR", "baltimore_AR", "mosey_AR")
+            Class.battleship.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.underseer.UPGRADES_TIER_3.push("autoUnderseer_AR", "underdrive_AR", "pentaseer_AR")
-            Class.necromancer.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.maleficitor.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.infestor.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.autoUnderseer_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.underdrive_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.pentaseer_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
+            Class.necromancer.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.maleficitor.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.infestor.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.autoUnderseer_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.underdrive_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.pentaseer_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.spawner.UPGRADES_TIER_3.push("megaSpawner_AR", "productionist_AR", "spawnerdrive_AR", "captain_AR", "hangar_AR", "laborer_AR", "foundry_AR", "issuer_AR")
-            //Class.hangar_AR.UPGRADES_TIER_4 = ["courier", "warlord", "aerodome", "autoHangar", "megaHangar", "dirigible", "airfield", "helipad", "governer", "grinder", "barn", "reposit"].map(x => x + "_AR")
-            //Class.laborer_AR.UPGRADES_TIER_4 = ["worker", "autoLaborer", "megaLaborer", "labordrive", "toiler", "grinder", "servicer", "endeavor", "slogger"].map(x => x + "_AR")
-            //Class.foundry_AR.UPGRADES_TIER_4 = ["endeavor", "stocker", "foundrydrive", "megaFoundry", "fabrication", "shopper", "autoFoundry", "barn", "topBanana", "plant"].map(x => x + "_AR")
-            //Class.issuer_AR.UPGRADES_TIER_4 = ["circulator", "facility", "autoIssuer", "megaIssuer", "inducer", "issuerdrive", "mogul", "reposit", "slogger", "plant"].map(x => x + "_AR")
+            //Class.hangar_AR.UPGRADES_TIER_3 = ["courier", "warlord", "aerodome", "autoHangar", "megaHangar", "dirigible", "airfield", "helipad", "governer", "grinder", "barn", "reposit"].map(x => x + "_AR")
+            //Class.laborer_AR.UPGRADES_TIER_3 = ["worker", "autoLaborer", "megaLaborer", "labordrive", "toiler", "grinder", "servicer", "endeavor", "slogger"].map(x => x + "_AR")
+            //Class.foundry_AR.UPGRADES_TIER_3 = ["endeavor", "stocker", "foundrydrive", "megaFoundry", "fabrication", "shopper", "autoFoundry", "barn", "topBanana", "plant"].map(x => x + "_AR")
+            //Class.issuer_AR.UPGRADES_TIER_3 = ["circulator", "facility", "autoIssuer", "megaIssuer", "inducer", "issuerdrive", "mogul", "reposit", "slogger", "plant"].map(x => x + "_AR")
         Class.directordrive_AR.UPGRADES_TIER_3 = ["directorstorm_AR", "overdrive", "cruiserdrive_AR", "underdrive_AR", "spawnerdrive_AR", "autoDirectordrive_AR", "honchodrive_AR", "doperdrive_AR"]
-            Class.directorstorm_AR.UPGRADES_TIER_4 = ["vortex", "downpourer", "overstorm", "cruiserstorm", "understorm", "spawnerstorm", "autoDirectorstorm", "honchostorm", "doperstorm"].map(x => x + "_AR")
-            Class.overdrive.UPGRADES_TIER_4 = ["overstorm", "tyrant", "overtrapperdrive", "overgunnerdrive", "bansheedrive", "autoOverdrive", "instructor", "captaindrive", "foredrive", "dopedrive"].map(x => x + "_AR")
-            Class.cruiserdrive_AR.UPGRADES_TIER_4 = ["cruiserstorm", "carrierdrive", "battledrive", "fortdrive"/*, "autoCruiserdrive"*/, "prescriber", "productiondrive"/*, "helipad", "baltimoredrive", "moseydrive"*/].map(x => x + "_AR")
-            Class.underdrive_AR.UPGRADES_TIER_4 = ["understorm", "necrodrive", "hexer", "infestordrive", "autoUnderdrive", "pentadrive"].map(x => x + "_AR")
-            Class.spawnerdrive_AR.UPGRADES_TIER_4 = ["spawnerstorm"].map(x => x + "_AR")
+            Class.directorstorm_AR.UPGRADES_TIER_3 = ["vortex", "downpourer", "overstorm", "cruiserstorm", "understorm", "spawnerstorm", "autoDirectorstorm", "honchostorm", "doperstorm"].map(x => x + "_AR")
+            Class.overdrive.UPGRADES_TIER_3 = ["overstorm", "tyrant", "overtrapperdrive", "overgunnerdrive", "bansheedrive", "autoOverdrive", "instructor", "captaindrive", "foredrive", "dopedrive"].map(x => x + "_AR")
+            Class.cruiserdrive_AR.UPGRADES_TIER_3 = ["cruiserstorm", "carrierdrive", "battledrive", "fortdrive"/*, "autoCruiserdrive"*/, "prescriber", "productiondrive"/*, "helipad", "baltimoredrive", "moseydrive"*/].map(x => x + "_AR")
+            Class.underdrive_AR.UPGRADES_TIER_3 = ["understorm", "necrodrive", "hexer", "infestordrive", "autoUnderdrive", "pentadrive"].map(x => x + "_AR")
+            Class.spawnerdrive_AR.UPGRADES_TIER_3 = ["spawnerstorm"].map(x => x + "_AR")
         Class.honcho_AR.UPGRADES_TIER_3 = ["bigCheese", "foreman_AR", "baltimore_AR", "foundry_AR", "autoHoncho_AR", "honchodrive_AR", "junkie_AR"]
-            //Class.junkie_AR.UPGRADES_TIER_4 = ["addict", "ganger", "harbor", "plant", "stoner", "junkiedrive", "autoJunkie"].map(x => x + "_AR")
+            //Class.junkie_AR.UPGRADES_TIER_3 = ["addict", "ganger", "harbor", "plant", "stoner", "junkiedrive", "autoJunkie"].map(x => x + "_AR")
         Class.doper_AR.UPGRADES_TIER_3 = ["brisker", "dopeseer", "mosey", "issuer", "junkie", "doperdrive", "autoDoper"].map(x => x + "_AR")
-            //Class.brisker_AR.UPGRADES_TIER_4 = ["adderall", "briskseer", "sailor", "circulator", "briskerdrive", "addict", "autoBrisker"].map(x => x + "_AR")
+            //Class.brisker_AR.UPGRADES_TIER_3 = ["adderall", "briskseer", "sailor", "circulator", "briskerdrive", "addict", "autoBrisker"].map(x => x + "_AR")
 
     //Class.pounder.UPGRADES_TIER_2.push("volute")
         Class.pounder.UPGRADES_TIER_3.push("subverter_AR")
-            Class.pounder.UPGRADES_TIER_4 = ["bruiser"].map(x => x + "_AR")
+            Class.pounder.UPGRADES_TIER_3.push("bruiser_AR")
         Class.destroyer.UPGRADES_TIER_3.push("blower_AR", "megaTrapper_AR", "queller_AR", "autoDestroyer_AR", "hurler_AR", "slinker_AR")
         Class.artillery.UPGRADES_TIER_3.push("queller_AR", "forger_AR", "force_AR", "autoArtillery_AR", "foctillery_AR", "discharger_AR")
-            Class.mortar.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.ordnance.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.beekeeper.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.fieldGun.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.queller_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.forger_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.force_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.autoArtillery_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.foctillery_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.discharger_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
+            Class.mortar.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.ordnance.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.beekeeper.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.fieldGun.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.queller_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.forger_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.force_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.autoArtillery_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.foctillery_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.discharger_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.launcher.UPGRADES_TIER_3.push("rocketeer_AR", "pitcher_AR", "cluster_AR", "projector_AR", "heaver_AR", "autoLauncher_AR", "hurler_AR", "inception_AR")
-            //UPGRADES_TIER_4 = ["shaver", "bazooka", "catapult", "myriad", "leviathan", "bulker", "bombard", "python", "claimant", "incline", "autoHurler", "mongrel", "bunger", "deliverer", "slingshot"].map(x => x + "_AR")
+            //UPGRADES_TIER_3 = ["shaver", "bazooka", "catapult", "myriad", "leviathan", "bulker", "bombard", "python", "claimant", "incline", "autoHurler", "mongrel", "bunger", "deliverer", "slingshot"].map(x => x + "_AR")
 
     Class.trapper.UPGRADES_TIER_2.push("pen_AR", "mech_AR", "machineTrapper_AR", "wark_AR")
         Class.trapper.UPGRADES_TIER_3.splice(0, 1) //remove barricade
         Class.trapper.UPGRADES_TIER_3.push("megaTrapper_AR")
-            Class.trapper.UPGRADES_TIER_4 = [/*"sawedOff", */"tricker"].map(x => x + "_AR")
+            Class.trapper.UPGRADES_TIER_3.push(/*"sawedOff_AR", */"tricker_AR")
         Class.builder.UPGRADES_TIER_3.push("forger_AR", "stall_AR", "fashioner_AR", "charger_AR")
         Class.triTrapper.UPGRADES_TIER_3.push("triPen_AR", "triMech_AR", "triMachine_AR", "triTrapGuard_AR")
-            Class.hexaTrapper.UPGRADES_TIER_4 = [].map(x => x + "_AR")
+            Class.hexaTrapper.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.trapGuard.UPGRADES_TIER_3.push("peashooter_AR", "incarcerator_AR", "mechGuard_AR", "autoTrapGuard_AR", "machineGuard_AR", "triTrapGuard_AR")
         Class.pen_AR.UPGRADES_TIER_3 = ["stall", "triPen", "encircler", "incarcerator", "operator", "cockatiel", "hutch", "interner", "autoPen"].map(x => x + "_AR")
         Class.mech_AR.UPGRADES_TIER_3 = ["engineer", "triMech_AR", "machineMech_AR", "mechGuard_AR", "operator_AR", "cog_AR", "cobbler_AR", "autoMech_AR"]
@@ -5935,109 +5920,115 @@ Config.level_cap_cheat = 60
 
     //Class.whirlwind.UPGRADES_TIER_2
         //Class.whirlwind.UPGRADES_TIER_3
-            Class.hexaWhirl.UPGRADES_TIER_4 = ["octoWhirl", "PLACEHOLDER_whirlCyclone", "PLACEHOLDER_whirlHexaTrapper", "peaceMoon", "autoHexaWhirl", "PLACEHOLDER_whirlMingler", "comboWhirl"].map(x => x + "_AR")
-            Class.munition.UPGRADES_TIER_4 = ["PLACEHOLDER_whirlMortar", "PLACEHOLDER_whirlOrdnance", "PLACEHOLDER_whirlBeekeeper", "PLACEHOLDER_whirlFieldGun", "PLACEHOLDER_whirlQueller", "PLACEHOLDER_whirlForger", "schwartz", "autoMunition", "PLACEHOLDER_whirlFoctillery", "PLACEHOLDER_whirlDischarger"].map(x => x + "_AR")
-            Class.whirl3.UPGRADES_TIER_4 = ["whirl5", "megaWhirl3", "whirl4", "PLACEHOLDER_whirlBanshee", "PLACEHOLDER_whirlSniper3", "whirlbar", "autoWhirl3", "comboWhirl"].map(x => x + "_AR")
-            Class.whirlGuard.UPGRADES_TIER_4 = ["autoWhirlGuard", "triWhirlGuard"].map(x => x + "_AR")
-            Class.prophet.UPGRADES_TIER_4 = ["PLACEHOLDER_whirlNecromancer", "PLACEHOLDER_whirlMaleficitor", "PLACEHOLDER_whirlInfestor", "autoProphet"].map(x => x + "_AR")
-            Class.vortex.UPGRADES_TIER_4 = ["PLACEHOLDER_whirlFieldGun", "autoVortex"].map(x => x + "_AR")
+            Class.hexaWhirl.UPGRADES_TIER_3 = ["octoWhirl", "PLACEHOLDER_whirlCyclone", "PLACEHOLDER_whirlHexaTrapper", "peaceMoon", "autoHexaWhirl", "PLACEHOLDER_whirlMingler", "comboWhirl"].map(x => x + "_AR")
+            Class.munition.UPGRADES_TIER_3 = ["PLACEHOLDER_whirlMortar", "PLACEHOLDER_whirlOrdnance", "PLACEHOLDER_whirlBeekeeper", "PLACEHOLDER_whirlFieldGun", "PLACEHOLDER_whirlQueller", "PLACEHOLDER_whirlForger", "schwartz", "autoMunition", "PLACEHOLDER_whirlFoctillery", "PLACEHOLDER_whirlDischarger"].map(x => x + "_AR")
+            Class.whirl3.UPGRADES_TIER_3 = ["whirl5", "megaWhirl3", "whirl4", "PLACEHOLDER_whirlBanshee", "PLACEHOLDER_whirlSniper3", "whirlbar", "autoWhirl3", "comboWhirl"].map(x => x + "_AR")
+            Class.whirlGuard.UPGRADES_TIER_3 = ["autoWhirlGuard", "triWhirlGuard"].map(x => x + "_AR")
+            Class.prophet.UPGRADES_TIER_3 = ["PLACEHOLDER_whirlNecromancer", "PLACEHOLDER_whirlMaleficitor", "PLACEHOLDER_whirlInfestor", "autoProphet"].map(x => x + "_AR")
+            Class.vortex.UPGRADES_TIER_3 = ["PLACEHOLDER_whirlFieldGun", "autoVortex"].map(x => x + "_AR")
         //Class.tornado.UPGRADES_TIER_3
-            Class.megaTornado.UPGRADES_TIER_4 = ["ultraTornado"].map(x => x + "_AR")
+            Class.megaTornado.UPGRADES_TIER_3 = ["ultraTornado"].map(x => x + "_AR")
 
 //    Class.desmos.UPGRADES_TIER_2.splice(0, 0, "volute")
 //    Class.desmos.UPGRADES_TIER_2.push("spiral", "repeater")
 //        Class.desmos.UPGRADES_TIER_3 = ["bender"]
 //        Class.volute.UPGRADES_TIER_3.push("oroboros", "autoVolute_AR")
 //        Class.helix.UPGRADES_TIER_3.push("coil", "duplicator", "doubleHelix_AR", "autoHelix_AR")
-            //Class.triplex.UPGRADES_TIER_4 = ["quintuplex_AR", "doubleTriplex_AR", "autoTriplex_AR"]
-            //Class.quadruplex.UPGRADES_TIER_4 = ["hextuplex_AR", "autoQuadruplex_AR"]
-            //Class.doubleHelix_AR.UPGRADES_TIER_4 = ["tripleHelix_AR", "doubleTriplex_AR", "doubleCoil_AR", "doubleDuplicator_AR", "autoDoubleHelix_AR"]
-            //Class.autoHelix_AR.UPGRADES_TIER_4 = ["autoTriplex_AR", "autoQuadruplex_AR", "autoCoil_AR", "autoDuplicator_AR", "autoDoubleHelix_AR"]
+            //Class.triplex.UPGRADES_TIER_3 = ["quintuplex_AR", "doubleTriplex_AR", "autoTriplex_AR"]
+            //Class.quadruplex.UPGRADES_TIER_3 = ["hextuplex_AR", "autoQuadruplex_AR"]
+            //Class.doubleHelix_AR.UPGRADES_TIER_3 = ["tripleHelix_AR", "doubleTriplex_AR", "doubleCoil_AR", "doubleDuplicator_AR", "autoDoubleHelix_AR"]
+            //Class.autoHelix_AR.UPGRADES_TIER_3 = ["autoTriplex_AR", "autoQuadruplex_AR", "autoCoil_AR", "autoDuplicator_AR", "autoDoubleHelix_AR"]
 //        Class.spiral.UPGRADES_TIER_3.push(/*"wrangler", */"oroboros", "cocci", /*"rocket", */"autoSpiral_AR")
-            //Class.superSpiral.UPGRADES_TIER_4 = ["autoSuperSpiral_AR"]
-            //Class.coil.UPGRADES_TIER_4 = ["doubleCoil_AR", "autoCoil_AR"]
-            //Class.autoSpiral_AR.UPGRADES_TIER_4 = ["autoSuperSpiral_AR", "autoCoil_AR"]
+            //Class.superSpiral.UPGRADES_TIER_3 = ["autoSuperSpiral_AR"]
+            //Class.coil.UPGRADES_TIER_3 = ["doubleCoil_AR", "autoCoil_AR"]
+            //Class.autoSpiral_AR.UPGRADES_TIER_3 = ["autoSuperSpiral_AR", "autoCoil_AR"]
 //        Class.repeater.UPGRADES_TIER_3.push("autoRepeater_AR")
-            //Class.iterator.UPGRADES_TIER_4 = ["autoIterator_AR"]
-            //Class.duplicator.UPGRADES_TIER_4 = ["doubleDuplicator_AR", "autoDuplicator_AR"]
-            //Class.autoRepeater_AR.UPGRADES_TIER_4 = ["autoIterator_AR", "autoDuplicator_AR"]
+            //Class.iterator.UPGRADES_TIER_3 = ["autoIterator_AR"]
+            //Class.duplicator.UPGRADES_TIER_3 = ["doubleDuplicator_AR", "autoDuplicator_AR"]
+            //Class.autoRepeater_AR.UPGRADES_TIER_3 = ["autoIterator_AR", "autoDuplicator_AR"]
 
-if (enable_whirlwind) {
+if (Config.retrograde) {
+    Class.sprayer.UPGRADES_TIER_3.push("splasher_RG")
+}
+
+if (Config.daily_tank.tank == "whirlwind") {
 Class.vortex_AR.LABEL = "Directive"
 
+/*if (enable_whirlwind) { // do another check without daily_tank so we aren't duplicating
 Class.basic.UPGRADES_TIER_1.push("whirlwind")
+}*/
     //Class.flankGuard.UPGRADES_TIER_2
         Class.hexaTank.UPGRADES_TIER_3.splice(3, 0, "hexaWhirl")
-            Class.octoTank.UPGRADES_TIER_4.push("octoWhirl_AR")
-            Class.hexaTrapper.UPGRADES_TIER_4.push("PLACEHOLDER_whirlHexaTrapper_AR")
-            Class.cyclone.UPGRADES_TIER_4.push("PLACEHOLDER_whirlCyclone_AR")
-            Class.deathStar_AR.UPGRADES_TIER_4.push("peaceMoon_AR")
-            Class.autoHexaTank_AR.UPGRADES_TIER_4.push("autoHexaWhirl_AR")
-            Class.mingler_AR.UPGRADES_TIER_4.push("PLACEHOLDER_whirlMingler_AR")
+            Class.octoTank.UPGRADES_TIER_3.push("octoWhirl_AR")
+            Class.hexaTrapper.UPGRADES_TIER_3.push("PLACEHOLDER_whirlHexaTrapper_AR")
+            Class.cyclone.UPGRADES_TIER_3.push("PLACEHOLDER_whirlCyclone_AR")
+            Class.deathStar_AR.UPGRADES_TIER_3.push("peaceMoon_AR")
+            Class.autoHexaTank_AR.UPGRADES_TIER_3.push("autoHexaWhirl_AR")
+            Class.mingler_AR.UPGRADES_TIER_3.push("PLACEHOLDER_whirlMingler_AR")
         Class.auto3.UPGRADES_TIER_3.splice(4, 0, "whirl3")
-            Class.auto5.UPGRADES_TIER_4.push("whirl5_AR")
-            Class.mega3.UPGRADES_TIER_4.push("megaWhirl3_AR")
-            Class.auto4.UPGRADES_TIER_4.push("whirl4_AR")
-            Class.banshee.UPGRADES_TIER_4.push("PLACEHOLDER_whirlBanshee_AR")
-            Class.sniper3_AR.UPGRADES_TIER_4.push("PLACEHOLDER_whirlSniper3_AR")
-            Class.crowbar_AR.UPGRADES_TIER_4.push("whirlbar_AR")
-            Class.autoAuto3_AR.UPGRADES_TIER_4.push("autoWhirl3_AR")
-            Class.combo_AR.UPGRADES_TIER_4.push("comboWhirl_AR")
+            Class.auto5.UPGRADES_TIER_3.push("whirl5_AR")
+            Class.mega3.UPGRADES_TIER_3.push("megaWhirl3_AR")
+            Class.auto4.UPGRADES_TIER_3.push("whirl4_AR")
+            Class.banshee.UPGRADES_TIER_3.push("PLACEHOLDER_whirlBanshee_AR")
+            Class.sniper3_AR.UPGRADES_TIER_3.push("PLACEHOLDER_whirlSniper3_AR")
+            Class.crowbar_AR.UPGRADES_TIER_3.push("whirlbar_AR")
+            Class.autoAuto3_AR.UPGRADES_TIER_3.push("autoWhirl3_AR")
+            Class.combo_AR.UPGRADES_TIER_3.push("comboWhirl_AR")
         Class.trapGuard.UPGRADES_TIER_3.splice(5, 0, "whirlGuard")
     //Class.director.UPGRADES_TIER_2
         Class.underseer.UPGRADES_TIER_3.splice(3, 0, "prophet")
-            Class.necromancer.UPGRADES_TIER_4.push("PLACEHOLDER_whirlNecromancer_AR")
-            Class.maleficitor.UPGRADES_TIER_4.push("PLACEHOLDER_whirlMaleficitor_AR")
-            Class.infestor.UPGRADES_TIER_4.push("PLACEHOLDER_whirlInfestor_AR")
-            Class.autoUnderseer_AR.UPGRADES_TIER_4.push("autoProphet_AR")
-            Class.underdrive_AR.UPGRADES_TIER_4.push()
-            Class.pentaseer_AR.UPGRADES_TIER_4.push()
+            Class.necromancer.UPGRADES_TIER_3.push("PLACEHOLDER_whirlNecromancer_AR")
+            Class.maleficitor.UPGRADES_TIER_3.push("PLACEHOLDER_whirlMaleficitor_AR")
+            Class.infestor.UPGRADES_TIER_3.push("PLACEHOLDER_whirlInfestor_AR")
+            Class.autoUnderseer_AR.UPGRADES_TIER_3.push("autoProphet_AR")
+            Class.underdrive_AR.UPGRADES_TIER_3.push()
+            Class.pentaseer_AR.UPGRADES_TIER_3.push()
     //Class.pounder.UPGRADES_TIER_2
         Class.artillery.UPGRADES_TIER_3.splice(4, 0, "munition")
-            Class.mortar.UPGRADES_TIER_4.push("PLACEHOLDER_whirlMortar_AR")
-            Class.ordnance.UPGRADES_TIER_4.push("PLACEHOLDER_whirlOrdnance_AR")
-            Class.beekeeper.UPGRADES_TIER_4.push("PLACEHOLDER_whirlBeekeeper_AR")
-            Class.fieldGun.UPGRADES_TIER_4.push("PLACEHOLDER_whirlFieldGun_AR")
-            Class.queller_AR.UPGRADES_TIER_4.push("PLACEHOLDER_whirlQueller_AR")
-            Class.forger_AR.UPGRADES_TIER_4.push("PLACEHOLDER_whirlForger_AR")
-            Class.force_AR.UPGRADES_TIER_4.push("schwartz_AR")
-            Class.autoArtillery_AR.UPGRADES_TIER_4.push("autoMunition_AR")
-            Class.foctillery_AR.UPGRADES_TIER_4.push("PLACEHOLDER_whirlFoctillery_AR")
-            Class.discharger_AR.UPGRADES_TIER_4.push("PLACEHOLDER_whirlDischarger_AR")
+            Class.mortar.UPGRADES_TIER_3.push("PLACEHOLDER_whirlMortar_AR")
+            Class.ordnance.UPGRADES_TIER_3.push("PLACEHOLDER_whirlOrdnance_AR")
+            Class.beekeeper.UPGRADES_TIER_3.push("PLACEHOLDER_whirlBeekeeper_AR")
+            Class.fieldGun.UPGRADES_TIER_3.push("PLACEHOLDER_whirlFieldGun_AR")
+            Class.queller_AR.UPGRADES_TIER_3.push("PLACEHOLDER_whirlQueller_AR")
+            Class.forger_AR.UPGRADES_TIER_3.push("PLACEHOLDER_whirlForger_AR")
+            Class.force_AR.UPGRADES_TIER_3.push("schwartz_AR")
+            Class.autoArtillery_AR.UPGRADES_TIER_3.push("autoMunition_AR")
+            Class.foctillery_AR.UPGRADES_TIER_3.push("PLACEHOLDER_whirlFoctillery_AR")
+            Class.discharger_AR.UPGRADES_TIER_3.push("PLACEHOLDER_whirlDischarger_AR")
         Class.launcher.UPGRADES_TIER_3.splice(5, 0, "vortex")
 }
 
 if (integrate_healers) {
     Class.basic.UPGRADES_TIER_2.push("healer")
-            //Class.smasher.UPGRADES_TIER_4.push("physician_AR")
-            //Class.single.UPGRADES_TIER_4.push("renovater_AR")
+            Class.smasher.UPGRADES_TIER_3.push("physician_AR")
+            Class.single.UPGRADES_TIER_3.push("renovater_AR")
         Class.twin.UPGRADES_TIER_3.push("nurse_AR")
-            //Class.doubleTwin.UPGRADES_TIER_4.push("clinician_AR")
-            //Class.tripleShot.UPGRADES_TIER_4.push("paramedic_AR")
-            //Class.gunner.UPGRADES_TIER_4.push("therapist_AR")
+            Class.doubleTwin.UPGRADES_TIER_3.push("clinician_AR")
+            Class.tripleShot.UPGRADES_TIER_3.push("paramedic_AR")
+            Class.gunner.UPGRADES_TIER_4.push("therapist_AR")
         Class.sniper.UPGRADES_TIER_3.push("medic")
-            //Class.assassin.UPGRADES_TIER_4.push("intern_AR")
-            //Class.hunter.UPGRADES_TIER_4.push("injection_AR")
-            //Class.rifle.UPGRADES_TIER_4.push("ointment_AR")
+            Class.assassin.UPGRADES_TIER_3.push("intern_AR")
+            Class.hunter.UPGRADES_TIER_3.push("injection_AR")
+            Class.rifle.UPGRADES_TIER_3.push("ointment_AR")
         Class.machineGun.UPGRADES_TIER_3 = ["psychiatrist_AR"]
-            //Class.minigun.UPGRADES_TIER_4.push("actuary_AR")
+            Class.minigun.UPGRADES_TIER_3.push("actuary_AR")
         Class.flankGuard.UPGRADES_TIER_3.push("triHealer_AR")
-            //Class.hexaTank.UPGRADES_TIER_4.push("hexaHealer_AR")
-            //Class.triAngle.UPGRADES_TIER_4.push("ambulance_AR")
-            //Class.auto3.UPGRADES_TIER_4.push("healer3_AR")
+            Class.hexaTank.UPGRADES_TIER_3.push("hexaHealer_AR")
+            Class.triAngle.UPGRADES_TIER_3.push("ambulance_AR")
+            Class.auto3.UPGRADES_TIER_3.push("healer3_AR")
         Class.director.UPGRADES_TIER_3.push("soother_AR")
-            //Class.cruiser.UPGRADES_TIER_4.push("antidote_AR")
-            //Class.spawner.UPGRADES_TIER_4.push("medicare_AR")
-            //Class.honcho.UPGRADES_TIER_4.push("doctor_AR")
+            Class.cruiser.UPGRADES_TIER_3.push("antidote_AR")
+            Class.spawner.UPGRADES_TIER_3.push("medicare_AR")
+            Class.honcho.UPGRADES_TIER_3.push("doctor_AR")
         Class.pounder.UPGRADES_TIER_3.push("analyzer_AR")
-            //Class.destroyer.UPGRADES_TIER_4.push("accountant_AR")
-            //Class.artillery.UPGRADES_TIER_4.push("guru_AR")
-            //Class.launcher.UPGRADES_TIER_4.push("clerk_AR")
+            Class.destroyer.UPGRADES_TIER_3.push("accountant_AR")
+            Class.artillery.UPGRADES_TIER_3.push("guru_AR")
+            Class.launcher.UPGRADES_TIER_3.push("clerk_AR")
         Class.trapper.UPGRADES_TIER_3.push("scientist_AR")
-            //Class.builder.UPGRADES_TIER_4.push("surgeon_AR")
-            //Class.triTrapper.UPGRADES_TIER_4.push("chemist_AR")
-            //Class.trapGuard.UPGRADES_TIER_4.push("professor_AR")
-            //Class.pen_AR.UPGRADES_TIER_4.push("scribble_AR")
+            Class.builder.UPGRADES_TIER_3.push("surgeon_AR")
+            Class.triTrapper.UPGRADES_TIER_3.push("chemist_AR")
+            Class.trapGuard.UPGRADES_TIER_3.push("professor_AR")
+            Class.pen_AR.UPGRADES_TIER_3.push("scribble_AR")
         Class.desmos.UPGRADES_TIER_3.push("recalibrator_AR")
 }
 
@@ -6097,7 +6088,8 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
             Class.manager.UPGRADES_TIER_3 = ["inspector"].map(x => x + "_AR")
         Class.overseer.UPGRADES_TIER_3 = ["overlord", "banshee", "autoOverseer", "overdrive", "commander", "captain_AR", "foreman_AR", "dopeseer_AR"]
             Class.overseer.UPGRADES_TIER_3.push("inspector_AR")
-        Class.cruiser.UPGRADES_TIER_3 = ["carrier", "battleship", "fortress", "autoCruiser", "commander", "productionist_AR", "cruiserdrive_AR", "hangar_AR", "zipper_AR", "baltimore_AR", "mosey_AR"]
+        Class.cruiser.UPGRADES_TIER_3 = ["carrier", "battleship", "fortress", "autoCruiser", "commander", "productionist_AR", "cruiserdrive_AR", "hangar_AR", "zipper_AR", "faucet_AR", "baltimore_AR", "mosey_AR"]
+            Class.battleship.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.underseer.UPGRADES_TIER_3 = ["necromancer", "maleficitor", "autoUnderseer_AR", "underdrive_AR", "infestor", "pentaseer_AR"]
         Class.spawner.UPGRADES_TIER_3 = ["factory", "autoSpawner", "megaSpawner_AR", "productionist_AR", "spawnerdrive_AR", "captain_AR", "hangar_AR", "laborer_AR", "foundry_AR", "issuer_AR"]
         Class.directordrive_AR.UPGRADES_TIER_3 = ["directorstorm_AR", "overdrive", "cruiserdrive_AR", "underdrive_AR", "spawnerdrive_AR", "autoDirectordrive_AR", "honchodrive_AR", "doperdrive_AR"]

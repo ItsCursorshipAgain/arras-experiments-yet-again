@@ -12,7 +12,7 @@ let { gamemodeManager } = require("./Game/gamemodeManager.js");
 // Gamemode names
 const getName = (name, gamemodeData) => {
     const nameMap = {
-        //arms_race: "Arms Race",
+        arms_race: "Arms Race",
         assault_acropolis: "Assault Acropolis",
         assault_booster: "Assault Booster",
         assault_bunker: "Assault Bunker",
@@ -29,6 +29,7 @@ const getName = (name, gamemodeData) => {
         old_siege: "Old Siege",
         open_tdm: `Open ${gamemodeData.teams}TDM`,
         outbreak: "Outbreak",
+        retrograde: "Retrograde",
         space: "Space",
         train_wars: "Train Wars",
         siege_blitz: "Siege Blitz",

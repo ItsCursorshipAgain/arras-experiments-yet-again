@@ -2,6 +2,8 @@ const { combineStats, dereference, makeAura, makeAuto, makeHat, weaponArray, wea
 const { base, smshskl } = require('../constants.js')
 const g = require('../gunvals.js')
 
+// ARMS RACE DREADS BY FROSTBYTE
+
 const eggnoughtBody = {
 	SPEED: base.SPEED * 0.75,
 	HEALTH: base.HEALTH * 1.75,
@@ -2576,7 +2578,7 @@ Class.menu_addons.UPGRADES_TIER_0.push("dreadnought_dreadsV2")
 					Class.pegasus_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("pegasus_dreadsV2")
 
 if (arms_race_dreadsV2) {
-	console.log('--- Dreadnoughts v2 Arms Race addon is activated. Credit to Frostbyte. ---')
+	//console.log('[dreadv2.js]: Dreadnoughts v2 Arms Race addon enabled. Credit to Frostbyte.')
 	//Class.dreadWeapon_dreadsV2
 
 		Class.sword_dreadsV2.UPGRADES_TIER_0.push("sling_dreadsV2")
