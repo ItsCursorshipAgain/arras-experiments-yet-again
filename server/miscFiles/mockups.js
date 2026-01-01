@@ -237,7 +237,7 @@ function buildMockup(className, Manager) {
         mockupData.push(getMockup(mockup, type.mockup.position));
         mockup.clear();
     } catch (error) {
-        util.error('[WARNING] An error has occured during mockup loading:');
+        util.error('[WARNING]: An error has occured during mockup loading:');
         util.error('When attempting to generate mockup "' + className + '":');
         for (let i in Class[className]) util.error("\t" + i + ": " + Class[className][i]);
         throw error;

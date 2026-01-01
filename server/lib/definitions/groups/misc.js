@@ -773,8 +773,7 @@ Class.flagship = {
 Class.arenaCloser = {
     PARENT: "genericTank",
     LABEL: "Arena Closer",
-    NAME: "Arena Closer",
-    DISPLAY_NAME: false,
+    DISPLAY_NAME: true,
     DANGER: 10,
     SIZE: 34,
     COLOR: "yellow",
@@ -788,19 +787,24 @@ Class.arenaCloser = {
         FOV: 10,
         SPEED: 6,
     },
-    SKILL: skillSet({ rld: 1, dam: 1, pen: 1, str: 1, spd: 1, atk: 1, hlt: 1, shi: 1, rgn: 1, mob: 1 }),
+    SKILL: skillSet({rld: 1, dam: 1, pen: 1, str: 1, spd: 1, atk: 1, hlt: 1, shi: 1, rgn: 1, mob: 1}),
     DRAW_HEALTH: false,
     HITS_OWN_TYPE: "never",
     ARENA_CLOSER: true,
     IS_IMMUNE_TO_TILES: true,
     UPGRADE_TOOLTIP: "Hackerman",
-    GUNS: [{
-        POSITION: [14, 10, 1, 0, 0, 0, 0],
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.arenaCloser]),
-            TYPE: [ "bullet", { LAYER: 12 } ]
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 14,
+                WIDTH: 10
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, {reload: 0.8, recoil: 0.25, health: 1e3, damage: 1e3, pen: 1e3, speed: 2.5, maxSpeed: 1.15, range: 1.8, density: 4, spray: 0.25}]),
+                TYPE: ["bullet", {LAYER: 12}]
+            }
         }
-    }]
+    ]
 }
 Class.antiTankMachineGun = {
     PARENT: "dominator",

@@ -268,7 +268,7 @@ class gameServer {
             // Redefine the room
             this.defineRoom();
             // Log that we are running again
-            util.log(`[${this.name}] New game instance is now running`);
+            util.log(`[${global.gameManager.port}]: New game instance is now running`);
 
             // Init every tile
             for (let y = 0; y < this.room.setup.length; y++) {
@@ -461,12 +461,11 @@ class gameServer {
         if (this.arenaClosed) return;
         // Log this
         util.saveToLog("Game Instance Ending", "Game running " + this.gamemode + " at `" + this.gamemode + "` is now closing.", 0xEE4132);
-        util.log(`[${this.name}] Arena Closing initiated`);
+        util.log(`[${global.gameManager.port}]: Arena Closing initiated`);
         // And broadcast it
         this.socketManager.broadcast("Arena closed: No players may join!");
         this.arenaClosed = true;
-        // Now we actually spawn arena closers
-        // But only in 5 seconds...
+        // Wait 5 seconds first, then we actually spawn arena closers
         let spawnTimeout = setTimeout(() => {
             for (let i = 0; i < 15; i++) {
                 // Decide where we are facing
@@ -480,20 +479,19 @@ class gameServer {
                 // Define it as arena closer
                 o.define('arenaCloser');
                 o.define({
-                    COLOR: 3,
+                    COLOR: "yellow",
+                    SIZE: 68,
+                    ACCEPTS_SCORE: false,
                     AI: {
                         FULL_VIEW: true,
                         SKYNET: true,
                         BLIND: true,
                         CHASE: true,
                     },
+                    CAN_BE_ON_LEADERBOARD: false,
+                    CAN_GO_OUTSIDE_ROOM: true,
                     CONTROLLERS: [["nearestDifferentMaster", { lockThroughWalls: true }], "mapTargetToGoal"],
                     SKILL: Array(10).fill(9),
-                    ACCEPTS_SCORE: false,
-                    CAN_BE_ON_LEADERBOARD: false,
-                    VALUE: 100000,
-                    LEVEL: 45,
-                    CAN_GO_OUTSIDE_ROOM: true,
                 });
                 // Set it's team, name and minimap color
                 o.team = TEAM_ENEMIES;
@@ -539,7 +537,7 @@ class gameServer {
 
     close(spawnTimeout) {
         // Log that we are closing
-        util.log(`[${this.name}] Ending Game instance`);
+        util.log(`[${global.gameManager.port}]: Ending Game instance`);
         // Clear the timeout if the arena closers did not spawn yet
         if (spawnTimeout) clearTimeout(spawnTimeout);
         // Now broadcast it
@@ -574,7 +572,7 @@ class gameServer {
 
     onEnd() {
         // Log that we are restarting
-        util.log(`[${this.name}] Game instance is now over. Soft restarting the server.`);
+        util.log(`[${global.gameManager.port}]: Game instance is now over. Soft restarting the server.`);
         // Set this to true to run the softstart code
         this.start(true);
     }

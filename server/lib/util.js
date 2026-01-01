@@ -146,7 +146,7 @@ exports.saveToLog = (title, description, color) => {
     console.log("[!]: " + title + " (#" + color.toString(16).padStart(6, "0") + ")\n :: " + description);
 }
 exports.warn = text => {
-    console.log('[' + (exports.time() / 1000).toFixed(3) + ']: ' + '[WARNING] ' + text);
+    console.log('[' + (exports.time() / 1000).toFixed(3) + ']: ' + '[WARNING]: ' + text);
 };
 exports.error = text => {
     console.log(text);
