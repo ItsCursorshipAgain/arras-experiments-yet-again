@@ -3964,7 +3964,7 @@ import * as socketStuff from "./socketinit.js";
         
         // Draw button background
         ctx[2].lineWidth = 3;
-        gameDraw.setColor(ctx[2], color.blue);
+        gameDraw.setColor(ctx[2], color.green);
         drawGuiRect(BTN_X, BTN_Y, animatedWidth, BTN_SIZE);
         if (hover) {
             gameDraw.setColor(ctx[2], global.clickables.clicked ? "#000" : "#fff");
@@ -4190,7 +4190,7 @@ import * as socketStuff from "./socketinit.js";
             // draw checkbox
             const isOn = (cb.reverseCheck && !cb.value) || (!cb.reverseCheck && cb.value);
             ctx[2].lineWidth = 3;
-            gameDraw.setColor(ctx[2], isOn ? color.blue : color.guiwhite);
+            gameDraw.setColor(ctx[2], isOn ? color.green : color.guiwhite);
             drawGuiRect(x, y, BOX_SIZE, BOX_SIZE);
             if (clickHover !== -1 && clickHover === i) {
                 gameDraw.setColor(ctx[2], !isOn ? global.clickables.clicked ? color.guiblack : color.black : global.clickables.clicked ? color.black : color.guiwhite);
