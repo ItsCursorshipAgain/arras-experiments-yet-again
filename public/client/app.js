@@ -1172,7 +1172,7 @@ import * as socketStuff from "./socketinit.js";
                 // the last letter of last text and the first letter of current text,
                 // making it align perfectly with what we drew with strokeText earlier
                 if (i) {
-                    Xoffset += ctx[2].measureText(textArray[i - 2] + str).width - ctx[2].measureText(str).width;
+                    Xoffset += context.measureText(textArray[i - 2] + str).width - context.measureText(str).width;
                 }
                 context.fillText(str, Xoffset, Yoffset);
             }
