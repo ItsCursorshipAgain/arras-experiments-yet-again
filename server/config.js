@@ -146,13 +146,13 @@ module.exports = {
     // Food
     food_types: [ // Possible food types outside the nest
         [1, [
-            [65, "egg"], [64, "triangle"], [45, "square"], [7, "pentagon"], [1, "hexagon"]
+            [65, "egg"], [64, "triangle"], [45, "square"], [7, "pentagon"]//, [1, "hexagon"]
         ]],
         [1/50000, [
-            [625, "gem"], [125, "shinyTriangle"], [25, "shinySquare"], [5, "shinyPentagon"], [1, "shinyHexagon"]
+            [625, "gem"], [125, "shinyTriangle"], [25, "shinySquare"], [5, "shinyPentagon"]//, [1, "shinyHexagon"]
         ]],
         [1/1000000, [
-            [1296, "jewel"], [216, "legendaryTriangle"], [36, "legendarySquare"], [6, "legendaryPentagon"], [1, "legendaryHexagon"]
+            [1296, "jewel"], [216, "legendaryTriangle"], [36, "legendarySquare"], [6, "legendaryPentagon"]//, [1, "legendaryHexagon"]
         ]]
     ],
     food_types_nest: [ // Possible food types in the nest

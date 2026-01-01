@@ -1,7 +1,13 @@
-const { makeCrasher, makeLaby, makePolychoron, makePolyhedron, makePresent, makeRarities, makeRelic } = require('../facilitators.js')
-const { basePolygonDamage, basePolygonHealth } = require('../constants.js')
+const {makeCrasher, makeLaby, makePolychoron, makePolyhedron, makePresent, makeRarities, makeRelic} = require('../facilitators.js')
+const {basePolygonDamage, basePolygonHealth} = require('../constants.js')
 
-// Set this to true to enable the flat 3D Polyhedra from Old Dreadnoughts.
+// Set the below variable to true to make Octagons use the nest tile color.
+const old_octagon_color = true
+
+// Set the below variable to true to make Octagons use their original (misspelled) name.
+const old_octagon_name = false
+
+// Set the below variable to true to enable the flat 3D shapes from Old Dreadnoughts.
 const classic_3D_shapes = false
 
 // Eggs
@@ -166,7 +172,7 @@ makeRarities("pentagon")
 makeRarities("betaPentagon")
 makeRarities("alphaPentagon")
 
-// Hexagon
+// Hexagons
 Class.hexagon = {
     PARENT: "food",
     LABEL: "Hexagon",
@@ -185,7 +191,95 @@ Class.hexagon = {
     },
     DRAW_HEALTH: true
 }
+Class.hexagon_old = {
+    PARENT: "food",
+    LABEL: "Hexagon",
+    VALUE: 21000,
+    SHAPE: 6,
+    SIZE: 70,
+    COLOR: "magenta",
+    BODY: {
+        DAMAGE: 2 * basePolygonDamage,
+        DENSITY: 80,
+        HEALTH: 600 * basePolygonHealth,
+        RESIST: Math.pow(1.25, 3),
+        PENETRATION: 1.1,
+        SHIELD: 40 * basePolygonHealth,
+        ACCELERATION: 0.0025
+    },
+    DRAW_HEALTH: true,
+    GIVE_KILL_MESSAGE: true
+}
 makeRarities("hexagon")
+makeRarities("hexagon_old")
+
+// Septagon
+Class.septagon = {
+    PARENT: "food",
+    LABEL: "Septagon",
+    VALUE: 28000,
+    SHAPE: 7,
+    SIZE: 80,
+    COLOR: "green",
+    BODY: {
+        DAMAGE: 2 * basePolygonDamage,
+        DENSITY: 80,
+        HEALTH: 750 * basePolygonHealth,
+        RESIST: Math.pow(1.25, 3),
+        PENETRATION: 1.1,
+        SHIELD: 50 * basePolygonHealth,
+        ACCELERATION: 0.0025
+    },
+    DRAW_HEALTH: true,
+    GIVE_KILL_MESSAGE: true
+}
+makeRarities("septagon")
+
+// Octagon
+Class.octagon = {
+    PARENT: "food",
+    LABEL: "Octagon",
+    VALUE: 35000,
+    SHAPE: 8,
+    SIZE: 90,
+    COLOR: "hexagon",
+    BODY: {
+        DAMAGE: 2 * basePolygonDamage,
+        DENSITY: 80,
+        HEALTH: 900 * basePolygonHealth,
+        RESIST: Math.pow(1.25, 3),
+        PENETRATION: 1.1,
+        SHIELD: 60 * basePolygonHealth,
+        ACCELERATION: 0.0025
+    },
+    DRAW_HEALTH: true,
+    GIVE_KILL_MESSAGE: true
+}
+if (old_octagon_color) {Class.octagon.COLOR = "nest"}
+if (old_octagon_name) {Class.octagon.LABEL = "Octogon"}
+makeRarities("octagon")
+
+// Nonagon
+Class.nonagon = {
+    PARENT: "food",
+    LABEL: "Nonagon",
+    VALUE: 42000,
+    SHAPE: 9,
+    SIZE: 100,
+    COLOR: "white",
+    BODY: {
+        DAMAGE: 2 * basePolygonDamage,
+        DENSITY: 80,
+        HEALTH: 1050 * basePolygonHealth,
+        RESIST: Math.pow(1.25, 3),
+        PENETRATION: 1.1,
+        SHIELD: 70 * basePolygonHealth,
+        ACCELERATION: 0.0025
+    },
+    DRAW_HEALTH: true,
+    GIVE_KILL_MESSAGE: true,
+}
+makeRarities("nonagon")
 
 // 3D
 if (!classic_3D_shapes) {
@@ -679,6 +773,10 @@ for (let [gemColor, name] of [
     Class[name + "BetaPentagonRelic"] = makeRelic("betaPentagon", -0.6, gem);
     Class[name + "AlphaPentagonRelic"] = makeRelic("alphaPentagon", -0.6, gem);
     Class[name + "HexagonRelic"] = makeRelic("hexagon", -0.4, gem, undefined, 6.25);
+    Class[name + "HexagonRelic_old"] = makeRelic("hexagon_old", -0.4, gem, undefined, 6.25);
+    Class[name + "SeptagonRelic"] = makeRelic("septagon", -0.4, gem, undefined, 6.25);
+    Class[name + "OctagonRelic"] = makeRelic("octagon", -0.4, gem, undefined, 6.25);
+    Class[name + "NonagonRelic"] = makeRelic("nonagon", -0.4, gem, undefined, 6.25);
 }
 
 // Tiered Food

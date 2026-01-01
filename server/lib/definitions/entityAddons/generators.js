@@ -1,36 +1,31 @@
 const { combineStats } = require("../facilitators.js")
 
 // Generators
-
 const shapeGeneratorUpgrades = [
-	["eggGen", "gemGen", "gravelGen", "stoneGen", "rockGen", "wallGen"],
-	["squareGen", "shinySquareGen", "legSquareGen", "shadowSquareGen", "rainbowSquareGen", "transSquareGen"],
-	["triangleGen", "shinyTriangleGen", "legTriangleGen", "shadowTriangleGen", "rainbowTriangleGen", "transTriangleGen"],
-	["pentagonGen", "shinyPentagonGen", "legPentagonGen", "shadowPentagonGen", "rainbowPentagonGen", "transPentagonGen"],
-	["betaPentagonGen", "shinyBetaPentagonGen", "legBetaPentagonGen", "shadowBetaPentagonGen", "rainbowBetaPentagonGen", "transBetaPentagonGen"],
-	["alphaPentagonGen", "shinyAlphaPentagonGen", "legAlphaPentagonGen", "shadowAlphaPentagonGen", "rainbowAlphaPentagonGen", "transAlphaPentagonGen"],
+	["egg", "gem", "gravel", "stone", "rock", "wall"].map(x => x + "Gen"),
+	["square", "shinySquare", "legSquare", "shadowSquare", "rainbowSquare", "transSquare"].map(x => x + "Gen"),
+	["triangle", "shinyTriangle", "legTriangle", "shadowTriangle", "rainbowTriangle", "transTriangle"].map(x => x + "Gen"),
+	["pentagon", "shinyPentagon", "legPentagon", "shadowPentagon", "rainbowPentagon", "transPentagon"].map(x => x + "Gen"),
+	["beta", "shinyBeta", "legBeta", "shadowBeta", "rainbowBeta", "transBeta"].map(x => x + "PentagonGen"),
+	["alpha", "shinyAlpha", "legAlpha", "shadowAlpha", "rainbowAlpha", "transAlpha"].map(x => x + "PentagonGen"),
 ]
 const hostileShapeGeneratorUpgrades = [
-	["crasherGen", "sentrySwarmGen", "sentryGunGen", "sentryTrapGen"],
-	["shinyCrasherGen", "shinySentrySwarmGen", "shinySentryGunGen", "shinySentryTrapGen"],
-	["legCrasherGen", "sentinelLauncherGen", "sentinelCrossbowGen", "sentinelMinigunGen"],
+	["crasher", "sentrySwarm", "sentryGun", "sentryTrap"].map(x => x + "Gen"),
+	["Crasher", "SentrySwarm", "SentryGun", "SentryTrap"].map(x => "shiny" + x + "Gen"),
+	["legCrasher", "sentinelLauncher", "sentinelCrossbow", "sentinelMinigun"].map(x => x + "Gen"),
 ]
-
 const eliteBossGeneratorUpgrades = [
-	["eliteDestroyerGen", "eliteGunnerGen", "eliteSprayerGen", "eliteBattleshipGen", "eliteSpawnerGen"],
-	["eliteSkimmerGen", "eliteSpinnerGen", "oldEliteSprayerGen", "legionaryCrasherGen", "eliteTrapGuardGen"],
+	["Destroyer", "Gunner", "Sprayer", "Battleship", "Spawner"].map(x => "elite" + x + "Gen"),
+	["eliteSkimmer", "eliteSpinner", "oldEliteSprayer", "legionaryCrasher", "eliteTrapGuard"].map(x => x + "Gen"),
 ]
-
 const mysticalBossGeneratorUpgrades = [
-	["sorcererGen", "summonerGen", "enchantressGen", "exorcistorGen", "shamanGen"],
+	["sorcerer", "summoner", "enchantress", "exorcistor", "shaman"].map(x => x + "Gen"),
 ]
-
 const nesterBossGeneratorUpgrades = [
-	["nestKeeperGen", "nestWardenGen", "nestGuardianGen"],
+	["Keeper", "Warden", "Guardian"].map(x => "nest" + x + "Gen"),
 ]
-
 const rogueBossGeneratorUpgrades = [
-	["roguePalisadeGen", "rogueArmadaGen"],
+	["Palisade", "Armada"].map(x => "rogue" + x + "Gen"),
 ]
 
 Class.genBody = {

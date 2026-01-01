@@ -59,6 +59,7 @@ Class.developer = {
         "menu_addons",
         "menu_testing",
         "eggGen",
+        "eggGenerator",
     ]
 }
 
