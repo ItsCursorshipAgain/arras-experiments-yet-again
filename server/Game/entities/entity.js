@@ -724,7 +724,13 @@ class Entity extends EventEmitter {
                            this.type === "food" ? 10 : 
                            this.type === "tank" ? 5 : 
                            this.type === "crasher" ? 1 : 0));
-        
+
+        // Split the score in half if we are in incognito mode
+        let score = this.skill.score;
+        if (this.incognito) {
+            if (this.skill.level < 56) score = 26263;
+            if (this.skill.level > 56) score = score / 2;
+        }
         // Create camera info object
         const cameraInfo = {
             type: typeValue,
@@ -750,7 +756,7 @@ class Entity extends EventEmitter {
             borderless: this.borderless,
             drawFill: this.drawFill,
             name: (this.nameColor || "#ffffff") + this.name,
-            score: this.settings.scoreLabel || this.skill.score,
+            score: this.settings.scoreLabel || score,
             guns: Array.from(this.guns).map(gun => gun[1].getPhotoInfo()),
             turrets: turretsAndProps.map(turret => turret[1].camera()),
         };

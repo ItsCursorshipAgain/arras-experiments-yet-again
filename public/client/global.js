@@ -286,9 +286,12 @@ const global = {
     GUIStatus: {
         renderGUI: false,
         renderLeaderboard: false,
+        renderUpgrades: false,
+        renderMinimap: false,
         renderhealth: false,
         renderPlayerNames: false,
         renderPlayerScores: false,
+        renderPlayerBars: false,
         renderPlayerKillbar: false,
         minimapReducedInfo: false,
         fullHDMode: false,

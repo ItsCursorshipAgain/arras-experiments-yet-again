@@ -240,7 +240,7 @@ class socketManager {
                   return 1;
                 }
                 // Get data
-                if (m.length < 3) {
+                if (m.length < 4) {
                     socket.kick("Ill-sized spawn request.");
                     return 1;
                 }
@@ -248,6 +248,8 @@ class socketManager {
                 let needsRoom = m[1];
                 let autoLVLup = m[2];
                 let transferbodyID = m[3];
+                let incognitoMode = m[4];
+                if (incognitoMode) socket.status.incognito = true;
                 if (transferbodyID) transferbodyID = transferbodyID.replace(name, "");
                 if (global.gameManager.arenaClosed) {
                     if (needsRoom) {
@@ -261,6 +263,7 @@ class socketManager {
                 if (encodeURI(name).split(/%..|./).length > 48) { socket.kick("Overly-long name."); return 1; }
                 if (typeof m[1] !== "number") { socket.kick("Bad spawn request needsRoom."); return 1; }
                 if (typeof autoLVLup !== "number") { socket.kick("Bad spawn request autoLVLup."); return 1; }
+                if (typeof incognitoMode !== "number") { socket.kick("Bad spawn request incognito."); return 1; }
                 // Give it the room state and move the camera.
                 if (needsRoom) {
                     if (Config.hidden) return socket.close(); // If the server is hidden then just kick the client.
@@ -296,9 +299,9 @@ class socketManager {
                         epackage.transferbodyID = transferbodyID;
                         // Easter eggs
                         epackage.braindamagemode = false;
-                        /*if (name.includes("Brain Damage") || name.includes("brain Damage") || name.includes("Brain damage") || name.includes("brain damage")) {
+                        if (name.toLowerCase().includes("brain damage")) {
                             epackage.braindamagemode = true;
-                        }*/ // disabled because of epilepsy concerns, reenable at your own risk
+                        }
                         this.initalizePlayer(epackage, socket);
                     }
                 }, 20)
@@ -1141,6 +1144,7 @@ class socketManager {
                 }
             }
             body.name = name;
+            body.incognito = socket.status.incognito ?? false;
             if (socket.permissions && socket.permissions.nameColor) {
                 body.nameColor = socket.permissions.nameColor;
                 socket.talk("z", body.nameColor);
@@ -1856,6 +1860,7 @@ class socketManager {
             for (let instance of entities.values()) {
                 if (instance.settings.leaderboardable &&
                     instance.settings.drawShape &&
+                    !instance.incognito &&
                     (instance.type === "tank" ||
                      instance.killCount.solo ||
                      instance.killCount.assists
@@ -1869,6 +1874,7 @@ class socketManager {
             for (const instance of entities.values()) {
                 if (instance.settings.leaderboardable &&
                     instance.settings.drawShape &&
+                    !instance.incognito &&
                     instance.type !== "food" &&
                     (instance.type === "tank" ||
                      instance.killCount.solo ||
@@ -1883,6 +1889,7 @@ class socketManager {
             for (const instance of entities.values()) {
                 if (
                     instance.isPlayer &&
+                    !instance.incognito &&
                     instance.settings.leaderboardable &&
                     instance.settings.drawShape
                 ) list.push(instance);

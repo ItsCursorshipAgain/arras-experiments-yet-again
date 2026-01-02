@@ -12,6 +12,7 @@ const config = {
         interpolation: false,
         lerpAnimations: false,
         lowResolution: false,
+        coloredNest: false,
         colors: 'normal',
         pointy: true,
         showGrid: true,
@@ -44,6 +45,7 @@ const config = {
     game: {
         autoLevelUp: false,
         centeredMinimap: false,
+        incognitoMode: false,
     }
   };
   export { config }

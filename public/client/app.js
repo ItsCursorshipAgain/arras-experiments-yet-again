@@ -165,6 +165,7 @@ import * as socketStuff from "./socketinit.js";
         util.retrieveFromLocalStorage("optCenterMinimap");
         util.retrieveFromLocalStorage("optBorders");
         util.retrieveFromLocalStorage("optNoGrid");
+        util.retrieveFromLocalStorage("optColoredNest");
         util.retrieveFromLocalStorage("optRenderKillbar");
         util.retrieveFromLocalStorage("separatedHealthbars");
         util.retrieveFromLocalStorage("autoLevelUp");
@@ -172,9 +173,12 @@ import * as socketStuff from "./socketinit.js";
         // GUI
         util.retrieveFromLocalStorage("optRenderGui");
         util.retrieveFromLocalStorage("optRenderLeaderboard");
+        util.retrieveFromLocalStorage("optRenderUpgrades");
+        util.retrieveFromLocalStorage("optRenderMinimap");
         util.retrieveFromLocalStorage("optRenderNames");
         util.retrieveFromLocalStorage("optRenderHealth");
         util.retrieveFromLocalStorage("optRenderScores");
+        util.retrieveFromLocalStorage("optRenderPlayerBars");
         util.retrieveFromLocalStorage("optReducedInfo");
         util.retrieveFromLocalStorage("showCrosshair");
         util.retrieveFromLocalStorage("showJoystick");
@@ -187,9 +191,12 @@ import * as socketStuff from "./socketinit.js";
             // Also do auto check for GUI stuff.
             document.getElementById("optRenderGui").checked = true;
             document.getElementById("optRenderLeaderboard").checked = true;
+            document.getElementById("optRenderUpgrades").checked = true;
+            document.getElementById("optRenderMinimap").checked = true;
             document.getElementById("optRenderNames").checked = true;
             document.getElementById("optRenderHealth").checked = true;
             document.getElementById("optRenderScores").checked = true;
+            document.getElementById("optRenderPlayerBars").checked = true;
             document.getElementById("optFancy").checked = true;
             if (global.mobile) document.getElementById("showCrosshair").checked = true, document.getElementById("showJoystick").checked = true;
         }
@@ -871,19 +878,25 @@ import * as socketStuff from "./socketinit.js";
         config.graphical.separatedHealthbars = document.getElementById("separatedHealthbars").checked;
         config.graphical.lowResolution = document.getElementById("optLowResolution").checked;
         config.graphical.showGrid = !document.getElementById("optNoGrid").checked;
+        config.graphical.coloredNest = document.getElementById("optColoredNest").checked;
         config.graphical.slowerFOV = document.getElementById("optSlowerFOV").checked;
         config.graphical.optimizeMode = document.getElementById("optOptimizeMode").checked;
         // GUI
         global.GUIStatus.renderGUI = document.getElementById("optRenderGui").checked;
         global.GUIStatus.renderLeaderboard = document.getElementById("optRenderLeaderboard").checked;
+        global.GUIStatus.renderUpgrades = document.getElementById("optRenderUpgrades").checked;
+        global.GUIStatus.renderMinimap = document.getElementById("optRenderMinimap").checked;
         global.GUIStatus.renderPlayerNames = document.getElementById("optRenderNames").checked;
         global.GUIStatus.renderPlayerScores = document.getElementById("optRenderScores").checked;
+        global.GUIStatus.renderPlayerBars = document.getElementById("optRenderPlayerBars").checked;
         global.GUIStatus.renderPlayerKillbar = document.getElementById("optRenderKillbar").checked;
         global.GUIStatus.renderhealth = document.getElementById("optRenderHealth").checked;
         global.GUIStatus.minimapReducedInfo = document.getElementById("optReducedInfo").checked;
         global.GUIStatus.fullHDMode = document.getElementById("optFullHD").checked;
         global.mobileStatus.enableCrosshair = document.getElementById("showCrosshair").checked;
         global.mobileStatus.showJoysticks = document.getElementById("showJoystick").checked;
+        // Game
+        config.game.incognitoMode = document.getElementById("optIncognitoMode").checked;
         switch (document.getElementById("optBorders").value) {
             case "normal":
                 config.graphical.darkBorders = config.graphical.neon = false;
@@ -951,13 +964,17 @@ import * as socketStuff from "./socketinit.js";
         util.submitToLocalStorage("optRenderKillbar");
         util.submitToLocalStorage("coloredHealthbars");
         util.submitToLocalStorage("separatedHealthbars");
+        util.submitToLocalStorage("optColoredNest");
         util.submitToLocalStorage("optNoGrid");
         // GUI
         util.submitToLocalStorage("optRenderGui");
         util.submitToLocalStorage("optRenderLeaderboard");
+        util.submitToLocalStorage("optRenderUpgrades");
+        util.submitToLocalStorage("optRenderMinimap");
         util.submitToLocalStorage("optRenderNames");
         util.submitToLocalStorage("optRenderHealth");
         util.submitToLocalStorage("optRenderScores");
+        util.submitToLocalStorage("optRenderPlayerBars");
         util.submitToLocalStorage("optReducedInfo");
         util.submitToLocalStorage("showCrosshair");
         util.submitToLocalStorage("showJoystick");
@@ -3125,117 +3142,119 @@ import * as socketStuff from "./socketinit.js";
         let upgradeColumns = Math.ceil(gui.upgrades.length / 9);
         let x = global.mobile ? spacing : global.screenWidth - spacing - len - 5;
         let y = global.mobile ? spacing : global.screenHeight - height - spacing - 5;
-        if (global.mobile) {
-            y += global.canUpgrade ? (alcoveSize / 1.5) * mobileUpgradeGlide.get() * upgradeColumns / 1.5 + spacing * (upgradeColumns + 1.55) + 9 : 0;
-            y += global.canSkill || global.showSkill ? statMenu.get() * alcoveSize / 2.6 + spacing / 0.75 : 0;
-        }
+        if (global.GUIStatus.renderMinimap) {
+            if (global.mobile) {
+                y += global.canUpgrade ? (alcoveSize / 1.5) * mobileUpgradeGlide.get() * upgradeColumns / 1.5 + spacing * (upgradeColumns + 1.55) + 9 : 0;
+                y += global.canSkill || global.showSkill ? statMenu.get() * alcoveSize / 2.6 + spacing / 0.75 : 0;
+            }
 
-        // Calculate minimap center if needed
-        let centerX = x + len / 2;
-        let centerY = y + height / 2;
-    
-        ctx[2].globalAlpha = 0.4;
-        ctx[2].save();
-        ctx[2].fillStyle = color.white;
-        global.advanced.roundMap ? drawGuiCircle(x + len / 2, y + height / 2, len / 2) : drawGuiRect(x, y, len, height);
-        ctx[2].beginPath(); // We will not allow to draw outside of the minimap so we are only allowing minimap entities to draw INSIDE the minimap only
-        global.advanced.roundMap ? ctx[2].arc(x + len / 2, y + height / 2, len / 2, 0, 2 * Math.PI) : ctx[2].rect(x, y, len, height); // Draw everything inside the minimap
-        ctx[2].clip();
+            // Calculate minimap center if needed
+            let centerX = x + len / 2;
+            let centerY = y + height / 2;
+        
+            ctx[2].globalAlpha = 0.4;
+            ctx[2].save();
+            ctx[2].fillStyle = color.white;
+            global.advanced.roundMap ? drawGuiCircle(x + len / 2, y + height / 2, len / 2) : drawGuiRect(x, y, len, height);
+            ctx[2].beginPath(); // We will not allow to draw outside of the minimap so we are only allowing minimap entities to draw INSIDE the minimap only
+            global.advanced.roundMap ? ctx[2].arc(x + len / 2, y + height / 2, len / 2, 0, 2 * Math.PI) : ctx[2].rect(x, y, len, height); // Draw everything inside the minimap
+            ctx[2].clip();
 
-        if (global.roomSetup.length) {
-            let W = global.roomSetup[0].length,
-                H = global.roomSetup.length,
-                i = 0;
+            if (global.roomSetup.length) {
+                let W = global.roomSetup[0].length,
+                    H = global.roomSetup.length,
+                    i = 0;
 
-            // Calculate player's position in game world
-            let playerWorldX = global.player.cx.animX;
-            let playerWorldY = global.player.cy.animY;
+                // Calculate player's position in game world
+                let playerWorldX = global.player.cx.animX;
+                let playerWorldY = global.player.cy.animY;
 
-            for (let ycell = 0; ycell < H; ycell++) {
-                let j = 0;
-                for (let xcell = 0; xcell < W; xcell++) {
-                    let cell = global.roomSetup[ycell][xcell];
-                    // Calculate cell world position
-                    let cellWorldX = (xcell / W - 0.5) * global.gameWidth;
-                    let cellWorldY = (ycell / H - 0.5) * global.gameHeight;
-                    
-                    // Calculate relative position to player
-                    let relX = cellWorldX - playerWorldX;
-                    let relY = cellWorldY - playerWorldY;
-                    
-                    // Convert to minimap coordinates
-                    let minimapX = config.game.centeredMinimap ? centerX + (relX / global.gameWidth) * len : x + (j * len) / W;
-                    let minimapY = config.game.centeredMinimap ? centerY + (relY / global.gameHeight) * height : y + (i * height) / H;
-                    let cellWidth = len / W;
-                    let cellHeight = height / H;
-                    if (!cell) {
-                        ctx[2].fillStyle = gameDraw.getColor("border", true);
-                        drawGuiRect(minimapX, minimapY, cellWidth, cellHeight);
-                    } else {
-                        let color = cell.color;
-                        if (color == 'none') cell.color = 'pureBlack';
-                        if (cell.renderImage) {
-                            ctx[2].globalAlpha = 1;
-                            ctx[2].drawImage(cell.renderImage, minimapX, minimapY, cellWidth, cellHeight);
-                        }
-                        ctx[2].globalAlpha = 0.4;
-                        ctx[2].fillStyle = gameDraw.getColor(color);
-                        if (gameDraw.getColor(color) !== color.white) {
+                for (let ycell = 0; ycell < H; ycell++) {
+                    let j = 0;
+                    for (let xcell = 0; xcell < W; xcell++) {
+                        let cell = global.roomSetup[ycell][xcell];
+                        // Calculate cell world position
+                        let cellWorldX = (xcell / W - 0.5) * global.gameWidth;
+                        let cellWorldY = (ycell / H - 0.5) * global.gameHeight;
+                        
+                        // Calculate relative position to player
+                        let relX = cellWorldX - playerWorldX;
+                        let relY = cellWorldY - playerWorldY;
+                        
+                        // Convert to minimap coordinates
+                        let minimapX = config.game.centeredMinimap ? centerX + (relX / global.gameWidth) * len : x + (j * len) / W;
+                        let minimapY = config.game.centeredMinimap ? centerY + (relY / global.gameHeight) * height : y + (i * height) / H;
+                        let cellWidth = len / W;
+                        let cellHeight = height / H;
+                        if (!cell) {
+                            ctx[2].fillStyle = gameDraw.getColor("border", true);
                             drawGuiRect(minimapX, minimapY, cellWidth, cellHeight);
-                        }
-                    };
-                    j++;
-                }
-                i++;
-            }
-        }
-        ctx[2].globalAlpha = 1;
-        for (let entity of minimap.get()) {
-            ctx[2].fillStyle = gameDraw.mixColors(gameDraw.modifyColor(entity.color), color.black, 0.3);
-            ctx[2].globalAlpha = entity.alpha;
-            
-            // Calculate entity position relative to player
-            let relX = entity.x - global.player.cx.animX;
-            let relY = entity.y - global.player.cy.animY;
-            
-            // Convert to minimap coordinates
-            let minimapX = config.game.centeredMinimap ? centerX + (relX / global.gameWidth) * len : x + (entity.x / global.gameWidth + 0.5) * len;
-            let minimapY = config.game.centeredMinimap ? centerY + (relY / global.gameHeight) * height : y + (entity.y / global.gameHeight + 0.5) * height;
-            
-            switch (entity.type) {
-                case 2:
-                    // Draw wall entities
-                    let trueSize = (entity.size + 2) / 1.1283791671;
-                    let sizeOnMap = (trueSize / global.gameWidth) * len;
-                    drawGuiRect(minimapX - sizeOnMap, minimapY - sizeOnMap, sizeOnMap * 2, sizeOnMap * 2);
-                    break;
-                case 1:
-                    // Draw rock/other entities
-                    let entitySize = (entity.size / global.gameWidth) * len;
-                    drawGuiCircle(minimapX, minimapY, entitySize);
-                    break;
-                case 0:
-                    // Draw other players
-                    if (entity.id !== gui.playerid) {
-                        drawGuiCircle(minimapX, minimapY, !global.mobile ? 2 : 3.5);
+                        } else {
+                            let color = cell.color;
+                            if (color == 'none') cell.color = 'pureBlack';
+                            if (cell.renderImage) {
+                                ctx[2].globalAlpha = 1;
+                                ctx[2].drawImage(cell.renderImage, minimapX, minimapY, cellWidth, cellHeight);
+                            }
+                            ctx[2].globalAlpha = 0.4;
+                            ctx[2].fillStyle = gameDraw.getColor(color);
+                            if (gameDraw.getColor(color) !== color.white) {
+                                drawGuiRect(minimapX, minimapY, cellWidth, cellHeight);
+                            }
+                        };
+                        j++;
                     }
-                    break;
+                    i++;
+                }
             }
-        }
+            ctx[2].globalAlpha = 1;
+            for (let entity of minimap.get()) {
+                ctx[2].fillStyle = gameDraw.mixColors(gameDraw.modifyColor(entity.color), color.black, 0.3);
+                ctx[2].globalAlpha = entity.alpha;
+                
+                // Calculate entity position relative to player
+                let relX = entity.x - global.player.cx.animX;
+                let relY = entity.y - global.player.cy.animY;
+                
+                // Convert to minimap coordinates
+                let minimapX = config.game.centeredMinimap ? centerX + (relX / global.gameWidth) * len : x + (entity.x / global.gameWidth + 0.5) * len;
+                let minimapY = config.game.centeredMinimap ? centerY + (relY / global.gameHeight) * height : y + (entity.y / global.gameHeight + 0.5) * height;
+                
+                switch (entity.type) {
+                    case 2:
+                        // Draw wall entities
+                        let trueSize = (entity.size + 2) / 1.1283791671;
+                        let sizeOnMap = (trueSize / global.gameWidth) * len;
+                        drawGuiRect(minimapX - sizeOnMap, minimapY - sizeOnMap, sizeOnMap * 2, sizeOnMap * 2);
+                        break;
+                    case 1:
+                        // Draw rock/other entities
+                        let entitySize = (entity.size / global.gameWidth) * len;
+                        drawGuiCircle(minimapX, minimapY, entitySize);
+                        break;
+                    case 0:
+                        // Draw other players
+                        if (entity.id !== gui.playerid) {
+                            drawGuiCircle(minimapX, minimapY, !global.mobile ? 2 : 3.5);
+                        }
+                        break;
+                }
+            }
 
-        ctx[2].globalAlpha = 1;
-        ctx[2].lineWidth = 1;
-        ctx[2].strokeStyle = color.guiblack;
-        ctx[2].fillStyle = color.guiblack;
-        // Draw yourself in the minimap
-        drawGuiCircle(config.game.centeredMinimap ? centerX : x + (global.player.cx.animX / global.gameWidth + 0.5) * len, config.game.centeredMinimap ? centerY : y + (global.player.cy.animY / global.gameHeight + 0.5) * height, !global.mobile ? 2 : 3.5, false);
-        ctx[2].restore();
-        ctx[2].globalAlpha = 1;
-        ctx[2].fillStyle = color.black;
-        // Draw border of the minimap
-        ctx[2].lineWidth = 3;
-        global.advanced.roundMap ? drawGuiCircle(x + len / 2, y + height / 2, len / 2, true) : drawGuiRect(x, y, len, height, true); // Border
-        if (global.mobile) {
+            ctx[2].globalAlpha = 1;
+            ctx[2].lineWidth = 1;
+            ctx[2].strokeStyle = color.guiblack;
+            ctx[2].fillStyle = color.guiblack;
+            // Draw yourself in the minimap
+            drawGuiCircle(config.game.centeredMinimap ? centerX : x + (global.player.cx.animX / global.gameWidth + 0.5) * len, config.game.centeredMinimap ? centerY : y + (global.player.cy.animY / global.gameHeight + 0.5) * height, !global.mobile ? 2 : 3.5, false);
+            ctx[2].restore();
+            ctx[2].globalAlpha = 1;
+            ctx[2].fillStyle = color.black;
+            // Draw border of the minimap
+            ctx[2].lineWidth = 3;
+            global.advanced.roundMap ? drawGuiCircle(x + len / 2, y + height / 2, len / 2, true) : drawGuiRect(x, y, len, height, true); // Border
+        }
+        if (global.mobile || !global.GUIStatus.renderMinimap) {
             x = global.screenWidth - spacing - len;
             y = global.screenHeight - spacing;
         }
@@ -4038,12 +4057,12 @@ import * as socketStuff from "./socketinit.js";
         if (global.gamepadMode) drawCrosshair();
         if (global.GUIStatus.renderGUI) {
             drawMessages(spacing, alcoveSize);
-            drawSkillBars(spacing, alcoveSize);
-            drawSelfInfo(max);
+            if (global.GUIStatus.renderUpgrades) drawSkillBars(spacing, alcoveSize);
+            if (global.GUIStatus.renderPlayerBars) drawSelfInfo(max);
             drawMinimapAndDebug(spacing, alcoveSize, global.GRAPHDATA, tick);
             if (global.GUIStatus.renderLeaderboard) drawLeaderboard(spacing, alcoveSize, max);
-            drawAvailableUpgrades(spacing, alcoveSize);
-        } else drawAvailableUpgrades(spacing, alcoveSize);
+            if (global.GUIStatus.renderUpgrades) drawAvailableUpgrades(spacing, alcoveSize);
+        } else if (global.GUIStatus.renderUpgrades) drawAvailableUpgrades(spacing, alcoveSize);
         if (global.showTree) {
             drawUpgradeTree(spacing, alcoveSize);
         }
@@ -4164,8 +4183,8 @@ import * as socketStuff from "./socketinit.js";
 
         // Draw options menu
         
-        //if (menuEase <= 0.001) return; // fully hidden
         const mainMenuAnim = global.optionsMenu_Anim.mainMenu.get();
+        if (mainMenuAnim < -470) return; // fully hidden
         const PANEL_WIDTH = 460;
         const PANEL_HEIGHT = 730;
         const PANEL_Y = 75;
@@ -4243,12 +4262,12 @@ import * as socketStuff from "./socketinit.js";
                 { id: "coloredHealthbars",      label: "Colored Health Bars",   column: 1, row: 5, section: "appearance", tooltip: "Changes the health and shield color with their body color." },
 
                 // UI Elements
-              //{ id: "optUpgrades",            label: "Upgrades",              column: 0, row: 0, section: "ui", tooltip: "Toggle the visibility of the class and skill upgrade menus." },
-                { id: "optRenderGui",           label: "Player Bars",            column: 0, row: 1, section: "ui", tooltip: "Toggle the visibility of the score and level bars." },
+                { id: "optRenderUpgrades",      label: "Upgrades",              column: 0, row: 0, section: "ui", tooltip: "Toggle the visibility of the class and skill upgrade menus." },
+                { id: "optRenderPlayerBars",    label: "Player Bars",           column: 0, row: 1, section: "ui", tooltip: "Toggle the visibility of the score and level bars." },
                 { id: "optRenderKillbar",       label: "Kill Bar",              column: 0, row: 2, section: "ui", tooltip: "Show recent kills in a bar." },
 
                 { id: "optRenderLeaderboard",   label: "Leaderboard",           column: 1, row: 0, section: "ui", tooltip: "Toggle the visibility of the leaderboard." },
-              //{ id: "optMinimap",             label: "Minimap",               column: 1, row: 1, section: "ui", tooltip: "Toggle the visibility of the minimap." },
+                { id: "optRenderMinimap",       label: "Minimap",               column: 1, row: 1, section: "ui", tooltip: "Toggle the visibility of the minimap." },
                 { id: "optReducedInfo",         label: "Extra Info",            column: 1, row: 2, section: "ui", tooltip: "Show various extra information in the bottom right corner.", reverseCheck: true },
 
                 // Extra
@@ -4360,11 +4379,6 @@ import * as socketStuff from "./socketinit.js";
                 ctx[2].save();
                 ctx[2].globalAlpha = anim;
 
-                // FONT (matches the screenshot exactly)
-                ctx[2].font = "bold 16px Ubuntu";  // bold + larger
-                ctx[2].textAlign = "left";
-                ctx[2].textBaseline = "middle";
-
                 const paddingX = 9;
                 const paddingY = 6;
 
@@ -4375,7 +4389,8 @@ import * as socketStuff from "./socketinit.js";
                 const textH = 16; // font size
                 const boxW = textW + paddingX * 2;
                 let boxH = 0;
-                for (let line of splitTooltip) boxH += textH + paddingY * 2.5;
+                if (splitTooltip.length === 1) boxH = textH + paddingY * 2.5;
+                if (splitTooltip.length !== 1) for (let line of splitTooltip) boxH += textH;
                 // convert from screen → canvas
                 const tipX = cb.tooltipService.x / clickableRatio;
                 const tipY = cb.tooltipService.y / clickableRatio;
@@ -4386,7 +4401,7 @@ import * as socketStuff from "./socketinit.js";
                 let textY = by;
                 // background
                 ctx[2].fillStyle = "rgba(30, 30, 30, 0.45)";
-                drawRoundedRect(bx, by, boxW, splitTooltip.length === 1 ? boxH : boxH - 15, 8);
+                drawRoundedRect(bx, by, boxW, splitTooltip.length === 1 ? boxH : boxH + 15, 8);
                 ctx[2].fill();
 
                 // Text
@@ -4394,7 +4409,7 @@ import * as socketStuff from "./socketinit.js";
                     let text = splitTooltip[i];
                     let increaseLength = splitTooltip.length === 1 ? 22 : 17.6;
                     textY += increaseLength;
-                    drawText(text, bx + paddingX, splitTooltip.length === 1 ? textY : textY + 2, 13.5, color.guiwhite);
+                    drawText(text, bx + paddingX, splitTooltip.length === 1 ? textY : textY + 3, 13.5, color.guiwhite);
                 }
 
                 ctx[2].restore();
