@@ -111,15 +111,18 @@
                         <input style="display: none;" placeholder="Insert Custom Theme" id="optCustom" />
                         <table>
                             <tr>
-                                <td><div><label class="container"><input id="optSharpEdges" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Sharp Edges</label></div></td>
-                                <td><div><label class="container"><input id="optPointy" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Sharp Traps</label></div></td>
+                                <td><div><label class="container"><input id="optColoredNest" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Colored Nest</label></div></td>
+                                <td><div><label class="container"><input id="optSharpEdges" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Sharp Polygons</label></div></td>
                             </tr>
                             <tr>
                                 <td><div><label class="container"><input id="optNoGrid" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Hide Grid</label></div></td>
+                                <td><div><label class="container"><input id="optPointy" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Sharp Traps</label></div></td>
+                            </tr>
+                            <tr>
+                                <td><div><label class="container"><input id="separatedHealthbars" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Separate Shield Bar</label></div></td>
                                 <td><div><label class="container"><input id="optPredictive" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Disable Hyperactivity</label></div></td>
                             </tr>
                             <tr>
-                                <td><div><label class="container"><input id="separatedHealthbars" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Separated Health Bars</label></div></td>
                                 <td><div><label class="container"><input id="coloredHealthbars" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span> Colored Health Bars</label></div></td>
                             </tr>
                         </table>
@@ -135,10 +138,10 @@
                             </tr>
                             <tr>
                                 <td><div><label class="container"><input id="optRenderScores" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark" checked></span>Player Scores</label></div></td>
-                                <td><div><label class="container"><input id="optRenderKillbar" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark" checked></span>Kill bar</label></div></td>
+                                <td><div><label class="container"><input id="optReducedInfo" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Reduced Info Bar</label></div></td>
                             </tr>
                             <tr>
-                                <td><div><label class="container"><input id="optReducedInfo" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Reduced Info Bar</label></div></td>
+                                <td><div><label class="container"><input id="optRenderKillbar" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark" checked></span>Kill Bar</label></div></td>
                             </tr>
                         </table>
                     </div>
@@ -146,29 +149,31 @@
                         <div class="optionsHeader">Performance</div>
                         <table>
                             <tr>
+                                <td><div><label class="container"><input id="optInterpolation" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Interpolation</label></div></td>
                                 <td><div><label class="container"><input id="optFancy" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark" checked></span>Fancy Animations</label></div></td>
-                                <td><div><label class="container"><input id="optLowResolution" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Low Resolution</label></div></td>
                             </tr>
                             <tr>
+                                <td><div><label class="container"><input id="optLowResolution" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Low Resolution</label></div></td>
                                 <td><div><label class="container"><input id="optPredictAnim" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Predict Animations</label></div></td>
+                            </tr>
+                            <tr>
+                                <td><div><label class="container"><input id="optOptimizeMode" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Optimize Mode</label></div></td>
                                 <td><div><label class="container"><input id="optLerpAnim" tabindex="-1" title="Smoothing animation" class="checkbox" type="checkbox"><span class="checkmark"></span>Lerp Animations</label></div></td>
                             </tr>
                             <tr>
-                                <td><div><label class="container"><input id="optOptimizeMode" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Optimize mode</label></div></td>
+                                <td><div><label class="container"><input id="optFullHD" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Full HD</label></div></td>
+                                <td><div><label class="container"><input id="smoothCamera" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Smooth Camera</label></div></td>
                             </tr>
                         </table>
                         <div class="optionsHeader">Miscellaneous</div>
                         <table>
                             <tr>
                                 <td><div><label class="container"><input id="autoLevelUp" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark" checked></span>Auto-Level Up</label></div></td>
-                                <td><div><label class="container"><input id="smoothCamera" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Smooth Camera</label></div></td>
-                            </tr>
-                            <tr>
-                                <td><div><label class="container"><input id="optSlowerFOV" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Slower FOV animation</label></div></td>
-                                <td><div><label class="container"><input id="optFullHD" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Full HD</label></div></td>
+                                <td><div><label class="container"><input id="optIncognitoMode" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark" checked></span>Incognito Mode</label></div></td>
                             </tr>
                             <tr>
                                 <td><div><label class="container"><input id="optCenterMinimap" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Centered Minimap</label></div></td>
+                                <td><div><label class="container"><input id="optSlowerFOV" tabindex="-1" class="checkbox" type="checkbox"><span class="checkmark"></span>Slow FOV Animation</label></div></td>
                             </tr>
                         </table>
                         <table>
@@ -232,23 +237,23 @@
                                         <td><div><b data-key="KEY_CHOOSE_6">K</b><span> - </span>upgrade 6</div></td>
                                     </tr>
                                     <tr>
-                                        <td><div><b data-key="KEY_UPGRADE_ATK">1</b><span> - </span>skill ATK 1</div></td>
-                                        <td><div><b data-key="KEY_UPGRADE_HTL">2</b><span> - </span>skill HTL 2</div></td>
-                                        <td><div><b data-key="KEY_UPGRADE_SPD">3</b><span> - </span>skill SPD 3</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_ATK">1</b><span> - </span>skill 1</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_HTL">2</b><span> - </span>skill 2</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_SPD">3</b><span> - </span>skill 3</div></td>
                                     </tr>
                                     <tr>
-                                        <td><div><b data-key="KEY_UPGRADE_STR">4</b><span> - </span>skill STR 4</div></td>
-                                        <td><div><b data-key="KEY_UPGRADE_PEN">5</b><span> - </span>skill PEN 5</div></td>
-                                        <td><div><b data-key="KEY_UPGRADE_DAM">6</b><span> - </span>skill DAM 6</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_STR">4</b><span> - </span>skill 4</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_PEN">5</b><span> - </span>skill 5</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_DAM">6</b><span> - </span>skill 6</div></td>
                                     </tr>
                                     <tr>
-                                        <td><div><b data-key="KEY_UPGRADE_RLD">7</b><span> - </span>skill RLD 7</div></td>
-                                        <td><div><b data-key="KEY_UPGRADE_MOB">8</b><span> - </span>skill MOB 8</div></td>
-                                        <td><div><b data-key="KEY_UPGRADE_RGN">9</b><span> - </span>skill RGN 9</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_RLD">7</b><span> - </span>skill 7</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_MOB">8</b><span> - </span>skill 8</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_RGN">9</b><span> - </span>skill 9</div></td>
                                     </tr>
                                     <tr>
                                         <td><div></div></td>
-                                        <td><div><b data-key="KEY_UPGRADE_SHI">0</b><span> - </span>skill SHI 0</div></td>
+                                        <td><div><b data-key="KEY_UPGRADE_SHI">0</b><span> - </span>skill 0</div></td>
                                         <td><div></div></td>
                                     </tr>
                                 </tbody>
@@ -258,7 +263,9 @@
                     <div id="tabLinks">
                         <div class="optionsHeader">Original Game</div>
                         <div class="moreLinks">
-                            <a href="https://github.com/nepphhh/arrasio">arras.io</a>
+                            <a href="https://arras.io">arras.io</a>
+                            <a href="https://arrax.io">arrax.io (proxy)</a><br/>
+                            <a href="https://github.com/nepphhh/arrasio">Original Source Code</a>
                         </div>
                         <div class="optionsHeader">Resources</div>
                         <div class="moreLinks">

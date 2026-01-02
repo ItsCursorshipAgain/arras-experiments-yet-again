@@ -351,7 +351,7 @@ exports.makeWhirlwind = (type, options = {}) => {
     if (type == Class.genericTank) {output.STAT_NAMES = statnames.satellite} else {output.STAT_NAMES = statnames.mixed}
     output.AI = {SPEED: options.satelliteSpeed ??= 2}
     output.ANGLE = (360 / options.satellites)
-    output.CONTROLLERS = ["whirlwind"]
+    if (type.CONTROLLERS == null) {output.CONTROLLERS = ["whirlwind"]} else {output.CONTROLLERS = [...type.CONTROLLERS, "whirlwind"]}
     output.DANGER = options.danger ??= type.DANGER + 1
     if (options.label == -1) {
         output.LABEL = "Whirl " + type.LABEL;
