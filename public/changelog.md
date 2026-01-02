@@ -1,14 +1,20 @@
-# Update [2025-03-26]
+
+# Update [2026-01-02]
 - Change 1
 - Change 2
 - Change 3 - <b><font color="#000000">Special Change</font></b>
 
-# Update [2025-03-23]
+# Balance [2026-01-02]
+- Change 1
+- Change 2
+- Change 3 - <b><font color="#11e9a1">Special Change</font></b>
+
+# Update [2026-01-02]
 - Change 1
 - Change 2
 - Change 3 - <b><font color="#171cb0">Special Change</font></b>
 
-# Update [2025-03-20]
+# Update [2026-01-02]
 - Change 1
 - Change 2
 - Change 3 - <b><font color="#ff0000">Special Change</font></b>

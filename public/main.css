@@ -704,9 +704,67 @@ body.mobile .startMenuSlidingContent {
   margin-left: 10px;
 }
 
-#patchNotes ul {
-  padding-left: 15px;
+#patchNotes table.poll-list {
+  margin: 8px 5px 20px;
+}
+#patchNotes table.poll-table {
+  text-align: center;
+  margin: 0 0 12px;
+}
+#patchNotes table.poll-table thead {
+  font-weight: bold;
+}
+#patchNotes b small {
+  color: #444;
+}
+#patchNotes b small a {
   margin-left: 10px;
+}
+
+#patchNotes div {
+  transition: max-height 500ms, opacity 500ms, line-height 500ms;
+  max-height: 1500px;
+  opacity: 1;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+#patchNotes div:nth-last-child(n+2)::after {
+  content: '';
+  display: block;
+  border: 0.5px solid rgba(0, 0, 0, 0.15);
+  margin: 18px 0;
+  transition: margin 500ms;
+}
+#patchNotes.default div.balance,
+#patchNotes.default div.patch,
+#patchNotes.updates div.announcement,
+#patchNotes.updates div.poll,
+#patchNotes.updates div.event,
+#patchNotes.updates div.balance,
+#patchNotes.updates div.patch,
+#patchNotes.balance div.update,
+#patchNotes.balance div.announcement,
+#patchNotes.balance div.poll,
+#patchNotes.balance div.event,
+#patchNotes.balance div.patch {
+  max-height: 0px;
+  opacity: 0;
+  line-height: 0;
+  pointer-events: none;
+}
+#patchNotes.default div.balance::after,
+#patchNotes.default div.patch::after,
+#patchNotes.updates div.announcement::after,
+#patchNotes.updates div.poll::after,
+#patchNotes.updates div.event::after,
+#patchNotes.updates div.balance::after,
+#patchNotes.updates div.patch::after,
+#patchNotes.balance div.update::after,
+#patchNotes.balance div.announcement::after,
+#patchNotes.balance div.poll::after,
+#patchNotes.balance div.event::after,
+#patchNotes.balance div.patch::after {
+  margin: 0;
 }
 
 .linkButtonHolder {

@@ -1213,7 +1213,7 @@ exports.makePresent = (outcolor, wrapcolor) => {
     }
 }
 
-// denisc
+// Created by DenisC!!!
 /**
  * @param {{
  *   VERTEXES?: [number, number, number][],

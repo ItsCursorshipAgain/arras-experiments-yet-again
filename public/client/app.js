@@ -397,6 +397,106 @@ import * as socketStuff from "./socketinit.js";
             }, 2e3);
             updateSnow();
         }
+        // Firework event for new year
+            let Gd = "en-US" === navigator.language && -7 <= c.na && -4 >= c.na,
+            Hd = 6 === currentDate.getMonth() && 4 === currentDate.getDate(),
+            Id =
+            (11 === currentDate.getMonth() && 31 === currentDate.getDate()) ||
+            (0 === currentDate.getMonth() && 3 >= currentDate.getDate());
+        if (!global.mobile && ((Hd && Gd) || Id)) {
+            let fireworkCanvas = document.createElement("canvas");
+            fireworkCanvas.style.position = "absolute";
+            fireworkCanvas.style.top = "0";
+            document.body.insertBefore(fireworkCanvas, document.body.firstChild);
+            let b = fireworkCanvas.getContext("2d"),
+            d = () => {
+                let k =
+                "164,14,14 230,80,0 230,119,0 47,127,51 23,78,166 123,31,163".split(
+                    " "
+                );
+                return k[Math.floor(Math.random() * k.length)];
+            },
+            fireworks = [],
+            updateFireworks = () => {
+                if (fireworkCanvas.width !== window.innerWidth || fireworkCanvas.height !== window.innerHeight)
+                (fireworkCanvas.width = window.innerWidth),
+                    (fireworkCanvas.height = window.innerHeight),
+                    (fireworks = []),
+                    b.clearRect(0, 0, fireworkCanvas.width, fireworkCanvas.height),
+                    (b.fillStyle = "rgba(255,255,255,0.01)"),
+                    b.fillRect(0, 0, fireworkCanvas.width, fireworkCanvas.height),
+                    (b.lineWidth = 2.5),
+                    (b.lineCap = "round");
+                b.globalCompositeOperation = "destination-out";
+                b.fillStyle = "rgba(0,0,0,0.15)";
+                b.fillRect(0, 0, fireworkCanvas.width, fireworkCanvas.height);
+                b.globalCompositeOperation = "lighter";
+                for (var firework of fireworks) {
+                    var l = firework.x,
+                        t = firework.y;
+                    firework.H += 0.2;
+                    firework.x += firework.M;
+                    firework.y += firework.H;
+                    firework.H *= 0.99;
+                    firework.M *= 0.99;
+                    firework.time--;
+                    var f = 0 < firework.time ? (firework.Oa ? 1 : 10 <= firework.time ? 1 : firework.time / 10) : 0;
+                    if (0 < f) {
+                        b.strokeStyle = `rgba(${firework.color},${f})`;
+                        b.beginPath();
+                        b.moveTo(l, t);
+                        b.lineTo(firework.x, firework.y);
+                        b.stroke();
+                    } else {
+                        if (firework.Oa && !firework.vanished) {
+                            l = Math.floor(5 * Math.random()) + 30;
+                            t = 0.5 * Math.random() + 3;
+                            f = 25 + 5 * Math.random();
+                            for (var h = 0; 2 > h; h++) {
+                                let p = d();
+                                for (let r = 0; r < l; r++) {
+                                let v = ((r + Math.random()) / l) * Math.PI * 2,
+                                    P = t + 0.5 * Math.random();
+                                fireworks.push({
+                                    color: p,
+                                    x: firework.x,
+                                    y: firework.y,
+                                    M: Math.cos(v) * P,
+                                    H: -0.8 + Math.sin(v) * P,
+                                    time: f + 2 * Math.random(),
+                                    Oa: !1,
+                                    vanished: !1,
+                                });
+                                }
+                            }
+                        }
+                        firework.vanished = !0;
+                    }
+                }
+                3e-5 * fireworkCanvas.width > Math.random() &&
+                ((firework = fireworkCanvas.width * Math.random()),
+                (l = fireworkCanvas.height - 10),
+                (t = 4 * Math.random() - 2),
+                (f = 5 * Math.random() - 15),
+                (h = 30 + 10 * Math.random()),
+                fireworks.push({
+                    color: d(),
+                    x: firework,
+                    y: l,
+                    M: t,
+                    H: f,
+                    time: h,
+                    Oa: !0,
+                    vanished: !1,
+                }));
+                if (global.gameStart) a.remove();
+                else requestAnimationFrame(updateFireworks);
+            };
+            setInterval(() => {
+                fireworks = fireworks.filter((k) => !k.vanished);
+            }, 2e3);
+            updateFireworks();
+        }
     }
 
     // Important functions
@@ -672,6 +772,30 @@ import * as socketStuff from "./socketinit.js";
         }
     }
     function initalizeChangelog(b, a) { // From CX Client (Modified) + decoded;
+        let triggerChangelog = ( () => {
+            let a = document.getElementById("changelogTabs")
+            , b = a.firstElementChild
+            , d = document.getElementById("patchNotes")
+            , e = {};
+            for (let g = 0; g < a.children.length; g++) {
+                let k = a.children[g]
+                , l = k.dataset.type;
+                e[l] = () => {
+                    if (k !== b) {
+                        var u = b.dataset.type;
+                        b.classList.remove("active");
+                        k.classList.add("active");
+                        d.classList.remove(u);
+                        d.classList.add(l);
+                        b = k
+                    }
+                }
+                ;
+                k.addEventListener("click", e[l])
+            }
+            return e
+        }
+        )()
         var sa = document.getElementById("patchNotes");
         var c = b.shift();
         if (c) {
@@ -707,17 +831,20 @@ import * as socketStuff from "./socketinit.js";
             let l;
             for (let n of b) l = document.createElement("li"), l.innerHTML = n, g.appendChild(l);
             l = g.getElementsByTagName("a");
-            for (b = 0; b < l.length; b++) {
-                let n = l[b];
-                if (!n.href) continue;
-                let a = n.href.lastIndexOf("#"); - 1 !== a && (a = n.href.slice(a + 1), "options-menu" === a ? l[b].onclick = function(b) {
-                    b.preventDefault();
-                    bb()
-                } : Ja[a] &&
-                (l[b].onclick = function(b) {
-                    b.preventDefault();
-                    Ja[a]()
-                }))
+            for (a = 0; a < l.length; a++) {
+                let u = l[a];
+                if (!u.href) continue;
+                let p = u.href.lastIndexOf("#");
+                -1 !== p && (p = u.href.slice(p + 1),
+                "options-menu" === p ? h[a].addEventListener("click", r => {
+                    r.preventDefault();
+                    tc()
+                }
+                ) : triggerChangelog[p] && h[a].addEventListener("click", r => {
+                    r.preventDefault();
+                    triggerChangelog[p]()
+                }
+                ))
             }
             d.appendChild(g)
             a && d.appendChild(document.createElement("hr"));
