@@ -56,13 +56,12 @@ module.exports = {
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["mothership"], // The selected gamemode.
+            gamemode: ["siege_fortress"], // The selected gamemode.
             player_cap: 50, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 2,
                 bot_cap: 32,
-                thanksgiving: true,
                 daily_tank: {
                     tank: "whirlwind",
                     tier: 3,
