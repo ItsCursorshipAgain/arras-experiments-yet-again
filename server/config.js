@@ -18,9 +18,9 @@ module.exports = {
             host: "localhost:3001", // Server host location.
             port: 3001, // The port on the server.
             id: "loc", // (<host>/#<id>)
-            featured: false,
+            featured: true, // Whether the server is featured or not.
 
-            region: "local", // The region the server is on.
+            region: "Local", // The region the server is on.
             gamemode: ["arms_race", "tdm"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
@@ -53,9 +53,9 @@ module.exports = {
             host: "localhost:3002", // Server host location.
             port: 3002, // The port on the server.
             id: "lod", // (<host>/#<id>)
-            featured: false,
+            featured: false, // Whether the server is featured or not.
 
-            region: "local", // The region the server is on.
+            region: "Local", // The region the server is on.
             gamemode: ["domination"], // The selected gamemode.
             player_cap: 50, // Not including bots. Set to 0 to disable.
 
@@ -88,9 +88,9 @@ module.exports = {
             host: "localhost:3003", // Server host location.
             port: 3003, // The port on the server.
             id: "loe", // (<host>/#<id>)
-            featured: false,
+            featured: false, // Whether the server is featured or not.
 
-            region: "local", // The region the server is on.
+            region: "Local", // The region the server is on.
             gamemode: ["sandbox"], // The selected gamemode.
             player_cap: 16, // Not including bots. Set to 0 to disable.
 

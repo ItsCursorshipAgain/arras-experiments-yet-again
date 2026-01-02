@@ -147,21 +147,18 @@ let initializeFilter = () => {
         ) {
             global.filters.regions.other.push(s);
         }
+        if (s.gameMode.includes("FFA") || s.gameMode.includes("Maze") || s.gameMode.includes("Manhunt")) global.filters.gamemodeFilters.ffa.push(s);
+        if (s.gameMode.includes("Duos") || s.gameMode.includes("Squads") || s.gameMode.includes("Wars")) global.filters.gamemodeFilters.squads.push(s);
+        if (s.gameMode.includes("TDM")) global.filters.gamemodeFilters.tdm.push(s);
+        if (s.gameMode.includes("Sandbox")) global.filters.gamemodeFilters.sandbox.push(s);
         if (
-            s.gameMode.includes("FFA") || 
-            s.gameMode.includes("Maze") || 
-            s.gameMode.includes("Manhunt")
-        ) global.filters.gamemodeFilters.ffa.push(s);
-        if (
-            s.gameMode.includes("TDM") 
-        ) global.filters.gamemodeFilters.tdm.push(s);
-        if (
-            s.gameMode.includes("Domination") ||
-            s.gameMode.includes("Mothership")
-        ) global.filters.gamemodeFilters.minigames.push(s);
-        if (
-            s.gameMode.includes("Sandbox")
-        ) global.filters.gamemodeFilters.sandbox.push(s);
+            !global.filters.gamemodeFilters.ffa.includes(s) &&
+            !global.filters.gamemodeFilters.squads.includes(s) &&
+            !global.filters.gamemodeFilters.tdm.includes(s) &&
+            !global.filters.gamemodeFilters.sandbox.includes(s)
+        ) {
+            global.filters.gamemodeFilters.minigames.push(s);
+        }
     };
     let l = [];
     let createFilter = (type, data) => {

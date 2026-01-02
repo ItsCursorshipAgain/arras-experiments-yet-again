@@ -28,14 +28,14 @@ class Outbreak {
         zombieEntity.refreshBodyAttributes();
         zombieEntity.refreshSkills();
         zombieEntity.team = -45;
-        zombieEntity.minimapColor = 11;
+        zombieEntity.minimapColor = "green";
         zombieEntity.zombified = true;
         setTimeout(() => {
             let Class = ensureIsClass(liveEntity.defs[0]);
             zombieEntity.controllers.push(new ioTypes.nearestDifferentMaster(zombieEntity, {}, global.gameManager), new ioTypes.mapTargetToGoal(zombieEntity, {}, global.gameManager));
             zombieEntity.godmode = false;
             zombieEntity.invuln = false;
-            zombieEntity.color.base = 11;
+            zombieEntity.color.base = "green";
             zombieEntity.define({ FACING_TYPE: Class.FACING_TYPE != null ? Class.FACING_TYPE : "looseToTarget" });
         }, 1000)
     }
