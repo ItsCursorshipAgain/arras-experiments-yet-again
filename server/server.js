@@ -136,7 +136,7 @@ server = require("http").createServer((req, res) => {
         case "/portalPermission": {
             ok = false;
             let sserver = [];
-            if (Config.ALLOW_SERVER_TRAVEL && global.launchedOnMainServer) {
+            if (Config.allow_server_travel && global.launchedOnMainServer) {
                 for (let i = 0; i < global.servers.length; i++) {
                     let server = global.servers[i];
                     if (server.gameManager) sserver.push(server);

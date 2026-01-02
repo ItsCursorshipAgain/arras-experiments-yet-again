@@ -172,7 +172,7 @@ class gameServer {
                     });
                 } break;
                 case "/portalPermission": {
-                    if (Config.ALLOW_SERVER_TRAVEL) {
+                    if (Config.allow_server_travel) {
                         res.writeHead(200);
                         res.end(JSON.stringify([{
                             ip: this.host,
@@ -277,20 +277,20 @@ class gameServer {
             }, 200);
 
             // Check if we have a server travel properties.
-            if (Config.SERVER_TRAVEL) {
-                if (!Config.SERVER_TRAVEL_PROPERTIES) {
-                    console.warn(this.name + " Config.SERVER_TRAVEL_PROPERTIES is not set up! Please set the properties for the server travel system to work.\nProcess terminated.");
+            if (Config.server_travel) {
+                if (!Config.server_travel_properties) {
+                    console.warn(this.name + " Config.server_travel_properties is not set up! Please set the properties for the server travel system to work.\nProcess terminated.");
                     process.exit(1);
                 }
                 this.serverTravelHandler = [];
-                for (let i = 0; i < Config.SERVER_TRAVEL.length; i++) {
-                    let instance = Config.SERVER_TRAVEL[i];
-                    this.serverTravelHandler[i] = new (require("./Game/addons/serverTravel.js").serverTravelHandler)(instance, instance.PORTAL_PROPERTIES.SPAWN_CHANCE, instance.PORTAL_PROPERTIES.COLOR);
+                for (let i = 0; i < Config.server_travel.length; i++) {
+                    let instance = Config.server_travel[i];
+                    this.serverTravelHandler[i] = new (require("./Game/addons/serverTravel.js").serverTravelHandler)(instance, instance.portal_properties.spawn_chance, instance.portal_properties.color);
                     setInterval(() => {
                         let y = 1;
-                        if (Config.SERVER_TRAVEL_PROPERTIES.AMOUNT) y = Config.SERVER_TRAVEL_PROPERTIES.AMOUNT;
+                        if (Config.server_travel_properties.portals) y = Config.server_travel_properties.portals;
                         for (let o = 0; o < y; o++) this.serverTravelHandler[i].spawnRandom();
-                    }, Config.SERVER_TRAVEL_PROPERTIES.LOOP_INTERVAL);
+                    }, Config.server_travel_properties.loop_interval);
                 }
             }
         }
