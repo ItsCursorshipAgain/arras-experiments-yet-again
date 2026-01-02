@@ -223,7 +223,7 @@ module.exports = {
 
     // How many members a team can have in comparison to an unweighed team.
     // Example: We have team A and B. If the weight of A is 2 and B is 1, then the game will try to give A twice as many members as B.
-    // Check gamemodeconfigs to see how this works.
+    // Check gamemodes/config to see how this works.
     team_weights: {},
 
     // Fun

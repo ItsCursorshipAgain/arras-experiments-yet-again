@@ -240,7 +240,7 @@ class gameServer {
             let overrideRoom = true;
             // Get gamemode
             for (let gamemode of this.gamemode) {
-                let mode = require(`./Game/gamemodeconfigs/${gamemode}.js`);
+                let mode = require(`./Game/gamemodes/config/${gamemode}.js`);
                 for (let key in mode) {
                     if (key == "do_not_override_room") {
                         overrideRoom = mode[key];
