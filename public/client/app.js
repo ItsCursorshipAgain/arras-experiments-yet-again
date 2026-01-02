@@ -801,14 +801,17 @@ import * as socketStuff from "./socketinit.js";
         if (c) {
             c = c.match(/^([A-Za-z ]+[A-Za-z])\s*\[([0-9\-]+)\]\s*(.+)?$/) || [c, c, null];
             var h = c[1] ? {
-                    Update: "update",
-                    Feature: "update",
-                    Event: "event",
-                    Gamemode: "event",
+                    "Announcement": "announcement",
+                    "Balance": "balance",
                     "Balance Update": "balance-update",
                     "Balance Update Details": "balance",
-                    Balance: "balance",
-                    Patch: "patch"
+                    "Event": "event",
+                    "Event Poll": "poll",
+                    "Gamemode": "event",
+                    "Gamemode Poll": "poll",
+                    "Patch": "patch",
+                    "Poll": "poll",
+                    "Update": "update",
                 } [c[1]] : null,
                 d = document.createElement("div");
             h && d.classList.add(h);
