@@ -31,7 +31,8 @@ GLOBAL.loadRooms(true);
 if (Config.load_all_mockups) global.loadAllMockups();
 
 // Log loader information including creation date and time
-console.log(`Loader successfully loaded all files. Info: [ Created Date: ${GLOBAL.creationDate} Created Time: ${GLOBAL.creationTime} ]`);
+console.log(`Successfully loaded all files.`);
+console.log(`Created on date ${GLOBAL.creationDate} at timestamp ${GLOBAL.creationTime}`);
 
 // Define the public directory for static files
 const publicRoot = path.join(__dirname, "../public/"),

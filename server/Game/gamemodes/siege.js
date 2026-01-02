@@ -273,7 +273,7 @@ class Siege {
     spawnWave(waveId) {
         //yell at everyone
         global.gameManager.socketManager.broadcast(`Wave ${waveId + 1} has started!`);
-        util.log(`[${global.gameManager.name}] Wave ${waveId + 1} has started!`)
+        util.log(`[${global.gameManager.name}]: Wave ${waveId + 1} has started!`)
 
         //spawn bosses
         for (let boss of this.waves[waveId]) {

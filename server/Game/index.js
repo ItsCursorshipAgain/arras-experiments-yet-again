@@ -212,7 +212,7 @@ class gameHandler {
         grid.clear();
         for (const instance of entities.values()) {
             if (instance.contemplationOfMortality() === 1) {
-                if (Config.OUTBREAK && !instance.zombified && (instance.isPlayer || instance.isBot)) {
+                if (Config.outbreak && !instance.zombified && (instance.isPlayer || instance.isBot)) {
                     instance.zombified = true;
                     instance.settings.no_collisions = true;
                     instance.alpha = 0;

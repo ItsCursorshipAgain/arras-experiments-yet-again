@@ -129,7 +129,7 @@ const global = {
     KEY_REVERSE_MOUSE: 66,// B
     KEY_SPIN_LOCK: 88,// X
 
-    KEY_LEVEL_UP: 78,
+    KEY_LEVEL_UP: 78, // N
     KEY_TOKEN: 80,// P
     KEY_CLASS_TREE: 84,// T
     KEY_MAX_STAT: 77,// M

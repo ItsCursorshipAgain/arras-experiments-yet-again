@@ -10,5 +10,5 @@ module.exports = {
     food_cap_nest: 5,
     room_setup: ["room_siege_legacy"],
     sanctuary_size: 15,
-    bot_xp_gain: 500,
-};
+    bot_xp_gain: 500
+}

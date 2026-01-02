@@ -26,7 +26,7 @@ module.exports = {
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 4,
-                bot_cap: 16,
+                bot_cap: 40,
                 daily_tank: {
                     tank: "whirlwind",
                     tier: 3,
@@ -56,12 +56,12 @@ module.exports = {
             featured: false,
 
             region: "local", // The region the server is on.
-            gamemode: ["tdm"], // The selected gamemode.
+            gamemode: ["domination"], // The selected gamemode.
             player_cap: 50, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 2,
-                bot_cap: 16,
+                bot_cap: 32,
                 daily_tank: {
                     tank: "whirlwind",
                     tier: 3,

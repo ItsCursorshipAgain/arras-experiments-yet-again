@@ -1,7 +1,7 @@
 module.exports = {
     mode: "tdm",
     teams: 2,
-    ASSAULT: true,
+    assault: true,
     map_tile_width: 413,
     map_tile_height: 412,
     do_not_override_room: false,
