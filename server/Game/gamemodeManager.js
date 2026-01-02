@@ -1,13 +1,13 @@
-const { Siege } = require("./gamemode/scripts/siege.js");
-const { Assault } = require("./gamemode/scripts/assault.js");
-const { Tag } = require("./gamemode/scripts/tag.js");
-const { Domination } = require("./gamemode/scripts/dominator.js");
-const { Mothership } = require("./gamemode/scripts/mothership.js");
-const { Sandbox } = require("./gamemode/scripts/sandbox.js");
-const { Train } = require("./gamemode/scripts/trainwars.js");
-const { Maze } = require("./gamemode/scripts/maze.js");
-const { Outbreak } = require("./gamemode/scripts/outbreak.js");
-const { ClanWars } = require("./gamemode/scripts/clan_wars.js");
+const { Siege } = require("./gamemodes/scripts/siege.js");
+const { Assault } = require("./gamemodes/scripts/assault.js");
+const { Tag } = require("./gamemodes/scripts/tag.js");
+const { Domination } = require("./gamemodes/scripts/dominator.js");
+const { Mothership } = require("./gamemodes/scripts/mothership.js");
+const { Sandbox } = require("./gamemodes/scripts/sandbox.js");
+const { Train } = require("./gamemodes/scripts/trainwars.js");
+const { Maze } = require("./gamemodes/scripts/maze.js");
+const { Outbreak } = require("./gamemodes/scripts/outbreak.js");
+const { ClanWars } = require("./gamemodes/scripts/clan_wars.js");
 
 class gamemodeManager {
     constructor() {
