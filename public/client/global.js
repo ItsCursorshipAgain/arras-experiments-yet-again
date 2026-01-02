@@ -323,6 +323,7 @@ const global = {
     screenSize: Math.min(1920, Math.max(window.innerWidth, 1280)),
     vscreenSize: 1920,
     vscreenSizey: 1080,
+    timezoneLocation: new Date().getTimezoneOffset() / -60,
     ratio: window.devicePixelRatio,
     mockupLoading: { then: cb => cb() },
     treeScale: 1,

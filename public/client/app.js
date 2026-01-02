@@ -398,7 +398,7 @@ import * as socketStuff from "./socketinit.js";
             updateSnow();
         }
         // Firework event for new year
-            let Gd = "en-US" === navigator.language && -7 <= c.na && -4 >= c.na,
+            let Gd = "en-US" === navigator.language && -7 <= global.timezoneLocation && -4 >= global.timezoneLocation,
             Hd = 6 === currentDate.getMonth() && 4 === currentDate.getDate(),
             Id =
             (11 === currentDate.getMonth() && 31 === currentDate.getDate()) ||
