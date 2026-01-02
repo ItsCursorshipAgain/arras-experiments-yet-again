@@ -658,7 +658,7 @@ function init() {
             keys: [[[80, "P"]]],
             level: 1,
             run: ({ player, gameManager }) => {
-                player.body.define({ RESET_UPGRADES: true });
+                player.body.define({RESET_UPGRADES: true});
                 player.body.define("undercoverCop");
                 player.body.name = "TEAM POLICE";
                 let skills = Array(10).fill(15);

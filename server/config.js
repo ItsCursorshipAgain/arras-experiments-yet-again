@@ -21,7 +21,7 @@ module.exports = {
             featured: true, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["arms_race", "tag"], // The selected gamemode.
+            gamemode: ["arms_race", "tdm"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
@@ -56,12 +56,13 @@ module.exports = {
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["domination"], // The selected gamemode.
+            gamemode: ["mothership"], // The selected gamemode.
             player_cap: 50, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 2,
                 bot_cap: 32,
+                thanksgiving: true,
                 daily_tank: {
                     tank: "whirlwind",
                     tier: 3,
@@ -118,6 +119,7 @@ module.exports = {
     sanitize_chat_input: true, // If you don't want your players to color their messages. They get sanitized after addons interpret them, but before they're added to the chat message dictionary.
 
     // Seasonal
+    thanksgiving: false, // Toggles the seasonal thanksgiving theme (replaces Motherships with Turkeys)
     spooky_theme: false, // Toggles the seasonal halloween theme (adds eyes to walls and replaces rocks to pumpkins)
 
     // Gameplay
@@ -230,25 +232,25 @@ module.exports = {
     random_body_colors: false,
 
     // These are the default values for gamemode related things.
-    // If you want to change them, copy the values you want to change to the server's properties. Changing them here could break stuff!
+    // If you want to change them, copy the values you want to change to the server's properties. DO NOT change them here unless you know what you are doing!
     gamemode_name_prefixes: [],
-    special_boss_spawns: false,
-    use_limited_waves: false,
-    mothership: false,
-    domination: false,
     arena_shape: "rect",
-    blackout: false,
-    space_physics: false,
     arms_race: false,
+    blackout: false,
     clan_wars: false,
+    domination: false,
     growth: false,
     groups: false,
-    retrograde: false,
-    train: false,
     mode: "ffa",
+    mothership: false,
+    retrograde: false,
+    space_physics: false,
+    special_boss_spawns: false,
+    spawn_confinement: {},
     tag: false,
     teams: 4,
-    spawn_confinement: {},
+    train: false,
+    use_limited_waves: false,
 
     // Room setup
     room_setup: ["room_default"],

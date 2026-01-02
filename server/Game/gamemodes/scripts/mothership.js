@@ -1,6 +1,12 @@
 class Mothership {
     constructor() {
-        this.choices = ["mothership"];
+        if (Config.thanksgiving) {
+            this.choices = ["turkey"];
+        } else if (Config.arms_race) {
+            this.choices = ["flagship"];
+        } else {
+            this.choices = ["mothership"];
+        }
         this.defineProperties();
         Config.mothership_data = {
             getData: () => this.globalMotherships,
@@ -50,7 +56,13 @@ class Mothership {
             o.define({ ACCEPTS_SCORE: false, VALUE: 643890 });
             o.color.base = getTeamColor(team);
             o.team = team;
-            o.name = "Mothership";
+            if (Config.thanksgiving) {
+                o.name = "Turkey";
+            } else if (Config.arms_race) {
+                o.name = "Flagship";
+            } else {
+                o.name = "Mothership";
+            }
             o.isMothership = true;
             o.controllers.push(new ioTypes.nearestDifferentMaster(o, {}, global.gameManager), new ioTypes.mapTargetToGoal(o));
             o.refreshBodyAttributes();

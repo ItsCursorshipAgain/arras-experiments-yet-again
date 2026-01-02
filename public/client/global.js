@@ -2,7 +2,7 @@ import { util } from "./util.js";
 
 const missingno = {
     index: -1,
-    name: "missingno",
+    name: "MissingNo.",
     x: 0,
     y: 0,
     color: "mirror 0 1 0 true",
@@ -42,7 +42,7 @@ const missingno = {
         shield_cap: "???"
     },
     rerootUpgradeTree: "basic", // todo: find a way to make this automatically change to Config.spawn_class without bricking everything
-    className: "missingno",
+    className: "MissingNo.",
     upgrades: [],
     guns: [],
     turrets: [],

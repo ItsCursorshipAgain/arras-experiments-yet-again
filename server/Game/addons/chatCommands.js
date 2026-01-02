@@ -150,7 +150,7 @@ let commands = [
     },
     {
         command: ["define"],
-        description: "Change your level.",
+        description: "Change your tank.",
         level: 2,
         hidden: true,
         run: ({ args, socket }) => {
@@ -158,7 +158,7 @@ let commands = [
                 socket.talk("m", 5_000, "No entity specified.");
             }
             else {
-                socket.player.body.define({ RESET_UPGRADES: true, BATCH_UPGRADES: false });
+                socket.player.body.define({RESET_UPGRADES: true, BATCH_UPGRADES: false});
                 socket.player.body.define(args[0]);
                 socket.talk("m", 5_000, `Changed to ${socket.player.body.label}`);
             }

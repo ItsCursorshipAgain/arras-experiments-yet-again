@@ -39,8 +39,8 @@ const getName = (name, gamemodeData) => {
         //pandemic: "Pandemic",
         siege_blitz: "Siege Blitz",
         siege_citadel: "Siege Citadel",
+        siege_classic: "Siege Classic",
         siege_fortress: "Siege Fortress",
-        siege_legacy: "Siege (aps-plus-plus)", // will be removed later
         //soccer: "Soccer",
         tag: `${gamemodeData.teams} Team Tag`,
     // Miscellaneous

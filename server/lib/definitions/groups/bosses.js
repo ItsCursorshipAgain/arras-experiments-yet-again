@@ -869,7 +869,7 @@ Class.summoner = {
     PARENT: "miniboss",
     LABEL: "Summoner",
     NAME: "Summoner",
-    //DISPLAY_NAME: false,
+    DISPLAY_NAME: false,
     DANGER: 8,
     SHAPE: 4,
     COLOR: "gold",
