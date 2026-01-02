@@ -9,7 +9,7 @@ const config = {
         curvyTraps: false,
         darkBorders: false,
         fancyAnimations: true,
-        predictAnimations: false,
+        interpolation: false,
         lerpAnimations: false,
         lowResolution: false,
         colors: 'normal',

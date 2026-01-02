@@ -159,7 +159,7 @@ import * as socketStuff from "./socketinit.js";
         util.retrieveFromLocalStorage("smoothCamera");
         util.retrieveFromLocalStorage("optColors");
         util.retrieveFromLocalStorage("optPointy");
-        util.retrieveFromLocalStorage("optPredictAnim");
+        util.retrieveFromLocalStorage("optInterpolation");
         util.retrieveFromLocalStorage("optLerpAnim");
         util.retrieveFromLocalStorage("optOptimizeMode");
         util.retrieveFromLocalStorage("optCenterMinimap");
@@ -179,6 +179,8 @@ import * as socketStuff from "./socketinit.js";
         util.retrieveFromLocalStorage("showCrosshair");
         util.retrieveFromLocalStorage("showJoystick");
         util.retrieveFromLocalStorage("optFullHD");
+        // Game
+        util.retrieveFromLocalStorage("optIncognitoMode");
         // Set default theme
         if (document.getElementById("optColors").value === "") {
             document.getElementById("optColors").value = "normal";
@@ -857,7 +859,7 @@ import * as socketStuff from "./socketinit.js";
 
     function loadSettings() {
         config.graphical.fancyAnimations = document.getElementById("optFancy").checked;
-        config.graphical.predictAnimations = document.getElementById("optPredictAnim").checked;
+        config.graphical.interpolation = document.getElementById("optInterpolation").checked;
         config.graphical.lerpAnimations = document.getElementById("optLerpAnim").checked;
         config.graphical.smoothcamera = document.getElementById("smoothCamera").checked;
         config.graphical.pointy = document.getElementById("optPointy").checked;
@@ -937,7 +939,7 @@ import * as socketStuff from "./socketinit.js";
         util.submitToLocalStorage("smoothCamera");
         util.submitToLocalStorage("optBorders");
         util.submitToLocalStorage("optPointy");
-        util.submitToLocalStorage("optPredictAnim");
+        util.submitToLocalStorage("optInterpolation");
         util.submitToLocalStorage("optLerpAnim");
         util.submitToLocalStorage("optOptimizeMode");
         util.submitToLocalStorage("optCenterMinimap");
@@ -960,6 +962,8 @@ import * as socketStuff from "./socketinit.js";
         util.submitToLocalStorage("showCrosshair");
         util.submitToLocalStorage("showJoystick");
         util.submitToLocalStorage("optFullHD");
+        // Game
+        util.submitToLocalStorage("optIncognitoMode");
         loadSettings();
         global.optionsCheckboxes = undefined;
         // Other more important stuff
@@ -2283,19 +2287,19 @@ import * as socketStuff from "./socketinit.js";
                 motion.set(instance.render.lastRender, instance.render.interval);
             }
             let isize = instance.render.size.get(tick, 1 !== rst);
-            instance.render.x = config.graphical.predictAnimations ?
+            instance.render.x = !config.graphical.interpolation ?
                 motion.predict(instance.render.lastx, instance.x, instance.render.lastvx, instance.vx) :
                 config.graphical.lerpAnimations ?
                 util.lerp(instance.render.x, Math.round(instance.x + instance.vx), 0.1, true) :
                 instance.render.xAnim.get(tick, 1 !== rst);
 
-            instance.render.y = config.graphical.predictAnimations ?
+            instance.render.y = !config.graphical.interpolation ?
                 motion.predict(instance.render.lasty, instance.y, instance.render.lastvy, instance.vy) :
                 config.graphical.lerpAnimations ?
                 util.lerp(instance.render.y, Math.round(instance.y + instance.vy), 0.1, true) :
                 instance.render.yAnim.get(tick, 1 !== rst);
 
-            instance.render.f = config.graphical.predictAnimations ?
+            instance.render.f = !config.graphical.interpolation ?
                 motion.predictFacing(instance.render.lastf, instance.facing) :
                 instance.render.faceAnim.get(tick, 1 !== rst);
 
@@ -3992,7 +3996,7 @@ import * as socketStuff from "./socketinit.js";
             let n = null == tickMotion ? 0 : 0.99 ** tickMotion;
             global.player.renderx = global.player.renderx * n + playerx * (1 - n);
             global.player.rendery = global.player.rendery * n + playery * (1 - n);
-        } else if (config.graphical.predictAnimations) {
+        } else if (!config.graphical.interpolation) {
             global.player.renderx = motion.predict(global.player.lastx, global.player.cx.x, global.player.lastvx, global.player.vx),
             global.player.rendery = motion.predict(global.player.lasty, global.player.cy.y, global.player.lastvy, global.player.vy);
         } else {
@@ -4253,7 +4257,7 @@ import * as socketStuff from "./socketinit.js";
               //{ id: "optUnscaledPanel",    label: "Unscaled Old Spawn Panel", column: 0, row: 2, section: "extra", tooltip: "Scale the original spawn panel to look the same regardless of display size." },
 
                 { id: "optFancy",               label: "Fading Animation",      column: 1, row: 0, section: "extra", tooltip: "Make dying entities fade out instead of shrinking until disappearing.\n" + "May slightly lower the frame rate." },
-              //{ id: "optIncognitoMode",       label: "Incognito Mode",        column: 1, row: 1, section: "extra", tooltip: "Hide you from the leaderboard and make your score appear low to other players." },
+                { id: "optIncognitoMode",       label: "Incognito Mode",        column: 1, row: 1, section: "extra", tooltip: "Hide you from the leaderboard and make your score appear low to other players." },
 
                 // Performance
                 { id: "optLowResolution",       label: "Low Resolution",        column: 1, row: 0, section: "perf", tooltip: "Lower the game's resolution.\n" + "May help to improve the frame rate." },
@@ -4352,7 +4356,7 @@ import * as socketStuff from "./socketinit.js";
             // And get it
             const anim = cb.tooltipService.alpha.get();
             // invisible → skip
-            if (anim > 0.01) {
+            if (anim > 0.001) {
                 ctx[2].save();
                 ctx[2].globalAlpha = anim;
 
@@ -4361,14 +4365,17 @@ import * as socketStuff from "./socketinit.js";
                 ctx[2].textAlign = "left";
                 ctx[2].textBaseline = "middle";
 
-                const paddingX = 5;
+                const paddingX = 9;
                 const paddingY = 6;
 
-                const textW = ctx[2].measureText(cb.tooltipService.text).width;
+                const splitTooltip = cb.tooltipService.text.split("\n");
+
+                let textW = cb.tooltipService.text.length;
+                for (let line of splitTooltip) textW = Math.max(textW, measureText(line, 13.5));
                 const textH = 16; // font size
                 const boxW = textW + paddingX * 2;
-                const boxH = textH + paddingY * 2.5;
-
+                let boxH = 0;
+                for (let line of splitTooltip) boxH += textH + paddingY * 2.5;
                 // convert from screen → canvas
                 const tipX = cb.tooltipService.x / clickableRatio;
                 const tipY = cb.tooltipService.y / clickableRatio;
@@ -4376,24 +4383,19 @@ import * as socketStuff from "./socketinit.js";
                 // tooltip sits BELOW checkbox
                 const bx = tipX;
                 const by = tipY;
-
+                let textY = by;
                 // background
-                ctx[2].fillStyle = "rgba(30, 30, 30, 0.5)";
-                drawRoundedRect(bx, by, boxW, boxH, 8);
+                ctx[2].fillStyle = "rgba(30, 30, 30, 0.45)";
+                drawRoundedRect(bx, by, boxW, splitTooltip.length === 1 ? boxH : boxH - 15, 8);
                 ctx[2].fill();
 
-                // TEXT BORDER (4-way stroke)
-                ctx[2].fillStyle = "#000000";
-                ctx[2].globalAlpha = cb.tooltipService.alpha * 0.7;
-                ctx[2].fillText(cb.tooltipService.text, bx + paddingX + 1, by + boxH / 2 + 1);
-                ctx[2].fillText(cb.tooltipService.text, bx + paddingX - 1, by + boxH / 2 - 1);
-                ctx[2].fillText(cb.tooltipService.text, bx + paddingX + 1, by + boxH / 2 - 1);
-                ctx[2].fillText(cb.tooltipService.text, bx + paddingX - 1, by + boxH / 2 + 1);
-
-                // MAIN WHITE TEXT
-                ctx[2].globalAlpha = cb.tooltipService.alpha;
-                ctx[2].fillStyle = "#ffffff";
-                ctx[2].fillText(cb.tooltipService.text, bx + paddingX, by + boxH / 2);
+                // Text
+                for (let i = 0; i < splitTooltip.length; i++) {
+                    let text = splitTooltip[i];
+                    let increaseLength = splitTooltip.length === 1 ? 22 : 17.6;
+                    textY += increaseLength;
+                    drawText(text, bx + paddingX, splitTooltip.length === 1 ? textY : textY + 2, 13.5, color.guiwhite);
+                }
 
                 ctx[2].restore();
             }
