@@ -1,13 +1,16 @@
 const {
     normal: ____,
-    nest,
-    rock,
-    roid,
     wall: WALL,
+    nexus_red: REDA,
+    atmg,
     base1: bas1,
+    baseprotected1: bap1,
     base2: bas2,
+    baseprotected2: bap2,
     base3: bas3,
+    baseprotected3: bap3,
     base4: bas4,
+    baseprotected4: bap4,
 } = tileClass;
 
 let nexus_room = [
@@ -31,3 +34,5 @@ let nexus_room = [
     [ ____, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, ____, atmg, ____, WALL, ____ ],
     [ ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____ ],
 ]
+
+module.exports = nexus_room;
