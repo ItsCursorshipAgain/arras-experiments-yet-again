@@ -56,7 +56,7 @@ module.exports = {
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["siege_fortress"], // The selected gamemode.
+            gamemode: ["old_dreadnoughts", "tdm"], // The selected gamemode.
             player_cap: 50, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
@@ -216,11 +216,11 @@ module.exports = {
             amount: [2, 2, 1], chance: 1, nameType: "a",
             message: "A strange trembling...",
         },
-        {
+        /*{
             bosses: ["paladin", "freyja", "zaphkiel", "nyx", "theia"],
             amount: [1], chance: 0.01,
             message: "The world tremors as the celestials are reborn anew!",
-        },
+        },*/
         {
             bosses: ["julius", "genghis", "napoleon"],
             amount: [1], chance: 0.1,
@@ -230,7 +230,7 @@ module.exports = {
 
     // How many members a team can have in comparison to an unweighed team.
     // Example: We have team A and B. If the weight of A is 2 and B is 1, then the game will try to give A twice as many members as B.
-    // Check gamemodes/config to see how this works.
+    // Check Game/gamemodes/config to see how this works.
     team_weights: {},
 
     // Fun

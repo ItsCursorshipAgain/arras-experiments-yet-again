@@ -16,8 +16,8 @@ Class.sorcerer = {
     DISPLAY_NAME: false,
     DANGER: 7,
     SHAPE: 0,
-    COLOR: "veryLightGrey",
-    UPGRADE_COLOR: "veryLightGrey",
+    COLOR: "egg",
+    UPGRADE_COLOR: "egg",
     SIZE: 26,
     MAX_CHILDREN: 50,
     VALUE: 2e5,
@@ -46,8 +46,8 @@ Class.summoner = {
     DISPLAY_NAME: false,
     DANGER: 8,
     SHAPE: 4,
-    COLOR: "gold",
-    UPGRADE_COLOR: "gold",
+    COLOR: "square",
+    UPGRADE_COLOR: "square",
     SIZE: 26,
     MAX_CHILDREN: 28,
     VALUE: 3e5,
@@ -76,8 +76,8 @@ Class.enchantress = {
     DISPLAY_NAME: false,
     DANGER: 8,
     SHAPE: 3.5,
-    COLOR: "orange",
-    UPGRADE_COLOR: "orange",
+    COLOR: "triangle",
+    UPGRADE_COLOR: "triangle",
     SIZE: 26,
     MAX_CHILDREN: 28,
     VALUE: 4e5,
@@ -106,8 +106,8 @@ Class.exorcistor = {
     DISPLAY_NAME: false,
     DANGER: 8,
     SHAPE: 5.5,
-    COLOR: "purple",
-    UPGRADE_COLOR: "purple",
+    COLOR: "pentagon",
+    UPGRADE_COLOR: "pentagon",
     SIZE: 26,
     MAX_CHILDREN: 20,
     VALUE: 5e5,
@@ -158,6 +158,105 @@ Class.shaman = {
             WAIT_TO_CYCLE: true,
         },
     }, 6, 1/6)
+}
+Class.sangoma = {
+    PARENT: "miniboss",
+    LABEL: "Sangoma",
+    NAME: "Sangoma",
+    DISPLAY_NAME: false,
+    DANGER: 9,
+    SHAPE: 7.5,
+    COLOR: "green",
+    UPGRADE_COLOR: "green",
+    SIZE: 26,
+    MAX_CHILDREN: 20,
+    VALUE: 7e5,
+    BODY: {
+        FOV: 0.5,
+        SPEED: 0.06 * base.SPEED,
+        HEALTH: 25 * base.HEALTH,
+        DAMAGE: 6 * base.DAMAGE,
+    },
+    GUNS: weaponArray({
+        POSITION: {
+            ...mystical_gun_position,
+            WIDTH: 8.15
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, { size: 1.25, maxSpeed: 1.2, damage: 1.1, reload: 3, damage: 4 }]),
+            TYPE: "sangomaDrone",
+            AUTOFIRE: true,
+            SYNCS_SKILLS: true,
+            STAT_CALCULATOR: "drone",
+            WAIT_TO_CYCLE: true,
+        },
+    }, 7, 1/7)
+}
+Class.preacher = {
+    PARENT: "miniboss",
+    LABEL: "Preacher",
+    NAME: "Preacher",
+    DISPLAY_NAME: false,
+    DANGER: 9,
+    SHAPE: 8,
+    COLOR: Class.octagon.COLOR,
+    UPGRADE_COLOR: Class.octagon.COLOR,
+    SIZE: 26,
+    MAX_CHILDREN: 16,
+    VALUE: 8e5,
+    BODY: {
+        FOV: 0.5,
+        SPEED: 0.05 * base.SPEED,
+        HEALTH: 30 * base.HEALTH,
+        DAMAGE: 7 * base.DAMAGE,
+    },
+    GUNS: weaponArray({
+        POSITION: {
+            ...mystical_gun_position,
+            WIDTH: 6.65
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, g.annihilator, { size: 1.45, maxSpeed: 1.2, damage: 1.1, reload: 3, damage: 4 }]),
+            TYPE: "preacherDrone",
+            AUTOFIRE: true,
+            SYNCS_SKILLS: true,
+            STAT_CALCULATOR: "drone",
+            WAIT_TO_CYCLE: true,
+        },
+    }, 8, 0.125)
+}
+Class.herbalist = {
+    PARENT: "miniboss",
+    LABEL: "Herbalist",
+    NAME: "Herbalist",
+    DISPLAY_NAME: false,
+    DANGER: 9,
+    SHAPE: 9.5,
+    COLOR: "white",
+    UPGRADE_COLOR: "white",
+    SIZE: 26,
+    MAX_CHILDREN: 12,
+    VALUE: 9e5,
+    BODY: {
+        FOV: 0.5,
+        SPEED: 0.04 * base.SPEED,
+        HEALTH: 35 * base.HEALTH,
+        DAMAGE: 8 * base.DAMAGE,
+    },
+    GUNS: weaponArray({
+        POSITION: {
+            ...mystical_gun_position,
+            WIDTH: 6.15
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, g.annihilator, { size: 1.7, maxSpeed: 1.2, damage: 1.1, reload: 3, damage: 4 }]),
+            TYPE: "herbalistDrone",
+            AUTOFIRE: true,
+            SYNCS_SKILLS: true,
+            STAT_CALCULATOR: "drone",
+            WAIT_TO_CYCLE: true,
+        },
+    }, 9, 1/9)
 }
 Class.witch = {
     PARENT: "miniboss",
@@ -247,4 +346,9 @@ Class.thaumaturge = {
             MAX_CHILDREN: 7
         },
     }, 4)]
+}
+
+if (!Config.tiered_food) {
+    Class.shaman.COLOR = "magenta"
+    Class.shaman.UPGRADE_COLOR = "magenta"
 }

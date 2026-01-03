@@ -542,11 +542,14 @@ Class.eggchip = { PARENT: "sunchip", NECRO: [0], SHAPE: 0 }
 Class.autoeggchip = { PARENT: "autosunchip", NECRO: [0], SHAPE: 0 }
 
 // Mystical Drones
-Class.sorcererDrone = { PARENT: "sunchip", NECRO: false, SHAPE: 0 }
-Class.summonerDrone = { PARENT: "sunchip", NECRO: false }
-Class.enchantressDrone = { PARENT: "sunchip", NECRO: false, SHAPE: 3 }
-Class.exorcistorDrone = { PARENT: "sunchip", NECRO: false, SHAPE: 5 }
-Class.shamanDrone = { PARENT: "sunchip", NECRO: false, SHAPE: 6 }
+Class.summonerDrone = {PARENT: "sunchip", NECRO: false}
+Class.sorcererDrone = {...Class.summonerDrone, SHAPE: 0}
+Class.enchantressDrone = {...Class.summonerDrone, SHAPE: 3}
+Class.exorcistorDrone = {...Class.summonerDrone, SHAPE: 5}
+Class.shamanDrone = {...Class.summonerDrone, SHAPE: 6}
+Class.sangomaDrone = {...Class.summonerDrone, SHAPE: 7}
+Class.preacherDrone = {...Class.summonerDrone, SHAPE: 8}
+Class.herbalistDrone = {...Class.summonerDrone, SHAPE: 9}
 
 // Minions
 Class.minion = {

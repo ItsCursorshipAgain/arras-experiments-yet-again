@@ -773,7 +773,7 @@ for (let [gemColor, name] of [
     Class[name + "BetaPentagonRelic"] = makeRelic("betaPentagon", -0.6, gem);
     Class[name + "AlphaPentagonRelic"] = makeRelic("alphaPentagon", -0.6, gem);
     Class[name + "HexagonRelic"] = makeRelic("hexagon", -0.4, gem, undefined, 6.25);
-    Class[name + "HexagonRelic_old"] = makeRelic("hexagon_old", -0.4, gem, undefined, 6.25);
+    Class[name + "Hexagon_oldRelic"] = makeRelic("hexagon_old", -0.4, gem, undefined, 6.25);
     Class[name + "SeptagonRelic"] = makeRelic("septagon", -0.4, gem, undefined, 6.25);
     Class[name + "OctagonRelic"] = makeRelic("octagon", -0.4, gem, undefined, 6.25);
     Class[name + "NonagonRelic"] = makeRelic("nonagon", -0.4, gem, undefined, 6.25);

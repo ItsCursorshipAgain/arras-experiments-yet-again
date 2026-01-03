@@ -7,6 +7,7 @@ require('../generics.js')
 require('../tanks.js')
 require('../turrets.js')
 require('../hats.js')
+require('../food.js')
 
 Class.celestial = {
     PARENT: "miniboss",

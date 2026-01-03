@@ -29,7 +29,7 @@ function compileMatrix(matrix, matrix2Entrance) {
         matrixHeight = matrix.length;
     for (let x = 0; x < matrixWidth; x++) for (let y = 0; y < matrixHeight; y++) {
         let str = matrix[y][x],
-            LABEL = str[0].toUpperCase() + str.slice(1).replace(/[A-Z]/g, m => ' ' + m) + " Generator",
+            LABEL = ensureIsClass(str).LABEL + " Generator",
             code = str + 'Generator';
         Class[code] = matrix[y][x] = {
             PARENT: "generatorBase",
@@ -84,14 +84,14 @@ let generatorMatrix = [
     [ "pentagon"      , "shinyPentagon"      , "legendaryPentagon"      , "shadowPentagon"      , "rainbowPentagon"      , "transPentagon"      , "PentagonRelic"      ],
     [ "betaPentagon"  , "shinyBetaPentagon"  , "legendaryBetaPentagon"  , "shadowBetaPentagon"  , "rainbowBetaPentagon"  , "transBetaPentagon"  , "BetaPentagonRelic"  ],
     [ "alphaPentagon" , "shinyAlphaPentagon" , "legendaryAlphaPentagon" , "shadowAlphaPentagon" , "rainbowAlphaPentagon" , "transAlphaPentagon" , "AlphaPentagonRelic" ],
-    [ "hexagon_old"   , "shinyHexagon_old"   , "legendaryHexagon_old"   , "shadowHexagon_old"   , "rainbowHexagon_old"   , "transHexagon_old"   , "HexagonRelic_old"   ],
+    [ "hexagon_old"   , "shinyHexagon_old"   , "legendaryHexagon_old"   , "shadowHexagon_old"   , "rainbowHexagon_old"   , "transHexagon_old"   , "Hexagon_oldRelic"   ],
     [ "septagon"      , "shinySeptagon"      , "legendarySeptagon"      , "shadowSeptagon"      , "rainbowSeptagon"      , "transSeptagon"      , "SeptagonRelic"      ],
     [ "octagon"       , "shinyOctagon"       , "legendaryOctagon"       , "shadowOctagon"       , "rainbowOctagon"       , "transOctagon"       , "OctagonRelic"       ],
     [ "nonagon"       , "shinyNonagon"       , "legendaryNonagon"       , "shadowNonagon"       , "rainbowNonagon"       , "transNonagon"       , "NonagonRelic"       ],
     [ "sphere"        , "cube"               , "tetrahedron"            , "octahedron"          , "dodecahedron"         , "icosahedron"        , "tesseract"          ],
 ],
 gemRelicMatrix = [];
-for (let tier of [ "", "Egg", "Square", "Triangle", "Pentagon", "BetaPentagon", "AlphaPentagon", "Hexagon", "Septagon", "Octagon", "Nonagon" ]) {
+for (let tier of [ "", "Egg", "Square", "Triangle", "Pentagon", "BetaPentagon", "AlphaPentagon", "Hexagon_old", "Septagon", "Octagon", "Nonagon" ]) {
     let row = [];
     for (let gem of [ "Power", "Space", "Reality", "Soul", "Time", "Mind" ]) {
         row.push(gem + (tier ? tier + 'Relic' : 'Gem'));
@@ -112,7 +112,7 @@ for (let poly = 0; poly < 5; poly++) {
             let tube = [];
             for (let rank = 0; rank < 2; rank++) {
                 let str = `laby_${poly}_${tier}_${shiny}_${rank}`,
-                    LABEL = ensureIsClass(str).LABEL + " Generator";
+                    LABEL = /*"Laby " +*/ ensureIsClass(str).LABEL + " Generator";
                 Class['generator_' + str] = {
                     PARENT: "generatorBase",
                     LABEL,
