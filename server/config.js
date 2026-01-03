@@ -228,6 +228,7 @@ module.exports = {
     team_weights: {},
 
     // Fun
+    brain_damage: false, // Disabled by default for epilepsy concerns. Violently shakes your camera and tank if you name yourself "Brain Damage".
     random_body_colors: false,
 
     // These are the default values for gamemode related things.

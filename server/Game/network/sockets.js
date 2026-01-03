@@ -299,7 +299,7 @@ class socketManager {
                         epackage.transferbodyID = transferbodyID;
                         // Easter eggs
                         epackage.braindamagemode = false;
-                        if (name.toLowerCase().includes("brain damage")) {
+                        if (Config.brain_damage && name.toLowerCase().includes("brain damage")) {
                             epackage.braindamagemode = true;
                         }
                         this.initalizePlayer(epackage, socket);
