@@ -577,12 +577,6 @@ Class.healer = {
                 TYPE: "healerBullet"
             }
         }
-    ],
-    UPGRADES_TIER_3: [
-        "medic",
-        "ambulance",
-        "surgeon",
-        "paramedic",
     ]
 }
 Class.helix = {
@@ -5708,6 +5702,7 @@ Class.worstTank = {
 Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "director", "pounder", "trapper", "desmos"]
     Class.basic.UPGRADES_TIER_2 = ["smasher"]
         Class.smasher.UPGRADES_TIER_3 = ["megaSmasher", "spike", "autoSmasher", "landmine"]
+        Class.healer.UPGRADES_TIER_3 = ["medic", "ambulance", "surgeon", "paramedic"]
 
     Class.twin.UPGRADES_TIER_2 = ["doubleTwin", "tripleShot", "gunner", "hexaTank", "helix"]
         Class.twin.UPGRADES_TIER_3 = ["dual", "bulwark", "musket"]
@@ -5768,3 +5763,9 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
         Class.spiral.UPGRADES_TIER_3 = ["coil", "superSpiral"/*, "wrangler", "oroboros", "cocci", "rocket"*/]
         Class.undertow.UPGRADES_TIER_3 = [/*"riptide"*/]
         Class.repeater.UPGRADES_TIER_3 = ["iterator", "duplicator"]
+
+if (Config.siege == true) {
+    Class.basic.UPGRADES_TIER_2 = ["healer"]
+    Class.director.UPGRADES_TIER_2 = ["overseer", "cruiser", "spawner"]
+    Class.whirlwind.UPGRADES_TIER_3 = ["hexaWhirl", "munition", "whirl3", "whirlGuard", "vortex"]
+}
