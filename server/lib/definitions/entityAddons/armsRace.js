@@ -1,6 +1,7 @@
 const {combineStats, makeAuto, makeDrive, makeHat, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../facilitators.js')
 const {base, statnames} = require('../constants.js')
 const g = require('../gunvals.js')
+const preset = require('../presets.js')
 
 // Settings
 const integrate_healers = false
@@ -9,24 +10,12 @@ const use_original_tree = false // Set to true to enable the original arras.io A
 
 // Function Presets (makeAuto)
 driveAuto_options = {type: "driveAutoTurret_AR", size: 9, clearTurrets: true}
-megaAuto_options = {type: "megaAutoTurret", size: 12}
 stormAuto_options = {type: "stormAutoTurret_AR", size: 9, clearTurrets: true}
-tripleAuto_options = {size: 6.5, x: 5.2, angle: 0, total: 3}
 whirlAuto_options = {type: "blankAutoTurret_AR", size: 8}
 
 // Function Presets (makeDrive)
-cruiserdrive_options = {hatType: "triangleHat", hatSize: 8, hatAngle: 180}
-cruiserstorm_options = {suffix: "storm", type: "swarmAutoTurret_AR", hatType: "stormTriangle_AR", hatSize: 8, hatAngle: 180}
 storm_options = {suffix: "storm", type: "swarmAutoTurret_AR", hatType: "stormSquare_AR", size: 12}
-
-// Function Presets (makeOver)
-cross_options = {count: 3, angle: 90}
-hybrid_options = {count: 1, independent: true, cycle: false}
-hybridBehind_options = {...hybrid_options, inFront: false}
-sideOver_options = {angle: 90}
-
-// Function Presets (makeWhirlwind)
-prophet_options = {satelliteType: "squareSatellite"}
+cruiserstorm_options = {suffix: "storm", type: "swarmAutoTurret_AR", hatType: "stormTriangle_AR", hatSize: 8, hatAngle: 180}
 
 // Gun Presets
 bird_rear = [
@@ -479,7 +468,7 @@ Class.wark_AR = {
 }
 
 // Tier 3
-Class.PLACEHOLDER_hybridMarksman_AR = makeOver("marksman", "", hybrid_options)
+Class.PLACEHOLDER_hybridMarksman_AR = makeOver("marksman", "", preset.hybrid)
 Class.PLACEHOLDER_autoHybridMarksman_AR = makeAuto("PLACEHOLDER_hybridMarksman_AR")
 Class.analyzer_AR = {
     PARENT: "genericHealer",
@@ -832,8 +821,8 @@ Class.cluster_AR = {
         }
     ]
 }
-Class.coalesce_AR = makeOver("wark_AR", "Coalesce", hybrid_options)
-Class.cobbler_AR = makeOver("mech_AR", "Cobbler", hybrid_options)
+Class.coalesce_AR = makeOver("wark_AR", "Coalesce", preset.hybrid)
+Class.cobbler_AR = makeOver("mech_AR", "Cobbler", preset.hybrid)
 Class.cog_AR = {
     PARENT: "genericTank",
     LABEL: "Cog",
@@ -1007,7 +996,7 @@ Class.crowbar_AR = {
         }
     ]
 }
-Class.cruiserdrive_AR = makeDrive("cruiser", cruiserdrive_options)
+Class.cruiserdrive_AR = makeDrive("cruiser", preset.driveSwarm)
 Class.deathStar_AR = {
     PARENT: "genericTank",
     LABEL: "Death Star",
@@ -1073,7 +1062,7 @@ Class.defect_AR = {
         ...bird_rear
     ]
 }
-Class.deviation_AR = makeOver("machineTrapper_AR", "Deviation", hybrid_options)
+Class.deviation_AR = makeOver("machineTrapper_AR", "Deviation", preset.hybrid)
 Class.dieselTrapper_AR = {
     PARENT: "genericTank",
     LABEL: "Diesel Trapper",
@@ -1431,7 +1420,7 @@ Class.expeller_AR = {
         }
     ], { delayIncrement: 0.5 })
 }
-Class.fashioner_AR = makeOver("builder", "Fashioner", hybrid_options)
+Class.fashioner_AR = makeOver("builder", "Fashioner", preset.hybrid)
 Class.faucet_AR = {
     PARENT: "genericTank",
     LABEL: "Faucet",
@@ -1548,7 +1537,7 @@ Class.foctillery_AR = {
         }
     ]
 }
-Class.force_AR = makeOver("artillery", "Force", hybrid_options)
+Class.force_AR = makeOver("artillery", "Force", preset.hybrid)
 Class.forger_AR = {
     PARENT: "genericTank",
     LABEL: "Forger",
@@ -1703,7 +1692,7 @@ Class.hangar_AR = {
         }
     ]
 }
-Class.heaver_AR = makeOver("launcher", "Heaver", hybrid_options)
+Class.heaver_AR = makeOver("launcher", "Heaver", preset.hybrid)
 Class.helicopter_AR = {
     PARENT: "genericTank",
     LABEL: "Helicopter",
@@ -1749,7 +1738,7 @@ Class.helicopter_AR = {
         return output
     })()
 }
-Class.hitman_AR = makeOver("assassin", "Hitman", hybrid_options)
+Class.hitman_AR = makeOver("assassin", "Hitman", preset.hybrid)
 Class.honchodrive_AR = makeDrive("honcho_AR")
 Class.hurler_AR = {
     PARENT: "genericTank",
@@ -1865,8 +1854,8 @@ Class.inception_AR = {
         }
     ]
 }
-Class.integrator_AR = makeOver("triAngle", "Integrator", hybridBehind_options)
-Class.interner_AR = makeOver("pen_AR", "Interner", hybrid_options)
+Class.integrator_AR = makeOver("triAngle", "Integrator", preset.hybridBehind)
+Class.interner_AR = makeOver("pen_AR", "Interner", preset.hybrid)
 Class.issuer_AR = {
     PARENT: "genericTank",
     LABEL: "Issuer",
@@ -2366,7 +2355,7 @@ Class.pitcher_AR = {
         }
     ]
 }
-Class.polluter_AR = makeOver("diesel_AR", "Polluter", hybrid_options)
+Class.polluter_AR = makeOver("diesel_AR", "Polluter", preset.hybrid)
 Class.prober_AR = {
     PARENT: "genericTank",
     LABEL: "Prober",
@@ -2740,7 +2729,7 @@ Class.scientist_AR = {
         }
     ]
 }
-Class.shower_AR = makeOver("sprayer", "Shower", hybrid_options)
+Class.shower_AR = makeOver("sprayer", "Shower", preset.hybrid)
 Class.slinker_AR = {
     PARENT: "genericTank",
     LABEL: "Slinker",
@@ -3342,10 +3331,10 @@ Class.PLACEHOLDER_whirlHexaTrapper_AR = makeWhirlwind(makeAuto({
     ], 6, 0.5),
 }, "", whirlAuto_options), {label: ""})
 Class.PLACEHOLDER_whirlInfestor_AR = makeWhirlwind("infestor", {label: ""})
-Class.PLACEHOLDER_whirlMaleficitor_AR = makeWhirlwind("maleficitor", {...prophet_options, label: ""})
+Class.PLACEHOLDER_whirlMaleficitor_AR = makeWhirlwind("maleficitor", {...preset.prophet, label: ""})
 Class.PLACEHOLDER_whirlMingler_AR = makeWhirlwind("mingler_AR", {label: ""})
 Class.PLACEHOLDER_whirlMortar_AR = makeWhirlwind("mortar", {label: ""})
-Class.PLACEHOLDER_whirlNecromancer_AR = makeWhirlwind("necromancer", {...prophet_options, label: ""})
+Class.PLACEHOLDER_whirlNecromancer_AR = makeWhirlwind("necromancer", {...preset.prophet, label: ""})
 Class.PLACEHOLDER_whirlOrdnance_AR = makeWhirlwind("ordnance", {label: ""})
 Class.PLACEHOLDER_whirlQueller_AR = makeWhirlwind("queller_AR", {label: ""})
 Class.PLACEHOLDER_whirlSniper3_AR = makeWhirlwind("sniper3_AR", {label: ""})
@@ -3478,7 +3467,7 @@ Class.antidote_AR = {
         }
     ], { delayIncrement: 0.5 })
 }
-Class.assistant_AR = makeOver("single", "Assistant", hybrid_options)
+Class.assistant_AR = makeOver("single", "Assistant", preset.hybrid)
 Class.autoBentDouble_AR = makeAuto("bentDouble", "Auto-Bent Double")
 Class.autoCoil_AR = makeAuto("coil")
 Class.autoDeadeye_AR = makeAuto("deadeye")
@@ -3538,7 +3527,7 @@ Class.avian_AR = {
     ]
 }
 Class.bansheedrive_AR = makeDrive("banshee")
-Class.battledrive_AR = makeDrive("battleship", {...cruiserdrive_options, label: "Battledrive"})
+Class.battledrive_AR = makeDrive("battleship", {...preset.driveSwarm, label: "Battledrive"})
 Class.bentTriple_AR = {
     PARENT: "genericTank",
     LABEL: "Bent Triple",
@@ -3627,7 +3616,7 @@ Class.butcher_AR = {
         ...trapGuard_rear
     ]
 }
-Class.carrierdrive_AR = makeDrive("carrier", cruiserdrive_options)
+Class.carrierdrive_AR = makeDrive("carrier", preset.driveSwarm)
 Class.captaindrive_AR = makeDrive("captain_AR")
 Class.chemist_AR = {
     PARENT: "genericHealer",
@@ -4028,7 +4017,7 @@ Class.executor_AR = {
     ]
 }
 Class.foredrive_AR = makeDrive("foreman_AR", {label: "Foredrive"})
-Class.fortdrive_AR = makeDrive("fortress", {...cruiserdrive_options, label: "Fortdrive"})
+Class.fortdrive_AR = makeDrive("fortress", {...preset.driveSwarm, label: "Fortdrive"})
 Class.gadgetGun_AR = {
     PARENT: "genericTank",
     LABEL: "Gadget Gun",
@@ -4453,7 +4442,7 @@ Class.prescriber_AR = makeDrive({
             STAT_CALCULATOR: "swarm"
         }
     }, 3, 1/3)
-}, {...cruiserdrive_options, label: "Prescriber"})
+}, {...preset.driveSwarm, label: "Prescriber"})
 Class.prescriber_AR.GUNS.push(...weaponArray({
     POSITION: {
         LENGTH: 6,
@@ -4521,7 +4510,7 @@ Class.kingpin_AR = makeOver({
             }
         }
     ]
-}, "Kingpin", cross_options)
+}, "Kingpin", preset.cross)
 Class.kraw_AR = {
     PARENT: "genericHealer",
     LABEL: "Kraw",
@@ -4602,8 +4591,8 @@ Class.medicare_AR = {
         }
     ]
 }
-Class.megaAutoDouble_AR = makeAuto("doubleTwin", "Mega Auto-Double", megaAuto_options)
-Class.megaAutoMarksman_AR = makeAuto("marksman", "Mega Auto-Marksman", megaAuto_options)
+Class.megaAutoDouble_AR = makeAuto("doubleTwin", "Mega Auto-Double", preset.megaAuto)
+Class.megaAutoMarksman_AR = makeAuto("marksman", "Mega Auto-Marksman", preset.megaAuto)
 Class.megaCocciSegment_AR = {
     PARENT: "genericSmasher",
     COLOR: "mirror",
@@ -4762,13 +4751,13 @@ Class.orifice_AR = {
         ...pelleter_rear
     ]
 }
-Class.overangle_AR = makeOver("triAngle", "Overangle", sideOver_options)
+Class.overangle_AR = makeOver("triAngle", "Overangle", preset.sideOver)
 Class.overartillery_AR = makeOver("artillery")
 Class.overassassin_AR = makeOver("assassin")
 Class.overbuilder_AR = makeOver("builder")
 Class.overdestroyer_AR = makeOver("destroyer")
 Class.overdiesel_AR = makeOver("diesel_AR")
-Class.overdoubleTwin_AR = makeOver("doubleTwin", "Overdouble Twin", sideOver_options)
+Class.overdoubleTwin_AR = makeOver("doubleTwin", "Overdouble Twin", preset.sideOver)
 Class.overhunter_AR = makeOver("hunter")
 Class.overlauncher_AR = makeOver("launcher")
 Class.overmarksman_AR = makeOver("marksman")
@@ -4782,7 +4771,7 @@ Class.overshot_AR = makeOver("tripleShot", "Overshot")
 Class.oversprayer_AR = makeOver("sprayer")
 Class.overstorm_AR = makeDrive("overseer", {...storm_options, label: "Overstorm"})
 Class.overtrapperdrive_AR = makeDrive("overtrapper")
-Class.overtrapGuard_AR = makeOver("trapGuard", "Overtrap Guard", sideOver_options)
+Class.overtrapGuard_AR = makeOver("trapGuard", "Overtrap Guard", preset.sideOver)
 Class.overwark_AR = makeOver("wark_AR", "Overwark")
 Class.peaceMoon_AR = makeWhirlwind("deathStar_AR", {label: "Peace Moon"})
 Class.pentadrive_AR = makeDrive("pentaseer_AR", {label: "Pentadrive"})
@@ -4845,7 +4834,7 @@ Class.pistol_AR = {
         }
     ]
 }
-Class.productiondrive_AR = makeDrive("productionist_AR", {...cruiserdrive_options, label: "Productiondrive"})
+Class.productiondrive_AR = makeDrive("productionist_AR", {...preset.driveSwarm, label: "Productiondrive"})
 Class.professor_AR = {
     PARENT: "genericHealer",
     LABEL: "Professor",
@@ -5448,8 +5437,8 @@ Class.tricker_AR = {
         }
     ]
 }
-Class.tripleAutoDouble_AR = makeAuto("doubleTwin", "Triple Auto-Double", tripleAuto_options)
-Class.tripleAutoMarksman_AR = makeAuto("marksman", "Triple Auto-Marksman", tripleAuto_options)
+Class.tripleAutoDouble_AR = makeAuto("doubleTwin", "Triple Auto-Double", preset.tripleAuto)
+Class.tripleAutoMarksman_AR = makeAuto("marksman", "Triple Auto-Marksman", preset.tripleAuto)
 Class.tripleFlankTwin_AR = {
     PARENT: "genericTank",
     LABEL: "Triple Flank Twin",

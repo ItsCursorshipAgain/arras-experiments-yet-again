@@ -299,7 +299,7 @@ class Siege {
             for (let sanc of this.sanctuaries) {
                 this.defineSanctuary(sanc, `sanctuaryTier${newSancTier}`);
             }
-            global.gameManager.socketManager.broadcast(`The sanctuaries have upgraded to tier ${newSancTier}.`);
+            global.gameManager.socketManager.broadcast(`The sanctuaries have been upgraded to Tier ${newSancTier}`);
             this.sanctuaryTier = newSancTier;
         }
     }
@@ -307,26 +307,6 @@ class Siege {
     // runs once when the server starts
     start(mazeType) {
         this.gameActive = true;
-        // Replace/remove certain tanks.
-        for (let i = 0; i < Class.basic.UPGRADES_TIER_2.length; i++) {
-            let string = Class.basic.UPGRADES_TIER_2[i];
-            if (string === "smasher") {
-                Class.basic.UPGRADES_TIER_2[i] = "healer"
-                for (let i = 0; i < Class.menu_tanks.UPGRADES_TIER_0.length; i++) {
-                    let string = Class.menu_tanks.UPGRADES_TIER_0[i];
-                    if (string === "healer") {
-                        Class.menu_tanks.UPGRADES_TIER_0[i] = "smasher"
-                        Class.menu_tanks.UPGRADES_TIER_0.splice([i+1], 0, "underseer")
-                    }
-                }
-            }
-        }
-        for (let i = 0; i < Class.director.UPGRADES_TIER_2.length; i++) {
-            let string = Class.director.UPGRADES_TIER_2[i];
-            if (string === "underseer") {
-                Class.director.UPGRADES_TIER_2.splice(i, 1)
-            }
-        }
         for (let tile of this.room.spawnable[TEAM_BLUE]) {
             tile.color = tile.bluePrint.COLOR;
             this.leftSanctuaries += 1;

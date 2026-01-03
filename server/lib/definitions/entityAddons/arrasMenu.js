@@ -39,7 +39,7 @@ const healerMenuTurrets = [
 ]
 
 // Developer tank that doesn't upgrade to anything
-Class.arrasMenu_developer = { PARENT: "developer", UPGRADES_TIER_0: [] }
+Class.arrasMenu_developer = {PARENT: "developer", UPGRADES_TIER_0: []}
 
 // Menus
 Class.arrasMenu_special = makeMenu("Special Menu", {upgrades: [Config.spawn_class, "arrasMenu_gameAdmin", "eggGen", "arrasMenu_specialTanks", "arrasMenu_bosses", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_memes", "dreadnought_dreadsV1", "arrasMenu_shinyMember"]})

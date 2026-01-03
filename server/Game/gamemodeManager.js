@@ -25,17 +25,17 @@ class gamemodeManager {
 
     request(type) {
         if (type == "start") {
-            if (Config.special_boss_spawns) this.gameSiege.start(Config.maze_type ?? false);
+            if (Config.siege) this.gameSiege.start(Config.maze_type ?? false);
             if (Config.assault) this.gameAssault.start();
             if (Config.tag) Config.tag_data.initAndStart();
             if (Config.domination) this.gameDomination.start();
             if (Config.mothership) this.gameMothership.start();
-            if (Config.maze_type !== undefined && !Config.special_boss_spawns) this.gameMaze.generate();
+            if (Config.maze_type !== undefined && !Config.siege) this.gameMaze.generate();
             if (Config.outbreak) this.gameOutbreak.start();
         }
         if (type == "loop") {
             global.gameManager.lagLogger.set();
-            if (Config.special_boss_spawns) this.gameSiege.loop();
+            if (Config.siege) this.gameSiege.loop();
             if (Config.mothership) this.gameMothership.loop();
             global.gameManager.lagLogger.mark();
             if (global.gameManager.lagLogger.totalTime > 100) {
@@ -52,7 +52,7 @@ class gamemodeManager {
     }
 
     terminate() {
-        if (Config.special_boss_spawns) this.gameSiege.reset();
+        if (Config.siege) this.gameSiege.reset();
         if (Config.assault) this.gameAssault.reset();
         if (Config.tag) Config.tag_data.resetAndStop();
         if (Config.domination) this.gameDomination.reset();

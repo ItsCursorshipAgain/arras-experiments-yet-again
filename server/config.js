@@ -17,7 +17,7 @@ module.exports = {
 
             host: "localhost:3001", // Server host location.
             port: 3001, // The port on the server.
-            id: "loc", // (<host>/#<id>)
+            id: "la", // (<host>/#<id>)
             featured: true, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
@@ -52,7 +52,7 @@ module.exports = {
 
             host: "localhost:3002", // Server host location.
             port: 3002, // The port on the server.
-            id: "lod", // (<host>/#<id>)
+            id: "lb", // (<host>/#<id>)
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
@@ -87,7 +87,7 @@ module.exports = {
 
             host: "localhost:3003", // Server host location.
             port: 3003, // The port on the server.
-            id: "loe", // (<host>/#<id>)
+            id: "lz", // (<host>/#<id>)
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
@@ -201,26 +201,32 @@ module.exports = {
     bosses_spawn: true,
     boss_spawn_cooldown: 260, // The delay (in seconds) between boss spawns.
     boss_spawn_delay: 6, // The delay (in seconds) between the boss spawn being announced and the boss(es) actually spawning.
-    boss_types: [{
-        bosses: ["eliteDestroyer", "eliteGunner", "eliteSprayer", "eliteBattleship", "eliteSpawner"],
-        amount: [5, 5, 4, 2, 1], chance: 2, nameType: "a",
-    },{
-        bosses: ["roguePalisade"],
-        amount: [4, 1], chance: 1, nameType: "castle",
-        message: "A strange trembling...",
-    },{
-        bosses: ["summoner", "eliteSkimmer", "nestKeeper"],
-        amount: [2, 2, 1], chance: 1, nameType: "a",
-        message: "A strange trembling...",
-    },{
-        bosses: ["paladin", "freyja", "zaphkiel", "nyx", "theia"],
-        amount: [1], chance: 0.01,
-        message: "The world tremors as the celestials are reborn anew!",
-    },{
-        bosses: ["julius", "genghis", "napoleon"],
-        amount: [1], chance: 0.1,
-        message: "The darkness arrives as the realms are torn apart!",
-    }],
+    boss_types: [
+            {
+            bosses: ["eliteDestroyer", "eliteGunner", "eliteSprayer", "eliteBattleship", "eliteSpawner"],
+            amount: [5, 5, 4, 2, 1], chance: 2, nameType: "a",
+        },
+        {
+            bosses: ["roguePalisade"],
+            amount: [4, 1], chance: 1, nameType: "castle",
+            message: "A strange trembling...",
+        },
+        {
+            bosses: ["summoner", "eliteSkimmer", "nestKeeper"],
+            amount: [2, 2, 1], chance: 1, nameType: "a",
+            message: "A strange trembling...",
+        },
+        {
+            bosses: ["paladin", "freyja", "zaphkiel", "nyx", "theia"],
+            amount: [1], chance: 0.01,
+            message: "The world tremors as the celestials are reborn anew!",
+        },
+        {
+            bosses: ["julius", "genghis", "napoleon"],
+            amount: [1], chance: 0.1,
+            message: "The darkness arrives as the realms are torn apart!",
+        }
+    ],
 
     // How many members a team can have in comparison to an unweighed team.
     // Example: We have team A and B. If the weight of A is 2 and B is 1, then the game will try to give A twice as many members as B.
@@ -228,6 +234,7 @@ module.exports = {
     team_weights: {},
 
     // Fun
+    brain_damage: false, // Disabled by default for epilepsy concerns. Violently shakes your camera and tank if you name yourself "Brain Damage".
     random_body_colors: false,
 
     // These are the default values for gamemode related things.
@@ -243,8 +250,8 @@ module.exports = {
     mode: "ffa",
     mothership: false,
     retrograde: false,
+    siege: false,
     space_physics: false,
-    special_boss_spawns: false,
     spawn_confinement: {},
     tag: false,
     teams: 4,

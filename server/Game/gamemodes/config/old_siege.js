@@ -1,7 +1,7 @@
 module.exports = {
     mode: "tdm",
     teams: 1,
-    special_boss_spawns: true,
+    siege: true,
     use_limited_waves: true,
     map_tile_width: 390,
     map_tile_height: 390,
