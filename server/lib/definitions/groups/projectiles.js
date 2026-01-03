@@ -857,7 +857,7 @@ Class.medkit = {
     DIE_AT_RANGE: true,
     TURRETS: [
         {
-            POSITION: [13, 0, 0, 0, 360, 1],
+            POSITION: [10, 0, 0, 0, 360, 1],
             TYPE: "medkitTurret",
         },
     ],
