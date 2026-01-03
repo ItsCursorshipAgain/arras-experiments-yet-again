@@ -9,7 +9,7 @@ class definitionCombiner {
     }
 
     loadDefinitions(log = true, includeGameAddons = true, definitionCount = 0, convertedExportsCount = 0, definitionGroupsLoadStart = performance.now()) {
-        if (Config.startup_logs && log) console.log(`Loading ${this.groupLoc.length} groups...`);
+        if (Config.startup_logs && log) console.log(`Loading ${this.calculateGroupsLength(this.groupLoc)} groups...`);
 
         // Load all the groups
         this.loadGroups(this.groupLoc, log);
@@ -45,6 +45,25 @@ class definitionCombiner {
             if (!Class.hasOwnProperty(key)) continue;
             Class[key].index = i++;
         }
+    }
+
+    calculateGroupsLength(directory) {
+        let total = 0;
+        let folder = fs.readdirSync(directory);
+        for (let filename of folder) {
+            // Create this file it's own filepath
+            let filepath = directory + `/${filename}`;
+            let isDirectory = fs.statSync(filepath).isDirectory();
+            // If we are fooled and it's a folder, restart it's court
+            if (isDirectory) {
+                let Etotal = this.calculateGroupsLength(filepath);
+                if (Etotal !== 0) total += Etotal;
+            }
+            // Now we don't want any html files in!
+            if (!filename.endsWith('.js')) continue;
+            total++;
+        }
+        return total;
     }
 
     loadGroups(directory, log) {
