@@ -112,6 +112,14 @@ class Canvas {
         this.chatInput.focus();
         global.showChat = true;
     }
+
+    respawn() {
+        if (global.died && !global.cannotRespawn) {
+            this.socket.talk('s', global.playerName, 0, 1 * config.game.autoLevelUp, false, 1 * config.game.incognitoMode);
+            global.died = false;
+        }
+    }
+
     keyDown(event) {
         if (global.dailyTankAd.renderUI) return;
         if (global.specialPressed) {
@@ -154,7 +162,7 @@ class Canvas {
             case global.KEY_ENTER:
                 // Enter to respawn
                 if (global.died && !global.cannotRespawn) {
-                    this.socket.talk('s', global.playerName, 0, 1 * config.game.autoLevelUp, false, 1 * config.game.incognitoMode);
+                    this.respawn();
                     global.died = false;
                     break;
                 }
@@ -470,10 +478,7 @@ class Canvas {
                     global.searchBarActive = false;
                 }
                 if (respawnCheck !== -1 && !global.disconnected) {
-                    if (!global.cannotRespawn && global.died) {
-                        this.socket.talk('s', global.playerName, 0, 1 * config.game.autoLevelUp);
-                        global.died = false;
-                    }
+                    this.respawn();
                 } else
                 if (reconnectCheck !== -1) {
                     if (global.disconnected) global.reconnect();
@@ -649,9 +654,7 @@ class Canvas {
     touchStart(e) {
         e.preventDefault();
         if (global.died && !global.cannotRespawn) {
-            this.socket.talk("s", global.playerName, 0, 1 * config.game.autoLevelUp);
-            global.died = false;
-            global.diedSlide = false;
+            this.respawn();
             global.resetTarget();
         } else {
             for (let touch of e.changedTouches) {
