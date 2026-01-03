@@ -1,7 +1,7 @@
-const {combineStats, makeAuto, makeDrive, makeHat, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../facilitators.js')
-const {base, statnames} = require('../constants.js')
-const g = require('../gunvals.js')
-const preset = require('../presets.js')
+const {combineStats, makeAuto, makeDrive, makeHat, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../../facilitators.js')
+const {base, statnames} = require('../../constants.js')
+const g = require('../../gunvals.js')
+const preset = require('../../presets.js')
 
 // Settings
 const integrate_healers = false

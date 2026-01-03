@@ -186,3 +186,5 @@ for (let x = 0; x < tensorWidth; x++) {
         }
     }
 }
+
+Class.menu_addons.UPGRADES_TIER_0.push("eggGenerator")

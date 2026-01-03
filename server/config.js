@@ -21,7 +21,7 @@ module.exports = {
             featured: true, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["arms_race", "tdm"], // The selected gamemode.
+            gamemode: ["retrograde", "tdm"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
