@@ -159,6 +159,7 @@ import * as socketStuff from "./socketinit.js";
         util.retrieveFromLocalStorage("smoothCamera");
         util.retrieveFromLocalStorage("optColors");
         util.retrieveFromLocalStorage("optPointy");
+        util.retrieveFromLocalStorage("optCurvyTraps");
         util.retrieveFromLocalStorage("optInterpolation");
         util.retrieveFromLocalStorage("optLerpAnim");
         util.retrieveFromLocalStorage("optOptimizeMode");
@@ -870,6 +871,7 @@ import * as socketStuff from "./socketinit.js";
         config.graphical.lerpAnimations = document.getElementById("optLerpAnim").checked;
         config.graphical.smoothcamera = document.getElementById("smoothCamera").checked;
         config.graphical.pointy = document.getElementById("optPointy").checked;
+        config.graphical.curvyTraps = document.getElementById("optCurvyTraps").checked;
         config.game.autoLevelUp = document.getElementById("autoLevelUp").checked;
         config.game.centeredMinimap = document.getElementById("optCenterMinimap").checked;
         config.lag.unresponsive = document.getElementById("optPredictive").checked;
@@ -952,6 +954,7 @@ import * as socketStuff from "./socketinit.js";
         util.submitToLocalStorage("smoothCamera");
         util.submitToLocalStorage("optBorders");
         util.submitToLocalStorage("optPointy");
+        util.submitToLocalStorage("optCurvyTraps");
         util.submitToLocalStorage("optInterpolation");
         util.submitToLocalStorage("optLerpAnim");
         util.submitToLocalStorage("optOptimizeMode");
@@ -4257,7 +4260,7 @@ import * as socketStuff from "./socketinit.js";
               //{ id: "optChatMessages",        label: "Chat Messages",         column: 1, row: 0, section: "appearance", tooltip: "Show chat messages." },
                 { id: "optRenderHealth",        label: "Health Bars",           column: 1, row: 1, section: "appearance", tooltip: "Show health bars." },
                 { id: "separatedHealthbars",    label: "Separate Shield Bar",   column: 1, row: 2, section: "appearance", tooltip: "Separate the shield bar from the health bar." },
-              //{ id: "optCurvyTraps",          label: "Curvy Traps",           column: 1, row: 3, section: "appearance", tooltip: "Sharpen the corners of all polygons.\n" + "May slightly lower the frame rate." },
+                { id: "optCurvyTraps",          label: "Curvy Traps",           column: 1, row: 3, section: "appearance", tooltip: "Sharpen the corners of all polygons.\n" + "May slightly lower the frame rate." },
               //{ id: "optTankSkins",           label: "Tank Skins",            column: 1, row: 4, section: "appearance", tooltip: "Show tank skins.\n" + "Note: Skins will be in grayscale if the low WebGL driver is selected." },
                 { id: "coloredHealthbars",      label: "Colored Health Bars",   column: 1, row: 5, section: "appearance", tooltip: "Changes the health and shield color with their body color." },
 

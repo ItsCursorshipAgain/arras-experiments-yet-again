@@ -86,7 +86,8 @@ class turretEntity extends EventEmitter {
     }
     fixFacing() {
         this.facing = this.bond.facing + this.bound.angle;
-        if (this.facingType.includes('Target') || this.facingType.includes('Speed')) this.facingType = "bound", this.facingTypeArgs = {}; 
+        if (this.facingType.includes('Target') || this.facingType.includes('Speed')) this.facingType = "bound", this.facingTypeArgs = {}, 
+        this.facingTypeArgs = {smoothness: this.settings.smoothness ?? 4}; 
     }
     life() { bringToLife(this); }
 
@@ -131,6 +132,7 @@ class turretEntity extends EventEmitter {
         if (set.WALL_TYPE != null) this.walltype = set.WALL_TYPE;
         if (set.MIRROR_MASTER_ANGLE != null) this.settings.mirrorMasterAngle = set.MIRROR_MASTER_ANGLE;
         if (set.INDEPENDENT != null) this.settings.independent = set.INDEPENDENT;
+        if (set.SMOOTHNESS != null) this.settings.smoothness = set.SMOOTHNESS;
         if (set.SHAPE != null) {
             this.shape = typeof set.SHAPE === "number" ? set.SHAPE : (set.SHAPE_NUM ?? 0);
             this.shapeData = set.SHAPE;

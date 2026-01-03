@@ -10,11 +10,9 @@ class definitionCombiner {
 
     loadDefinitions(log = true, includeGameAddons = true, definitionCount = 0, convertedExportsCount = 0, definitionGroupsLoadStart = performance.now()) {
         if (Config.startup_logs && log) console.log(`Loading ${this.groupLoc.length} groups...`);
+
         // Load all the groups
-        for (let filename of this.groupLoc) {
-            if (Config.startup_logs && log) console.log(`Loading group: ${filename}`);
-            require('./groups/' + filename);
-        }
+        this.loadGroups(this.groupLoc, log);
 
         let definitionGroupsLoadEnd = performance.now();
         if (Config.startup_logs && log) console.log("Loaded definitions in " + util.rounder(definitionGroupsLoadEnd - definitionGroupsLoadStart, 3) + " milliseconds. \n");
@@ -46,6 +44,24 @@ class definitionCombiner {
         for (let key in Class) {
             if (!Class.hasOwnProperty(key)) continue;
             Class[key].index = i++;
+        }
+    }
+
+    loadGroups(directory, log) {
+        // Take the folder
+        let folder = fs.readdirSync(directory);
+        for (let filename of folder) {
+            // Create this file it's own filepath
+            let filepath = directory + `/${filename}`;
+            let isDirectory = fs.statSync(filepath).isDirectory();
+            // If we are fooled and it's a folder, restart it's court
+            if (isDirectory) {
+                this.loadGroups(filepath, logs);
+            }
+            // Now we don't want any html files in!
+            if (!filename.endsWith('.js')) continue;
+            if (Config.startup_logs && log) console.log(`Loading group: ${filename}`);
+            require(filepath);
         }
     }
 
