@@ -355,6 +355,16 @@ Class.genericBoss = {
     BROADCAST_MESSAGE: "A visitor has left!",
     BODY: { PUSHABILITY: 0.05 }
 }
+Class.miniboss = {
+    PARENT: "genericBoss",
+    RENDER_ON_LEADERBOARD: true,
+    CONTROLLERS: ["nearestDifferentMaster", ["minion", {turnwiserange: 360}], "canRepel"],
+    AI: { NO_LEAD: true },
+}
+Class.ramMiniboss = {
+    PARENT: "genericBoss",
+    CONTROLLERS: ["nearestDifferentMaster", "canRepel", "mapTargetToGoal"],
+}
 
 // Aura Components
 Class.auraBase = {
