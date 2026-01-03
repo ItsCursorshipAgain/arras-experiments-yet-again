@@ -827,7 +827,7 @@ let incoming = async function(message, socket) {
 
             case 'w': { // welcome to the game
                 if (m[0]) { // Ask to get the room data first
-                    socket.talk('s', "", 1, 0, false);
+                    socket.talk('s', "", 1, 0, false, 0);
                 }
             }; break;
             case 'R': { // room setup
@@ -920,7 +920,7 @@ let incoming = async function(message, socket) {
                     util.pullTotalPlayers();
                     global.gameUpdate = true;
                     // Now we can ask for spawn.
-                    socket.talk('s', global.playerName, 0, 1 * config.game.autoLevelUp, global.bodyID ? global.bodyID : false);
+                    socket.talk('s', global.playerName, 0, 1 * config.game.autoLevelUp, global.bodyID ? global.bodyID : false, 1 * config.game.incognitoMode);
                     global.bodyID = undefined;
                 }
             } break;
