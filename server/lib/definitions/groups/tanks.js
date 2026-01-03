@@ -1,9 +1,7 @@
 const { combineStats, makeAuto, makeDrive, makeOver, makeRadialAuto, makeWhirlwind, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
 const { base, dfltskl, smshskl, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
-
-// Function Presets
-hybrid_options = {count: 1, independent: true, cycle: false}
+const preset = require('../presets.js')
 
 // Gun Presets
 bird_rear = [
@@ -1268,9 +1266,6 @@ Class.volute = {
         ...weaponMirror({
             POSITION: [5, 10, 2.125, 1, -6.375, 90, 0],
         })
-    ],
-    UPGRADES_TIER_3: [
-        "sidewinder",
     ]
 }
 Class.whirlwind_old = makeWhirlwind("genericTank", {hat: "circleHat", hatSize: 24, hatLayer: 0, satellites: 6, satelliteType: "satellite_old", label: "Whirlwind"})
@@ -1326,7 +1321,7 @@ Class.annihilator = {
         }
     ]
 }
-Class.armsman = makeOver("rifle", "Armsman", hybrid_options)
+Class.armsman = makeOver("rifle", "Armsman", preset.hybrid)
 Class.architect = makeRadialAuto("architectGun", {isTurret: true, danger: 7, size: 12, label: "Architect", body: {SPEED: 1.1 * base.SPEED}})
 Class.assembler = {
     PARENT: "genericTank",
@@ -1625,7 +1620,7 @@ Class.bentDouble = {
         }
     ], 2)
 }
-Class.bentHybrid = makeOver("tripleShot", "Bent Hybrid", hybrid_options)
+Class.bentHybrid = makeOver("tripleShot", "Bent Hybrid", preset.hybrid)
 Class.bigCheese = {
     PARENT: "genericTank",
     LABEL: "Big Cheese",
@@ -2190,7 +2185,7 @@ Class.construct = { // it's "construct" and not "constructor" because "construct
         }
     ]
 }
-Class.cropDuster = makeOver("minigun", "Crop Duster", hybrid_options)
+Class.cropDuster = makeOver("minigun", "Crop Duster", preset.hybrid)
 Class.crossbow = {
     PARENT: "genericTank",
     LABEL: "Crossbow",
@@ -2960,7 +2955,7 @@ Class.gunnerTrapper = {
         }
     ]
 }
-Class.heptaAutoBasic = makeAuto("basic", "Hepta Auto-Basic", {size: 4, x: 6.5, angle: 0, total: 7})
+Class.heptaAutoBasic = makeAuto("basic", "Hepta Auto-Basic", preset.heptaAuto)
 Class.hewnDouble = {
     PARENT: "genericTank",
     LABEL: "Hewn Double",
@@ -3022,7 +3017,7 @@ Class.hexaTrapper = makeAuto({
     ], 6, 0.5),
 }, "Hexa-Trapper")
 Class.hexaWhirl = makeWhirlwind("hexaTank", {label: "Hexa Whirl"})
-Class.hybrid = makeOver("destroyer", "Hybrid", hybrid_options)
+Class.hybrid = makeOver("destroyer", "Hybrid", preset.hybrid)
 Class.infestor = {
     PARENT: "genericTank",
     LABEL: "Infestor",
@@ -3906,7 +3901,7 @@ Class.phoenix = {
         ...bird_rear
     ]
 }
-Class.poacher = makeOver("hunter", "Poacher", hybrid_options)
+Class.poacher = makeOver("hunter", "Poacher", preset.hybrid)
 Class.predator = {
     PARENT: "genericTank",
     LABEL: "Predator",
@@ -4002,7 +3997,7 @@ Class.prodigy = {
         }], 3)
     ],
 }
-Class.prophet = makeWhirlwind("underseer", {label: "Prophet", satelliteType: "squareSatellite"})
+Class.prophet = makeWhirlwind("underseer", {...preset.prophet, label: "Prophet"})
 Class.quadBuilder = {
     PARENT: "genericTank",
     LABEL: "Quad Builder",

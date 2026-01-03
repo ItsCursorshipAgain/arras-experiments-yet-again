@@ -2,7 +2,7 @@ const { combineStats, dereference, makeAura, makeAuto, makeHat, weaponArray, wea
 const { base, smshskl } = require('../constants.js')
 const g = require('../gunvals.js')
 
-// ARMS RACE DREADS BY FROSTBYTE
+// ARMS RACE V2 DREADNOUGHTS BY FROSTBYTE
 
 const eggnoughtBody = {
 	SPEED: base.SPEED * 0.75,
@@ -88,9 +88,6 @@ function combineBodyStats(...bodies) {
 
 // Comment out the line below to enable this addon, uncomment it to disable this addon.
 //return console.log('--- Dreadnoughts v2 addon [dreadv2.js] is disabled. See lines 87-88 to enable it. ---');
-
-// Set the below variable to true to enable the dreadnoughts from Frostbyte's Arms Race Dreadnoughts V2 addon.
-const arms_race_dreadsV2 = false
 
 // Set the below variable to true to enable hex dreadnought building.
 const buildHexnoughts = true
@@ -2577,7 +2574,7 @@ Class.menu_addons.UPGRADES_TIER_0.push("dreadnought_dreadsV2")
 				Class.harpy_dreadsV2.UPGRADES_TIER_0 = ["pegasus"].map(x => x + "_dreadsV2")
 					Class.pegasus_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("pegasus_dreadsV2")
 
-if (arms_race_dreadsV2) {
+if (Config.arms_race) {
 	//console.log('[dreadv2.js]: Dreadnoughts v2 Arms Race addon enabled. Credit to Frostbyte.')
 	//Class.dreadWeapon_dreadsV2
 
@@ -3190,7 +3187,7 @@ const pentanoughtWeapons = [
 	"cerberus_dreadsV2",
 	"lucifer_dreadsV2"
 ]
-if (arms_race_dreadsV2) {
+if (Config.arms_race) {
 	pentanoughtWeapons.splice(2, 0, "woomera_dreadsV2")
 }
 if(buildHexnoughts) {
