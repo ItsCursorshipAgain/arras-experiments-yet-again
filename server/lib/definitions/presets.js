@@ -1,4 +1,101 @@
+const {combineStats, weaponMirror} = require('./facilitators.js')
+const g = require('./gunvals.js')
 module.exports = {
+
+// GUNS
+	bird: [
+		...weaponMirror({
+			POSITION: {
+				LENGTH: 16,
+				WIDTH: 9,
+				ANGLE: 153,
+				DELAY: 0.1
+			},
+			PROPERTIES: {
+				SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+				TYPE: "bullet",
+				LABEL: "Thruster"
+			}
+		}),
+		{
+			POSITION: {
+				LENGTH: 18,
+				WIDTH: 9,
+				ANGLE: 180,
+				DELAY: 0.6
+			},
+			PROPERTIES: {
+				SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
+				TYPE: "bullet",
+				LABEL: "Thruster"
+			}
+		}
+	],
+	trapGuard: [
+	    {
+	        POSITION: {
+	            LENGTH: 13,
+	            WIDTH: 8,
+	            ANGLE: 180
+	        }
+	    },
+	    {
+	        POSITION: {
+	            LENGTH: 4,
+	            WIDTH: 8,
+	            ASPECT: 1.7,
+	            X: 13,
+	            ANGLE: 180
+	        },
+	        PROPERTIES: {
+	            SHOOT_SETTINGS: combineStats([g.trap]),
+	            TYPE: "trap",
+	            STAT_CALCULATOR: "trap"
+	        }
+	    }
+	],
+	triAngle: weaponMirror({
+		POSITION: {
+			LENGTH: 16,
+			WIDTH: 8,
+			ANGLE: 150,
+			DELAY: 0.1
+		},
+		PROPERTIES: {
+			SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
+			TYPE: "bullet",
+			LABEL: "thruster"
+		}
+	}),
+	booster: weaponMirror([
+		{
+			POSITION: {
+				LENGTH: 14,
+				WIDTH: 8,
+				ANGLE: 135,
+				DELAY: 0.6
+			},
+			PROPERTIES: {
+				SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
+				TYPE: "bullet",
+				LABEL: "thruster"
+			}
+		},
+		{
+			POSITION: {
+				LENGTH: 16,
+				WIDTH: 8,
+				ANGLE: 150,
+				DELAY: 0.1
+			},
+			PROPERTIES: {
+				SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
+				TYPE: "bullet",
+				LABEL: "thruster"
+			}
+		}
+	]),
+
 // makeAuto
 	megaAuto: {type: "megaAutoTurret", size: 12},
 	tripleAuto: {size: 6.5, x: 5.2, angle: 0, total: 3},

@@ -224,7 +224,7 @@ Class.eliteBattleshipGen = makeGenerator("eliteBattleship", "Elite Crasher", "El
 Class.eliteSpawnerGen = makeGenerator("eliteSpawner", "Elite Crasher", "Elite Crasher", "eliteSpawner", 10, 3, "pink", Class.elite.SIZE, 5)
 Class.eliteTrapGuardGen = makeGenerator("eliteTrapGuard", "Elite Crasher", "Elite Crasher", "eliteTrapGuard", 10, 3, "pink", Class.elite.SIZE, 5)
 Class.eliteSpinnerGen = makeGenerator("eliteSpinner", "Elite Crasher", "Elite Crasher", "eliteSpinner", 10, 3, "pink", Class.elite.SIZE, 5)
-Class.oldEliteSprayerGen = makeGenerator("oldEliteSprayer", "Elite Crasher", "Elite Crasher", "oldEliteSprayer", 10, 3, "pink", Class.elite.SIZE, 5)
+Class.oldEliteSprayerGen = makeGenerator("eliteSprayer_old", "Elite Crasher", "Elite Crasher", "eliteSprayer_old", 10, 3, "pink", Class.elite.SIZE, 5)
 Class.eliteSkimmerGen = makeGenerator("eliteSkimmer", "Elite Skimmer", "Elite Skimmer", "eliteSkimmer", 10, 3, "orange", Class.elite.SIZE, 5)
 Class.legionaryCrasherGen = makeGenerator("legionaryCrasher", "Legionary Crasher", "Legionary Crasher", "legionaryCrasher", 12, 3, "pink", Class.elite.SIZE, 1)
 //nesters

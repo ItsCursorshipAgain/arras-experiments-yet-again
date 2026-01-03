@@ -1,7 +1,5 @@
 const { combineStats, skillSet, makeAuto, makePolyhedron, weaponArray, weaponMirror } = require('../facilitators.js')
 const { base, statnames, dfltskl, smshskl } = require('../constants.js')
-require('./generics.js')
-require('./tanks.js')
 const g = require('../gunvals.js')
 
 // Obstacles

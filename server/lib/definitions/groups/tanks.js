@@ -1,89 +1,7 @@
-const { combineStats, makeAuto, makeDrive, makeOver, makeRadialAuto, makeWhirlwind, weaponArray, weaponMirror, weaponStack } = require('../facilitators.js')
-const { base, dfltskl, smshskl, statnames } = require('../constants.js')
+const {combineStats, makeAuto, makeDrive, makeOver, makeRadialAuto, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../facilitators.js')
+const {base, dfltskl, smshskl, statnames} = require('../constants.js')
 const g = require('../gunvals.js')
 const preset = require('../presets.js')
-
-// Gun Presets
-bird_rear = [
-    ...weaponMirror({
-        POSITION: {
-            LENGTH: 16,
-            WIDTH: 9,
-            ANGLE: 153,
-            DELAY: 0.1
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
-            TYPE: "bullet",
-            LABEL: "Thruster"
-        }
-    }),
-    {
-        POSITION: {
-            LENGTH: 18,
-            WIDTH: 9,
-            ANGLE: 180,
-            DELAY: 0.6
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
-            TYPE: "bullet",
-            LABEL: "Thruster"
-        }
-    }
-]
-trapGuard_rear = [
-    {
-        POSITION: {
-            LENGTH: 13,
-            WIDTH: 8,
-            ANGLE: 180
-        }
-    },
-    {
-        POSITION: {
-            LENGTH: 4,
-            WIDTH: 8,
-            ASPECT: 1.7,
-            X: 13,
-            ANGLE: 180
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.trap]),
-            TYPE: "trap",
-            STAT_CALCULATOR: "trap"
-        }
-    }
-]
-triAngle_propeller = weaponMirror({
-    POSITION: {
-        LENGTH: 16,
-        WIDTH: 8,
-        ANGLE: 150,
-        DELAY: 0.1
-    },
-    PROPERTIES: {
-        SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-        TYPE: "bullet",
-        LABEL: "thruster"
-    }
-})
-booster_propeller = [
-    ...weaponMirror({
-        POSITION: {
-            LENGTH: 14,
-            WIDTH: 8,
-            ANGLE: 135,
-            DELAY: 0.6
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
-            TYPE: "bullet",
-            LABEL: "thruster"
-        }
-    }),
-    ...triAngle_propeller
-]
 
 // Basic Tank
 Class.basic = {
@@ -306,7 +224,7 @@ Class.twin = {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin]),
             TYPE: "bullet"
         }
-    }, { delayIncrement: 0.5 })
+    }, {delayIncrement: 0.5})
 }
 Class.whirlwind = makeWhirlwind("genericTank", {hat: "hexagonHat_spin", satellites: 6, label: "Whirlwind", danger: 5})
 Class.whirlwind_bent = {
@@ -514,7 +432,7 @@ Class.flangle = {
     LABEL: "Flangle",
     DANGER: 6,
     STAT_NAMES: statnames.mixed,
-    GUNS: triAngle_propeller,
+    GUNS: preset.triAngle,
     TURRETS: [{
         POSITION: [6, 10, 0, 0, 190, 0],
         TYPE: ["flailBolt3", {
@@ -1091,7 +1009,7 @@ Class.trapGuard = {
                 TYPE: "bullet"
             }
         },
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 Class.triAngle = {
@@ -1115,7 +1033,7 @@ Class.triAngle = {
                 LABEL: "Front"
             }
         },
-        ...triAngle_propeller
+        ...preset.triAngle
     ]
 }
 Class.triTrapper = {
@@ -1301,7 +1219,7 @@ Class.ambulance = {
                 LABEL: "Front"
             }
         },
-        ...triAngle_propeller
+        ...preset.triAngle
     ]
 }
 Class.annihilator = {
@@ -1758,7 +1676,7 @@ Class.bomber = {
                 LABEL: "Wing"
             }
         }),
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 Class.boomer = {
@@ -1844,7 +1762,7 @@ Class.booster = {
                 LABEL: "Front"
             }
         },
-        ...booster_propeller
+        ...preset.booster
     ]
 }
 Class.bulwark = {
@@ -1909,7 +1827,7 @@ Class.bushwhacker = {
                 TYPE: "bullet"
             }
         },
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 Class.carrier = {
@@ -2575,7 +2493,7 @@ Class.eagle = {
                 ALT_FIRE: true
             }
         },
-        ...bird_rear
+        ...preset.bird
     ]
 }
 Class.engineer = {
@@ -2693,7 +2611,7 @@ Class.falcon = {
                 ASPECT: -2.2
             }
         },
-        ...bird_rear
+        ...preset.bird
     ]
 }
 Class.fieldGun = {
@@ -2770,7 +2688,7 @@ Class.fighter = {
                 LABEL: "Side"
             }
         }]),
-        ...triAngle_propeller
+        ...preset.triAngle
     ]
 }
 Class.flace = {
@@ -2778,7 +2696,7 @@ Class.flace = {
     LABEL: "Flace",
     DANGER: 7,
     STAT_NAMES: statnames.mixed,
-    GUNS: triAngle_propeller,
+    GUNS: preset.triAngle,
     TURRETS: [{
         POSITION: [6, 10, 0, 0, 190, 0],
         TYPE: ["maceBolt3", {
@@ -2792,7 +2710,7 @@ Class.flooster = {
     LABEL: "Flooster",
     DANGER: 7,
     STAT_NAMES: statnames.mixed,
-    GUNS: booster_propeller,
+    GUNS: preset.booster,
     TURRETS: [{
         POSITION: [6, 10, 0, 0, 190, 0],
         TYPE: ["flailBolt3", {
@@ -3286,7 +3204,7 @@ Class.master = {
                 LABEL: "thruster"
             }
         }]),
-        ...triAngle_propeller
+        ...preset.triAngle
     ]
 }
 Class.medic = {
@@ -3898,7 +3816,7 @@ Class.phoenix = {
                 ALT_FIRE: true
             }
         },
-        ...bird_rear
+        ...preset.bird
     ]
 }
 Class.poacher = makeOver("hunter", "Poacher", preset.hybrid)
@@ -4970,7 +4888,7 @@ Class.surfer = {
                 STAT_CALCULATOR: "swarm"
             }
         }]),
-        ...triAngle_propeller
+        ...preset.triAngle
     ]
 }
 Class.surgeon = {
@@ -5253,7 +5171,7 @@ Class.vulture = {
                 ALT_FIRE: true
             }
         },
-        ...bird_rear
+        ...preset.bird
     ]
 }
 Class.whirlGuard = makeWhirlwind("trapGuard", {label: "Whirl Guard"})

@@ -1,8 +1,6 @@
 const { combineStats, LayeredBoss, makeAura, makeAuto, makeMenu, makeRadialAuto, makeTurret, weaponArray, weaponMirror } = require('../facilitators.js')
 const { base, basePolygonDamage, basePolygonHealth, dfltskl, statnames } = require('../constants.js')
 const g = require('../gunvals.js')
-require('./tanks.js')
-require('./food.js')
 
 // Presets
 
@@ -237,12 +235,12 @@ Class.menu_bosses = makeMenu("Bosses", {upgrades: ["sentries", "elites", "mystic
     Class.menu_rogues = makeMenu("Rogues", {upgrades: ["roguePalisade", "rogueAlcazar", "rogueArmada", "julius", "genghis", "napoleon"], color: "darkGrey", boxColor: "darkGrey", shape: 6})
     Class.menu_rammers = makeMenu("Rammers", {upgrades: ["bob", "nemesis"], color: "aqua", boxColor: "aqua", props: [{TYPE: "dominationBody", POSITION: { SIZE: 21.5, ARC: 360 }}]})
     Class.menu_terrestrials = makeMenu("Terrestrials", {upgrades: ["ares", "gersemi", "ezekiel", "eris", "selene"], color: "orange", boxColor: "orange", shape: 7.5})
-    Class.menu_celestials = makeMenu("Celestials", {upgrades: ["paladin", "freyja", "zaphkiel", "nyx", "theia", "atlas", "hera", "horus", "anubis", "isis", "tethys", "ullr", "dellingr", "osiris", "alcis", "khonsu", "baldr", "nephthys", "tyr", "vor", "aether", "iapetus", "apollo", "eros", "hjordis", "sif", "freyr", "styx", "hyperion", "ptah", "rhea", "julius", "genghis", "napoleon"], color: "lightGreen", boxColor: "lightGreen", shape: 9.5, tooltip: "WARNING: There are a lot of tanks in here and having this menu open may cause noticeable frame drops!"})
-    Class.menu_eternals = makeMenu("Eternals", {upgrades: ["ragnarok", "kronos", "amun"], color: "veryLightGrey", boxColor: "veryLightGrey", shape: 11.5})
+    Class.menu_celestials = makeMenu("Celestials", {upgrades: ["paladin", "freyja", "zaphkiel", "nyx", "theia", "atlas", "hera", "horus", "anubis", "isis", "tethys", "ullr", "dellingr", "osiris", "alcis", "khonsu", "baldr", "nephthys", "tyr", "vor", "aether", "iapetus", "apollo", "eros", "hjordis", "sif", "freyr", "styx", "hyperion", "ptah", "rhea", "julius", "genghis", "napoleon"], color: "lightGreen", boxColor: "lightGreen", shape: 9.5, tooltip: "WARNING: There are a lot of entities in here and having this menu open may cause noticeable frame drops!"})
+    Class.menu_eternals = makeMenu("Eternals", {upgrades: ["odin", "kronos", "amun"], color: "veryLightGrey", boxColor: "veryLightGrey", shape: 11.5})
     Class.menu_devBosses = makeMenu("Developers", {upgrades: ["AEMKShipBoss", "dogeiscutBoss", "helenaBoss", "toothlessBoss", "tgsBoss", "menu_retiredDevBosses"], color: "lightGreen", boxColor: "rainbow", shape: 4})
         Class.menu_retiredDevBosses = makeMenu("Developers (Retired)", {upgrades: ["frostBoss", "taureonBoss", "trplnrBoss"], color: "pureBlack", boxColor: "pureBlack", shape: 4, boxLabel: "Retired"})
 Class.menu_addons = makeMenu("Addons", {tooltip: "Content that is (usually) not part of Open Source Arras but was added by someone else."})
-Class.menu_testing = makeMenu("Testing", {upgrades: ["diamondShape", "miscTest", "mmaTest", "vulnturrettest", "onTest", "alphaGunTest", "strokeWidthTest", "testLayeredBoss", "tooltipTank", "turretLayerTesting", "bulletSpawnTest", "propTest", "weaponArrayTest", "radialAutoTest", "imageShapeTest", "screenShakeTest", "turretStatScaleTest", "auraBasic", "auraHealer", "ghoster", "gunBenchmark", "switcheroo", "armyOfOne", "vanquisher", "mummifier", "syncWithTankTest", "airblast", "angleseer", "backwardsexports"], tooltip: "A large selection of tanks that use many of the features of Open Source Arras.\n" + "WARNING: There are a lot of tanks in here and having this menu open may cause noticeable frame drops!"})
+Class.menu_testing = makeMenu("Testing", {upgrades: ["diamondShape", "miscTest", "mmaTest", "vulnturrettest", "onTest", "alphaGunTest", "strokeWidthTest", "testLayeredBoss", "tooltipTank", "turretLayerTesting", "bulletSpawnTest", "propTest", "weaponArrayTest", "radialAutoTest", "imageShapeTest", "screenShakeTest", "turretStatScaleTest", "auraBasic", "auraHealer", "ghoster", "gunBenchmark", "switcheroo", "armyOfOne", "vanquisher", "mummifier", "syncWithTankTest", "airblast", "angleseer", "backwardsexports"], tooltip: "A large selection of tanks that use many of the features of Open Source Arras.\n" + "WARNING: There are a lot of entities in here and having this menu open may cause noticeable frame drops!"})
 
 if (Config.siege) {
     Class.menu_tanks.UPGRADES_TIER_0 = [Config.spawn_class, "menu_unused", "menu_removed", "menu_mapEntities", "menu_motherships", "menu_fun", "smasher", "undercoverCop", "arenaCloser", "underseer"]

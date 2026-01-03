@@ -126,7 +126,7 @@ class Siege {
             //eternals
             [100, "legionaryCrasherFix"], // fucking mid
             [100, "kronos"],
-            [100, "ragnarok"],
+            [100, "odin"],
             [100, "amun"],
         ];
         this.friendlyBossChoices = ["roguePalisade", "rogueArmada", "julius", "genghis", "napoleon"];
