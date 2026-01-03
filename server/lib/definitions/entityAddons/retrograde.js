@@ -1,41 +1,12 @@
 const {combineStats, makeAuto, makeMenu, makeOver, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../facilitators.js')
 const {base, statnames} = require('../constants.js')
 const g = require('../gunvals.js')
+const preset = require('../presets.js')
 
 // Settings
 const arras_mode = false // Set to true to make tank designs closer to how they were in arras.io's implementation of Retrograde.
 const public_retrograde_menu = false // Set to true to allow access to the Retrograde menu and everything inside it for all players
 const replace_newer_classes = false // Set to true to make the class tree replace certain entries with Retrograde equivalents
-
-// Function Presets (makeAuto)
-megaAuto_options = {type: "megaAutoTurret", size: 12}
-tripleAuto_options = {size: 6.5, x: 5.2, angle: 0, total: 3}
-
-// Function Presets (makeOver)
-hybrid_options = {count: 1, independent: true, cycle: false}
-
-// Gun Presets
-const pelleter_rear = [
-    ...weaponMirror({
-        POSITION: {
-            LENGTH: 19,
-            WIDTH: 2,
-            Y: -2.5,
-            ANGLE: 180
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, { recoil: 4 }, { recoil: 1.8 }]),
-            TYPE: "bullet",
-        },
-    }, { delayIncrement: 0.5 }),
-    {
-        POSITION: {
-            LENGTH: 12,
-            WIDTH: 11,
-            ANGLE: 180
-        }
-    }
-]
 
 // Menus
 Class.arrasMenu_diep2.UPGRADES_TIER_0.push(
@@ -274,7 +245,7 @@ Class.blower_RG = {
                 TYPE: "bullet"
             }
         },
-        ...pelleter_rear
+        ...preset.rearPelleter
     ]
 }
 Class.buttbuttin_RG = {
@@ -303,7 +274,7 @@ Class.buttbuttin_RG = {
                 ASPECT: -2.2
             }
         },
-        ...pelleter_rear
+        ...preset.rearPelleter
     ]
 }
 Class.deathStar_RG = {
@@ -502,7 +473,7 @@ Class.doubleTrapGuard_RG = {
         }
     ], { delayIncrement: 0.5 })
 }
-Class.gator_RG_AR = makeOver("gatlingGun_RG", "Gator", hybrid_options)
+Class.gator_RG_AR = makeOver("gatlingGun_RG", "Gator", preset.hybrid)
 Class.halfNHalf_RG = {
     PARENT: "genericTank",
     LABEL: "Half 'n Half",
@@ -1243,9 +1214,9 @@ Class.doubleTriBlaster_RG_AR = {
         }
     ], 2)
 }
-Class.megaAutoBlaster_RG_AR = makeAuto("blaster_RG", "Mega Auto-Blaster", megaAuto_options)
-Class.megaAutoDoubleMachine_RG_AR = makeAuto("doubleMachine_RG", "Mega Auto-Double Machine", megaAuto_options)
-Class.megaAutoGatlingGun_RG_AR = makeAuto("gatlingGun_RG", "Mega Auto-Gatling Gun", megaAuto_options)
+Class.megaAutoBlaster_RG_AR = makeAuto("blaster_RG", "Mega Auto-Blaster", preset.megaAuto)
+Class.megaAutoDoubleMachine_RG_AR = makeAuto("doubleMachine_RG", "Mega Auto-Double Machine", preset.megaAuto)
+Class.megaAutoGatlingGun_RG_AR = makeAuto("gatlingGun_RG", "Mega Auto-Gatling Gun", preset.megaAuto)
 Class.overblaster_RG_AR = makeOver("blaster_RG")
 Class.overdoubleMachine_RG_AR = makeOver("doubleMachine_RG", "Overdouble Machine", {angle: 90})
 Class.overgatling_RG_AR = makeOver("gatlingGun_RG", "Overgatling")
@@ -1431,9 +1402,9 @@ Class.tripleArtillery_RG_AR = {
         }
     ], 3)
 }
-Class.tripleAutoBlaster_RG_AR = makeAuto("blaster_RG", "Triple Auto-Blaster", tripleAuto_options)
-Class.tripleAutoDoubleMachine_RG_AR = makeAuto("doubleMachine_RG", "Triple Auto-Double Machine", tripleAuto_options)
-Class.tripleAutoGatlingGun_RG_AR = makeAuto("gatlingGun_RG", "Triple Auto-Gatling Gun", tripleAuto_options)
+Class.tripleAutoBlaster_RG_AR = makeAuto("blaster_RG", "Triple Auto-Blaster", preset.tripleAuto)
+Class.tripleAutoDoubleMachine_RG_AR = makeAuto("doubleMachine_RG", "Triple Auto-Double Machine", preset.tripleAuto)
+Class.tripleAutoGatlingGun_RG_AR = makeAuto("gatlingGun_RG", "Triple Auto-Gatling Gun", preset.tripleAuto)
 Class.tripleBlaster_RG_AR = {
     PARENT: "genericTank",
     LABEL: "Triple Blaster",

@@ -361,10 +361,6 @@ Class.miniboss = {
     CONTROLLERS: ["nearestDifferentMaster", ["minion", {turnwiserange: 360}], "canRepel"],
     AI: { NO_LEAD: true },
 }
-Class.ramMiniboss = {
-    PARENT: "genericBoss",
-    CONTROLLERS: ["nearestDifferentMaster", "canRepel", "mapTargetToGoal"],
-}
 
 // Aura Components
 Class.auraBase = {

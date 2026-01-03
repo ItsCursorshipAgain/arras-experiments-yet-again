@@ -1196,22 +1196,6 @@ Class.hp = {
 }
 
 // misc tanks, cont.
-Class.bacteriaChildren = {
-    PARENT: "genericTank",
-    LABEL: 'Bacteria',
-    FACING_TYPE: 'smoothToTarget',
-    CONTROLLERS: ['mapTargetToGoal'],
-    BODY: {
-        SPEED: base.SPEED * 0.5
-    },
-    CONNECT_CHILDREN_ON_CAMERA: true,
-    CLEAR_ON_MASTER_UPGRADE: false,
-    GUNS: [
-        {
-            POSITION: { LENGTH: 5, WIDTH: 32.00000047683716, ASPECT: 1, X: 0, Y: 0, ANGLE: 0 },
-        },
-    ],
-};
 Class.bacteria = {
     PARENT: "genericTank",
     LABEL: 'Bacteria',
@@ -1224,13 +1208,34 @@ Class.bacteria = {
                 WIDTH: 32
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.bacteria]),
-                TYPE: "bacteriaChildren",
+                SHOOT_SETTINGS: combineStats([g.basic, {reload: 2, recoil: 0.25, shudder: 0.1, size: 0.62, speed: 2}]),
+                TYPE: "bacteriaClone",
                 NO_LIMITATIONS: true,
-            },
-        },
+                WAIT_TO_CYCLE: true,
+            }
+        }
+    ]
+}
+Class.bacteriaClone = {
+    PARENT: "genericTank",
+    LABEL: 'Bacteria',
+    FACING_TYPE: 'smoothToTarget',
+    CONTROLLERS: ['mapTargetToGoal'],
+    BODY: {
+        SPEED: base.SPEED * 0.5
+    },
+    CONNECT_CHILDREN_ON_CAMERA: true,
+    CLEAR_ON_MASTER_UPGRADE: false,
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 5,
+                WIDTH: 32
+            }
+        }
     ],
-};
+    //GUNS: Class.bacteria.GUNS // server stress test mode
+}
 
 // TURKEY
 Class.turkeynose = {

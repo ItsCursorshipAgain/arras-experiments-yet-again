@@ -2,7 +2,7 @@ const {combineStats, weaponMirror} = require('./facilitators.js')
 const g = require('./gunvals.js')
 module.exports = {
 
-// GUNS
+	// GUNS
 	bird: [
 		...weaponMirror({
 			POSITION: {
@@ -31,6 +31,27 @@ module.exports = {
 			}
 		}
 	],
+	rearPelleter: [
+        ...weaponMirror({
+            POSITION: {
+                LENGTH: 19,
+                WIDTH: 2,
+                Y: -2.5,
+                ANGLE: 180
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, { recoil: 4 }, { recoil: 1.8 }]),
+                TYPE: "bullet",
+            },
+        }, {delayIncrement: 0.5}),
+        {
+            POSITION: {
+                LENGTH: 12,
+                WIDTH: 11,
+                ANGLE: 180
+            }
+        }
+    ],
 	trapGuard: [
 	    {
 	        POSITION: {
@@ -96,22 +117,22 @@ module.exports = {
 		}
 	]),
 
-// makeAuto
+	// makeAuto
 	megaAuto: {type: "megaAutoTurret", size: 12},
 	tripleAuto: {size: 6.5, x: 5.2, angle: 0, total: 3},
 	pentaAuto: {size: 5.2, x: 6.5, angle: 0, total: 5},
 	heptaAuto: {size: 4, x: 6.5, angle: 0, total: 7},
 
-// makeDrive
+	// makeDrive
 	swarmDrive: {hatType: "triangleHat", hatSize: 8, hatAngle: 180},
 
-// makeOver
+	// makeOver
 	hybrid: {count: 1, independent: true, cycle: false},
 	hybridBehind: {count: 1, independent: true, cycle: false, inFront: false},
 	sideOver: {angle: 90},
 	cross: {count: 3, angle: 90},
 
-// makeWhirlwind
+	// makeWhirlwind
 	prophet: {satelliteType: "squareSatellite"},
 
 }

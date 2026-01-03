@@ -207,15 +207,15 @@ Class.tgsSunchip = {
         BLIND: true,
         FARMER: true,
     },
-    TURRETS: [{
-        POSITION: [20 * Math.SQRT1_2, 0, 0, 45, 0, 1],
-        TYPE: ["squareHat", { MIRROR_MASTER_ANGLE: true }]
+    PROPS: [{
+        POSITION: [20 * Math.SQRT1_2, 0, 0, 45, 1],
+        TYPE: "squareHat"
     },{
-        POSITION: [20 * Math.SQRT1_2 ** 2, 0, 0, 0, 0, 1],
-        TYPE: ["squareHat", { MIRROR_MASTER_ANGLE: true }]
+        POSITION: [20 * Math.SQRT1_2 ** 2, 0, 0, 0, 1],
+        TYPE: "squareHat"
     },{
-        POSITION: [20 * Math.SQRT1_2 ** 3, 0, 0, 45, 0, 1],
-        TYPE: ["squareHat", { MIRROR_MASTER_ANGLE: true }]
+        POSITION: [20 * Math.SQRT1_2 ** 3, 0, 0, 45, 1],
+        TYPE: "squareHat"
     }]
 }
 Class.tgsEggchip = {
@@ -230,10 +230,14 @@ Class.tgsEggchip = {
         BLIND: true,
         FARMER: true,
     },
-    TURRETS: [{
-        POSITION: [10, 0, 0, 45, 0, 1],
-        TYPE: "circleHat"
-    }]
+    PROPS: [
+        {
+            TYPE: "circleHat",
+            POSITION: {
+                SIZE: 10
+            }
+        }
+    ]
 }
 Class.tgsBoss = {
     PARENT: "miniboss",

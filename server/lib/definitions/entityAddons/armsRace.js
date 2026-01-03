@@ -18,34 +18,6 @@ storm_options = {suffix: "storm", type: "swarmAutoTurret_AR", hatType: "stormSqu
 cruiserstorm_options = {suffix: "storm", type: "swarmAutoTurret_AR", hatType: "stormTriangle_AR", hatSize: 8, hatAngle: 180}
 
 // Gun Presets
-bird_rear = [
-    ...weaponMirror({
-        POSITION: {
-            LENGTH: 16,
-            WIDTH: 9,
-            ANGLE: 153,
-            DELAY: 0.1
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
-            TYPE: "bullet",
-            LABEL: "Thruster"
-        }
-    }),
-    {
-        POSITION: {
-            LENGTH: 18,
-            WIDTH: 9,
-            ANGLE: 180,
-            DELAY: 0.6
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
-            TYPE: "bullet",
-            LABEL: "Thruster"
-        }
-    }
-]
 birdSuper_rear = [
     ...weaponMirror([{
         POSITION: {
@@ -84,50 +56,6 @@ birdSuper_rear = [
             SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: 0.5 }]),
             TYPE: "bullet",
             LABEL: "Thruster"
-        }
-    }
-]
-pelleter_rear = [
-    ...weaponMirror({
-        POSITION: {
-            LENGTH: 19,
-            WIDTH: 2,
-            Y: -2.5,
-            ANGLE: 180
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, { recoil: 4 }, { recoil: 1.8 }]),
-            TYPE: "bullet",
-        },
-    }, { delayIncrement: 0.5 }),
-    {
-        POSITION: {
-            LENGTH: 12,
-            WIDTH: 11,
-            ANGLE: 180
-        }
-    }
-]
-trapGuard_rear = [
-    {
-        POSITION: {
-            LENGTH: 13,
-            WIDTH: 8,
-            ANGLE: 180
-        }
-    },
-    {
-        POSITION: {
-            LENGTH: 4,
-            WIDTH: 8,
-            ASPECT: 1.7,
-            X: 13,
-            ANGLE: 180
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.trap]),
-            TYPE: "trap",
-            STAT_CALCULATOR: "trap"
         }
     }
 ]
@@ -664,7 +592,7 @@ Class.blower_AR = {
     DANGER: 7,
     GUNS: [
         ...Class.destroyer.GUNS,
-        ...pelleter_rear
+        ...preset.rearPelleter
     ]
 }
 Class.bonker_AR = {
@@ -722,7 +650,7 @@ Class.buttbuttin_AR = {
     BODY: Class.assassin.BODY,
     GUNS: [
         ...Class.assassin.GUNS,
-        ...pelleter_rear
+        ...preset.rearPelleter
     ]
 }
 Class.captain_AR = {
@@ -876,7 +804,7 @@ Class.cockatiel_AR = {
                 X: 13
             }
         },
-        ...bird_rear
+        ...preset.bird
     ]
 }
 Class.combo_AR = {
@@ -1059,7 +987,7 @@ Class.defect_AR = {
                 ALT_FIRE: true
             }
         },
-        ...bird_rear
+        ...preset.bird
     ]
 }
 Class.deviation_AR = makeOver("machineTrapper_AR", "Deviation", preset.hybrid)
@@ -2294,7 +2222,7 @@ Class.peashooter_AR = {
                 STAT_CALCULATOR: "swarm"
             }
         },
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 Class.pentaseer_AR = {
@@ -3015,7 +2943,7 @@ Class.triTrapGuard_AR = {
                 STAT_CALCULATOR: "trap",
             }
         }]),
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 Class.underdrive_AR = makeDrive("underseer", {label: "Underdrive"})
@@ -3523,7 +3451,7 @@ Class.avian_AR = {
                 X: 6.5
             }
         },
-        ...bird_rear
+        ...preset.bird
     ]
 }
 Class.bansheedrive_AR = makeDrive("banshee")
@@ -3613,7 +3541,7 @@ Class.butcher_AR = {
                 TYPE: "bullet"
             }
         },
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 Class.carrierdrive_AR = makeDrive("carrier", preset.driveSwarm)
@@ -4013,7 +3941,7 @@ Class.executor_AR = {
                 ASPECT: -2.2
             }
         },
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 Class.foredrive_AR = makeDrive("foreman_AR", {label: "Foredrive"})
@@ -4730,25 +4658,8 @@ Class.orifice_AR = {
     LABEL: "Orifice",
     DANGER: 8,
     GUNS: [
-        {
-            POSITION: {
-                LENGTH: 19,
-                WIDTH: 8
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 5.5,
-                WIDTH: 8,
-                ASPECT: -1.8,
-                X: 6.5
-            }
-        },
-        ...pelleter_rear
+        ...Class.single.GUNS,
+        ...preset.rearPelleter
     ]
 }
 Class.overangle_AR = makeOver("triAngle", "Overangle", preset.sideOver)
@@ -5060,7 +4971,7 @@ Class.ransacker_AR = {
                 TYPE: "bullet"
             }
         },
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 Class.renovator_AR = {
@@ -5398,7 +5309,7 @@ Class.tommy_AR = {
                 TYPE: "bullet"
             }
         }, 3, { lengthOffset: 2, delayIncrement: 1/3 }),
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 Class.triWhirlGuard_AR = makeWhirlwind("triTrapGuard_AR", {label: "Tri-Whirl Guard"})
@@ -5723,7 +5634,7 @@ Class.custodian_AR = {
                 X: 6.5
             }
         },
-        ...trapGuard_rear
+        ...preset.trapGuard
     ]
 }
 

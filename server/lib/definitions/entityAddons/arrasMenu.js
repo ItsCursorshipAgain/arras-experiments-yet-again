@@ -64,7 +64,7 @@ Class.arrasMenu_special = makeMenu("Special Menu", {upgrades: [Config.spawn_clas
     Class.arrasMenu_shinyMember = makeMenu("Shiny Member Menu", {upgrades: ["eggGen", "arrasMenu_specialTanks", "arrasMenu_bosses", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_diep", "dreadnought_dreadsV2", "tracker3", "meOnMyWayToDoYourMom", "meDoingYourMom", "rapture", "bigBalls", "tetraGunner", "worstTank", "machineShot"]})
 
 // YouTuber
-Class.arrasMenu_youtuberHat = makeHat(3, { color: "pureWhite"})
+Class.arrasMenu_youtuberHat = makeHat(3, {color: "pureWhite"})
 Class.arrasMenu_youtuber = {
     PARENT: "genericTank",
     LABEL: "YouTuber",

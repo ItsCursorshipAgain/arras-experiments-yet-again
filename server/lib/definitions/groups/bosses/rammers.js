@@ -1,5 +1,10 @@
 const {base} = require('../../constants.js')
 
+Class.ramMiniboss = {
+    PARENT: "genericBoss",
+    CONTROLLERS: ["nearestDifferentMaster", "canRepel", "mapTargetToGoal"],
+}
+
 Class.bob = {
     PARENT: "ramMiniboss",
     LABEL: "Bob",
