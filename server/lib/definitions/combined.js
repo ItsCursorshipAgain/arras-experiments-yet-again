@@ -56,7 +56,7 @@ class definitionCombiner {
             let isDirectory = fs.statSync(filepath).isDirectory();
             // If we are fooled and it's a folder, restart it's court
             if (isDirectory) {
-                this.loadGroups(filepath, logs);
+                this.loadGroups(filepath, log);
             }
             // Now we don't want any html files in!
             if (!filename.endsWith('.js')) continue;
