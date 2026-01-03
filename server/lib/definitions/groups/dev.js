@@ -244,6 +244,10 @@ Class.menu_bosses = makeMenu("Bosses", {upgrades: ["sentries", "elites", "mystic
 Class.menu_addons = makeMenu("Addons", {tooltip: "Content that is (usually) not part of Open Source Arras but was added by someone else."})
 Class.menu_testing = makeMenu("Testing", {upgrades: ["diamondShape", "miscTest", "mmaTest", "vulnturrettest", "onTest", "alphaGunTest", "strokeWidthTest", "testLayeredBoss", "tooltipTank", "turretLayerTesting", "bulletSpawnTest", "propTest", "weaponArrayTest", "radialAutoTest", "imageShapeTest", "screenShakeTest", "turretStatScaleTest", "auraBasic", "auraHealer", "ghoster", "gunBenchmark", "switcheroo", "armyOfOne", "vanquisher", "mummifier", "syncWithTankTest", "airblast", "angleseer", "backwardsexports"], tooltip: "A large selection of tanks that use many of the features of Open Source Arras.\n" + "WARNING: There are a lot of tanks in here and having this menu open may cause noticeable frame drops!"})
 
+if (Config.siege) {
+    Class.menu_tanks.UPGRADES_TIER_0 = [Config.spawn_class, "menu_unused", "menu_removed", "menu_mapEntities", "menu_motherships", "menu_fun", "smasher", "undercoverCop", "arenaCloser", "underseer"]
+}
+
 // airblast testing
 Class.airblastBullet = { PARENT: "bullet", ALPHA: 0.5, BODY: { KNOCKBACK: 30 } }
 Class.airblast = {
