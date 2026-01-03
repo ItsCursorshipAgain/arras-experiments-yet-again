@@ -1,5 +1,5 @@
-const {combineStats, makeAura, makeAuto, makeHat, makeTurret, LayeredBoss, setTurretProjectileRecoil, skillSet, weaponArray, weaponMirror} = require('../../facilitators.js')
-const {base, smshskl, statnames} = require('../../constants.js')
+const {combineStats, makeAura, makeHat, skillSet, weaponArray, weaponMirror} = require('../../facilitators.js')
+const {base, smshskl} = require('../../constants.js')
 const g = require('../../gunvals.js')
 
 // Taureon
