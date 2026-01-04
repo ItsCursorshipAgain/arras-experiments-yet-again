@@ -78,7 +78,7 @@ Class.arrasMenu_youtuber = {
     },
     PROPS: [
         {
-            TYPE: ["triangleHat", {color: "pureWhite"}],
+            TYPE: ["triangleHat", {COLOR: "pureWhite"}],
             POSITION: {
                 SIZE: 6,
                 LAYER: 1

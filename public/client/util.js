@@ -478,7 +478,7 @@ const util = (function() {
             if (data.isProp) {
                 return {
                     index: image.index,
-                    color: image.color,
+                    color: data.color,
                     borderless: data.borderless,
                     drawFill: data.drawFill,
                     layer: data.layer,
