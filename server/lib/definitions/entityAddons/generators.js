@@ -1,4 +1,4 @@
-const { combineStats } = require("../facilitators.js")
+const {combineStats} = require("../facilitators.js")
 
 // Generators
 const shapeGeneratorUpgrades = [

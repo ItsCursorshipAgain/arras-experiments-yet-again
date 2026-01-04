@@ -1,6 +1,7 @@
 const {combineStats, LayeredBoss, setTurretProjectileRecoil} = require('../../facilitators.js')
 const {base} = require('../../constants.js')
 const g = require('../../gunvals.js')
+const preset = require('../../presets.js')
 
 // Since this is the first file loaded from groups, we'll also load the important stuff we need for every other file before this so nothing breaks
 require('../generics.js')
@@ -25,6 +26,7 @@ Class.celestial = {
         SPEED: base.SPEED * 0.5,
         DAMAGE: 12,
     },
+    ON: [preset.retrograde_self_destruct]
 }
 Class.rogueCelestial = {
     PARENT: "celestial",
@@ -377,7 +379,7 @@ ptah.addLayer({turret: {
 }});
 
 // Rogue Celestials
-let julius = new LayeredBoss(null, "Julius", "celestial", 9, "darkGrey", "baseTrapTurret", 6.5, 5.5);
+let julius = new LayeredBoss(null, "Julius", "rogueCelestial", 9, "darkGrey", "baseTrapTurret", 6.5, 5.5); // ??? / Charon
 julius.addLayer({turret: {
     POSITION: [8.5, 9, 0, null, 180, 0],
     TYPE: "juliusLowerTurret",
@@ -387,7 +389,7 @@ julius.addLayer({turret: {
     TYPE: [setTurretProjectileRecoil("launcherTurret", 0.82), {GUN_STAT_SCALE: {health: 1.3, damage: 1.3, maxSpeed: 0.82}}],
 }}, true, 6);
 
-let genghis = new LayeredBoss(null, "Genghis", "celestial", 9, "darkGrey", "baseTrapTurret", 6.5, 5.5);
+let genghis = new LayeredBoss(null, "Genghis", "rogueCelestial", 9, "darkGrey", "baseTrapTurret", 6.5, 5.5); // Tyr
 genghis.addLayer({turret: {
     POSITION: [8.5, 9, 0, null, 180, 0],
     TYPE: "genghisLowerTurret",
@@ -397,7 +399,7 @@ genghis.addLayer({turret: {
     TYPE: ["auto4gun", {GUN_STAT_SCALE: {speed: 1.2, maxSpeed: 0.85, health: 1.15, damage: 1.2, resist: 1.2}}],
 }}, true, 6);
 
-let napoleon = new LayeredBoss(null, "Napoleon", "celestial", 9, "darkGrey", "baseTrapTurret", 6.5, 5.5);
+let napoleon = new LayeredBoss(null, "Napoleon", "rogueCelestial", 9, "darkGrey", "baseTrapTurret", 6.5, 5.5); // Fiolnir
 napoleon.addLayer({turret: {
     POSITION: [8.5, 9, 0, null, 180, 0],
     TYPE: "napoleonLowerTurret",

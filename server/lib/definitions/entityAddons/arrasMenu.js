@@ -1,5 +1,5 @@
-const { combineStats, makeHat, makeMenu } = require('../facilitators.js')
-const { base } = require('../constants.js')
+const {combineStats, makeHat, makeMenu} = require('../facilitators.js')
+const {base} = require('../constants.js')
 const g = require('../gunvals.js')
 
 // Presets
@@ -37,12 +37,17 @@ const healerMenuTurrets = [
         }
     }
 ]
+if (!Config.tiered_food) {
+    dreadnoughts = "dreadnought_dreadsV1"
+} else {
+    dreadnoughts = "dreadnought_dreadsV2"
+}
 
 // Developer tank that doesn't upgrade to anything
 Class.arrasMenu_developer = {PARENT: "developer", UPGRADES_TIER_0: []}
 
 // Menus
-Class.arrasMenu_special = makeMenu("Special Menu", {upgrades: [Config.spawn_class, "arrasMenu_gameAdmin", "eggGen", "arrasMenu_specialTanks", "arrasMenu_bosses", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_memes", "dreadnought_dreadsV1", "arrasMenu_shinyMember"]})
+Class.arrasMenu_special = makeMenu("Special Menu", {upgrades: [Config.spawn_class, "arrasMenu_gameAdmin", "eggGen", "arrasMenu_specialTanks", "arrasMenu_bosses", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_memes", dreadnoughts, "arrasMenu_shinyMember"]})
     Class.arrasMenu_gameAdmin = makeMenu("Game Admin Menu", {upgrades: [Config.spawn_class, "arrasMenu_gameMod", "spectator", "guillotine", "banHammer"/*, "arrasMenu_nostalgia", "arrasMenu_scrapped"*/]})
         Class.arrasMenu_gameMod = makeMenu("Game Mod Menu", {upgrades: [Config.spawn_class, "arrasMenu_betaTester", "spectator", "guillotine"/*, "arrasMenu_nostalgia", "arrasMenu_scrapped"*/]})
             Class.arrasMenu_betaTester = makeMenu("Beta Tester Menu", {upgrades: [Config.spawn_class/*, "arrasMenu_spectator"*/, "arrasMenu_tankChanges"/*, "arrasMenu_nostalgia", "arrasMenu_scrapped"*/]})
@@ -61,9 +66,9 @@ Class.arrasMenu_special = makeMenu("Special Menu", {upgrades: [Config.spawn_clas
         Class.arrasMenu_adminTanks = makeMenu("Admin Tanks", {upgrades: ["arrasMenu_developer", "cxATMG", "damoclone", "machineShot", "fat456", "wifeBeater"]})
         Class.arrasMenu_misc = makeMenu("Misc", {upgrades: [/*"theAmalgamation", "theConglomerate", "schoolShooter", "average4tdmScore", "averageL39Hunt", */"tracker3", "meOnMyWayToDoYourMom", "meDoingYourMom", "rapture", "bigBalls", "tetraGunner", "worstTank"/*, "genericEntity", "quadCyclone", "beeman"*/, "heptaAutoBasic", "alas"]})
         Class.arrasMenu_digdig = makeMenu("DigDig", {upgrades: ["digDigSmile", "digDigSmile_kirk", "digDigFrown", "digDigFrown_kirk"]})
-    Class.arrasMenu_shinyMember = makeMenu("Shiny Member Menu", {upgrades: ["eggGen", "arrasMenu_specialTanks", "arrasMenu_bosses", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_diep", "dreadnought_dreadsV2", "tracker3", "meOnMyWayToDoYourMom", "meDoingYourMom", "rapture", "bigBalls", "tetraGunner", "worstTank", "machineShot"]})
+    Class.arrasMenu_shinyMember = makeMenu("Shiny Member Menu", {upgrades: ["eggGen", "arrasMenu_specialTanks", "arrasMenu_bosses", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_diep", dreadnoughts, "tracker3", "meOnMyWayToDoYourMom", "meDoingYourMom", "rapture", "bigBalls", "tetraGunner", "worstTank", "machineShot"]})
 
-// linked boss menus below are placeholders until we get the arras'd version of them (celestial/elite/strange bosses, the former rigged to self-destruct in 10 seconds)
+// linked boss menus below are placeholders until we get the arras'd version of them (celestial/elite/strange bosses)
 Class.arrasMenu_retrograde = makeMenu("Retrograde", {upgrades: ["arrasMenu_diep", "arrasMenu_digdig", "menu_celestials", "menu_elites", "menu_mysticals", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_miscRetrograde"]})
 Class.arrasMenu_miscRetrograde = makeMenu("Misc Retrograde", {upgrades: ["tracker3", "tetraGunner", "worstTank"]})
 

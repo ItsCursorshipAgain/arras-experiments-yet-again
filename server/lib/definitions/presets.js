@@ -117,6 +117,19 @@ module.exports = {
 		}
 	]),
 
+	// ON
+	retrograde_self_destruct: {
+        event: 'define',
+        handler: ({ body }) => {
+            if (Config.retrograde && body.socket && !body.socket.permissions) {
+                body.sendMessage("WARNING: This tank will self-destruct in 10 seconds!");
+                setTimeout(() => {
+                    body.destroy();
+                }, 10_000)
+            }
+        }
+    },
+
 	// makeAuto
 	megaAuto: {type: "megaAutoTurret", size: 12},
 	tripleAuto: {size: 6.5, x: 5.2, angle: 0, total: 3},

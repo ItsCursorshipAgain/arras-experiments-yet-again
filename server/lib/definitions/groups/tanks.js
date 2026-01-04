@@ -1354,7 +1354,7 @@ Class.annihilator = {
     ]
 }
 Class.armsman = makeOver("rifle", "Armsman", preset.hybrid)
-Class.architect = makeRadialAuto("architectGun", {isTurret: true, danger: 7, size: 12, label: "Architect", body: {SPEED: 1.1 * base.SPEED}})
+Class.architect = makeRadialAuto("architectGun", {isTurret: true, danger: 7, size: 12, label: "Architect", body: {SPEED: 1.1 * base.SPEED}}) // todo: fix this
 Class.assembler = {
     PARENT: "genericTank",
     DANGER: 7,
@@ -3203,9 +3203,10 @@ Class.halfNHalf = {
         },
         {
             POSITION: {
-                LENGTH: 24,
-                WIDTH: 8,
-                ASPECT: 1.5,
+                LENGTH: 14,
+                WIDTH: 9.5,
+                ASPECT: 1.25,
+                X: 8,
                 ANGLE: 180
             },
             PROPERTIES: {

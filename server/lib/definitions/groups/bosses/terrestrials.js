@@ -1,6 +1,7 @@
 const {combineStats, LayeredBoss, setTurretProjectileRecoil} = require('../../facilitators.js')
 const {base} = require('../../constants.js')
 const g = require('../../gunvals.js')
+const preset = require('../../presets.js')
 
 Class.terrestrial = {
     PARENT: "miniboss",
@@ -18,6 +19,7 @@ Class.terrestrial = {
         SPEED: base.SPEED * 0.7,
         DAMAGE: 9,
     },
+    ON: [preset.retrograde_self_destruct]
 }
 
 let ares = new LayeredBoss(null, "Ares", "terrestrial", 7, "purple", "terrestrialTrapTurret", 7, 5.5)

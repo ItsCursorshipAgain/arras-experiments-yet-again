@@ -1,6 +1,7 @@
 const {combineStats, LayeredBoss, setTurretProjectileRecoil} = require('../../facilitators.js')
 const {base} = require('../../constants.js')
 const g = require('../../gunvals.js')
+const preset = require('../../presets.js')
 
 Class.eternal = {
     PARENT: "miniboss",
@@ -18,6 +19,7 @@ Class.eternal = {
         SPEED: base.SPEED * 0.15,
         DAMAGE: 18,
     },
+    ON: [preset.retrograde_self_destruct]
 }
 
 let kronos = new LayeredBoss(null, "Kronos", "eternal", 11, "veryLightGrey", "baseTrapTurret", 6, 5.5)
