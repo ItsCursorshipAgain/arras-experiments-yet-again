@@ -351,6 +351,10 @@ Class.pen_AR = {
             POSITION: {
                 LENGTH: 20,
                 WIDTH: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard]),
+                TYPE: "bullet"
             }
         },
         {
@@ -359,6 +363,11 @@ Class.pen_AR = {
                 WIDTH: 8,
                 ASPECT: 1.7,
                 X: 13
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap]),
+                TYPE: "trap",
+                STAT_CALCULATOR: "trap"
             }
         }
     ]

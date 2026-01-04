@@ -12,7 +12,6 @@ const mystical_gun_position = {
 Class.sorcerer = {
     PARENT: "miniboss",
     LABEL: "Sorcerer",
-    NAME: "Sorcerer",
     DISPLAY_NAME: false,
     DANGER: 7,
     SHAPE: 0,
@@ -42,7 +41,6 @@ Class.sorcerer = {
 Class.summoner = {
     PARENT: "miniboss",
     LABEL: "Summoner",
-    NAME: "Summoner",
     DISPLAY_NAME: false,
     DANGER: 8,
     SHAPE: 4,
@@ -72,7 +70,6 @@ Class.summoner = {
 Class.enchantress = {
     PARENT: "miniboss",
     LABEL: "Enchantress",
-    NAME: "Enchantress",
     DISPLAY_NAME: false,
     DANGER: 8,
     SHAPE: 3.5,
@@ -102,7 +99,6 @@ Class.enchantress = {
 Class.exorcistor = {
     PARENT: "miniboss",
     LABEL: "Exorcistor",
-    NAME: "Exorcistor",
     DISPLAY_NAME: false,
     DANGER: 8,
     SHAPE: 5.5,
@@ -132,7 +128,6 @@ Class.exorcistor = {
 Class.shaman = {
     PARENT: "miniboss",
     LABEL: "Shaman",
-    NAME: "Shaman",
     DISPLAY_NAME: false,
     DANGER: 8,
     SHAPE: 6,
@@ -162,7 +157,6 @@ Class.shaman = {
 Class.sangoma = {
     PARENT: "miniboss",
     LABEL: "Sangoma",
-    NAME: "Sangoma",
     DISPLAY_NAME: false,
     DANGER: 9,
     SHAPE: 7.5,
@@ -195,7 +189,6 @@ Class.sangoma = {
 Class.preacher = {
     PARENT: "miniboss",
     LABEL: "Preacher",
-    NAME: "Preacher",
     DISPLAY_NAME: false,
     DANGER: 9,
     SHAPE: 8,
@@ -228,7 +221,6 @@ Class.preacher = {
 Class.herbalist = {
     PARENT: "miniboss",
     LABEL: "Herbalist",
-    NAME: "Herbalist",
     DISPLAY_NAME: false,
     DANGER: 9,
     SHAPE: 9.5,
@@ -261,7 +253,6 @@ Class.herbalist = {
 Class.witch = {
     PARENT: "miniboss",
     LABEL: "Witch",
-    NAME: "Witch",
     DISPLAY_NAME: false,
     DANGER: 8,
     SHAPE: 3.5,
@@ -296,7 +287,6 @@ Class.witch = {
 Class.thaumaturge = {
     PARENT: "miniboss",
     LABEL: "Thaumaturge",
-    NAME: "Elite Skimmer",
     DISPLAY_NAME: false,
     DANGER: 11,
     SHAPE: 4,
