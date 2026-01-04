@@ -1,4 +1,4 @@
-const {combineStats, makeAuto, makeDrive, makeHat, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../../facilitators.js')
+const {combineStats, makeAuto, makeDrive, makeHat, makeMenu, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../../facilitators.js')
 const {base, statnames} = require('../../constants.js')
 const g = require('../../gunvals.js')
 const preset = require('../../presets.js')
@@ -4131,7 +4131,7 @@ Class.hewnTriple_AR = {
                 ANGLE: -25
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.spam, g.doubleTwin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.spam, g.doubleTwin, g.tripleTwin, g.hewnDouble, { recoil: 1.15 }]),
                 TYPE: "bullet"
             }
         }, { delayIncrement: 0.5 }),
@@ -4142,7 +4142,7 @@ Class.hewnTriple_AR = {
                 Y: 5.5
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.doubleTwin, g.hewnDouble]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin, g.hewnDouble]),
                 TYPE: "bullet"
             }
         }, { delayIncrement: 0.5 }), 3)
@@ -5385,7 +5385,7 @@ Class.tripleFlankTwin_AR = {
                 Y: 5.5
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.doubleTwin]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin]),
                 TYPE: "bullet"
             }
         }, { delayIncrement: 0.5 })
@@ -5404,7 +5404,7 @@ Class.tripleGunner_AR = {
                 DELAY: 0.5
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.doubleTwin, g.gunner, { speed: 1.2 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin, g.gunner, { speed: 1.2 }]),
                 TYPE: "bullet"
             }
         },
@@ -5415,7 +5415,7 @@ Class.tripleGunner_AR = {
                 Y: 3.75
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.doubleTwin, g.gunner, { speed: 1.2 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin, g.gunner, { speed: 1.2 }]),
                 TYPE: "bullet"
             }
         }
@@ -5435,7 +5435,7 @@ Class.tripleHelix_AR = {
                 Y: -5
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.doubleTwin, g.desmos]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin, g.desmos]),
                 TYPE: ["bullet", {CONTROLLERS: ['snake']}]
             },
         },
@@ -5447,7 +5447,7 @@ Class.tripleHelix_AR = {
                 Y: 5
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.doubleTwin, g.desmos]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin, g.desmos]),
                 TYPE: ["bullet", {CONTROLLERS: [['snake', {invert: true}]]}]
             },
         },
@@ -5610,7 +5610,7 @@ Class.warkwarkwark_AR = {
                 ANGLE: 5
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.spam, g.doubleTwin, g.doubleTwin]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.spam, g.doubleTwin, g.tripleTwin]),
                 TYPE: "trap",
                 STAT_CALCULATOR: "trap"
             }
@@ -5661,6 +5661,9 @@ if (!use_original_tree) {
         Class.assassin.UPGRADES_TIER_3.splice(i, 1)
     }
 }*/
+
+Class.menu_unused.UPGRADES_TIER_0.push("menu_unused_AR")
+Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "duster_AR"], boxLabel: "Tier 4 (Lv.45+)"})
 
 //Class.basic.UPGRADES_TIER_1
     //Class.basic.UPGRADES_TIER_2

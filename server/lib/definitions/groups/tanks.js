@@ -144,7 +144,7 @@ Class.machineGun = {
                 X: 8
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { size: 0.92 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, {size: 0.92}]),
                 TYPE: "bullet"
             }
         }
@@ -328,6 +328,25 @@ Class.assassin = {
 Class.auto3 = makeRadialAuto("autoTankGun", {isTurret: true, danger: 6, label: "Auto-3"})
 Class.autoTrapper = makeAuto("trapper")
 Class.autoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "hexaTrapper"]
+Class.blaster = {
+    PARENT: "genericTank",
+    LABEL: "Blaster",
+    DANGER: 6,
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 13,
+                WIDTH: 8,
+                ASPECT: 1.9,
+                X: 4
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.blaster]),
+                TYPE: "bullet"
+            }
+        }
+    ]
+}
 Class.builder = {
     PARENT: "genericTank",
     LABEL: "Builder",
@@ -411,6 +430,22 @@ Class.doubleFlail = {
         }]
     }, 2)
 }
+Class.doubleMachine = {
+    PARENT: "genericTank",
+    LABEL: "Double Machine",
+    GUNS: weaponArray({
+        POSITION: {
+            LENGTH: 12,
+            WIDTH: 10,
+            ASPECT: 1.4,
+            X: 8
+        },
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, {size: 0.92}, g.flankGuard]),
+            TYPE: "bullet"
+        }
+    }, 2)
+}
 Class.doubleTwin = {
     PARENT: "genericTank",
     LABEL: "Double Twin",
@@ -440,6 +475,28 @@ Class.flangle = {
         }]
     }],
     SKILL_CAP: [dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl]
+}
+Class.gatlingGun = {
+    PARENT: "genericTank",
+    LABEL: "Gatling Gun",
+    DANGER: 6,
+    /*BODY: {
+        FOV: base.FOV * 1.25
+    },*/
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 14,
+                WIDTH: 9.5,
+                ASPECT: 1.25,
+                X: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.focal]),
+                TYPE: "bullet"
+            }
+        }
+    ]
 }
 Class.gunner = {
     PARENT: "genericTank",
@@ -2705,6 +2762,33 @@ Class.flace = {
     }],
     SKILL_CAP: [dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl, dfltskl],
 }
+Class.flamethrower = {
+    PARENT: "genericTank",
+    LABEL: "Flamethrower",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 3,
+                WIDTH: 20,
+                ASPECT: 0.95,
+                X: 13
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.blaster, [1.75, 1.33, 2, 0.25, 10, 0.2, 4, 2, 0, 3, 0.25, 1, 1, 5]]),
+                TYPE: "growBullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 9,
+                WIDTH: 12,
+                ASPECT: 2,
+                X: 4
+            }
+        }
+    ]
+}
 Class.flooster = {
     PARENT: "genericFlail",
     LABEL: "Flooster",
@@ -4702,7 +4786,8 @@ Class.spreadshot = {
 }
 Class.spreadshot_old = {
     PARENT: "genericTank",
-    LABEL: "Old Spreadshot",
+    LABEL: "Spreadshot",
+    UPGRADE_LABEL: "Old Spreadshot",
     DANGER: 7,
     GUNS: [
         ...weaponMirror([{
@@ -5633,6 +5718,9 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
     Class.machineGun.UPGRADES_TIER_2 = ["artillery", "minigun", "gunner", "sprayer"]
         Class.minigun.UPGRADES_TIER_3 = ["streamliner", "nailgun", "cropDuster", "barricade", "vulture"]
         Class.sprayer.UPGRADES_TIER_3 = ["redistributor", "phoenix", "atomizer", "focal"]
+        Class.blaster.UPGRADES_TIER_3 = [/*"triBlaster", "splasher", */"flamethrower"]
+        Class.gatlingGun.UPGRADES_TIER_3 = ["focal", /*"accurator", "halfNHalf"*/]
+        Class.doubleMachine.UPGRADES_TIER_3 = [/*"tripleMachine", "halfNHalf"*/]
 
     Class.flankGuard.UPGRADES_TIER_2 = ["hexaTank", "triAngle", "auto3", "trapGuard", "triTrapper"]
         Class.flankGuard.UPGRADES_TIER_3 = ["tripleTwin", "quadruplex"]
@@ -5677,7 +5765,11 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
         Class.undertow.UPGRADES_TIER_3 = [/*"riptide"*/]
         Class.repeater.UPGRADES_TIER_3 = ["iterator", "duplicator"]
 
-if (Config.siege == true) {
+if (Config.retrograde) {
+    Class.machineGun.UPGRADES_TIER_2.push("blaster", "gatlingGun", "doubleMachine")
+}
+
+if (Config.siege) {
     Class.basic.UPGRADES_TIER_2 = ["healer"]
     Class.director.UPGRADES_TIER_2 = ["overseer", "cruiser", "spawner"]
     Class.whirlwind.UPGRADES_TIER_3 = ["hexaWhirl", "munition", "whirl3", "whirlGuard", "vortex"]
