@@ -553,15 +553,15 @@ class Entity extends EventEmitter {
         if (set.mockup != null) {
             this.mockup = set.mockup;
         }
+        if (overrideDefs) {
+            this.defs = [];
+            for (let def of defs) this.defs.push(def);
+        }
         if (emitEvent) {
             this.emit('define', { body: this, set });
             // We dont want a broken camera
             this.cameraOverrideX = null;
             this.cameraOverrideY = null;
-        }
-        if (overrideDefs) {
-            this.defs = [];
-            for (let def of defs) this.defs.push(def);
         }
 
         for (let branch = 1; branch < defs.length; branch++) defineSplit(defs, branch, set, this, emitEvent); // Define additional stats for other split upgrades
