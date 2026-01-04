@@ -57,11 +57,15 @@ Class.arrasMenu_special = makeMenu("Special Menu", {upgrades: [Config.spawn_clas
         Class.arrasMenu_scrapped2 = makeMenu("Scrapped Menu 2", {upgrades: ["arrasMenu_gameMod", "arrasMenu_scrapped", "mender", "infestor", "prodigy", "spawnerdrive_AR", "rimfire_AR", "productionist_AR", "vulture"]})
     Class.arrasMenu_memes = makeMenu("Memes", {upgrades: ["arrasMenu_diep", "arrasMenu_adminTanks", "arrasMenu_misc", "arrasMenu_digdig"]})
         Class.arrasMenu_diep = makeMenu("Diep Tanks", {upgrades: ["arrasMenu_diep2"]})
-            Class.arrasMenu_diep2 = makeMenu("Diep2 Menu", {upgrades: []}) // filled in by retrograde.js
+            Class.arrasMenu_diep2 = makeMenu("Diep2 Menu", {upgrades: ["blaster", "gatlingGun", "doubleMachine", "rifle_old", "buttbuttin", "blower", "quadTwin_AR", "tornado_AR", "subverter", "battery", "deathStar", "bonker", "protector", "bulwark_old"]})
         Class.arrasMenu_adminTanks = makeMenu("Admin Tanks", {upgrades: ["arrasMenu_developer", "cxATMG", "damoclone", "machineShot", "fat456", "wifeBeater"]})
-        Class.arrasMenu_misc = makeMenu("Misc", {upgrades: [/*"theAmalgamation", "theConglomerate", "schoolShooter", "average4tdmScore", "averageL39Hunt", */"tracker3", "meOnMyWayToDoYourMom", "meDoingYourMom", "rapture", "bigBalls", "tetraGunner", "worstTank"/*, "genericEntity", "quadCyclone", "beeman"*/, "heptaAutoBasic"/*, "alas"*/]})
+        Class.arrasMenu_misc = makeMenu("Misc", {upgrades: [/*"theAmalgamation", "theConglomerate", "schoolShooter", "average4tdmScore", "averageL39Hunt", */"tracker3", "meOnMyWayToDoYourMom", "meDoingYourMom", "rapture", "bigBalls", "tetraGunner", "worstTank"/*, "genericEntity", "quadCyclone", "beeman"*/, "heptaAutoBasic", "alas"]})
         Class.arrasMenu_digdig = makeMenu("DigDig", {upgrades: ["digDigSmile", "digDigSmile_kirk", "digDigFrown", "digDigFrown_kirk"]})
     Class.arrasMenu_shinyMember = makeMenu("Shiny Member Menu", {upgrades: ["eggGen", "arrasMenu_specialTanks", "arrasMenu_bosses", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_diep", "dreadnought_dreadsV2", "tracker3", "meOnMyWayToDoYourMom", "meDoingYourMom", "rapture", "bigBalls", "tetraGunner", "worstTank", "machineShot"]})
+
+// linked boss menus below are placeholders until we get the arras'd version of them (celestial/elite/strange bosses, the former rigged to self-destruct in 10 seconds)
+Class.arrasMenu_retrograde = makeMenu("Retrograde", {upgrades: ["arrasMenu_diep", "arrasMenu_digdig", "menu_celestials", "menu_elites", "menu_mysticals", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_miscRetrograde"]})
+Class.arrasMenu_miscRetrograde = makeMenu("Misc Retrograde", {upgrades: ["tracker3", "tetraGunner", "worstTank"]})
 
 // YouTuber
 Class.arrasMenu_youtuber = {
@@ -103,4 +107,4 @@ Class.arrasMenu_youtuber = {
 }
 
 // Push everything to addons
-Class.menu_addons.UPGRADES_TIER_0.push("arrasMenu_special", "arrasMenu_youtuber")
+Class.menu_addons.UPGRADES_TIER_0.push("arrasMenu_special", "arrasMenu_youtuber", "arrasMenu_retrograde")

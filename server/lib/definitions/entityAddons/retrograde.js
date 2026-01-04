@@ -5,57 +5,9 @@ const preset = require('../presets.js')
 
 // Settings
 const arras_mode = false // Set to true to make tank designs closer to how they were in arras.io's implementation of Retrograde.
-const public_retrograde_menu = false // Set to true to allow access to the Retrograde menu and everything inside it for all players
 const replace_newer_classes = false // Set to true to make the class tree replace certain entries with Retrograde equivalents
 
-// Menus
-Class.arrasMenu_diep2.UPGRADES_TIER_0.push(
-    "blaster",
-    "gatlingGun",
-    "doubleMachine",
-    "rifle_RG",
-    "buttbuttin_RG",
-    "blower_RG",
-    "quadTwin_RG",
-    "tornado_RG",
-    "subverter_RG",
-    "battery_RG",
-    "deathStar_RG",
-    "bonker_RG",
-    "protector_RG",
-    "doubleTrapGuard_RG",
-)
-Class.arrasMenu_retrograde = makeMenu("Retrograde", {upgrades: ["arrasMenu_diep", "arrasMenu_digdig", "menu_celestials", "menu_elites", "menu_mysticals", "arrasMenu_nostalgia", "arrasMenu_scrapped", "arrasMenu_miscRetrograde"]})
-Class.arrasMenu_miscRetrograde = makeMenu("Misc Retrograde", {upgrades: ["tracker3", "tetraGunner", "worstTank"]})
-// linked boss menus are placeholders until we get the arras'd version of them (celestial/elite/strange bosses, the former rigged to self-destruct in 10 seconds)
-
 // Tier 2
-Class.rifle_RG = {
-    PARENT: "genericTank",
-    LABEL: "Rifle",
-    DANGER: 6,
-    BODY: {
-        FOV: base.FOV * 1.225
-    },
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 22,
-                WIDTH: 7
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 14,
-                WIDTH: 10.5
-            }
-        }
-    ]
-}
 if (arras_mode) {
     Class.blaster.GUNS = [
         {
@@ -85,177 +37,27 @@ if (arras_mode) {
             }
         }
     ]
-}
-
-// Tier 3
-Class.accurator_RG = {
-    PARENT: "genericTank",
-    LABEL: "Accurator",
-    DANGER: 7,
-    /*BODY: {
-        FOV: 1.5 * base.FOV
-    },*/
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 8,
-                WIDTH: 8,
-                ASPECT: 0.1,
-                X: 18
-            }
-        },
+    Class.rifle.GUNS = [
         {
             POSITION: {
                 LENGTH: 22,
-                WIDTH: 8,
-                ASPECT: 1.3
+                WIDTH: 7
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.focal]),
-                TYPE: "speedBullet"
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 14,
+                WIDTH: 10.5
             }
         }
     ]
 }
-Class.autoBlaster_RG_AR = makeAuto("blaster")
-Class.autoDoubleMachine_RG_AR = makeAuto("doubleMachine")
-Class.autoGatlingGun_RG_AR = makeAuto("gatlingGun")
-Class.battery_RG = {
-    PARENT: "genericTank",
-    LABEL: "Battery",
-    DANGER: 7,
-    GUNS: [
-        ...weaponMirror([{
-            POSITION: {
-                LENGTH: 12,
-                WIDTH: 3.5,
-                Y: 7.25,
-                DELAY: 0.6
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 3.5,
-                Y: 3.75,
-                DELAY: 0.2
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
-                TYPE: "bullet"
-            }
-        }], { delayIncrement: 0.2 }),
-        {
-            POSITION: {
-                LENGTH: 20,
-                WIDTH: 3.5
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
-                TYPE: "bullet"
-            }
-        }
-    ]
-}
-Class.bonker_RG = {
-    PARENT: "genericSmasher",
-    LABEL: "Bonker",
-    SIZE: 8.5,
-    BODY: {
-        FOV: 1.2 * base.FOV,
-        HEALTH: 0.95 * base.HEALTH,
-        SPEED: 1.1 * base.SPEED,
-    },
-    TURRETS: [
-        {
-            POSITION: {
-                SIZE: 21.5,
-                ARC: 360
-            },
-            TYPE: ["hexagonHat_spin", { COLOR: "black" }]
-        }
-    ]
-}
-Class.blower_RG = {
-    PARENT: "genericTank",
-    LABEL: "Blower",
-    DANGER: 7,
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 20.5,
-                WIDTH: 14
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer]),
-                TYPE: "bullet"
-            }
-        },
-        ...preset.rearPelleter
-    ]
-}
-Class.buttbuttin_RG = {
-    PARENT: "genericTank",
-    LABEL: "Buttbuttin",
-    DANGER: 7,
-    BODY: {
-        SPEED: 0.85 * base.SPEED,
-        FOV: 1.4 * base.FOV
-    },
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 27,
-                WIDTH: 8
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 13,
-                WIDTH: 8,
-                ASPECT: -2.2
-            }
-        },
-        ...preset.rearPelleter
-    ]
-}
-Class.deathStar_RG = {
-    PARENT: "genericTank",
-    LABEL: "Death Star",
-    DANGER: 7,
-    GUNS: weaponArray([
-        {
-            POSITION: {
-                LENGTH: 20.5,
-                WIDTH: 12,
-                ANGLE: 180,
-                DELAY: 0.5
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.flankGuard, g.flankGuard]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 20.5,
-                WIDTH: 12,
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.flankGuard, g.flankGuard]),
-                TYPE: "bullet"
-            }
-        }
-    ], 3)
-}
+
+// Tier 3
 Class.doubleArtillery_RG_AR = {
     PARENT: "genericTank",
     LABEL: "Double Artillery",
@@ -382,99 +184,6 @@ Class.doubleSprayer_RG_AR = {
         }
     ], 2)
 }
-Class.doubleTrapGuard_RG = {
-    PARENT: "genericTank",
-    LABEL: "Double Trap Guard",
-    DANGER: 7,
-    GUNS: weaponMirror([
-        {
-            POSITION: {
-                LENGTH: 20,
-                WIDTH: 8,
-                Y: 5.5
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard, g.twin]),
-                TYPE: "bullet",
-            },
-        },
-        {
-            POSITION: {
-                LENGTH: 13,
-                WIDTH: 7,
-                Y: 6.25,
-                ANGLE: 180
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 4,
-                WIDTH: 7,
-                ASPECT: 1.7,
-                X: 13,
-                Y: 6.25,
-                ANGLE: 180
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
-                TYPE: "trap",
-                STAT_CALCULATOR: "trap"
-            }
-        }
-    ], { delayIncrement: 0.5 })
-}
-Class.gator_RG_AR = makeOver("gatlingGun", "Gator", preset.hybrid)
-Class.halfNHalf_RG = {
-    PARENT: "genericTank",
-    LABEL: "Half 'n Half",
-    DANGER: 7,
-    HAS_NO_RECOIL: true,
-    /*BODY: {
-        FOV: base.FOV * 1.25
-    },*/
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 13,
-                WIDTH: 8,
-                ASPECT: 1.9,
-                X: 4
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.blaster, g.flankGuard]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 24,
-                WIDTH: 8,
-                ASPECT: 1.5,
-                ANGLE: 180
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.focal, g.flankGuard]),
-                TYPE: "bullet"
-            }
-        }
-    ]
-}
-Class.quadTwin_RG = {
-    PARENT: "genericTank",
-    LABEL: "Quad Twin",
-    DANGER: 7,
-    GUNS: weaponArray(weaponMirror({
-        POSITION: {
-            LENGTH: 20,
-            WIDTH: 8,
-            Y: 5.5
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin]),
-            TYPE: "bullet"
-        }
-    }, { delayIncrement: 0.5 }), 4)
-}
 Class.rifleGuard_RG = {
     PARENT: "genericTank",
     LABEL: "Rifle Guard",
@@ -548,70 +257,6 @@ Class.sniperRifle_RG = {
         }
     ]
 }
-Class.splasher_RG = {
-    PARENT: "genericTank",
-    LABEL: "Splasher",
-    DANGER: 7,
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 20,
-                WIDTH: 7,
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.lowPower, g.pelleter, { recoil: 1.15 }]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 13,
-                WIDTH: 8,
-                ASPECT: 1.9,
-                X: 4
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { size: 0.92 }, g.blaster]),
-                TYPE: "bullet"
-            }
-        }
-    ]
-}
-Class.sprayer_RG = {
-    PARENT: "genericTank",
-    LABEL: "Sprayer",
-    UPGRADE_LABEL: "Old Sprayer",
-    DANGER: 7,
-    BODY: {
-        FOV: base.FOV * 1.25
-    },
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 24,
-                WIDTH: 8,
-                ASPECT: 1.5,
-                DELAY: 0.5
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.lowPower, g.pelleter, { recoil: 1.15 }]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 20,
-                WIDTH: 8,
-                ASPECT: 1.7,
-                X: -1
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.focal]),
-                TYPE: "bullet"
-            }
-        }
-    ]
-}
 Class.spreadRifle_RG = {
     PARENT: "genericTank",
     LABEL: "Spread Rifle",
@@ -676,130 +321,8 @@ Class.spreadRifle_RG = {
         }
     ]
 }
-Class.subverter_RG = {
-    PARENT: "genericTank",
-    LABEL: "Subverter",
-    DANGER: 7,
-    BODY: {
-        FOV: base.FOV * 1.2
-    },
-    GUNS: weaponStack({
-        POSITION: {
-            LENGTH: 21,
-            WIDTH: 14
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.minigun]),
-            TYPE: "bullet"
-        }
-    }, 3, { lengthOffset: 2, delayIncrement: 1/3 })
-}
-Class.tornado_RG = {
-    PARENT: "genericTank",
-    LABEL: "Tornado",
-    DANGER: 7,
-    GUNS: weaponArray([
-        {
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 5.5,
-                ANGLE: 90,
-                DELAY: 0.75
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.cyclone]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 5.5,
-                ANGLE: 30,
-                DELAY: 0.5
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.cyclone]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 5.5,
-                ANGLE: 60,
-                DELAY: 0.25
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.cyclone]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 5.5
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.cyclone]),
-                TYPE: "bullet"
-            }
-        }
-    ], 3)
-}
-Class.triBlaster_RG = {
-    PARENT: "genericTank",
-    LABEL: "Tri-Blaster",
-    DANGER: 7,
-    GUNS: [
-        ...weaponMirror({
-            POSITION: {
-                LENGTH: 13,
-                WIDTH: 8,
-                ASPECT: 1.7,
-                X: 4,
-                Y: 2,
-                ANGLE: 15,
-                DELAY: 0.5
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.blaster, { recoil: 0.5 }, g.lowPower]),
-                TYPE: "bullet"
-            }
-        }),
-        {
-            POSITION: {
-                LENGTH: 13,
-                WIDTH: 8,
-                ASPECT: 1.9,
-                X: 6
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.blaster, { recoil: 0.5 }]),
-                TYPE: "bullet"
-            }
-        }
-    ]
-}
-Class.tripleMachine_RG = {
-    PARENT: "genericTank",
-    LABEL: "Triple Machine",
-    DANGER: 7,
-    GUNS: weaponArray({
-        POSITION: {
-            LENGTH: 12,
-            WIDTH: 10,
-            ASPECT: 1.4,
-            X: 8
-        },
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { size: 0.92 }, g.flankGuard, g.flankGuard]),
-            TYPE: "bullet"
-        }
-    }, 3)
-}
 if (arras_mode) {
-    Class.accurator_RG.GUNS = [
+    Class.accurator.GUNS = [
         {
             POSITION: {
                 LENGTH: 3,
@@ -825,7 +348,7 @@ if (arras_mode) {
     Class.doubleDiesel_RG_AR.LABEL = "Diesel Flank"
     Class.doubleGatling_RG_AR.LABEL = "Gatling Flank"
     Class.doubleSprayer_RG_AR.LABEL = "Sprayer Flank"
-    Class.halfNHalf_RG.GUNS = [
+    Class.halfNHalf.GUNS = [
         {
             POSITION: {
                 LENGTH: 24,
@@ -851,7 +374,7 @@ if (arras_mode) {
             }
         }
     ]
-    Class.splasher_RG.GUNS = [
+    Class.splasher.GUNS = [
         {
             POSITION: {
                 LENGTH: 21,
@@ -875,7 +398,7 @@ if (arras_mode) {
             }
         }
     ]
-    Class.triBlaster_RG.GUNS = [
+    Class.triBlaster.GUNS = [
         ...weaponMirror({
             POSITION: {
                 LENGTH: 5,
@@ -903,21 +426,21 @@ if (arras_mode) {
             }
         }
     ]
-    Class.tripleMachine_RG.LABEL = "Machine Triple"
+    Class.tripleMachine.LABEL = "Machine Triple"
 }
 
 // Tier 4
-Class.autoAccurator_RG_AR = makeAuto("accurator_RG")
+Class.autoAccurator_RG_AR = makeAuto("accurator")
 Class.autoDoubleArtillery_RG_AR = makeAuto("doubleArtillery_RG_AR")
 Class.autoDoubleBlaster_RG_AR = makeAuto("doubleBlaster_RG_AR")
 Class.autoDoubleDiesel_RG_AR = makeAuto("doubleDiesel_RG_AR")
 Class.autoDoubleGatling_RG_AR = makeAuto("doubleGatling_RG_AR")
 Class.autoDoubleMinigun_RG_AR = makeAuto("doubleMinigun_RG_AR")
 Class.autoDoubleSprayer_RG_AR = makeAuto("doubleSprayer_RG_AR")
-Class.autoHalfNHalf_RG_AR = makeAuto("halfNHalf_RG")
-Class.autoSplasher_RG_AR = makeAuto("splasher_RG")
-Class.autoTriBlaster_RG_AR = makeAuto("triBlaster_RG")
-Class.autoTripleMachine_RG_AR = makeAuto("tripleMachine_RG")
+Class.autoHalfNHalf_RG_AR = makeAuto("halfNHalf")
+Class.autoSplasher_RG_AR = makeAuto("splasher")
+Class.autoTriBlaster_RG_AR = makeAuto("triBlaster")
+Class.autoTripleMachine_RG_AR = makeAuto("tripleMachine")
 Class.doubleAtomizer_RG_AR = {
     PARENT: "genericTank",
     LABEL: "Double Atomizer",
@@ -1489,42 +1012,6 @@ if (arras_mode) {
     Class.quadMachine_RG_AR.LABEL = "Machine Quadruple"
 }
 
-// Tierless
-Class.protector_RG = {
-    PARENT: "genericTank",
-    LABEL: "Protector",
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 18,
-                WIDTH: 12
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap]),
-                TYPE: "setTrap",
-                STAT_CALCULATOR: "block"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 17,
-                WIDTH: 13
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder]),
-                TYPE: "bullet"
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 13,
-                WIDTH: 13,
-                ASPECT: -1.3
-            }
-        }
-    ]
-}
-
 // break if original tree is enabled
 for (let i = 0; i < Class.sprayer.UPGRADES_TIER_3.length; i++) {
     let string = Class.sprayer.UPGRADES_TIER_3[i];
@@ -1534,97 +1021,67 @@ for (let i = 0; i < Class.sprayer.UPGRADES_TIER_3.length; i++) {
 }
 /*
 // Class Tree
-Class.blaster.UPGRADES_TIER_3 = ["triBlaster", "splasher", "flamethrower"].map(x => x + "_RG")
-Class.gatlingGun.UPGRADES_TIER_3 = ["accurator", "halfNHalf"].map(x => x + "_RG")
-Class.doubleMachine_RG.UPGRADES_TIER_3 = ["tripleMachine", "halfNHalf"].map(x => x + "_RG")
-Class.rifle_RG.UPGRADES_TIER_3 = ["sniperRifle", "rifleGuard", "spreadRifle"].map(x => x + "_RG")
+Class.rifle_old.UPGRADES_TIER_3 = ["sniperRifle", "rifleGuard", "spreadRifle"].map(x => x + "_RG")
 if (arras_mode) {
     Class.blaster.UPGRADES_TIER_3 = ["triBlaster", "splasher"].map(x => x + "_RG")
 }
-if (Config.retrograde == true) {
-    Class.flankGuard.UPGRADES_TIER_3.splice(1, 0, "tripleMachine_RG") // so it doesn't appear in front of quadruplex/ternion
-    Class.machineGun.UPGRADES_TIER_2.push("blaster", "gatlingGun", "doubleMachine")
-    Class.tripleShot.UPGRADES_TIER_3.push("triBlaster_RG")
-    if (!Config.arms_race == true) {
-        Class.assassin.UPGRADES_TIER_3.push("buttbuttin_RG")
-        Class.blaster.UPGRADES_TIER_3.push("halfNHalf_RG")
-        Class.destroyer.UPGRADES_TIER_3.push("blower_RG")
-        Class.gatlingGun.UPGRADES_TIER_3.splice(0, 0, "sprayer_RG")
-        Class.gunner.UPGRADES_TIER_3.push("battery_RG")
-        if (!replace_newer_classes) {
-            Class.hexaTank.UPGRADES_TIER_3.push("tornado_RG", "deathStar_RG")
-        } else {
-            Class.hexaTank.UPGRADES_TIER_3.push("deathStar_RG")
-        }
-        Class.minigun.UPGRADES_TIER_3.push("subverter_RG")
-        Class.pounder.UPGRADES_TIER_3.push("subverter_RG")
-        Class.smasher.UPGRADES_TIER_3.push("bonker_RG")
-        Class.sprayer.UPGRADES_TIER_3.push("sprayer_RG", "splasher_RG")
-    } else {
-        //Class.twin.UPGRADES_TIER_2
-            //Class.tripleShot.UPGRADES_TIER_3
-                Class.pentaShot.UPGRADES_TIER_3.push("pentaBlaster_RG_AR")
-                Class.bentDouble.UPGRADES_TIER_3.push("doubleTriBlaster_RG_AR")
-        //Class.machineGun.UPGRADES_TIER_2
-            Class.artillery.UPGRADES_TIER_3.push("doubleArtillery_RG_AR")
-                Class.munition.UPGRADES_TIER_3.push("doubleMunition_RG_AR")
-                Class.autoArtillery_AR.UPGRADES_TIER_3.push("autoDoubleArtillery_RG_AR")
-            Class.minigun.UPGRADES_TIER_3.push("doubleMinigun_RG_AR")
-                Class.autoMinigun_AR.UPGRADES_TIER_3.push("autoDoubleMinigun_RG_AR")
-            Class.sprayer.UPGRADES_TIER_3.push("doubleSprayer_RG_AR")
-                Class.redistributor.UPGRADES_TIER_3.push("doubleRedistributor_RG_AR")
-                Class.atomizer.UPGRADES_TIER_3.push("doubleAtomizer_RG_AR")
-                Class.focal.UPGRADES_TIER_3.push("sprayNSpray_RG_AR", "doubleFocal_RG_AR")
-                Class.frother_AR.UPGRADES_TIER_3 = ["doubleFrother_RG"].map(x => x + "_AR")
-                Class.foamer_AR.UPGRADES_TIER_3 = ["doubleFoamer_RG"].map(x => x + "_AR")
-                Class.faucet_AR.UPGRADES_TIER_3 = ["doubleFaucet_RG"].map(x => x + "_AR")
-                Class.autoSprayer_AR.UPGRADES_TIER_3.push("autoDoubleSprayer_RG_AR")
-                Class.stormer_AR.UPGRADES_TIER_3.push("doubleStormer_RG_AR")
-            Class.diesel_AR.UPGRADES_TIER_3.push("doubleDiesel_RG_AR")
-                Class.autoDiesel_AR.UPGRADES_TIER_3.push("autoDoubleDiesel_RG_AR")
-            Class.blaster.UPGRADES_TIER_3.push("volley_AR", "halfNHalf_RG", "doubleBlaster_RG_AR", "autoBlaster_RG_AR")
-                Class.triBlaster_RG.UPGRADES_TIER_3 = ["pentaBlaster", "doubleTriBlaster", "autoTriBlaster"].map(x => x + "_RG_AR")
-                Class.splasher_RG.UPGRADES_TIER_3 = ["sprayNSpray", "autoSplasher"].map(x => x + "_RG_AR")
-                Class.doubleBlaster_RG_AR.UPGRADES_TIER_3 = ["tripleBlaster", "doubleTriBlaster", "slabNSlab", "autoDoubleBlaster"].map(x => x + "_RG_AR")
-                Class.autoBlaster_RG_AR.UPGRADES_TIER_3 = ["megaAutoBlaster", "tripleAutoBlaster", "autoTriBlaster", "autoSplasher", "autoHalfNHalf"].map(x => x + "_RG_AR")
-            Class.gatlingGun.UPGRADES_TIER_3.push("focal", "doubleGatling_RG_AR", "gator_RG_AR", "autoGatlingGun_RG_AR")
-                Class.doubleGatling_RG_AR.UPGRADES_TIER_3 = ["tripleGatling", "doubleFocal", "slabNSlab", "autoDoubleGatling"].map(x => x + "_RG_AR")
-                Class.gator_RG_AR.UPGRADES_TIER_3 = ["overgatling"].map(x => x + "_RG_AR")
-                Class.autoGatlingGun_RG_AR.UPGRADES_TIER_3 = ["megaAutoGatlingGun_RG", "tripleAutoGatlingGun_RG", "autoAccurator_RG", "autoHalfNHalf_RG", "autoFocal"].map(x => x + "_AR")
-            Class.doubleMachine.UPGRADES_TIER_3.push("doubleArtillery_RG_AR", "doubleMinigun_RG_AR", "doubleGunner_AR", "doubleSprayer_RG_AR", "doubleDiesel_RG_AR", "doubleBlaster_RG_AR", "doubleGatling_RG_AR", "autoDoubleMachine_RG_AR")
-                Class.doubleMachine.UPGRADES_TIER_3.push("overdoubleMachine_RG_AR")
-                Class.tripleMachine_RG.UPGRADES_TIER_3 = ["quadMachine_RG", "tripleArtillery_RG", "tripleMinigun_RG", "tripleGunner", "tripleSprayer_RG", "tripleDiesel_RG", "tripleBlaster_RG", "tripleGatling_RG", "autoTripleMachine_RG"].map(x => x + "_AR")
-                Class.halfNHalf_RG.UPGRADES_TIER_3 = ["slabNSlab", "sprayNSpray", "autoHalfNHalf"].map(x => x + "_RG_AR")
-                Class.doubleArtillery_RG_AR.UPGRADES_TIER_3 = ["tripleArtillery", "autoDoubleArtillery"].map(x => x + "_RG_AR")
-                Class.doubleMinigun_RG_AR.UPGRADES_TIER_3 = ["tripleMinigun", "autoDoubleMinigun"].map(x => x + "_RG_AR")
-                Class.doubleSprayer_RG_AR.UPGRADES_TIER_3 = ["tripleSprayer", "sprayNSpray", "doubleRedistributor", "doubleAtomizer", "doubleFocal", "doubleFrother", "doubleFoamer", "doubleFaucet", "autoDoubleSprayer", "doubleStormer"].map(x => x + "_RG_AR")
-                Class.doubleDiesel_RG_AR.UPGRADES_TIER_3 = ["tripleDiesel", "autoDoubleDiesel"].map(x => x + "_RG_AR")
-                Class.autoDoubleMachine_RG_AR.UPGRADES_TIER_3 = ["megaAutoDoubleMachine_RG", "tripleAutoDoubleMachine_RG", "autoTripleMachine_RG", "autoHalfNHalf_RG", "autoDoubleArtillery_RG", "autoDoubleMinigun_RG", "autoDoubleGunner", "autoDoubleSprayer_RG", "autoDoubleDiesel_RG", "autoDoubleBlaster_RG", "autoDoubleGatling_RG"].map(x => x + "_AR")
-        //Class.director.UPGRADES_TIER_2
-            //Class.overseer.UPGRADES_TIER_3
-                Class.overseer.UPGRADES_TIER_3.splice(21, 0, "overblaster_RG_AR", "overgatling_RG_AR", "overdoubleMachine_RG_AR")
-            //Class.cruiser.UPGRADES_TIER_3
-                Class.battleship.UPGRADES_TIER_3.push("doubleFaucet_RG_AR")
-        if (!Config.daily_tank == undefined && Config.daily_tank.tank == "whirlwind") {
-            Class.doubleArtillery_RG_AR.UPGRADES_TIER_3.push("doubleMunition_RG_AR") //.splice(4, 0, "doubleMunition_RG_AR")
-        }
+if (Config.retrograde && Config.arms_race) {
+    //Class.twin.UPGRADES_TIER_2
+        //Class.tripleShot.UPGRADES_TIER_3
+            Class.pentaShot.UPGRADES_TIER_3.push("pentaBlaster_RG_AR")
+            Class.bentDouble.UPGRADES_TIER_3.push("doubleTriBlaster_RG_AR")
+    //Class.machineGun.UPGRADES_TIER_2
+        Class.artillery.UPGRADES_TIER_3.push("doubleArtillery_RG_AR")
+            Class.munition.UPGRADES_TIER_3.push("doubleMunition_RG_AR")
+            Class.autoArtillery_AR.UPGRADES_TIER_3.push("autoDoubleArtillery_RG_AR")
+        Class.minigun.UPGRADES_TIER_3.push("doubleMinigun_RG_AR")
+            Class.autoMinigun_AR.UPGRADES_TIER_3.push("autoDoubleMinigun_RG_AR")
+        Class.sprayer.UPGRADES_TIER_3.push("doubleSprayer_RG_AR")
+            Class.redistributor.UPGRADES_TIER_3.push("doubleRedistributor_RG_AR")
+            Class.atomizer.UPGRADES_TIER_3.push("doubleAtomizer_RG_AR")
+            Class.focal.UPGRADES_TIER_3.push("sprayNSpray_RG_AR", "doubleFocal_RG_AR")
+            Class.frother_AR.UPGRADES_TIER_3 = ["doubleFrother_RG"].map(x => x + "_AR")
+            Class.foamer_AR.UPGRADES_TIER_3 = ["doubleFoamer_RG"].map(x => x + "_AR")
+            Class.faucet_AR.UPGRADES_TIER_3 = ["doubleFaucet_RG"].map(x => x + "_AR")
+            Class.autoSprayer_AR.UPGRADES_TIER_3.push("autoDoubleSprayer_RG_AR")
+            Class.stormer_AR.UPGRADES_TIER_3.push("doubleStormer_RG_AR")
+        Class.diesel_AR.UPGRADES_TIER_3.push("doubleDiesel_RG_AR")
+            Class.autoDiesel_AR.UPGRADES_TIER_3.push("autoDoubleDiesel_RG_AR")
+        Class.blaster.UPGRADES_TIER_3.push("volley_AR", "halfNHalf", "doubleBlaster_RG_AR", "autoBlaster_RG_AR")
+            Class.triBlaster.UPGRADES_TIER_3 = ["pentaBlaster", "doubleTriBlaster", "autoTriBlaster"].map(x => x + "_RG_AR")
+            Class.splasher.UPGRADES_TIER_3 = ["sprayNSpray", "autoSplasher"].map(x => x + "_RG_AR")
+            Class.doubleBlaster_RG_AR.UPGRADES_TIER_3 = ["tripleBlaster", "doubleTriBlaster", "slabNSlab", "autoDoubleBlaster"].map(x => x + "_RG_AR")
+            Class.autoBlaster_RG_AR.UPGRADES_TIER_3 = ["megaAutoBlaster", "tripleAutoBlaster", "autoTriBlaster", "autoSplasher", "autoHalfNHalf"].map(x => x + "_RG_AR")
+        Class.gatlingGun.UPGRADES_TIER_3.push("focal", "doubleGatling_RG_AR", "gator_RG_AR", "autoGatlingGun_RG_AR")
+            Class.doubleGatling_RG_AR.UPGRADES_TIER_3 = ["tripleGatling", "doubleFocal", "slabNSlab", "autoDoubleGatling"].map(x => x + "_RG_AR")
+            Class.gator_RG_AR.UPGRADES_TIER_3 = ["overgatling"].map(x => x + "_RG_AR")
+            Class.autoGatlingGun_RG_AR.UPGRADES_TIER_3 = ["megaAutoGatlingGun_RG", "tripleAutoGatlingGun_RG", "autoAccurator_RG", "autoHalfNHalf_RG", "autoFocal"].map(x => x + "_AR")
+        Class.doubleMachine.UPGRADES_TIER_3.push("doubleArtillery_RG_AR", "doubleMinigun_RG_AR", "doubleGunner_AR", "doubleSprayer_RG_AR", "doubleDiesel_RG_AR", "doubleBlaster_RG_AR", "doubleGatling_RG_AR", "autoDoubleMachine_RG_AR")
+            Class.doubleMachine.UPGRADES_TIER_3.push("overdoubleMachine_RG_AR")
+            Class.tripleMachine.UPGRADES_TIER_3 = ["quadMachine_RG", "tripleArtillery_RG", "tripleMinigun_RG", "tripleGunner", "tripleSprayer_RG", "tripleDiesel_RG", "tripleBlaster_RG", "tripleGatling_RG", "autoTripleMachine_RG"].map(x => x + "_AR")
+            Class.halfNHalf.UPGRADES_TIER_3 = ["slabNSlab", "sprayNSpray", "autoHalfNHalf"].map(x => x + "_RG_AR")
+            Class.doubleArtillery_RG_AR.UPGRADES_TIER_3 = ["tripleArtillery", "autoDoubleArtillery"].map(x => x + "_RG_AR")
+            Class.doubleMinigun_RG_AR.UPGRADES_TIER_3 = ["tripleMinigun", "autoDoubleMinigun"].map(x => x + "_RG_AR")
+            Class.doubleSprayer_RG_AR.UPGRADES_TIER_3 = ["tripleSprayer", "sprayNSpray", "doubleRedistributor", "doubleAtomizer", "doubleFocal", "doubleFrother", "doubleFoamer", "doubleFaucet", "autoDoubleSprayer", "doubleStormer"].map(x => x + "_RG_AR")
+            Class.doubleDiesel_RG_AR.UPGRADES_TIER_3 = ["tripleDiesel", "autoDoubleDiesel"].map(x => x + "_RG_AR")
+            Class.autoDoubleMachine_RG_AR.UPGRADES_TIER_3 = ["megaAutoDoubleMachine_RG", "tripleAutoDoubleMachine_RG", "autoTripleMachine_RG", "autoHalfNHalf_RG", "autoDoubleArtillery_RG", "autoDoubleMinigun_RG", "autoDoubleGunner", "autoDoubleSprayer_RG", "autoDoubleDiesel_RG", "autoDoubleBlaster_RG", "autoDoubleGatling_RG"].map(x => x + "_AR")
+    //Class.director.UPGRADES_TIER_2
+        //Class.overseer.UPGRADES_TIER_3
+            Class.overseer.UPGRADES_TIER_3.splice(21, 0, "overblaster_RG_AR", "overgatling_RG_AR", "overdoubleMachine_RG_AR")
+        //Class.cruiser.UPGRADES_TIER_3
+            Class.battleship.UPGRADES_TIER_3.push("doubleFaucet_RG_AR")
+    if (!Config.daily_tank == undefined && Config.daily_tank.tank == "whirlwind") {
+        Class.doubleArtillery_RG_AR.UPGRADES_TIER_3.push("doubleMunition_RG_AR") //.splice(4, 0, "doubleMunition_RG_AR")
     }
 }
 */
-if (public_retrograde_menu) {
-    Config.daily_tank = {
-        tank: "arrasMenu_retrograde",
-        tier: 3,
-        ads: false
-    }
-}
 
-if (!Config.arms_race == true && replace_newer_classes) {
+if (!Config.arms_race && replace_newer_classes) {
     for (let i = 0; i < Class.twin.UPGRADES_TIER_3.length; i++) {
         let string = Class.twin.UPGRADES_TIER_3[i];
         if (string === "bulwark") {
             Class.twin.UPGRADES_TIER_3.splice(i, 1)
-            Class.doubleTwin.UPGRADES_TIER_3.push("doubleTrapGuard_RG")
+            Class.doubleTwin.UPGRADES_TIER_3.push("bulwark_old")
         }
         let string2 = Class.twin.UPGRADES_TIER_3[i];
         if (string2 === "musket") {
@@ -1634,7 +1091,7 @@ if (!Config.arms_race == true && replace_newer_classes) {
     for (let i = 0; i < Class.doubleTwin.UPGRADES_TIER_3.length; i++) {
         let string = Class.doubleTwin.UPGRADES_TIER_3[i];
         if (string === "tripleTwin") {
-            Class.doubleTwin.UPGRADES_TIER_3.splice(i, 1, "quadTwin_RG")
+            Class.doubleTwin.UPGRADES_TIER_3.splice(i, 1, "quadTwin_AR")
             Class.menu_unused.UPGRADES_TIER_0.push("tripleTwin")
         }
     }
@@ -1647,7 +1104,7 @@ if (!Config.arms_race == true && replace_newer_classes) {
     for (let i = 0; i < Class.sniper.UPGRADES_TIER_2.length; i++) {
         let string = Class.sniper.UPGRADES_TIER_2[i];
         if (string === "rifle") {
-            Class.sniper.UPGRADES_TIER_2.splice(i, 1, "rifle_RG")
+            Class.sniper.UPGRADES_TIER_2.splice(i, 1, "rifle_old")
             Class.menu_unused.UPGRADES_TIER_0.push("rifle")
         }
     }

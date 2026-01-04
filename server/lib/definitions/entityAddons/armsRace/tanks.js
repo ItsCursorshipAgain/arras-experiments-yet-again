@@ -432,10 +432,13 @@ Class.analyzer_AR = {
 }
 Class.autoArtillery_AR = makeAuto("artillery")
 Class.autoAuto3_AR = makeAuto("auto3")
+Class.autoBlaster_AR = makeAuto("blaster")
 Class.autoDestroyer_AR = makeAuto("destroyer")
 Class.autoDiesel_AR = makeAuto("diesel_AR")
 Class.autoDirectordrive_AR = makeAuto("directordrive_AR", "Auto-Directordrive", driveAuto_options)
 Class.autoDoper_AR = makeAuto("doper_AR")
+Class.autoDoubleMachine_AR = makeAuto("doubleMachine")
+Class.autoGatlingGun_AR = makeAuto("gatlingGun")
 Class.autoHelix_AR = makeAuto("helix")
 Class.autoHexaTank_AR = makeAuto("hexaTank")
 Class.autoHoncho_AR = makeAuto("honcho_AR")
@@ -1589,6 +1592,7 @@ Class.frother_AR = {
         }
     ]
 }
+Class.gator_AR = makeOver("gatlingGun", "Gator", preset.hybrid)
 Class.hangar_AR = {
     PARENT: "genericTank",
     LABEL: "Hangar",
@@ -4816,7 +4820,7 @@ Class.quadTwin_AR = {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin]),
             TYPE: "bullet"
         }
-    }, { delayIncrement: 0.5 }), 4)
+    }, {delayIncrement: 0.5}), 4)
 }
 Class.quintuplet_AR = {
     PARENT: "genericTank",
@@ -5323,6 +5327,59 @@ Class.tommy_AR = {
         }, 3, { lengthOffset: 2, delayIncrement: 1/3 }),
         ...preset.trapGuard
     ]
+}
+Class.tornado_AR = {
+    PARENT: "genericTank",
+    LABEL: "Tornado",
+    DANGER: 8,
+    GUNS: weaponArray([
+        {
+            POSITION: {
+                LENGTH: 16,
+                WIDTH: 5.5,
+                ANGLE: 90,
+                DELAY: 0.75
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.cyclone]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 16,
+                WIDTH: 5.5,
+                ANGLE: 30,
+                DELAY: 0.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.cyclone]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 16,
+                WIDTH: 5.5,
+                ANGLE: 60,
+                DELAY: 0.25
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.cyclone]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 16,
+                WIDTH: 5.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.cyclone]),
+                TYPE: "bullet"
+            }
+        }
+    ], 3)
 }
 Class.triWhirlGuard_AR = makeWhirlwind("triTrapGuard_AR", {label: "Tri-Whirl Guard"})
 Class.tricker_AR = {
@@ -5862,9 +5919,9 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             //Class.duplicator.UPGRADES_TIER_3 = ["doubleDuplicator_AR", "autoDuplicator_AR"]
             //Class.autoRepeater_AR.UPGRADES_TIER_3 = ["autoIterator_AR", "autoDuplicator_AR"]
 
-if (Config.retrograde) {
-    Class.sprayer.UPGRADES_TIER_3.push("splasher_RG")
-}
+/*if (Config.retrograde) {
+    Class.sprayer.UPGRADES_TIER_3.push("splasher")
+}*/
 
 if (!Config.daily_tank == undefined && Config.daily_tank.tank == "whirlwind") {
 Class.vortex_AR.LABEL = "Directive"
