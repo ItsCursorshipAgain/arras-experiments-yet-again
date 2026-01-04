@@ -386,7 +386,8 @@ class Canvas {
                 } else if (
                     !global.dailyTankAd.renderUI &&
                     global.clickables.optionsMenu.toggleBoxes.check(mpos) == -1 && 
-                    global.clickables.optionsMenu.switchButton.check(mpos) == -1 && 
+                    global.clickables.optionsMenu.switchButton.check(mpos) == -1 &&
+                    global.optionsMenu_Anim.tabClickables.check(mpos) == -1 &&
                     global.clickables.skipUpgrades.check(mpos) == -1 && 
                     global.clickables.dailyTankUpgrade.check(mpos) == false &&
                     global.clickables.dailyTankAd.check(mpos) === false &&
@@ -422,6 +423,7 @@ class Canvas {
                 let reconnectCheck = global.clickables.reconnect.check(mpos);
                 let optionsMenu_Switch = global.clickables.optionsMenu.switchButton.check(mpos);
                 let optionsMenu_toggleBox = global.clickables.optionsMenu.toggleBoxes.check(mpos);
+                let optionsMenu_tabClick = global.optionsMenu_Anim.tabClickables ? global.optionsMenu_Anim.tabClickables.check(mpos) : -1;
                 // Options menu clickables
                 if (optionsMenu_Switch === 0) {
                     global.optionsMenu_Anim.switchMenu_button.set(-40);
@@ -433,6 +435,11 @@ class Canvas {
                     global.optionsMenu_Anim.switchMenu_button.set(0);
                     global.optionsMenu_Anim.mainMenu.set(-500);
                     global.optionsMenu_Anim.isOpened = false;
+                    break;
+                }
+                if (optionsMenu_tabClick !== -1) {
+                    global.optionsMenu_Anim.activeTab = optionsMenu_tabClick;
+                    global.optionsMenu_Anim.tabOffset.set(optionsMenu_tabClick);
                     break;
                 }
                 if (optionsMenu_toggleBox !== -1) {

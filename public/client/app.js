@@ -4074,15 +4074,11 @@ import * as socketStuff from "./socketinit.js";
     }
 
     function drawOptionsMenu() {
-        // Set up the animation
-        if (!global.optionsMenu_Anim.switchMenu_button) {
-            global.optionsMenu_Anim = {
-                switchMenu_button: Smoothbar(0, 2, 3, 0.08, 0.025, true),
-                optionsButtonProgress: Smoothbar(0, 2, 0.1, 0.08, 0.025, true),
-                mainMenu: Smoothbar(-500, 2, 3, 0.08, 0.025, true),
-                isOpened: false,
-            }
+        // Initialize tab offset for sliding animation
+        if (!global.optionsMenu_Anim.tabOffset) {
+            global.optionsMenu_Anim.tabOffset = Smoothbar(global.optionsMenu_Anim.activeTab || 0, 2, 3, 0.08, 0.025, true);
         }
+
         const RENDERX = global.optionsMenu_Anim.switchMenu_button.get();
         const BTN_SIZE = 30;
         const BTN_WIDTH_COLLAPSED = BTN_SIZE / 1.57; // Half width when not hovering
@@ -4160,11 +4156,11 @@ import * as socketStuff from "./socketinit.js";
         const arrowCenterX = arrowBaseX + animatedWidth - 19;
         const arrowCenterY = BTN_Y + BTN_SIZE / 2;
         
+
         const leftX = arrowCenterX - arrowW / 3; 
-        const tipX = arrowCenterX + arrowW / 2;  
-        const topY = arrowCenterY - arrowH / 2; 
-        const botY = arrowCenterY + arrowH / 2; 
-        
+        const tipX = arrowCenterX + arrowW / 2; 
+        const topY = arrowCenterY - arrowH / 2;
+        const botY = arrowCenterY + arrowH / 2;
 
         ctx[2].fillStyle = "#ffffff";
         ctx[2].lineJoin = "round";
@@ -4177,15 +4173,12 @@ import * as socketStuff from "./socketinit.js";
         ctx[2].lineTo(leftX, botY);
         ctx[2].closePath();
         ctx[2].fill();
-        
         ctx[2].strokeStyle = "#ffffff";
         ctx[2].stroke();
         
         ctx[2].restore();
         ctx[2].translate(-RENDERX, -0);
 
-        // Draw options menu
-        
         const mainMenuAnim = global.optionsMenu_Anim.mainMenu.get();
         if (mainMenuAnim < -470) return; // fully hidden
         const PANEL_WIDTH = 460;
@@ -4197,7 +4190,6 @@ import * as socketStuff from "./socketinit.js";
         const PANEL_HIDDEN_X = PANEL_VISIBLE_X - PANEL_WIDTH - 30;
         const panelX = PANEL_HIDDEN_X + (PANEL_VISIBLE_X - PANEL_HIDDEN_X);
 
-
         ctx[2].save();
         ctx[2].globalAlpha = 1;
 
@@ -4208,168 +4200,211 @@ import * as socketStuff from "./socketinit.js";
         gameDraw.setColor(ctx[2], color.black);
         drawGuiRect(panelX, PANEL_Y, PANEL_WIDTH, PANEL_HEIGHT, true);
 
-        // top tabs (Options / Theme / Keybinds) – visuals only here
-        const TAB_WIDTH = PANEL_WIDTH / 3.73; /* 5.035*/
+        // Top tabs with interactive functionality
+        const TAB_WIDTH = PANEL_WIDTH / 3.73; // 5.035
         const TAB_HEIGHT = 50;
         const TAB_Y = PANEL_Y - TAB_HEIGHT;
-
-        function drawTab(index, label, active) {
-            const x = panelX + index * TAB_WIDTH * 1.162;
-            const cx = x + TAB_WIDTH - 11;
-            const cy = TAB_Y + TAB_HEIGHT - 18;
-            ctx[2].lineWidth = 3;
-            gameDraw.setColor(ctx[2], gameDraw.mixColors(color.grey, gameDraw.getColor(color.black), 0.3));
-            drawGuiRect(x + 50, TAB_Y, TAB_WIDTH, TAB_HEIGHT);
-            gameDraw.setColor(ctx[2], color.black);
-            drawGuiRect(x + 50, TAB_Y, TAB_WIDTH, TAB_HEIGHT, true);
-            if (active) {
-                ctx[2].lineWidth = 3;
-                gameDraw.setColor(ctx[2], color.grey);
-                drawGuiRect(x + 50, TAB_Y, TAB_WIDTH, TAB_HEIGHT + 5);
-                gameDraw.setColor(ctx[2], color.black);
-                drawGuiRect(x + 50, TAB_Y, TAB_WIDTH, TAB_HEIGHT, true);
-                gameDraw.setColor(ctx[2], color.grey);
-                drawGuiRect(x + 51.6, TAB_Y + 48, TAB_WIDTH - 3, TAB_HEIGHT - 46);
-            }
-            drawText(label, cx, cy, 16, color.guiwhite, "center");
-        }
-        drawTab(0, "Options", true);
-        drawTab(1, "Theme", false);
-        drawTab(2, "Keybinds", false);
-        //drawTab(3, "Secrets", false);
+        const TAB_NAMES = ["Options", "Theme", "Keybinds"];
 
         drawText("ingame options is not finished, expect missing features and bugs lol", panelX + PANEL_WIDTH / 2, PANEL_Y - 57, 13.5, color.guiwhite, "center");
 
-        drawText("Game Appearance", panelX + PANEL_WIDTH / 2, PANEL_Y + 30, 15.5, color.guiwhite, "center");
-        drawText("UI Elements",     panelX + PANEL_WIDTH / 2, PANEL_Y + 310, 15.5, color.guiwhite, "center");
-        drawText("Extra",           panelX + PANEL_WIDTH / 2, PANEL_Y + 470, 15.5, color.guiwhite, "center");
-        drawText("Performance",     panelX + PANEL_WIDTH / 2, PANEL_Y + 670, 15.5, color.guiwhite, "center");
+        // Initialize tab clickables
 
-        // -------------- Checkboxes + tooltips --------------
-        if (!global.optionsCheckboxes) {
-            // very simple logical layout: column (0 = left, 1 = right) + row index
-            global.optionsCheckboxes = [
-                // Game Appearance
-                { id: "optRenderNames",         label: "Player Names",          column: 0, row: 0, section: "appearance", tooltip: "Show player names." },
-                { id: "optRenderScores",        label: "Player Scores",         column: 0, row: 1, section: "appearance", tooltip: "Show player scores." },
-                { id: "optNoGrid",              label: "Background Grid",       column: 0, row: 2, section: "appearance", tooltip: "Show the background grid.", reverseCheck: true },
-                { id: "optPointy",              label: "Sharp Traps",           column: 0, row: 3, section: "appearance", tooltip: "Sharpen the corners of traps." },
-                { id: "optSharpEdges",          label: "Sharp Polygons",        column: 0, row: 4, section: "appearance", tooltip: "Sharpen the corners of all polygons.\n" + "May slightly lower the frame rate." },
-                { id: "optSecretOptions",       label: "Secret Options",        column: 0, row: 5, section: "appearance", tooltip: "Unlock the secret options tab.\n" + "Note: Some of these options are hidden for a reason. They can cause glitches, and may get removed at any time." },
+        // Draw tabs backgrounds and place clickables
+        for (let tabIndex = 0; tabIndex < TAB_NAMES.length; tabIndex++) {
+            const x = panelX + tabIndex * TAB_WIDTH * 1.162;
+            const tabX = x + 50;
+            const tabClickableX = tabX * clickableRatio;
+            const tabClickableY = TAB_Y * clickableRatio;
+            const tabClickableW = TAB_WIDTH * clickableRatio;
+            const tabClickableH = TAB_HEIGHT * clickableRatio;
 
-                { id: "optChatMessages",        label: "Chat Messages",         column: 1, row: 0, section: "appearance", tooltip: "Show chat messages." },
-                { id: "optRenderHealth",        label: "Health Bars",           column: 1, row: 1, section: "appearance", tooltip: "Show health bars." },
-                { id: "separatedHealthbars",    label: "Separate Shield Bar",   column: 1, row: 2, section: "appearance", tooltip: "Separate the shield bar from the health bar." },
-                { id: "optCurvyTraps",          label: "Curvy Traps",           column: 1, row: 3, section: "appearance", tooltip: "Add curvature to the sides of traps.\n" + "May slightly lower the frame rate." },
-                { id: "optTankSkins",           label: "Tank Skins",            column: 1, row: 4, section: "appearance", tooltip: "Show tank skins.\n" + "Note: Skins will be in grayscale if the low WebGL driver is selected." },
-                { id: "coloredHealthbars",      label: "Colored Health Bars",   column: 1, row: 5, section: "appearance", tooltip: "Make the health and shield bar(s) of entities match their body color." },
+            global.optionsMenu_Anim.tabClickables.place(tabIndex, tabClickableX, tabClickableY, tabClickableW, tabClickableH);
 
-                // UI Elements
-                { id: "optRenderUpgrades",      label: "Upgrades",              column: 0, row: 0, section: "ui", tooltip: "Toggle the visibility of the class and skill upgrade menus." },
-                { id: "optRenderPlayerBars",    label: "Player Bars",           column: 0, row: 1, section: "ui", tooltip: "Toggle the visibility of the score and level bars." },
-                { id: "optRenderKillbar",       label: "Kill Bar",              column: 0, row: 2, section: "ui", tooltip: "Toggle the visibility of the kill bar, which shows the number of kills, assists and boss kills." },
-
-                { id: "optRenderLeaderboard",   label: "Leaderboard",           column: 1, row: 0, section: "ui", tooltip: "Toggle the visibility of the leaderboard." },
-                { id: "optRenderMinimap",       label: "Minimap",               column: 1, row: 1, section: "ui", tooltip: "Toggle the visibility of the minimap." },
-                { id: "optReducedInfo",         label: "Extra Info",            column: 1, row: 2, section: "ui", tooltip: "Show various extra information in the bottom right corner.", reverseCheck: true },
-
-                // Extra
-                { id: "smoothCamera",           label: "Smooth Camera",         column: 0, row: 0, section: "extra", tooltip: "Make the camera follow your tank instead of being fixed at it." },
-                { id: "autoLevelUp",            label: "Auto-Level Up",         column: 0, row: 1, section: "extra", tooltip: "Automatically level you up to level 45 upon joining the game." },
-                { id: "optUnscaledPanel",    label: "Unscaled Old Spawn Panel", column: 0, row: 2, section: "extra", tooltip: "Scale the original spawn panel to look the same regardless of display size." },
-
-                { id: "optFancy",               label: "Fading Animation",      column: 1, row: 0, section: "extra", tooltip: "Make dying entities fade out instead of shrinking until disappearing.\n" + "May slightly lower the frame rate." },
-                { id: "optIncognitoMode",       label: "Incognito Mode",        column: 1, row: 1, section: "extra", tooltip: "Hide you from the leaderboard and make your score appear low to other players." },
-
-                // Performance
-                { id: "optLowResolution",       label: "Low Resolution",        column: 1, row: 0, section: "perf", tooltip: "Lower the game's resolution.\n" + "May help to improve the frame rate." },
-            ];
-
-            // default values; hook these into your actual settings as needed
-            for (const cb of global.optionsCheckboxes) {
-                let doc = document.getElementById(cb.id);
-                if (doc) cb.value = doc.checked, cb.lastValue = cb.value;
-            }
-        }
-        if (!global.optionsSlidingBars) {
-            global.optionsSlidingBars = [
-                { maxLowValue: 1, maxValue: config.graphical.borderChunk, affect: config.graphical.borderChunk, column: 0, row: 4, label: "Low Resolution", section: "appearance", tooltip: "Lower the game's resolution. May help to improve the frame rate.", }
-            ]
-        }
-
-        const BOX_SIZE = 25;
-        const LINE_HEIGHT = 40;
-
-        for (let i = 0; i < global.optionsCheckboxes.length; i++) {
-            const cb = global.optionsCheckboxes[i];
-            // section offset
-            let baseY = PANEL_Y + 45;     // Game Appearance
-            if (cb.section === "ui")    baseY = PANEL_Y + 325;
-            if (cb.section === "extra") baseY = PANEL_Y + 525;
-            if (cb.section === "perf")  baseY = PANEL_Y + 685;
-
-            const baseXLeft  = panelX + 20;
-            const baseXRight = panelX + PANEL_WIDTH / 2 + 7.5;
-
-            const x = (cb.column === 0 ? baseXLeft : baseXRight);
-            const y = baseY + cb.row * LINE_HEIGHT;
-            // hitbox in screen coords
-            const hitX = x * clickableRatio;
-            const hitY = y * clickableRatio;
-            const hitSize = BOX_SIZE * clickableRatio;
-            // Initalize the tooltip if we didnt.
-            if (!cb.tooltipService) {
-                global.optionsCheckboxes[i].tooltipService = {
-                    text: cb.tooltip,
-                    targetAlpha: 0,
-                    alpha: Smoothbar(0, 2, 3, 0.06, 0.025, true),
-                    x: 0,
-                    y: 0
-                }
-            }
-            // Also update the positions due to animation movement.
-            cb.tooltipService.x = hitX;
-            cb.tooltipService.y = hitY + hitSize + 10;
-            global.clickables.optionsMenu.toggleBoxes.place(i, hitX, hitY, hitSize, hitSize);
-            global.clickables.optionsMenu.HoverBoxes.place(i, hitX, hitY, hitSize + measureText(cb.label, BOX_SIZE) * 0.65, hitSize);
-            let clickHover = global.clickables.optionsMenu.toggleBoxes.check(mpos);
-            let hovered = global.clickables.optionsMenu.HoverBoxes.check(mpos);
-            if (hovered !== -1) {
-                global.optionsCheckboxes[hovered].tooltipService.targetAlpha = 1;
-            } else global.optionsCheckboxes[i].tooltipService.targetAlpha = 0;
-            // If the box got changed the reload the settings
-            if (cb.lastValue !== cb.value) {
-                cb.lastValue = cb.value;
-                loadSettings();
-                if (cb.id === "optLowResolution") resizeEvent();
-            }
-            // draw checkbox
-            const isOn = (cb.reverseCheck && !cb.value) || (!cb.reverseCheck && cb.value);
+            const tabHover = global.optionsMenu_Anim.tabClickables.check(mpos) === tabIndex;
+            
+            // Draw tab background
             ctx[2].lineWidth = 3;
-            gameDraw.setColor(ctx[2], isOn ? color.green : color.guiwhite);
-            drawGuiRect(x, y, BOX_SIZE, BOX_SIZE);
-            if (clickHover !== -1 && clickHover === i) {
-                gameDraw.setColor(ctx[2], !isOn ? global.clickables.clicked ? color.guiblack : color.black : global.clickables.clicked ? color.black : color.guiwhite);
-                ctx[2].globalAlpha = global.clickables.clicked ? 0.25 : 0.2;
-                drawGuiRect(x, y, BOX_SIZE, BOX_SIZE);
+            gameDraw.setColor(ctx[2], gameDraw.mixColors(color.grey, color.black, 0.3));
+            drawGuiRect(tabX, TAB_Y, TAB_WIDTH, TAB_HEIGHT);
+            if (tabHover) {
+                gameDraw.setColor(ctx[2], global.clickables.clicked ? color.guiblack : color.lgrey);
+                ctx[2].globalAlpha = global.clickables.clicked ? 0.10 : 1;
+                drawGuiRect(tabX, TAB_Y, TAB_WIDTH, TAB_HEIGHT);
                 ctx[2].globalAlpha = 1;
             }
+        }
+
+        // Draw tabs borders
+        for (let tabIndex = 0; tabIndex < TAB_NAMES.length; tabIndex++) {
+            const x = panelX + tabIndex * TAB_WIDTH * 1.162;
+            const tabX = x + 50;
+            
+            // Draw tab border
+            ctx[2].lineWidth = 3;
             gameDraw.setColor(ctx[2], color.black);
-            drawGuiRect(x, y, BOX_SIZE, BOX_SIZE, true);
-            // checkmark
-            if (isOn) {
-                ctx[2].strokeStyle = "#ffffff";
-                ctx[2].lineWidth = 3;
-                ctx[2].beginPath();
-                ctx[2].moveTo(x + 5.5, y + BOX_SIZE / 1.8);
-                ctx[2].lineTo(x + BOX_SIZE / 2 - 3, y + BOX_SIZE - 7);
-                ctx[2].lineTo(x + BOX_SIZE - 6, y + 8);
-                ctx[2].stroke();
+            drawGuiRect(tabX, TAB_Y, TAB_WIDTH, TAB_HEIGHT, true);
+        }
+
+        // Sliding tab background and border (above borders, below text)
+        const currentTab = global.optionsMenu_Anim.tabOffset.get();
+        const bgX = panelX + currentTab * TAB_WIDTH * 1.162 + 50;
+        gameDraw.setColor(ctx[2], color.grey);
+        drawGuiRect(bgX, TAB_Y, TAB_WIDTH, TAB_HEIGHT + 3); // Extend height to cover bottom border
+        // Draw border without bottom
+        ctx[2].strokeStyle = color.black;
+        ctx[2].lineWidth = 3;
+        ctx[2].beginPath();
+        ctx[2].moveTo(bgX, TAB_Y);
+        ctx[2].lineTo(bgX + TAB_WIDTH, TAB_Y); // top
+        ctx[2].moveTo(bgX, TAB_Y);
+        ctx[2].lineTo(bgX, TAB_Y + TAB_HEIGHT); // left
+        ctx[2].moveTo(bgX + TAB_WIDTH, TAB_Y);
+        ctx[2].lineTo(bgX + TAB_WIDTH, TAB_Y + TAB_HEIGHT); // right
+        ctx[2].stroke();
+
+        // Draw tabs labels
+        for (let tabIndex = 0; tabIndex < TAB_NAMES.length; tabIndex++) {
+            const x = panelX + tabIndex * TAB_WIDTH * 1.162;
+            
+            // Tab label
+            const cx = x + TAB_WIDTH - 11;
+            const cy = TAB_Y + TAB_HEIGHT - 18;
+            drawText(TAB_NAMES[tabIndex], cx, cy, 16, color.guiwhite, "center");
+        }
+
+        // Draw tab content with fade animation
+        const fadeOptions = Math.max(0, 1 - Math.abs(0 - currentTab));
+        const fadeTheme = Math.max(0, 1 - Math.abs(1 - currentTab));
+        const fadeKeybinds = Math.max(0, 1 - Math.abs(2 - currentTab));
+
+        ctx[2].save();
+        ctx[2].globalAlpha *= fadeOptions;
+        if (fadeOptions > 0.01) {
+
+            // OPTIONS TAB
+
+            drawText("Game Appearance", panelX + PANEL_WIDTH / 2, PANEL_Y + 30, 15.5, color.guiwhite, "center");
+            drawText("UI Elements",     panelX + PANEL_WIDTH / 2, PANEL_Y + 310, 15.5, color.guiwhite, "center");
+            drawText("Extra",           panelX + PANEL_WIDTH / 2, PANEL_Y + 470, 15.5, color.guiwhite, "center");
+            drawText("Performance",     panelX + PANEL_WIDTH / 2, PANEL_Y + 670, 15.5, color.guiwhite, "center");
+
+            if (!global.optionsCheckboxes) {
+                global.optionsCheckboxes = [
+                    // Game Appearance
+                    { id: "optRenderNames",         label: "Player Names",          column: 0, row: 0, section: "appearance", tooltip: "Show player names." },
+                    { id: "optRenderScores",        label: "Player Scores",         column: 0, row: 1, section: "appearance", tooltip: "Show player scores." },
+                    { id: "optNoGrid",              label: "Background Grid",       column: 0, row: 2, section: "appearance", tooltip: "Show the background grid.", reverseCheck: true },
+                    { id: "optPointy",              label: "Sharp Traps",           column: 0, row: 3, section: "appearance", tooltip: "Sharpen the corners of traps." },
+                    { id: "optSharpEdges",          label: "Sharp Polygons",        column: 0, row: 4, section: "appearance", tooltip: "Sharpen the corners of all polygons.\n" + "May slightly lower the frame rate." },
+                    { id: "optSecretOptions",       label: "Secret Options",        column: 0, row: 5, section: "appearance", tooltip: "Unlock the secret options tab.\n" + "Note: Some of these options are hidden for a reason. They can cause glitches, and may get removed at any time." },
+
+                    { id: "optChatMessages",        label: "Chat Messages",         column: 1, row: 0, section: "appearance", tooltip: "Show chat messages." },
+                    { id: "optRenderHealth",        label: "Health Bars",           column: 1, row: 1, section: "appearance", tooltip: "Show health bars." },
+                    { id: "separatedHealthbars",    label: "Separate Shield Bar",   column: 1, row: 2, section: "appearance", tooltip: "Separate the shield bar from the health bar." },
+                    { id: "optCurvyTraps",          label: "Curvy Traps",           column: 1, row: 3, section: "appearance", tooltip: "Add curvature to the sides of traps.\n" + "May slightly lower the frame rate." },
+                    { id: "optTankSkins",           label: "Tank Skins",            column: 1, row: 4, section: "appearance", tooltip: "Show tank skins.\n" + "Note: Skins will be in grayscale if the low WebGL driver is selected." },
+                    { id: "coloredHealthbars",      label: "Colored Health Bars",   column: 1, row: 5, section: "appearance", tooltip: "Make the health and shield bar(s) of entities match their body color." },
+
+                    // UI Elements
+                    { id: "optRenderUpgrades",      label: "Upgrades",              column: 0, row: 0, section: "ui", tooltip: "Toggle the visibility of the class and skill upgrade menus." },
+                    { id: "optRenderPlayerBars",    label: "Player Bars",           column: 0, row: 1, section: "ui", tooltip: "Toggle the visibility of the score and level bars." },
+                    { id: "optRenderKillbar",       label: "Kill Bar",              column: 0, row: 2, section: "ui", tooltip: "Toggle the visibility of the kill bar, which shows the number of kills, assists and boss kills." },
+
+                    { id: "optRenderLeaderboard",   label: "Leaderboard",           column: 1, row: 0, section: "ui", tooltip: "Toggle the visibility of the leaderboard." },
+                    { id: "optRenderMinimap",       label: "Minimap",               column: 1, row: 1, section: "ui", tooltip: "Toggle the visibility of the minimap." },
+                    { id: "optReducedInfo",         label: "Extra Info",            column: 1, row: 2, section: "ui", tooltip: "Show various extra information in the bottom right corner.", reverseCheck: true },
+
+                    // Extra
+                    { id: "smoothCamera",           label: "Smooth Camera",         column: 0, row: 0, section: "extra", tooltip: "Make the camera follow your tank instead of being fixed at it." },
+                    { id: "autoLevelUp",            label: "Auto-Level Up",         column: 0, row: 1, section: "extra", tooltip: "Automatically level you up to level 45 upon joining the game." },
+                    { id: "optUnscaledPanel",    label: "Unscaled Old Spawn Panel", column: 0, row: 2, section: "extra", tooltip: "Scale the original spawn panel to look the same regardless of display size." },
+
+                    { id: "optFancy",               label: "Fading Animation",      column: 1, row: 0, section: "extra", tooltip: "Make dying entities fade out instead of shrinking until disappearing.\n" + "May slightly lower the frame rate." },
+                    { id: "optIncognitoMode",       label: "Incognito Mode",        column: 1, row: 1, section: "extra", tooltip: "Hide you from the leaderboard and make your score appear low to other players." },
+
+                    // Performance
+                    { id: "optLowResolution",       label: "Low Resolution",        column: 1, row: 0, section: "perf", tooltip: "Lower the game's resolution.\n" + "May help to improve the frame rate." },
+                ];
+
+                for (const cb of global.optionsCheckboxes) {
+                    let doc = document.getElementById(cb.id);
+                    if (doc) cb.value = doc.checked, cb.lastValue = cb.value;
+                }
             }
 
-            // label
-            drawText(cb.label, x + BOX_SIZE + 10.5, y + BOX_SIZE / 2 + 6, 13.5, color.guiwhite, "left");
-        }
+            const BOX_SIZE = 25;
+            const LINE_HEIGHT = 40;
+
+            for (let i = 0; i < global.optionsCheckboxes.length; i++) {
+                const cb = global.optionsCheckboxes[i];
+                let baseY = PANEL_Y + 45;
+                if (cb.section === "ui")    baseY = PANEL_Y + 325;
+                if (cb.section === "extra") baseY = PANEL_Y + 525;
+                if (cb.section === "perf")  baseY = PANEL_Y + 685;
+
+                const baseXLeft  = panelX + 20;
+                const baseXRight = panelX + PANEL_WIDTH / 2 + 7.5;
+
+                const x = (cb.column === 0 ? baseXLeft : baseXRight);
+                const y = baseY + cb.row * LINE_HEIGHT;
+                const hitX = x * clickableRatio;
+                const hitY = y * clickableRatio;
+                const hitSize = BOX_SIZE * clickableRatio;
+
+                if (!cb.tooltipService) {
+                    global.optionsCheckboxes[i].tooltipService = {
+                        text: cb.tooltip,
+                        targetAlpha: 0,
+                        alpha: Smoothbar(0, 2, 3, 0.06, 0.025, true),
+                        x: 0,
+                        y: 0
+                    }
+                }
+
+                cb.tooltipService.x = hitX;
+                cb.tooltipService.y = hitY + hitSize + 10;
+                global.clickables.optionsMenu.toggleBoxes.place(i, hitX, hitY, hitSize, hitSize);
+                global.clickables.optionsMenu.HoverBoxes.place(i, hitX, hitY, hitSize + measureText(cb.label, BOX_SIZE) * 0.65, hitSize);
+                let clickHover = global.clickables.optionsMenu.toggleBoxes.check(mpos);
+                let hovered = global.clickables.optionsMenu.HoverBoxes.check(mpos);
+
+                if (hovered !== -1) {
+                    global.optionsCheckboxes[hovered].tooltipService.targetAlpha = 1;
+                } else global.optionsCheckboxes[i].tooltipService.targetAlpha = 0;
+
+                if (cb.lastValue !== cb.value) {
+                    cb.lastValue = cb.value;
+                    loadSettings();
+                    if (cb.id === "optLowResolution") resizeEvent();
+                }
+
+                const isOn = (cb.reverseCheck && !cb.value) || (!cb.reverseCheck && cb.value);
+                ctx[2].lineWidth = 3;
+                gameDraw.setColor(ctx[2], isOn ? color.green : color.guiwhite);
+                drawGuiRect(x, y, BOX_SIZE, BOX_SIZE);
+                if (clickHover !== -1 && clickHover === i) {
+                    gameDraw.setColor(ctx[2], !isOn ? global.clickables.clicked ? color.guiblack : color.black : global.clickables.clicked ? color.black : color.guiwhite);
+                    ctx[2].globalAlpha = global.clickables.clicked ? 0.25 : 0.2;
+                    drawGuiRect(x, y, BOX_SIZE, BOX_SIZE);
+                    ctx[2].globalAlpha = 1 * fadeOptions;
+                }
+                gameDraw.setColor(ctx[2], color.black);
+                drawGuiRect(x, y, BOX_SIZE, BOX_SIZE, true);
+
+                if (isOn) {
+                    ctx[2].strokeStyle = "#ffffff";
+                    ctx[2].lineWidth = 3;
+                    ctx[2].beginPath();
+                    ctx[2].moveTo(x + 5.5, y + BOX_SIZE / 1.8);
+                    ctx[2].lineTo(x + BOX_SIZE / 2 - 3, y + BOX_SIZE - 7);
+                    ctx[2].lineTo(x + BOX_SIZE - 6, y + 8);
+                    ctx[2].stroke();
+                }
+
+                drawText(cb.label, x + BOX_SIZE + 10.5, y + BOX_SIZE / 2 + 6, 13.5, color.guiwhite, "left");
+            }
+
         for (const cb of global.optionsCheckboxes) {
             // Draw tooltip
 
@@ -4380,7 +4415,7 @@ import * as socketStuff from "./socketinit.js";
             // invisible → skip
             if (anim > 0.001) {
                 ctx[2].save();
-                ctx[2].globalAlpha = anim;
+                ctx[2].globalAlpha = anim * fadeOptions;
 
                 const paddingX = 9;
                 const paddingY = 6;
@@ -4406,6 +4441,7 @@ import * as socketStuff from "./socketinit.js";
                 ctx[2].fillStyle = "rgba(30, 30, 30, 0.45)";
                 drawRoundedRect(bx, by, boxW, splitTooltip.length === 1 ? boxH : boxH + 15, 8);
                 ctx[2].fill();
+                ctx[2].globalAlpha = anim * fadeOptions;
 
                 // Text
                 for (let i = 0; i < splitTooltip.length; i++) {
@@ -4418,11 +4454,49 @@ import * as socketStuff from "./socketinit.js";
                 ctx[2].restore();
             }
         }
+
+        }
+        ctx[2].restore();
+
+        ctx[2].save();
+        ctx[2].globalAlpha *= fadeTheme;
+        if (fadeTheme > 0.01) {
+            // THEME TAB
+        
+            const CONTENT_Y = PANEL_Y + 50;
+            const CONTENT_X = panelX + 30;
+
+            ctx[2].fillStyle = color.guiwhite;
+            ctx[2].font = "bold 20px Ubuntu";
+            ctx[2].textAlign = "left";
+            ctx[2].textBaseline = "middle";
+
+            drawText("Coming soon...", CONTENT_X, CONTENT_Y, 20, color.guiwhite, "left");
+        }
+        ctx[2].restore();
+
+        ctx[2].save();
+        ctx[2].globalAlpha *= fadeKeybinds;
+        if (fadeKeybinds > 0.01) {
+            // KEYBINDS TAB
+        
+            const CONTENT_Y = PANEL_Y + 50;
+            const CONTENT_X = panelX + 30;
+
+            ctx[2].fillStyle = color.guiwhite;
+            ctx[2].font = "bold 20px Ubuntu";
+            ctx[2].textAlign = "left";
+            ctx[2].textBaseline = "middle";
+
+            drawText("Coming soon...", CONTENT_X, CONTENT_Y, 20, color.guiwhite, "left");
+        }
+        ctx[2].restore();
+
+        // Close button
         const CLOSE_SIZE = 30;
         const closeX = panelX;
         const closeY = PANEL_Y - CLOSE_SIZE - 20;
 
-        // place clickable
         global.clickables.optionsMenu.switchButton.place(
             1,
             closeX * clickableRatio,
@@ -4432,7 +4506,6 @@ import * as socketStuff from "./socketinit.js";
         );
 
         const cstate = global.clickables.optionsMenu.switchButton.check(mpos);
-        // draw red button
         ctx[2].save();
         ctx[2].globalAlpha = 1;
 
@@ -4447,7 +4520,7 @@ import * as socketStuff from "./socketinit.js";
         }
         gameDraw.setColor(ctx[2], color.black);
         drawGuiRect(closeX, closeY, CLOSE_SIZE, CLOSE_SIZE, true);
-        // draw X
+
         ctx[2].strokeStyle = "#ffffff";
         ctx[2].lineWidth = 4;
         ctx[2].beginPath();
@@ -4458,6 +4531,7 @@ import * as socketStuff from "./socketinit.js";
         ctx[2].stroke();
 
         ctx[2].restore();
+
         function drawRoundedRect(x, y, w, h, r) {
             ctx[2].beginPath();
             ctx[2].moveTo(x+r, y);
@@ -4471,7 +4545,6 @@ import * as socketStuff from "./socketinit.js";
             ctx[2].quadraticCurveTo(x, y, x+r, y);
             ctx[2].closePath();
         }
-
 
         ctx[2].restore();
     }
