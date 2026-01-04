@@ -488,8 +488,6 @@ var gameDraw = {
                 return config.graphical.coloredNest ? gameDraw.color.lavender : gameDraw.color.white;
             case "border":
                 return gameDraw.mixColors(gameDraw.color.white, gameDraw.color.guiblack, 1 / 3);
-            default:
-                return "#00000000";
         }
     },
     getColorDark: (givenColor) => {
