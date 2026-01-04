@@ -902,35 +902,28 @@ Class.antiTankMachineGunArm = {
     SKILL: Array(10).fill(15),
     GUNS: [
         {
-            POSITION: [15, 2.5, 1, 0, 2, 0, 0.2],
+            POSITION: { LENGTH: 15, WIDTH: 3.0000001192092896, ASPECT: 0, X: -6.556708751634699e-8, Y: 1.5000000596046434, ANGLE: 0 },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.op, {reload: 0.5, health: 100, damage: 100, recoil: 0, spray: 0.1, speed: 2, maxSpeed: 2}]),
                 TYPE: "bullet",
             }
         },
         {
-            POSITION: [15, 2.5, 1, 0, -2, 0, 0.2],
+            POSITION: { LENGTH: 15, WIDTH: 3.0000001192092896, ASPECT: 0, X: -6.556708770004402e-8, Y: -1.5000000596046434, ANGLE: 0 },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.op, {reload: 0.5, health: 100, damage: 100, recoil: 0, spray: 0.1, speed: 2, maxSpeed: 2}]),
                 TYPE: "bullet",
             }
         },
         {
-            POSITION: [1, 2.5, 1, 0, 0, 0, 0],
+            POSITION: { LENGTH: 17.000000476837158, WIDTH: 3.0000001192092896, ASPECT: 0, X: 0, Y: 0, ANGLE: 0 },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.op, {reload: 0.5, health: 100, damage: 100, recoil: 0, spray: 0.1, speed: 2, maxSpeed: 2}]),
                 TYPE: "bullet",
             }
         },
         {
-            POSITION: [16.5, 3.5, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.op, {reload: 0.5, health: 100, damage: 100, recoil: 0, spray: 0.1, speed: 2, maxSpeed: 2}]),
-                TYPE: "bullet",
-            }
-        },
-        {
-            POSITION: [5.5, 6.5, -1.8, 6.5, 0, 0, 0]
+            POSITION: { LENGTH: 5, WIDTH: 6.000000238418579, ASPECT: -1.600000023841858, X: 7.5, Y: -4.592425496802574e-16, ANGLE: 0 }
         }
     ],
 }

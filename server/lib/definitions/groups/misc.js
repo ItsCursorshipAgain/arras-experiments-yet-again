@@ -298,6 +298,7 @@ Class.sanctuary = {
     PARENT: "dominator",
     LABEL: "Sanctuary",
     DISPLAY_NAME: false,
+    DISPLAY_SCORE: false,
     LEVEL: 45,
     SIZE: 20,
     FACING_TYPE: ["spin", {speed: 0.025}],
@@ -826,43 +827,36 @@ Class.antiTankMachineGun = {
     SKILL_CAP: Array(10).fill(15),
     SKILL: Array(10).fill(15),
     GUNS: [
-        {
-            POSITION: [15, 2.5, 1, 0, 2, 0, 0.2],
+		{
+			POSITION: { LENGTH: 15, WIDTH: 3.0000001192092896, ASPECT: 0, X: -6.556708751634699e-8, Y: 1.5000000596046434, ANGLE: 0 },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.op, {reload: 0.5, health: 100, damage: 100, recoil: 0, spray: 0.1, speed: 2, maxSpeed: 2}]),
                 TYPE: "bullet",
             }
-        },
-        {
-            POSITION: [15, 2.5, 1, 0, -2, 0, 0.2],
+		},
+		{
+			POSITION: { LENGTH: 15, WIDTH: 3.0000001192092896, ASPECT: 0, X: -6.556708770004402e-8, Y: -1.5000000596046434, ANGLE: 0 },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.op, {reload: 0.5, health: 100, damage: 100, recoil: 0, spray: 0.1, speed: 2, maxSpeed: 2}]),
                 TYPE: "bullet",
             }
-        },
-        {
-            POSITION: [1, 2.5, 1, 0, 0, 0, 0],
+		},
+		{
+			POSITION: { LENGTH: 17.000000476837158, WIDTH: 3.0000001192092896, ASPECT: 0, X: 0, Y: 0, ANGLE: 0 },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.op, {reload: 0.5, health: 100, damage: 100, recoil: 0, spray: 0.1, speed: 2, maxSpeed: 2}]),
                 TYPE: "bullet",
             }
-        },
-        {
-            POSITION: [16.5, 3.5, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.op, {reload: 0.5, health: 100, damage: 100, recoil: 0, spray: 0.1, speed: 2, maxSpeed: 2}]),
-                TYPE: "bullet",
-            }
-        },
-        {
-            POSITION: [24, 7, -1.3, 0, 0, 90, 0],
-        },
-        {
-            POSITION: [24, 7, -1.3, 0, 0, -90, 0],
-        },
-        {
-            POSITION: [5.5, 6.5, -1.8, 6.5, 0, 0, 0]
-        }
+		},
+		{
+			POSITION: { LENGTH: 10, WIDTH: 8.00000011920929, ASPECT: -1.2000000476837158, X: 9.999999999999998, Y: -6.123234262925839e-16, ANGLE: 90.00000250447816 }
+		},
+		{
+			POSITION: { LENGTH: 10, WIDTH: 8.00000011920929, ASPECT: -1.2000000476837158, X: 9.999999999999998, Y: -6.123233601181349e-16, ANGLE: -90.00000250447816 }
+		},
+		{
+			POSITION: { LENGTH: 5, WIDTH: 6.000000238418579, ASPECT: -1.600000023841858, X: 7.5, Y: -4.592425496802574e-16, ANGLE: 0 }
+		}
     ],
     TURRETS: [{
         POSITION: [20, 0, 25, 0, 180, 1],
@@ -871,7 +865,7 @@ Class.antiTankMachineGun = {
         POSITION: [20, 0, -25, 0, 180, 1],
         TYPE: ["antiTankMachineGunArm"]
     }, {
-        POSITION: [26, 0, 0, 0, 360, 0],
+        POSITION: [25, 0, 0, 0, 360, 0],
         TYPE: ["dominationBody"]
     }]
 }

@@ -1000,6 +1000,12 @@ class Entity extends EventEmitter {
 
             // Legacy death function
             if (this.onDeath) this.onDeath();
+
+            // MEMORY LEAKS ARE BAD!!!!
+            for (let i = 0; i < this.turrets.length; i++) {
+                this.turrets[i].kill();
+            }
+
             // Initalize message arrays
             let killers = [],
                 killTools = [],
