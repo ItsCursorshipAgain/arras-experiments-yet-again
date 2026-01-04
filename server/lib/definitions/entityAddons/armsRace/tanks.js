@@ -134,7 +134,8 @@ Class.vortexSquare_AR = {
 }
 
 // Projectiles
-Class.pentachip = {
+Class.mechTrap_AR = makeAuto("trap", {type: "droneAutoTurret"})
+Class.pentaseerSunchip_AR = {
     PARENT: "sunchip",
     NECRO: [5],
     SHAPE: 5
@@ -226,8 +227,7 @@ Class.diesel_AR = {
                 LENGTH: 14,
                 WIDTH: 12,
                 ASPECT: 1.6,
-                X: 8,
-                ANGLE: 0
+                X: 8
             }
         }
     ]
@@ -283,8 +283,7 @@ Class.honcho_AR = {
                 LENGTH: 11,
                 WIDTH: 14,
                 ASPECT: 1.3,
-                X: 2,
-                ANGLE: 0
+                X: 2
             }
         }
     ]
@@ -307,8 +306,7 @@ Class.machineTrapper_AR = {
                 LENGTH: 3,
                 WIDTH: 13,
                 ASPECT: 1.3,
-                X: 15,
-                ANGLE: 0
+                X: 15
             }
         }
     ]
@@ -337,6 +335,11 @@ Class.mech_AR = {
                 WIDTH: 8,
                 ASPECT: 1.7,
                 X: 15
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap]),
+                TYPE: "mechTrap_AR",
+                STAT_CALCULATOR: "trap"
             }
         }
     ]
@@ -5860,7 +5863,7 @@ if (Config.retrograde) {
     Class.sprayer.UPGRADES_TIER_3.push("splasher_RG")
 }
 
-if (Config.daily_tank.tank == "whirlwind") {
+if (!Config.daily_tank == undefined && Config.daily_tank.tank == "whirlwind") {
 Class.vortex_AR.LABEL = "Directive"
 
 /*if (enable_whirlwind) { // do another check without daily_tank so we aren't duplicating

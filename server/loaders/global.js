@@ -202,7 +202,7 @@ global.runMove = (() => {
             a = my.acceleration / global.gameManager.roomSpeed;
         switch (my.motionType) {
             case "grow":
-                my.SIZE += my.motionTypeArgs.growSpeed ?? 1;
+                my.SIZE += my.motionTypeArgs.speed ?? 1;
                 break;
             case 'glide':
                 my.maxSpeed = my.topSpeed;

@@ -7,7 +7,7 @@ Class.casing = {
     LABEL: "Shell",
     TYPE: "swarm"
 }
-Class.developerBullet = { PARENT: "bullet", SHAPE: [[-1, -1], [1, -1], [2, 0], [1, 1], [-1, 1]] }
+Class.developerBullet = {PARENT: "bullet", SHAPE: [[-1, -1], [1, -1], [2, 0], [1, 1], [-1, 1]]}
 Class.flare = {
     PARENT: "growBullet",
     LABEL: "Flare",
@@ -15,7 +15,7 @@ Class.flare = {
 }
 Class.growBullet = {
     PARENT: "bullet",
-    MOTION_TYPE: "grow"
+    MOTION_TYPE: ["grow", {speed: 0.75}]
 }
 Class.masterBullet = {
     PARENT: "missile",
