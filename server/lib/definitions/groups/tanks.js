@@ -254,7 +254,7 @@ Class.whirlwind_bent = {
                 ANGLE: 15
             }
         }
-    ], { delayIncrement: 0.5 }),
+    ], {delayIncrement: 0.5}),
     UPGRADES_TIER_2: [
         "maelstrom_bent",
         "hurricane_bent",
@@ -283,7 +283,7 @@ Class.artillery = {
                 TYPE: "bullet",
                 LABEL: "Secondary"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         {
             POSITION: {
                 LENGTH: 19,
@@ -400,7 +400,7 @@ Class.cruiser = {
             TYPE: "swarm",
             STAT_CALCULATOR: "swarm"
         }
-    }, { delayIncrement: 0.5 })
+    }, {delayIncrement: 0.5})
 }
 Class.destroyer = {
     PARENT: "genericTank",
@@ -460,7 +460,7 @@ Class.doubleTwin = {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
             TYPE: "bullet"
         }
-    }, { delayIncrement: 0.5 }), 2)
+    }, {delayIncrement: 0.5}), 2)
 }
 Class.flangle = {
     PARENT: "genericFlail",
@@ -526,7 +526,7 @@ Class.gunner = {
                 TYPE: "bullet"
             }
         }
-    ], { delayIncrement: 0.25 })
+    ], {delayIncrement: 0.25})
 }
 Class.healer = {
     PARENT: "genericHealer",
@@ -774,7 +774,7 @@ Class.marksman = {
                 ASPECT: 2.2,
                 X: 10
             }
-        }, 3, { xPosOffset: 5 }),
+        }, 3, {xPosOffset: 5}),
         {
             POSITION: {
                 LENGTH: 24,
@@ -803,7 +803,7 @@ Class.minigun = {
             SHOOT_SETTINGS: combineStats([g.basic, g.minigun]),
             TYPE: "bullet"
         }
-    }, 3, { lengthOffset: 2, delayIncrement: 1/3 })
+    }, 3, {lengthOffset: 2, delayIncrement: 1/3})
 }
 Class.monsoon_bent = {
     PARENT: "genericTank",
@@ -843,7 +843,7 @@ Class.monsoon_bent = {
                 ANGLE: 30
             }
         }
-    ], { delayIncrement: 0.5 })
+    ], {delayIncrement: 0.5})
 }
 Class.overseer = {
     PARENT: "genericTank",
@@ -1508,7 +1508,7 @@ Class.barricade = {
                 TYPE: "trap",
                 STAT_CALCULATOR: "trap"
             }
-        }, 3, { xPosOffset: 4, delayIncrement: 1/3 })
+        }, 3, {xPosOffset: 4, delayIncrement: 1/3})
     ]
 }
 Class.battery = {
@@ -1539,7 +1539,7 @@ Class.battery = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
                 TYPE: "bullet"
             }
-        }], { delayIncrement: 0.2 }),
+        }], {delayIncrement: 0.2}),
         {
             POSITION: {
                 LENGTH: 20,
@@ -1577,7 +1577,7 @@ Class.battleship = {
                 STAT_CALCULATOR: "swarm",
                 LABEL: "Guided"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         ...weaponMirror({
             POSITION: {
                 LENGTH: 9,
@@ -1593,7 +1593,7 @@ Class.battleship = {
                 STAT_CALCULATOR: "swarm",
                 LABEL: "Autonomous"
             }
-        }, { delayIncrement: 0.5 })
+        }, {delayIncrement: 0.5})
     ]
 }
 Class.beekeeper = {
@@ -1617,7 +1617,7 @@ Class.beekeeper = {
                 WAIT_TO_CYCLE: true,
                 LABEL: "Secondary"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         {
             POSITION: {
                 LENGTH: 19,
@@ -1923,7 +1923,7 @@ Class.boomer_old = {
                 TYPE: "boomerang"
             }
         }
-    ], { delayIncrement: 0.5 })
+    ], {delayIncrement: 0.5})
 }
 Class.booster = {
     PARENT: "genericTank",
@@ -1991,7 +1991,7 @@ Class.bulwark = {
                 STAT_CALCULATOR: "trap"
             }
         }
-    ], { delayIncrement: 0.5 })
+    ], {delayIncrement: 0.5})
 }
 Class.bulwark_old = {
     PARENT: "genericTank",
@@ -2032,7 +2032,7 @@ Class.bulwark_old = {
                 STAT_CALCULATOR: "trap"
             }
         }
-    ], { delayIncrement: 0.5 })
+    ], {delayIncrement: 0.5})
 }
 Class.bushwhacker = {
     PARENT: "genericTank",
@@ -2403,7 +2403,7 @@ Class.crossbow = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.crossbow, { speed: 0.7, maxSpeed: 0.7 }, { recoil: 0.5 }]),
                 TYPE: "bullet"
             }
-        }], { delayIncrement: 0.5, delayOverflow: true }),
+        }], {delayIncrement: 0.5, delayOverflow: true}),
         {
             POSITION: {
                 LENGTH: 24,
@@ -2485,7 +2485,7 @@ Class.deadeye = {
                 ASPECT: 2.2,
                 X: 7
             }
-        }, 2, { xPosOffset: 5 }),
+        }, 2, {xPosOffset: 5}),
         {
             POSITION: {
                 LENGTH: 24,
@@ -2724,7 +2724,7 @@ Class.dual = {
                 TYPE: "bullet"
             }
         }
-    ], { delayIncrement: 0.5 })
+    ], {delayIncrement: 0.5})
 }
 Class.duplicator = {
     PARENT: "genericTank",
@@ -2918,7 +2918,7 @@ Class.fieldGun = {
                 TYPE: "bullet",
                 LABEL: "Secondary"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         {
             POSITION: {
                 LENGTH: 19.2,
@@ -3073,7 +3073,7 @@ Class.fork = {
                 ASPECT: 2.2,
                 X: 15
             }
-        }, 4, { xPosOffset: 5 }),
+        }, 4, {xPosOffset: 5}),
         {
             POSITION: {
                 LENGTH: 29,
@@ -3153,7 +3153,7 @@ Class.gunnerTrapper = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, { recoil: 4 }, { recoil: 1.8 }]),
                 TYPE: "bullet"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         {
             POSITION: {
                 LENGTH: 12,
@@ -3232,7 +3232,7 @@ Class.hewnDouble = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),
                 TYPE: "bullet"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         ...weaponArray(weaponMirror({
             POSITION: {
                 LENGTH: 20,
@@ -3243,7 +3243,7 @@ Class.hewnDouble = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin, g.hewnDouble]),
                 TYPE: "bullet"
             }
-        }, { delayIncrement: 0.5 }), 2)
+        }, {delayIncrement: 0.5}), 2)
     ]
 }
 Class.hexaTrapper = makeAuto({
@@ -3435,7 +3435,7 @@ Class.machineGunner = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.machineGunner]),
                 TYPE: "bullet"
             }
-        }], { delayIncrement: 0.2 }),
+        }], {delayIncrement: 0.2}),
         {
             POSITION: {
                 LENGTH: 14,
@@ -3612,7 +3612,7 @@ Class.mender = {
                 TYPE: "bullet",
                 LABEL: "Secondary"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         {
             POSITION: {
                 LENGTH: 19,
@@ -3700,7 +3700,7 @@ Class.mortar = {
                 TYPE: "bullet",
                 LABEL: "Secondary"
             }
-        }], { delayIncrement: 0.2 }),
+        }], {delayIncrement: 0.2}),
         {
             POSITION: {
                 LENGTH: 19,
@@ -3741,7 +3741,7 @@ Class.musket = {
                 TYPE: "bullet"
             }
         }
-    ], { delayIncrement: 0.5 })
+    ], {delayIncrement: 0.5})
 }
 Class.nailgun = {
     PARENT: "genericTank",
@@ -3763,7 +3763,7 @@ Class.nailgun = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun]),
                 TYPE: "bullet"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         {
             POSITION: {
                 LENGTH: 20,
@@ -3919,7 +3919,7 @@ Class.ordnance = {
                 TYPE: "bullet",
                 LABEL: "Secondary"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         {
             POSITION: {
                 LENGTH: 24,
@@ -3966,7 +3966,7 @@ Class.overgunner = makeOver({
                 SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, { speed: 0.7, maxSpeed: 0.7 }, g.flankGuard, { recoil: 1.8 }]),
                 TYPE: "bullet"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
         {
             POSITION: {
                 LENGTH: 12,
@@ -4353,7 +4353,7 @@ Class.quadruplex = {
                 Y: -7,
                 ANGLE: 45
             }
-        }, { delayIncrement: 0.5 }), 4)
+        }, {delayIncrement: 0.5}), 4)
     ]
 }
 Class.ranger = {
@@ -4439,7 +4439,7 @@ Class.revolver = {
                 ASPECT: 2.2,
                 X: 5
             }
-        }, 2, { xPosOffset: 5 }),
+        }, 2, {xPosOffset: 5}),
         {
             POSITION: {
                 LENGTH: 20,
@@ -4508,7 +4508,7 @@ Class.rimfire_old = {
                 TYPE: "bullet"
             }
         }
-    ], { delayIncrement: 0.25 })
+    ], {delayIncrement: 0.25})
 }
 Class.rocketSegment = {
     PARENT: "genericTank",
@@ -5237,7 +5237,7 @@ Class.streamliner = {
             SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.streamliner]),
             TYPE: "bullet"
         }
-    }, 5, { lengthOffset: 2, delayIncrement: 0.2 })
+    }, 5, {lengthOffset: 2, delayIncrement: 0.2})
 }
 Class.subverter = {
     PARENT: "genericTank",
@@ -5469,7 +5469,7 @@ Class.tripleTwin = {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin]),
             TYPE: "bullet"
         }
-    }, { delayIncrement: 0.5 }), 3)
+    }, {delayIncrement: 0.5}), 3)
 }
 Class.triplet = {
     PARENT: "genericTank",
@@ -5563,7 +5563,7 @@ Class.triplex = {
                 ASPECT: -4,
                 ANGLE: 22.5
             }
-        }], { delayIncrement: 0.5 }),
+        }], {delayIncrement: 0.5}),
     ]
 }
 Class.twister = {
@@ -6105,7 +6105,7 @@ Class.worstTank = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.worstTank]),
                 TYPE: "bullet"
             }
-        }], { delayIncrement: 0.2 }),
+        }], {delayIncrement: 0.2}),
         {
             POSITION: {
                 LENGTH: 14,
