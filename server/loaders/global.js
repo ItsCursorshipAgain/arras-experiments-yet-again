@@ -206,7 +206,7 @@ global.runMove = (() => {
                 break;
             case 'glide':
                 my.maxSpeed = my.topSpeed;
-                my.damp = 0.05;
+                my.damp = my.motionTypeArgs.damp ?? 0.05;
                 break;
             case 'motor':
                 my.maxSpeed = 0;
