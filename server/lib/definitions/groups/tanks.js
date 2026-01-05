@@ -1099,12 +1099,12 @@ Class.trapGuard = {
 Class.triAngle = {
     PARENT: "genericTank",
     LABEL: "Tri-Angle",
+    DANGER: 6,
     BODY: {
         HEALTH: 0.8 * base.HEALTH,
         SHIELD: 0.8 * base.SHIELD,
         DENSITY: 0.6 * base.DENSITY,
     },
-    DANGER: 6,
     GUNS: [
         {
             POSITION: {
@@ -1928,12 +1928,12 @@ Class.boomer_old = {
 Class.booster = {
     PARENT: "genericTank",
     LABEL: "Booster",
+    DANGER: 7,
     BODY: {
         HEALTH: base.HEALTH * 0.4,
         SHIELD: base.SHIELD * 0.4,
         DENSITY: base.DENSITY * 0.3
     },
-    DANGER: 7,
     GUNS: [
         {
             POSITION: {
@@ -3459,7 +3459,7 @@ Class.manager = {
     STAT_NAMES: statnames.drone,
     BODY: {
         SPEED: 0.85 * base.SPEED,
-        FOV: 1.1 * base.FOV,
+        FOV: 1.1 * base.FOV
     },
     INVISIBLE: [0.08, 0.03],
     TOOLTIP: "Stay still to turn invisible.",
@@ -3477,10 +3477,10 @@ Class.manager = {
                 TYPE: "drone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
-                STAT_CALCULATOR: "drone",
-            },
-        },
-    ],
+                STAT_CALCULATOR: "drone"
+            }
+        }
+    ]
 }
 Class.maleficitor = {
     PARENT: "genericTank",
