@@ -302,7 +302,7 @@ class gameServer {
             // Redefine the room
             this.defineRoom();
             // Log that we are running again
-            util.log(`[${global.gameManager.port}]: New game instance is now running`);
+            util.log(`[${global.gameManager.host}/${global.gameManager.port}]: New game instance is now running`);
 
             // Init every tile
             for (let y = 0; y < this.room.setup.length; y++) {
@@ -495,7 +495,7 @@ class gameServer {
         if (this.arenaClosed) return;
         // Log this
         util.saveToLog("Game Instance Ending", "Game running " + this.gamemode + " at `" + this.gamemode + "` is now closing.", 0xEE4132);
-        util.log(`[${global.gameManager.port}]: Arena Closing initiated`);
+        util.log(`[${global.gameManager.host}/${global.gameManager.port}]: Arena Closing initiated`);
         // And broadcast it
         this.socketManager.broadcast("Arena closed: No players may join!");
         this.arenaClosed = true;
@@ -571,7 +571,7 @@ class gameServer {
 
     close(spawnTimeout) {
         // Log that we are closing
-        util.log(`[${global.gameManager.port}]: Ending Game instance`);
+        util.log(`[${global.gameManager.host}/${global.gameManager.port}]: Ending Game instance`);
         // Clear the timeout if the arena closers did not spawn yet
         if (spawnTimeout) clearTimeout(spawnTimeout);
         // Now broadcast it
@@ -606,7 +606,7 @@ class gameServer {
 
     onEnd() {
         // Log that we are restarting
-        util.log(`[${global.gameManager.port}]: Game instance is now over. Soft restarting the server.`);
+        util.log(`[${global.gameManager.host}/${global.gameManager.port}]: Game instance is now over. Soft restarting the server.`);
         // Set this to true to run the softstart code
         this.start(true);
     }
