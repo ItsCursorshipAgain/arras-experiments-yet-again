@@ -40,7 +40,7 @@ module.exports = {
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["retrograde", "old_dreadnoughts", "tdm"], // The selected gamemode.
+            gamemode: ["march_madness", "retrograde", "tdm"], // The selected gamemode.
             player_cap: 50, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
@@ -121,6 +121,7 @@ module.exports = {
     sanitize_chat_input: true, // If you don't want your players to color their messages. They get sanitized after addons interpret them, but before they're added to the chat message dictionary.
 
     // Seasonal
+    fireworks: false, // Toggles fireworks (automatic around July 4 in US-region servers)
     thanksgiving: false, // Toggles the seasonal thanksgiving theme (replaces Motherships with Turkeys)
     spooky_theme: false, // Toggles the seasonal halloween theme (adds eyes to walls and replaces rocks to pumpkins)
 
@@ -248,9 +249,9 @@ module.exports = {
     blackout: false,
     clan_wars: false,
     domination: false,
-    fireworks: false,
     growth: false,
     groups: false,
+    march_madness: false,
     mode: "ffa",
     mothership: false,
     retrograde: false,

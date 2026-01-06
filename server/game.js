@@ -58,7 +58,7 @@ const getName = (name, gamemodeData) => {
         growth: "Growth",
         //half: "Half",
         //manhunt: "Manhunt",
-        //march_madness: "March Madness",
+        march_madness: "March Madness",
         maze: "Maze",
             //labyrinth: "Labyrinth",
                 //old_labyrinth: "Old Labyrinth",

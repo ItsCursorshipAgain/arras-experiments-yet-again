@@ -3,7 +3,7 @@ Developers who are actively contributing to this project at the time of writing.
 - `TGS`: Project Co-Owner and creator of `aps-template` (original OSA)\
 - `AE0Hello`: Project Co-Owner, Mobile Controls, Daily Tanks, In-Game UI\
 - `Dogeiscut`: TODO\
-- `Helena`: TODO\
+- `Helena`: March Madness\
 - `Toothless`: TODO\
 
 # Former Developers
