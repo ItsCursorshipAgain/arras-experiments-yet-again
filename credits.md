@@ -19,4 +19,4 @@ People who have submitted code to the project but are not official developers.
 - `funny0_0`: More Maze Generations, Shiny Tanks, SVG Shapes, Kill Bars\
 - `kuoworic`: Precise Visual Tank Definitions\
 - `LA3T`: Custom Wall Collisions\
-- `PR2000`: Multiple GameServer Instances via `worker_threads`\
+- `pr2000`: Fireworks, Multiple GameServer Instances via `worker_threads`\

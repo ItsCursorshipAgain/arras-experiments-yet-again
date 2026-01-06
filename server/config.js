@@ -248,6 +248,7 @@ module.exports = {
     blackout: false,
     clan_wars: false,
     domination: false,
+    fireworks: false,
     growth: false,
     groups: false,
     mode: "ffa",
