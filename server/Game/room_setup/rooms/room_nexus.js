@@ -1,7 +1,7 @@
 const {
     normal: ____,
-    wall: WALL,
     nexus_red: REDA,
+    wall: WALL,
     atmg,
     base1: bas1,
     baseprotected1: bap1,
