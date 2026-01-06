@@ -202,7 +202,7 @@ module.exports = {
     food_group_cap: 6, // Number of foods that random food groups spawn with
 
     // Bosses
-    bosses_spawn: true,
+    enable_bosses: true,
     boss_spawn_cooldown: 260, // The delay (in seconds) between boss spawns.
     boss_spawn_delay: 6, // The delay (in seconds) between the boss spawn being announced and the boss(es) actually spawning.
     boss_types: [
