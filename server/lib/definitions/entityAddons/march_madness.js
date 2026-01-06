@@ -50,7 +50,7 @@ if (Config.march_madness) {
                         }
 
                         if (typeof y?.PROPERTIES?.TYPE === "string") {
-                            if (y.PROPERTIES.TYPE === "drone") y.PROPERTIES.MAX_CHILDREN = 6;
+                            if (["drone", "minion"].includes(y.PROPERTIES.TYPE)) y.PROPERTIES.MAX_CHILDREN = 6;
                             else if (["missile", "minimissile", "spinmissile", "hypermissile", "swarm"].includes(y.PROPERTIES.TYPE)) {
                                 y.PROPERTIES.MAX_CHILDREN = 8;
                                 y.PROPERTIES.DESTROY_OLDEST_CHILD = true;
