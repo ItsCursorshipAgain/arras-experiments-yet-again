@@ -938,7 +938,7 @@ class Entity extends EventEmitter {
                     y: global.gameManager.room.height - global.gameManager.room.height,
                 }, dist = util.getDistance(this, centerPoint);
                 if (dist > global.gameManager.room.width - global.gameManager.room.width / 2) {
-                    let strength = (dist - global.gameManager.room.width / 2) * Config.room_bound_force / (Config.runSpeed * 350);
+                    let strength = (dist - global.gameManager.room.width / 2) * Config.room_bound_force / (Config.run_speed * 350);
                     this.x = util.lerp(this.x, centerPoint.x, strength);
                     this.y = util.lerp(this.y, centerPoint.y, strength);
                 }
