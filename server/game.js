@@ -255,7 +255,7 @@ class gameServer {
             this.name = this.gamemode.map(x => getName(x, Config) || (x[0].toUpperCase() + x.slice(1))).join(' ');
 
             // Activate tiered food if enabled
-            if (Config.tiered_food) global.activateTieredFood();
+            if (!Config.classic_food) global.activateTieredFood();
 
             // Get the definitions before we can initalize the rest.
             this.definitionsCombiner.loadDefinitions(false);

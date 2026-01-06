@@ -338,7 +338,7 @@ Class.thaumaturge = {
     }, 4)]
 }
 
-if (!Config.tiered_food) {
+if (Config.classic_food) {
     Class.shaman.COLOR = "magenta"
     Class.shaman.UPGRADE_COLOR = "magenta"
 }

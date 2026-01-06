@@ -37,7 +37,7 @@ const healerMenuTurrets = [
         }
     }
 ]
-if (!Config.tiered_food) {
+if (Config.classic_food) {
     dreadnoughts = "dreadnought_dreadsV1"
 } else {
     dreadnoughts = "dreadnought_dreadsV2"

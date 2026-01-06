@@ -1,5 +1,5 @@
 module.exports = {
-    tiered_food: false,
+    classic_food: true,
     tier_cap: 13,
     //level_cap_cheat: 180,
     //level_cap: 180,

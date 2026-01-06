@@ -40,7 +40,7 @@ module.exports = {
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["march_madness", "retrograde", "tdm"], // The selected gamemode.
+            gamemode: ["retrograde", "old_dreadnoughts", "tdm"], // The selected gamemode.
             player_cap: 50, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
@@ -169,7 +169,7 @@ module.exports = {
 
     // Food
     enable_food: true,
-    tiered_food: true, // Enables tiered (norm/Beta/Alpha/Omega) food, overrides the below arrays
+    classic_food: false, // Disables tiered (norm/Beta/Alpha/Omega) food, enables editing the below arrays
 
     food_types: [ // Possible food types outside the nest
         [1, [

@@ -477,6 +477,7 @@ Class.banger_AR = {
     PARENT: "genericSmasher",
     LABEL: "Banger",
     DANGER: 7,
+    SIZE: Class.genericTank.SIZE * 1.3,
     TURRETS: [
         {
             TYPE: "digDigHat",
@@ -6446,7 +6447,7 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
         Class.sprayer.UPGRADES_TIER_3.push("frother_AR", "foamer_AR", "faucet_AR", "shower_AR", "autoSprayer_AR", "stormer_AR")
             Class.redistributor.UPGRADES_TIER_3 = ["autoRedistributor"].map(x => x + "_AR")
             Class.phoenix.UPGRADES_TIER_3 = ["autoPhoenix"].map(x => x + "_AR")
-            Class.atomizer.UPGRADES_TIER_3 = ["autoAtomizer"].map(x => x + "_AR")
+            Class.atomizer.UPGRADES_TIER_3 = ["scatterer", "autoAtomizer"].map(x => x + "_AR")
             Class.focal.UPGRADES_TIER_3 = ["concentrator", "autoFocal"].map(x => x + "_AR")
             Class.frother_AR.UPGRADES_TIER_3 = ["autoFrother"].map(x => x + "_AR")
             Class.foamer_AR.UPGRADES_TIER_3 = ["autoFoamer"].map(x => x + "_AR")
