@@ -4471,7 +4471,8 @@ import * as socketStuff from "./socketinit.js";
             ctx[2].textAlign = "left";
             ctx[2].textBaseline = "middle";
 
-            drawText("Coming soon...", CONTENT_X, CONTENT_Y, 20, color.guiwhite, "left");
+            drawText("Theme", panelX + PANEL_WIDTH / 2, PANEL_Y + 30, 15.5, color.guiwhite, "center");
+            drawText("Coming soon™", CONTENT_X, CONTENT_Y, 20, color.guiwhite, "left");
         }
         ctx[2].restore();
 
@@ -4488,7 +4489,8 @@ import * as socketStuff from "./socketinit.js";
             ctx[2].textAlign = "left";
             ctx[2].textBaseline = "middle";
 
-            drawText("Coming soon...", CONTENT_X, CONTENT_Y, 20, color.guiwhite, "left");
+            drawText("Keybinds", panelX + PANEL_WIDTH / 2, PANEL_Y + 30, 15.5, color.guiwhite, "center");
+            drawText("Coming soon™", CONTENT_X, CONTENT_Y, 20, color.guiwhite, "left");
         }
         ctx[2].restore();
 
