@@ -1,5 +1,5 @@
-const { combineStats, dereference, makeAura, makeAuto, makeHat, weaponArray, weaponMirror } = require('../facilitators.js')
-const { base, smshskl } = require('../constants.js')
+const {combineStats, dereference, makeAura, makeAuto, makeHat, weaponArray, weaponMirror} = require('../facilitators.js')
+const {base, smshskl} = require('../constants.js')
 const g = require('../gunvals.js')
 
 // ARMS RACE V2 DREADNOUGHTS BY FROSTBYTE

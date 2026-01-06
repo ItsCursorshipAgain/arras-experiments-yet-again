@@ -21,28 +21,12 @@ module.exports = {
             featured: true, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["retrograde", "tdm"], // The selected gamemode.
+            gamemode: ["arms_race", "tdm"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 4,
-                bot_cap: 40,
-                daily_tank: {
-                    tank: "whirlwind",
-                    tier: 3,
-                    ads: false,
-                    ad_sources: [
-                        {
-                            file: "testadvideo.mp4",
-                            use_regular_ad_size: true,
-                        },
-                        {
-                            file: "testadimage.png",
-                            image_wait_time: 3,
-                            use_regular_ad_size: true,
-                        }
-                    ]
-                },
+                bot_cap: 40
             }
         },
         {
@@ -56,28 +40,12 @@ module.exports = {
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["old_dreadnoughts", "tdm"], // The selected gamemode.
+            gamemode: ["retrograde", "old_dreadnoughts", "tdm"], // The selected gamemode.
             player_cap: 50, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
-                teams: 2,
-                bot_cap: 32,
-                daily_tank: {
-                    tank: "whirlwind",
-                    tier: 3,
-                    ads: false,
-                    ad_sources: [
-                        {
-                            file: "testadvideo.mp4",
-                            use_regular_ad_size: true,
-                        },
-                        {
-                            file: "testadimage.png",
-                            image_wait_time: 3,
-                            use_regular_ad_size: true,
-                        }
-                    ]
-                },
+                teams: 4,
+                bot_cap: 40
             }
         },
         {
@@ -97,6 +65,22 @@ module.exports = {
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 4,
                 bot_cap: 0,
+                daily_tank: {
+                    tank: "whirlwind",
+                    tier: 3,
+                    ads: false,
+                    ad_sources: [
+                        {
+                            file: "testadvideo.mp4",
+                            use_regular_ad_size: true,
+                        },
+                        {
+                            file: "testadimage.png",
+                            image_wait_time: 3,
+                            use_regular_ad_size: true,
+                        }
+                    ]
+                }
             }
         },
         {

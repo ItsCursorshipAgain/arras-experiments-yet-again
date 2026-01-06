@@ -943,6 +943,11 @@ Class.rifle_old = {
                 WIDTH: 9.5
             }
         }
+    ],
+    UPGRADES_TIER_3: [
+        "sniperRifle",
+        "ransacker_old",
+        "spreadRifle",
     ]
 }
 Class.smasher = {
@@ -3477,7 +3482,8 @@ Class.manager = {
                 TYPE: "drone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
-                STAT_CALCULATOR: "drone"
+                STAT_CALCULATOR: "drone",
+                WAIT_TO_CYCLE: true
             }
         }
     ]
@@ -4459,26 +4465,6 @@ Class.revolver = {
         }
     ]
 }
-Class.riptide = {
-    PARENT: "genericTank",
-    LABEL: "Riptide",
-    DANGER: 7,
-    GUNS: [
-        {
-            POSITION: [6.5, 23.5, 0.25, 3, 0, 180, 0],
-        },
-        {
-            POSITION: [18, 16, 0.75, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, { size: 0.9, reload: 1.2 }]),
-                TYPE: "undertowBullet"
-            }
-        },
-        ...weaponMirror({
-            POSITION: [17, 16, 0.1, 0.25, 4, 13.5, 0]
-        })
-    ]
-}
 Class.rimfire_old = {
     PARENT: "genericTank",
     LABEL: "Rimfire",
@@ -4510,6 +4496,26 @@ Class.rimfire_old = {
             }
         }
     ], {delayIncrement: 0.25})
+}
+Class.riptide = {
+    PARENT: "genericTank",
+    LABEL: "Riptide",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [6.5, 23.5, 0.25, 3, 0, 180, 0],
+        },
+        {
+            POSITION: [18, 16, 0.75, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, { size: 0.9, reload: 1.2 }]),
+                TYPE: "undertowBullet"
+            }
+        },
+        ...weaponMirror({
+            POSITION: [17, 16, 0.1, 0.25, 4, 13.5, 0]
+        })
+    ]
 }
 Class.rocketSegment = {
     PARENT: "genericTank",
@@ -4914,6 +4920,32 @@ Class.skimmer = {
         },
     ],
 }
+Class.sniperRifle = {
+    PARENT: "genericTank",
+    LABEL: "Sniper Rifle",
+    DANGER: 7,
+    BODY: {
+        FOV: base.FOV * 1.35
+    },
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 28,
+                WIDTH: 7
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.rifle]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 14,
+                WIDTH: 9.5
+            }
+        }
+    ]
+}
 Class.spike = {
     PARENT: "genericSmasher",
     LABEL: "Spike",
@@ -5016,6 +5048,70 @@ Class.sprayer_old = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.focal]),
                 TYPE: "bullet"
+            }
+        }
+    ]
+}
+Class.spreadRifle = {
+    PARENT: "genericTank",
+    LABEL: "Spread Rifle",
+    DANGER: 7,
+    BODY: {
+        FOV: base.FOV * 1.225
+    },
+    GUNS: [
+        ...weaponMirror([{
+            POSITION: {
+                LENGTH: 16,
+                WIDTH: 3,
+                Y: 3.5,
+                ANGLE: 2
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.crossbow, { recoil: 0.5 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 14,
+                WIDTH: 3,
+                Y: 3.75,
+                ANGLE: 4,
+                DELAY: 0.08
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.crossbow, { recoil: 0.5 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 12,
+                WIDTH: 3,
+                Y: 4,
+                ANGLE: 6,
+                DELAY: 0.16
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.crossbow, { recoil: 0.5 }]),
+                TYPE: "bullet"
+            }
+        }]),
+        {
+            POSITION: {
+                LENGTH: 25,
+                WIDTH: 7
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 14,
+                WIDTH: 9.5
             }
         }
     ]
@@ -5728,6 +5824,35 @@ Class.xHunter = {
     ]
 }
 
+// Tier 4
+Class.ransacker_old = {
+    PARENT: "genericTank",
+    LABEL: "Rifle Guard",
+    DANGER: 8,
+    BODY: {
+        FOV: base.FOV * 1.225
+    },
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 25,
+                WIDTH: 7
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.flankGuard, g.flankGuard]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 14,
+                WIDTH: 9.5
+            }
+        },
+        ...preset.trapGuard
+    ]
+}
+
 // Tierless / Fun
 Class.alas = {
     PARENT: "genericTank",
@@ -6200,7 +6325,7 @@ if (Config.arms_race || Config.retrograde) {
 
     //Class.machineGun.UPGRADES_TIER_2
         Class.minigun.UPGRADES_TIER_3.push("subverter")
-        Class.gunner.UPGRADES_TIER_3.push("battery")
+        Class.gunner.UPGRADES_TIER_3.push("battery", "buttbuttin", "blower")
 
     //Class.flankGuard.UPGRADES_TIER_2
         Class.hexaTank.UPGRADES_TIER_3.push("deathStar")

@@ -671,7 +671,7 @@ class Entity extends EventEmitter {
         return Math.min(this.levelCap ?? Config.level_cap, this.skill.level);
     }
     // How this works: in 2025 growth a 3.00m player has the same size as a wall (tile)
-    get size() {
+    get size() { // todo: make this dynamic compared to the level cap and not fixed at 45
         let level = this.level;
         if (!Config.growth) level = Math.min(45, level);
         let levelMultiplier = 1;
