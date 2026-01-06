@@ -3389,6 +3389,7 @@ Class.autoBentDouble_AR = makeAuto("bentDouble", "Auto-Bent Double")
 Class.autoBentHybrid_AR = makeAuto("bentHybrid", "Auto-Bent Hybrid")
 Class.autoCoil_AR = makeAuto("coil")
 Class.autoDeadeye_AR = makeAuto("deadeye")
+Class.autoDefect_AR = makeAuto("defect_AR")
 Class.autoDirectorstorm_AR = makeAuto("directorstorm_AR", "Auto-Directorstorm", stormAuto_options)
 Class.autoDoubleArtillery_AR = makeAuto("doubleArtillery_AR")
 Class.autoDoubleBlaster_AR = makeAuto("doubleBlaster_AR")
@@ -3468,6 +3469,7 @@ Class.bentTriple_AR = {
         }
     ], 3)
 }
+Class.bozo_AR = makeBird("spreadshot", "Bozo")
 Class.bruiser_AR = {
     PARENT: "genericTank",
     LABEL: "Bruiser",
@@ -3695,6 +3697,7 @@ Class.cyclops_AR = {
         }
     ]
 }
+Class.deficiency_AR = makeBird("pentaShot", "Deficiency")
 Class.doctor_AR = {
     PARENT: "genericHealer",
     LABEL: "Doctor",
@@ -3710,8 +3713,10 @@ Class.doctor_AR = {
         }
     ]
 }
+Class.donkey_AR = makeBird("bentGunner_AR", "Donkey")
 Class.dopedrive_AR = makeDrive("dopeseer_AR", {label: "Dopedrive"})
 Class.doperstorm_AR = makeDrive("doper_AR", storm_options)
+Class.dork_AR = makeBird("splitShot_AR", "Dork")
 Class.doubleAtomizer_AR = {
     PARENT: "genericTank",
     LABEL: "Double Atomizer",
@@ -4242,6 +4247,7 @@ Class.executor_AR = {
         ...preset.trapGuard
     ]
 }
+Class.fault_AR = makeBird("waarrk_AR", "Fault")
 Class.flexedHybrid_AR = makeOver("pentaShot", "Flexed Hybrid", preset.hybrid)
 Class.foredrive_AR = makeDrive("foreman_AR", {label: "Foredrive"})
 Class.fortdrive_AR = makeDrive("fortress", {...preset.driveSwarm, label: "Fortdrive"})
@@ -4931,6 +4937,8 @@ Class.mono_AR = {
     ]
 }
 Class.necrodrive_AR = makeDrive("necromancer", {label: "Necrodrive"})
+Class.nitwit_AR = makeBird("triplet", "Nitwit")
+Class.nitwix_AR = makeBird("triplex", "Nitwix")
 Class.octoWhirl_AR = makeWhirlwind("octoTank", {label: "Octo Whirl"})
 Class.ointment_AR = {
     PARENT: "genericHealer",
@@ -6346,7 +6354,7 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             Class.autoTripleShot_AR.UPGRADES_TIER_3 = ["autoTriplex"].map(x => x + "_AR")
             Class.bentGunner_AR.UPGRADES_TIER_3 = ["spambrid"].map(x => x + "_AR")
             Class.bentMinigun_AR.UPGRADES_TIER_3 = ["junker"].map(x => x + "_AR")
-            Class.defect_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.defect_AR.UPGRADES_TIER_3 = ["deficiency", "bozo", "nitwit", "nitwix", "dork", "autoDefect", "donkey", "fault"].map(x => x + "_AR")
             Class.waarrk_AR.UPGRADES_TIER_3 = ["bentCatcher"].map(x => x + "_AR")
         Class.gunner.UPGRADES_TIER_3.push("rimfire_AR", "volley_AR", "doubleGunner_AR", "bentGunner_AR", "equalizer_AR")
             Class.autoGunner.UPGRADES_TIER_3 = [].map(x => x + "_AR")

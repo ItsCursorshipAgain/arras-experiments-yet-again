@@ -4089,7 +4089,7 @@ Class.pentaShot = {
         }
     ]
 }
-Class.phoenix = makeBird("Sprayer", "Phoenix")
+Class.phoenix = makeBird("sprayer", "Phoenix")
 Class.poacher = makeOver("hunter", "Poacher", preset.hybrid)
 Class.predator = {
     PARENT: "genericTank",
