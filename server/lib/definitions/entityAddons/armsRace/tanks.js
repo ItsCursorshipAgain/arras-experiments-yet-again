@@ -1,4 +1,4 @@
-const {combineStats, makeAuto, makeDrive, makeHat, makeMenu, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../../facilitators.js')
+const {combineStats, makeAuto, makeBird, makeDrive, makeHat, makeMenu, makeOver, makeRadialAuto, makeTurret, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../../facilitators.js')
 const {base, statnames} = require('../../constants.js')
 const g = require('../../gunvals.js')
 const preset = require('../../presets.js')
@@ -727,29 +727,7 @@ Class.cog_AR = {
         }
     ], { delayIncrement: 0.5 })
 }
-Class.cockatiel_AR = {
-    PARENT: "genericTank",
-    LABEL: "Cockatiel",
-    DANGER: 7,
-    STAT_NAMES: statnames.trap,
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 20,
-                WIDTH: 8
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 4,
-                WIDTH: 8,
-                ASPECT: 1.7,
-                X: 13
-            }
-        },
-        ...preset.bird
-    ]
-}
+Class.cockatiel_AR = makeBird("pen_AR", "Cockatiel")
 Class.combo_AR = {
     PARENT: "genericTank",
     LABEL: "Combo",
@@ -868,42 +846,7 @@ Class.crowbar_AR = {
     ]
 }
 Class.cruiserdrive_AR = makeDrive("cruiser", preset.driveSwarm)
-Class.defect_AR = {
-    PARENT: "genericTank",
-    LABEL: "Defect",
-    DANGER: 7,
-    BODY: {
-        SPEED: base.SPEED * 0.9
-    },
-    GUNS: [
-        ...weaponMirror({
-            POSITION: {
-                LENGTH: 19,
-                WIDTH: 8,
-                Y: 2,
-                ANGLE: 18,
-                DELAY: 0.5
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
-                TYPE: "bullet",
-                ALT_FIRE: true
-            }
-        }),
-        {
-            POSITION: {
-                LENGTH: 22,
-                WIDTH: 8
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
-                TYPE: "bullet",
-                ALT_FIRE: true
-            }
-        },
-        ...preset.bird
-    ]
-}
+Class.defect_AR = makeBird("tripleShot", "Defect")
 Class.deviation_AR = makeOver("machineTrapper_AR", "Deviation", preset.hybrid)
 Class.dieselTrapper_AR = {
     PARENT: "genericTank",
@@ -3491,33 +3434,7 @@ Class.autoVortex_AR = makeWhirlwind(makeAuto("launcher", "", whirlAuto_options),
 Class.autoWarkwark_AR = makeAuto("warkwark_AR")
 Class.autoWhirl3_AR = makeWhirlwind(makeAuto("auto3", "", whirlAuto_options), {label: "Auto-Whirl-3"})
 Class.autoWhirlGuard_AR = makeWhirlwind(makeAuto("trapGuard", "", whirlAuto_options), {label: "Auto-Whirl Guard"})
-Class.avian_AR = {
-    PARENT: "genericTank",
-    LABEL: "Avian",
-    DANGER: 8,
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 19,
-                WIDTH: 8
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-                TYPE: "bullet",
-                ALT_FIRE: true
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 5.5,
-                WIDTH: 8,
-                ASPECT: -1.8,
-                X: 6.5
-            }
-        },
-        ...preset.bird
-    ]
-}
+Class.avian_AR = makeBird("single", "Avian")
 Class.bansheedrive_AR = makeDrive("banshee")
 Class.battledrive_AR = makeDrive("battleship", {...preset.driveSwarm, label: "Battledrive"})
 Class.bentCatcher_AR = makeOver("waarrk_AR", "Bent Catcher", preset.hybrid)
@@ -4266,12 +4183,20 @@ Class.duster_AR = {
             POSITION: {
                 LENGTH: 26,
                 WIDTH: 3
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.lowPower, g.machineGun, { recoil: 1.15 }]),
+                TYPE: "bullet"
             }
         },
         {
             POSITION: {
                 LENGTH: 23,
                 WIDTH: 7
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.lowPower, g.machineGun, { recoil: 1.15 }]),
+                TYPE: "bullet"
             }
         },
         {
@@ -4280,6 +4205,10 @@ Class.duster_AR = {
                 WIDTH: 10,
                 ASPECT: 1.4,
                 X: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun]),
+                TYPE: "bullet"
             }
         }
     ]
@@ -6464,7 +6393,7 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
         Class.sniper.UPGRADES_TIER_3.push("railgun_AR")
             Class.sniper.UPGRADES_TIER_3.push("sharpshooter_AR")
         Class.assassin.UPGRADES_TIER_3.push("hitman_AR", "sniper3_AR", "enforcer_AR", "courser_AR")
-            Class.ranger.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.ranger.UPGRADES_TIER_3 = ["mono"].map(x => x + "_AR")
             Class.stalker.UPGRADES_TIER_3 = ["spy"].map(x => x + "_AR")
             Class.falcon.UPGRADES_TIER_3 = ["avian"].map(x => x + "_AR")
             Class.autoAssassin.UPGRADES_TIER_3 = ["autoSingle", "autoDeadeye"].map(x => x + "_AR")

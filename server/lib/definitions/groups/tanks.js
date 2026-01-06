@@ -1,4 +1,4 @@
-const {combineStats, makeAuto, makeDrive, makeOver, makeRadialAuto, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../facilitators.js')
+const {combineStats, makeAuto, makeBird, makeDrive, makeOver, makeRadialAuto, makeWhirlwind, weaponArray, weaponMirror, weaponStack} = require('../facilitators.js')
 const {base, dfltskl, smshskl, statnames} = require('../constants.js')
 const g = require('../gunvals.js')
 const preset = require('../presets.js')
@@ -2765,25 +2765,7 @@ Class.duplicator = {
         },
     ]
 }
-Class.eagle = {
-    PARENT: "genericTank",
-    LABEL: "Eagle",
-    DANGER: 7,
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 20.5,
-                WIDTH: 12
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder]),
-                TYPE: "bullet",
-                ALT_FIRE: true
-            }
-        },
-        ...preset.bird
-    ]
-}
+Class.eagle = makeBird("pounder", "Eagle")
 Class.engineer = {
     PARENT: "genericTank",
     DANGER: 7,
@@ -2872,36 +2854,7 @@ Class.factory = {
         }
     ]
 }
-Class.falcon = {
-    PARENT: "genericTank",
-    LABEL: "Falcon",
-    DANGER: 7,
-    BODY: {
-        SPEED: 0.85 * base.SPEED,
-        FOV: 1.4 * base.FOV
-    },
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 27,
-                WIDTH: 8
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin]),
-                TYPE: "bullet",
-                ALT_FIRE: true
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 13,
-                WIDTH: 8,
-                ASPECT: -2.2
-            }
-        },
-        ...preset.bird
-    ]
-}
+Class.falcon = makeBird("assassin", "Falcon")
 Class.fieldGun = {
     PARENT: "genericTank",
     LABEL: "Field Gun",
@@ -4136,38 +4089,7 @@ Class.pentaShot = {
         }
     ]
 }
-Class.phoenix = {
-    PARENT: "genericTank",
-    LABEL: "Phoenix",
-    DANGER: 7,
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 23,
-                WIDTH: 7
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.lowPower, g.pelleter, { recoil: 1.15 }]),
-                TYPE: "bullet",
-                ALT_FIRE: true
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 12,
-                WIDTH: 10,
-                ASPECT: 1.4,
-                X: 8
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun]),
-                TYPE: "bullet",
-                ALT_FIRE: true
-            }
-        },
-        ...preset.bird
-    ]
-}
+Class.phoenix = makeBird("Sprayer", "Phoenix")
 Class.poacher = makeOver("hunter", "Poacher", preset.hybrid)
 Class.predator = {
     PARENT: "genericTank",

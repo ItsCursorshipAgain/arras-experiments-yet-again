@@ -213,6 +213,66 @@ exports.makeOver = (type, name = -1, options = {}) => {
     return output
 }
 
+// gun functions
+exports.makeBird = (type, name = -1, options = {}) => {
+    type = ensureIsClass(type);
+    let output = exports.dereference(type);
+    let frontRecoilFactor = options.frontRecoil ?? 1;
+    let backRecoilFactor = options.frontRecoil ?? 1;
+    let color = options.frontRecoil;
+    let superBird = options.super ?? false;
+
+    // Thrusters
+    let backRecoil = 0.5 * backRecoilFactor;
+    let thrusterProperties = { SHOOT_SETTINGS: exports.combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: backRecoil }]), TYPE: "bullet", LABEL: "thruster" };
+    let shootyBois = [
+        ...exports.weaponMirror({
+            POSITION: {
+                LENGTH: 16,
+                WIDTH: 8,
+                ANGLE: 153,
+                DELAY: 0.1
+            },
+            PROPERTIES: thrusterProperties
+        }),
+        {
+            POSITION: {
+                LENGTH: 18,
+                WIDTH: 8,
+                ANGLE: 180,
+                DELAY: 0.6
+            },
+            PROPERTIES: thrusterProperties
+        }
+    ];
+    if (superBird) {
+        shootyBois.splice(0, 0, ...exports.weaponMirror({
+            POSITION: [14, 8, 1, 0, 0, 130, 0.6],
+            PROPERTIES: thrusterProperties
+        }))
+    }
+    // Assign thruster color
+    if (color) for (let gun of shootyBois) {
+        gun.PROPERTIES.TYPE = [gun.PROPERTIES.TYPE, { COLOR: color }];
+    }
+
+    // Modify front barrels
+    for (let gun of output.GUNS) {
+        if (gun.PROPERTIES) {
+            gun.PROPERTIES.ALT_FIRE = true;
+            // Nerf front barrels
+            if (gun.PROPERTIES.SHOOT_SETTINGS) {
+                gun.PROPERTIES.SHOOT_SETTINGS = exports.combineStats([gun.PROPERTIES.SHOOT_SETTINGS, g.flankGuard, g.triAngle, g.triAngleFront, {recoil: frontRecoilFactor}]);
+            }
+        }
+    }
+    // Assign misc settings
+    if (output.FACING_TYPE == "locksFacing") output.FACING_TYPE = "toTarget";
+    output.GUNS = type.GUNS == null ? [...shootyBois] : [...output.GUNS, ...shootyBois];
+    output.LABEL = name == -1 ? "Bird " + type.LABEL : name;
+    return output;
+}
+
 // turret functions
 exports.makeAuto = (type, name = -1, options = {}) => {
 
