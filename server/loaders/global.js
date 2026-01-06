@@ -120,7 +120,7 @@ global.ensureIsClass = str => {
         return Class[str];
     };
 
-    throw Error(`Definition ${str} is attempted to be gotten but does not exist!`);
+    throw Error(`Definition "${str}" was attempted to be gotten but does not exist!`);
 }
 
 global.ensureIsManager = str => {
