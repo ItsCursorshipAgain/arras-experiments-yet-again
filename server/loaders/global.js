@@ -38,11 +38,29 @@ global.getSpawnableArea = (team, gameManager) => {
     let room = gameManager.room;
     return ran.choose((team in room.spawnable && room.spawnable[team].length) ? room.spawnable[team] : room.spawnableDefault).randomInside();
 }
-global.teamNames = ["BLUE", "GREEN", "RED", "PURPLE", "YELLOW", "ORANGE", "BROWN", "CYAN"];
-global.teamColors = ["blue", "green", "red", "magenta", "mustard", "tangerine", "brown", "cyan"];
-global.getTeamName = team => ["BLUE", "GREEN", "RED", "PURPLE", "YELLOW", "ORANGE", "BROWN", "CYAN", , "DREADNOUGHTS"][-team - 1] ?? "An unknown team";
+global.teamNames = [
+    "BLUE",
+    "GREEN",
+    "RED",
+    "PURPLE",
+    "YELLOW",
+    "ORANGE",
+    "BROWN",
+    "CYAN"
+]
+global.teamColors = [
+    "blue",
+    "green",
+    "red",
+    "magenta",
+    "mustard",
+    "tangerine",
+    "brown",
+    "cyan"
+]
+global.getTeamName = team => [...global.teamNames, , "DREADNOUGHT"][-team - 1] ?? "An unknown team";
 global.getTeamColor = (team, fixMode = false) => {
-    let color = (["blue", "green", "red", "magenta", "mustard", "tangerine", "brown", "cyan", , 4][-team - 1] ?? 3);
+    let color = ([...global.teamColors, , "aqua"][-team - 1] ?? 3);
     if (fixMode) color = color + " 0 1 0 false";
     return color;
 }
