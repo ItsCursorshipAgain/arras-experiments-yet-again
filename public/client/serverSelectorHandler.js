@@ -136,6 +136,7 @@ let initializeFilter = () => {
     tbody.appendChild(noServerMatches);
 
     for (let s of servers) {
+        // Regions
         global.filters.regions.all.push(s);
         if (s.region.toLowerCase() == "usa" || s.region.toLowerCase() == "us west" || s.region.toLowerCase() == "us central" || s.region.toLowerCase() == "us east") global.filters.regions.america.push(s);
         if (s.region.toLowerCase() == "europe") global.filters.regions.europe.push(s);
@@ -148,8 +149,10 @@ let initializeFilter = () => {
         ) {
             global.filters.regions.other.push(s);
         }
-        if (!s.gameMode.includes("Sandbox")) global.filters.gamemodeFilters.all.push(s);
-        if (s.gameMode.includes("FFA") || s.gameMode.includes("Maze") || s.gameMode.includes("Manhunt")) global.filters.gamemodeFilters.ffa.push(s);
+
+        // Gamemodes
+        global.filters.gamemodeFilters.all.push(s);
+        if (s.gameMode.includes("FFA")) global.filters.gamemodeFilters.ffa.push(s);
         if (s.gameMode.includes("Duos") || s.gameMode.includes("Squads") || s.gameMode.includes("Wars")) global.filters.gamemodeFilters.squads.push(s);
         if (s.gameMode.includes("TDM")) global.filters.gamemodeFilters.tdm.push(s);
         if (s.gameMode.includes("Sandbox")) global.filters.gamemodeFilters.sandbox.push(s);
@@ -225,10 +228,7 @@ let initializeFilter = () => {
         } },
     ]);
     createFilter(svFilterModeDoc, [
-        { name: "All", filter: (h) => {
-            let e = checkFilter(h, global.filters.gamemodeFilters.all);
-            return e;
-        } },
+        { name: "All", filter: () => !0 },
         { name: "FFA", filter: (h) => {
             let e = checkFilter(h, global.filters.gamemodeFilters.ffa);
             return e;

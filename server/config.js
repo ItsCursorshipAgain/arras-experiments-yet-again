@@ -55,6 +55,25 @@ module.exports = {
 
             host: "localhost:3003", // Server host location.
             port: 3003, // The port on the server.
+            id: "lx", // (<host>/#<id>)
+            featured: false, // Whether the server is featured or not.
+
+            region: "Local", // The region the server is on.
+            gamemode: ["arms_race", "retrograde", "nexus"], // The selected gamemode.
+            player_cap: 80, // Not including bots. Set to 0 to disable.
+
+            properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
+                teams: 1,
+                bot_cap: 0,
+            }
+        },
+        {
+            load_on_mainserver: false, // Only one server at a time can have this enabled.
+            // The above is required if your VM (the machine that hosts the website stuff) doesn't support multi-ports and forces everything through the main server.
+            // This also overrides the below host and port settings to be identical to the main server's host/port (by default, 3000).
+
+            host: "localhost:3099", // Server host location.
+            port: 3099, // The port on the server.
             id: "lz", // (<host>/#<id>)
             featured: false, // Whether the server is featured or not.
 
@@ -81,25 +100,6 @@ module.exports = {
                         }
                     ]
                 }
-            }
-        },
-        {
-            load_on_mainserver: false, // Only one server at a time can have this enabled.
-            // The above is required if your VM (the machine that hosts the website stuff) doesn't support multi-ports and forces everything through the main server.
-            // This also overrides the below host and port settings to be identical to the main server's host/port (by default, 3000).
-
-            host: "localhost:3004", // Server host location.
-            port: 3004, // The port on the server.
-            id: "lx", // (<host>/#<id>)
-            featured: false, // Whether the server is featured or not.
-
-            region: "Local", // The region the server is on.
-            gamemode: ["arms_race", "retrograde", "nexus"], // The selected gamemode.
-            player_cap: 80, // Not including bots. Set to 0 to disable.
-
-            properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
-                teams: 1,
-                bot_cap: 0,
             }
         },
     ],
