@@ -34,7 +34,7 @@ let Portal = class {
         this.body.alwaysShowOnMinimap = true;
         this.body.minimapColor = 19;
         let updateInterval = setInterval(async () => {
-            let data = await getServer({IP: this.ip});
+            let data = await getServer({ip: this.ip});
             if (data) {
                 this.body.settings.scoreLabel = `${data.players} player${data.players === 1 ? "" : "s"}`;
                 this.body.name = data.name;
