@@ -1,6 +1,6 @@
-const {combineStats, dereference, makeAura, makeAuto, makeHat, weaponArray, weaponMirror} = require('../facilitators.js')
-const {base, smshskl} = require('../constants.js')
-const g = require('../gunvals.js')
+const {combineStats, dereference, makeAura, makeAuto, makeHat, weaponArray, weaponMirror} = require('../../facilitators.js')
+const {base, smshskl} = require('../../constants.js')
+const g = require('../../gunvals.js')
 
 // ARMS RACE V2 DREADNOUGHTS BY FROSTBYTE
 
@@ -488,7 +488,7 @@ Class.dreadnought_dreadsV2 = {
 	PARENT: "genericEggnought",
 	LABEL: "Dreadnought",
 	//UPGRADE_LABEL: "Dreads V2",
-	LEVEL: 90,
+	//LEVEL: 90,
 	EXTRA_SKILL: 18,
 }
 Class.dreadWeapon_dreadsV2 = {
@@ -1503,15 +1503,16 @@ Class.mitigator_dreadsV2 = {
 	LABEL: "Mitigator",
 	GUNS: weaponArray(weaponMirror({
 		POSITION: {
-			LENGTH: 13,
+			LENGTH: 8,
 			WIDTH: 8,
+			X: 5,
 			Y: 5
 		},
 		PROPERTIES: {
 			SHOOT_SETTINGS: combineStats([g.basic, g.twin, {health: 1.15, range: 0.9}]),
 			TYPE: "bullet"
 		}
-	}, { delayIncrement: 0.5 }), 3)
+	}, {delayIncrement: 0.5}), 3)
 }
 Class.suppressor_dreadsV2 = {
 	PARENT: "genericTrinought",
@@ -1534,27 +1535,27 @@ Class.binary_dreadsV2 = {
 	LABEL: "Binary",
 	TURRETS: [
 		...weaponArray({
+			TYPE: ["spamAutoTurret", {GUN_STAT_SCALE: g.triSecondaryAuto}],
 			POSITION: {
 				SIZE: 3.5,
 				X: 10.5,
 				ANGLE: 60,
 				ARC: 180,
 				LAYER: 2
-			},
-			TYPE: ["spamAutoTurret", {GUN_STAT_SCALE: g.triSecondaryAuto}],
+			}
 		}, 3),
 		{
+			TYPE: ["kilobyteTurret_dreadsV2", {GUN_STAT_SCALE: g.triKilobyte}],
 			POSITION: {
 				SIZE: 10,
 				ARC: 360,
 				LAYER: 2
-			},
-			TYPE: ["kilobyteTurret_dreadsV2", {GUN_STAT_SCALE: g.triKilobyte}],
+			}
 		}
 	],
 	PROPS: [
 		{
-			TYPE: ["triangleHat", { COLOR: "mirror" }],
+			TYPE: ["triangleHat", {COLOR: "mirror"}],
 			POSITION: {
 				SIZE: 13.5,
 				ANGLE: 180,
@@ -1568,25 +1569,25 @@ Class.chromosphere_dreadsV2 = {
 	LABEL: "Chromosphere",
 	TURRETS: [
 		...weaponArray({
+			TYPE: "trinoughtSmallAura",
 			POSITION: {
 				SIZE: 3.5,
 				X: 10.5,
 				ANGLE: 60,
 				LAYER: 2
-			},
-			TYPE: "trinoughtSmallAura",
+			}
 		}, 3),
 		{
+			TYPE: "trinoughtBigAura",
 			POSITION: {
 				SIZE: 9,
 				LAYER: 2
-			},
-			TYPE: "trinoughtBigAura"
+			}
 		}
 	],
 	PROPS: [
 		{
-			TYPE: ["triangleHat", { COLOR: "mirror" }],
+			TYPE: ["triangleHat", {COLOR: "mirror"}],
 			POSITION: {
 				SIZE: 13,
 				ANGLE: 180,
@@ -1601,17 +1602,26 @@ Class.exosphere_dreadsV2 = {
 	BODY: healerBodyStats[0],
 	TURRETS: [
 		...weaponArray({
-			POSITION: [3.5, 10.5, 0, 60, 180, 2],
 			TYPE: ["spamAutoTurret", {GUN_STAT_SCALE: g.triSecondaryAuto}],
+			POSITION: {
+				SIZE: 3.5,
+				X: 10.5,
+				ANGLE: 60,
+				ARC: 180,
+				LAYER: 2
+			}
 		}, 3),
 		{
-			POSITION: [9.5, 0, 0, 0, 360, 2],
 			TYPE: "trinoughtBigHealAura",
-		},
+			POSITION: {
+				SIZE: 9,
+				LAYER: 2
+			}
+		}
 	],
 	PROPS: [
 		{
-			TYPE: ["triangleHat", { COLOR: "mirror" }],
+			TYPE: ["triangleHat", {COLOR: "mirror"}],
 			POSITION: {
 				SIZE: 13,
 				ANGLE: 180,
@@ -1625,17 +1635,26 @@ Class.fusion_dreadsV2 = {
 	LABEL: "Fusion",
 	TURRETS: [
 		...weaponArray({
-			POSITION: [3.5, 10.5, 0, 60, 180, 2],
 			TYPE: ["spamAutoTurret", {GUN_STAT_SCALE: g.triSecondaryAuto}],
+			POSITION: {
+				SIZE: 3.5,
+				X: 10.5,
+				ARC: 60,
+				ANGLE: 180,
+				LAYER: 2
+			}
 		}, 3),
 		{
-			POSITION: [9.5, 0, 0, 0, 360, 2],
 			TYPE: "trinoughtBigAura",
+			POSITION: {
+				SIZE: 9,
+				LAYER: 2
+			}
 		},
 	],
 	PROPS: [
 		{
-			TYPE: ["triangleHat", { COLOR: "mirror" }],
+			TYPE: ["triangleHat", {COLOR: "mirror"}],
 			POSITION: {
 				SIZE: 13,
 				ANGLE: 180,
@@ -1650,7 +1669,7 @@ Class.goliath_dreadsV2 = {
 	BODY: hpBuffBodyStats[2],
 	PROPS: [
 		{
-			TYPE: ["triangleHat", { color: "black" }],
+			TYPE: ["triangleHat", {COLOR: "black"}],
 			POSITION: {
 				SIZE: 14.5,
 				ANGLE: 180,
@@ -1658,7 +1677,7 @@ Class.goliath_dreadsV2 = {
 			}
 		},
 		{
-			TYPE: ["triangleHat", { color: "black" }],
+			TYPE: ["triangleHat", {COLOR: "black"}],
 			POSITION: {
 				SIZE: 24,
 				ANGLE: 180
@@ -1672,19 +1691,31 @@ Class.hardware_dreadsV2 = {
 	BODY: healerBodyStats[0],
 	TURRETS: [
 		...weaponArray({
-			POSITION: [3.5, 11, 0, 60, 360, 2],
 			TYPE: "trinoughtSmallHealAura",
+			POSITION: {
+				SIZE: 3.5,
+				X: 11,
+				ANGLE: 60,
+				LAYER: 2
+			}
 		}, 3),
 		{
-			POSITION: [10, 0, 0, 0, 360, 2],
 			TYPE: ["kilobyteTurret_dreadsV2", {GUN_STAT_SCALE: g.triKilobyte}],
-		},
+			POSITION: {
+				SIZE: 10,
+				LAYER: 2
+			}
+		}
 	],
 	PROPS: [
 		{
-			POSITION: [13, 0, 0, 180, 1],
-			TYPE: "triangle"
-		},
+			TYPE: "triangleHat",
+			POSITION: {
+				SIZE: 13,
+				ANGLE: 180,
+				LAYER: 1
+			}
+		}
 	]
 }
 Class.harpy_dreadsV2 = {
@@ -1692,19 +1723,33 @@ Class.harpy_dreadsV2 = {
 	LABEL: "Harpy",
 	BODY: combineBodyStats(speedBuffBodyStats[0], healerBodyStats[0]),
 	TURRETS: weaponArray({
-		POSITION: [3.5, 10.5, 0, 60, 360, 2],
-			TYPE: "trinoughtSmallHealAura",
+		TYPE: "trinoughtSmallHealAura",
+		POSITION: {
+			SIZE: 3.5,
+			X: 10.5,
+			ANGLE: 60,
+			LAYER: 2
+		}
 	}, 3),
 	PROPS: [
 		{
-			POSITION: [12, 0, 0, 180, 1],
-			TYPE: "triangle"
-		}, {
-			POSITION: [20, 0, 0, 0, 0],
-			TYPE: "titanTop_dreadsV2"
+			TYPE: "triangleHat",
+			POSITION: {
+				SIZE: 11,
+				ANGLE: 180,
+				LAYER: 1
+			}
 		},
-	],
+		{
+			TYPE: "titanTop_dreadsV2",
+			POSITION: {
+				SIZE: 20
+			}
+		}
+	]
 }
+
+// up to here
 Class.mechanism_dreadsV2 = {
 	PARENT: "genericTrinought",
 	LABEL: "Mechanism",
@@ -1856,97 +1901,139 @@ Class.arbitrator_dreadsV2 = {
 	LABEL: "Arbitrator",
 	GUNS: weaponArray([
 		{
-			POSITION: [7.5, 10.75, 4/3, 5.5, 0, 0, 0],
+			POSITION: {
+				LENGTH: 13,
+				WIDTH: 8,
+				ASPECT: 1.8
+			},
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.twin, g.triplet, g.spam, g.spam, {size: 0.7,  health: 1.05, range: 0.8, reload: 1}]),
 				TYPE: "bullet",
+			}
+		},
+		{
+			POSITION: {
+				LENGTH: 15,
+				WIDTH: 7,
+				ASPECT: 1.8
 			},
-		}, {
-			POSITION: [7.5, 9.5, 4/3, 7.5, 0, 0, 0],
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.twin, g.triplet, g.spam, g.spam, {size: 0.65, health: 1.05, range: 0.8, reload: 1.05}]),
 				TYPE: "bullet",
+			}
+		},
+		{
+			POSITION: {
+				LENGTH: 17,
+				WIDTH: 5,
+				ASPECT: 1.8
 			},
-		}, {
-			POSITION: [7.5, 7.25, 1.25, 9.5, 0, 0, 0],
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.twin, g.triplet, g.spam, g.spam, {size: 0.7,  health: 1.05, range: 0.8, reload: 1.1}]),
 				TYPE: "bullet",
-			},
-		},
-	], 5),
+			}
+		}
+	], 5)
 }
 Class.cerberus_dreadsV2 = {
 	PARENT: "genericPentanought",
 	LABEL: "Cerberus",
 	GUNS: weaponArray([
+		...weaponMirror([
+			{
+				POSITION: {
+					LENGTH: 12.5,
+					WIDTH: 3,
+					Y: 3,
+					ANGLE: 10
+				}
+			},
+			{
+				POSITION: {
+					LENGTH: 1.5,
+					WIDTH: 3,
+					ASPECT: 1.7,
+					X: 12,
+					Y: 3,
+					ANGLE: 10,
+					DELAY: 0.5
+				},
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.pounder, {shudder: 0.6, health: 0.55, reload: 1.2, range: 0.67}]),
+					TYPE: "trap",
+					STAT_CALCULATOR: "trap"
+				}
+			}
+		]),
 		{
-			POSITION: [12, 4, 1, 0, 2.5, 10, 0.5],
-		}, {
-			POSITION: [1.5, 4, 1.6, 12, 2.5, 10, 0.5],
-			PROPERTIES: {
-				SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.pounder, {shudder: 0.6, health: 0.55, reload: 1.2, range: 0.67}]),
-				TYPE: "trap",
-				STAT_CALCULATOR: "trap",
+			POSITION: {
+				LENGTH: 15,
+				WIDTH: 5.5
+			}
+		},
+		{
+			POSITION: {
+				LENGTH: 2,
+				WIDTH: 5.5,
+				ASPECT: 1.7,
+				X: 14
 			},
-		}, {
-			POSITION: [12, 4, 1, 0, -2.5, -10, 0.5],
-		}, {
-			POSITION: [1.5, 4, 1.6, 12, -2.5, -10, 0.5],
-			PROPERTIES: {
-				SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.pounder, {shudder: 0.6, health: 0.55, reload: 1.2, range: 0.67}]),
-				TYPE: "trap",
-				STAT_CALCULATOR: "trap",
-			},
-		}, {
-			POSITION: [14, 5.5, 1, 0, 0, 0, 0],
-		}, {
-			POSITION: [2, 5.5, 1.7, 14, 0, 0, 0],
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.twin, g.pounder, {reload: 1.15, health: 0.85, speed: 0.75, maxSpeed: 0.75, range: 0.5}]),
 				TYPE: "unsetTrap",
 				STAT_CALCULATOR: "block"
-			},
-		},
-	], 5),
+			}
+		}
+	], 5)
 }
 Class.diplomat_dreadsV2 = {
 	PARENT: "genericPentanought",
 	LABEL: "Diplomat",
 	GUNS: weaponArray([
+		...weaponMirror({
+			POSITION: {
+				LENGTH: 13,
+				WIDTH: 7,
+				Y: 3.25,
+				DELAY: 0.5
+			},
+			PROPERTIES: {
+				SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triplet, {health: 1.15}]),
+				TYPE: "bullet"
+			}
+		}),
 		{
-			POSITION: [13, 7, 1, 0, 3.25, 0, 0.5],
+			POSITION: {
+				LENGTH: 15,
+				WIDTH: 7
+			},
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triplet, {health: 1.15}]),
-				TYPE: "bullet",
-			},
-		}, {
-			POSITION: [13, 7, 1, 0, -3.25, 0, 0.5],
-			PROPERTIES: {
-				SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triplet, {health: 1.15}]),
-				TYPE: "bullet",
-			},
-		}, {
-			POSITION: [15, 7, 1, 0, 0, 0, 0],
-			PROPERTIES: {
-				SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triplet, {health: 1.15}]),
-				TYPE: "bullet",
-			},
-		},
-	], 5),
+				TYPE: "bullet"
+			}
+		}
+	], 5)
 }
 Class.gladiator_dreadsV2 = {
 	PARENT: "genericPentanought",
 	LABEL: "Gladiator",
 	BODY: { 
 		FOV: pentanoughtBody.FOV * 1.1,
-		SPEED: pentanoughtBody.SPEED * 0.85,
+		SPEED: pentanoughtBody.SPEED * 0.85
 	},
 	GUNS: weaponArray([
 		{
-			POSITION: [4.75, 12, 1, 10, 0, 0, 0],
-		}, {
-			POSITION: [1.5, 13, 1, 14.75, 0, 0, 0],
+			POSITION: {
+				LENGTH: 15,
+				WIDTH: 12
+			}
+		},
+		{
+			POSITION: {
+				LENGTH: 1.5,
+				WIDTH: 13,
+				X: 15
+			},
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.factory, {size: 0.9, reload: 2.1, health: 1.16, damage: 0.62, pen: 0.9, speed: 0.8, maxSpeed: 0.8, density: 1.6}]),
 				TYPE: "minion",
@@ -1956,10 +2043,14 @@ Class.gladiator_dreadsV2 = {
 				MAX_CHILDREN: 2,
 				WAIT_TO_CYCLE: true,
 			},
-		}, {
-			POSITION: [12, 13, 1, 0, 0, 0, 0],
 		},
-	], 5),
+		{
+			POSITION: {
+				LENGTH: 12,
+				WIDTH: 13
+			}
+		}
+	], 5)
 }
 let minionIndex = 0;
 for (let gun of Class.gladiator_dreadsV2.GUNS) {
@@ -1970,68 +2061,87 @@ Class.javelin_dreadsV2 = {
 	LABEL: "Javelin",
 	BODY: {
 		FOV: pentanoughtBody.FOV * 1.5,
-		SPEED: pentanoughtBody.SPEED * 0.85,
+		SPEED: pentanoughtBody.SPEED * 0.85
 	},
 	GUNS: weaponArray([
 		{
-			POSITION: [28, 7, 1, 0, 0, 0, 0],
+			POSITION: {
+				LENGTH: 28,
+				WIDTH: 7
+			},
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.assassin, {reload: 1.13, health: 1.1, density: 0.55, range: 0.65}]),
 				TYPE: "bullet",
 			},
-		}, {
-			POSITION: [5, 7, -1.6, 7, 0, 0, 0],
 		},
-	], 5),
+		{
+			POSITION: {
+				LENGTH: 11,
+				WIDTH: 7,
+				ASPECT: -2.5,
+				X: 1
+			}
+		}
+	], 5)
 }
 Class.lucifer_dreadsV2 = {
 	PARENT: "genericPentanought",
 	LABEL: "Lucifer",
 	GUNS: weaponArray([
 		{
-			POSITION: [13, 10, 1, 0, 0, 0, 0],
-		}, {
-			POSITION: [3.5, 10, 1.6, 13, 0, 0, 0],
+			POSITION: {
+				LENGTH: 14,
+				WIDTH: 10
+			}
+		},
+		{
+			POSITION: {
+				LENGTH: 3.6,
+				WIDTH: 10,
+				ASPECT: 1.6,
+				X: 13
+			},
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.pounder, {reload: 1.2, speed: 1.15, maxSpeed: 1.15, size: 1.25, health: 1.15, range: 0.37}]),
 				TYPE: "unsetTrap",
 				STAT_CALCULATOR: "block"
-			},
-		},
-	], 5),
+			}
+		}
+	], 5)
 }
 Class.raider_dreadsV2 = {
 	PARENT: "genericPentanought",
 	LABEL: "Raider",
 	BODY: { 
 		FOV: pentanoughtBody.FOV * 1.1,
-		SPEED: pentanoughtBody.SPEED * 0.9,
+		SPEED: pentanoughtBody.SPEED * 0.9
 	},
 	GUNS: weaponArray([
+		...weaponMirror({
+			POSITION: {
+				LENGTH: 6,
+				WIDTH: 8,
+				ASPECT: -0.05,
+				X: 6,
+				Y: 4.275
+			},
+			PROPERTIES: {
+				SHOOT_SETTINGS: combineStats([g.drone, g.overseer, g.overseer, {damage: 0.9, health: 0.63, maxSpeed: 0.9, size: 1.5, reload: 1.5}]),
+				TYPE: "drone",
+				MAX_CHILDREN: 2,
+				AUTOFIRE: true,
+				SYNCS_SKILLS: true,
+				STAT_CALCULATOR: "drone",
+				WAIT_TO_CYCLE: true
+			}
+		}),
 		{
-			POSITION: [4, 5, 2.1, 8, 3, 0, 0],
-			PROPERTIES: {
-				SHOOT_SETTINGS: combineStats([g.drone, g.overseer, g.overseer, {damage: 0.9, health: 0.63, maxSpeed: 0.9, size: 1.5, reload: 1.5}]),
-				TYPE: "drone",
-				MAX_CHILDREN: 2,
-				AUTOFIRE: true,
-				SYNCS_SKILLS: true,
-				STAT_CALCULATOR: "drone",
-				WAIT_TO_CYCLE: true,
+			POSITION: {
+				LENGTH: 8,
+				WIDTH: 8.5,
+				ASPECT: -0.6,
+				X: 6
 			},
-		}, {
-			POSITION: [4, 5, 2.1, 8, -3, 0, 0],
-			PROPERTIES: {
-				SHOOT_SETTINGS: combineStats([g.drone, g.overseer, g.overseer, {damage: 0.9, health: 0.63, maxSpeed: 0.9, size: 1.5, reload: 1.5}]),
-				TYPE: "drone",
-				MAX_CHILDREN: 2,
-				AUTOFIRE: true,
-				SYNCS_SKILLS: true,
-				STAT_CALCULATOR: "drone",
-				WAIT_TO_CYCLE: true,
-			},
-		}, {
-			POSITION: [6, 6.5, 1.4, 8, 0, 0, 0],
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.drone, g.overseer, g.overseer, g.pounder, {damage: 1.06, maxSpeed: 0.9, size: 2, reload: 1.5}]),
 				TYPE: "betadrone",
@@ -2039,57 +2149,67 @@ Class.raider_dreadsV2 = {
 				AUTOFIRE: true,
 				SYNCS_SKILLS: true,
 				STAT_CALCULATOR: "drone",
-				WAIT_TO_CYCLE: true,
-			},
-		},
-	], 5),
+				WAIT_TO_CYCLE: true
+			}
+		}
+	], 5)
 }
 Class.rapier_dreadsV2 = {
 	PARENT: "genericPentanought",
 	LABEL: "Rapier",
 	BODY: { 
-		FOV: pentanoughtBody.FOV * 1.225,
+		FOV: pentanoughtBody.FOV * 1.225
 	},
 	GUNS: weaponArray([
 		{
-			POSITION: [17, 1, 1, 0, 6, 0, 0],
-		}, {
-			POSITION: [17, 1, 1, 0, -6, 0, 0],
-		}, {
-			POSITION: [18, 5, 1, 0, 3, 0, 0],
-			PROPERTIES: {
-				SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.twin, {speed: 1.13, maxSpeed: 1.13, health: 1.15, range: 0.65}]),
-				TYPE: "bullet",
-			},
-		}, {
-			POSITION: [18, 5, 1, 0, -3, 0, 0.5],
-			PROPERTIES: {
-				SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.twin, {speed: 1.13, maxSpeed: 1.13, health: 1.15, range: 0.65}]),
-				TYPE: "bullet",
-			},
+			POSITION: {
+				LENGTH: 16,
+				WIDTH: 12.5
+			}
 		},
-	], 5),
+		...weaponMirror({
+			POSITION: {
+				LENGTH: 18,
+				WIDTH: 5,
+				Y: 2.8
+			},
+			PROPERTIES: {
+				SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.twin, {speed: 1.13, maxSpeed: 1.13, health: 1.15, range: 0.65}]),
+				TYPE: "bullet",
+			}
+		}, {delayIncrement: 0.5})
+	], 5)
 }
 Class.retardant_dreadsV2 = {
 	PARENT: "genericPentanought",
 	LABEL: "Retardant",
 	GUNS: weaponArray({
-		POSITION: [17, 12, 1, 0, 0, 0, 0],
+		POSITION: {
+			LENGTH: 17,
+			WIDTH: 12
+		},
 		PROPERTIES: {
 			SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, {reload: 1.1, health: 1.26}]),
-			TYPE: "bullet",
-		},
-	}, 5),
+			TYPE: "bullet"
+		}
+	}, 5)
 }
 Class.tyrant_dreadsV2 = {
 	PARENT: "genericPentanought",
 	LABEL: "Tyrant",
 	GUNS: weaponArray([
 		{
-			POSITION: [10, 11, -0.75, 7, 0, 0, 0]
+		    POSITION: {
+		        LENGTH: 17,
+		        WIDTH: 11,
+		        ASPECT: -0.5
+		    }
 		},
 		{
-			POSITION: [15, 12, 1, 0, 0, 0, 0],
+		    POSITION: {
+		        LENGTH: 15,
+		        WIDTH: 12
+		    },
 			PROPERTIES: {
 				SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer, {reload: 1.18, health: 1.39, speed: 0.7, maxSpeed: 0.7, range: 0.4}]),
 				TYPE: "supermissile",
@@ -2320,11 +2440,22 @@ if (useOldPhotosphere) {
 Class.photosphere_dreadsV2.TURRETS = [
 	...weaponArray([
 		{
-			POSITION: [3.5, 8.75, 0, 36, 360, 2],
+			POSITION: {
+				SIZE: 3.5,
+				X: 8.75,
+				ANGLE: 36,
+				ARC: 360,
+				LAYER: 2
+			},
 			TYPE: "photosphereSmallAura_dreadsV2",
 		},
 		{
-			POSITION: [3, 4, 0, 0, 360, 2],
+			POSITION: {
+				SIZE: 3,
+				X: 4,
+				ARC: 360,
+				LAYER: 2
+			},
 			TYPE: "photosphereBigAura_dreadsV2",
 		}
 	], 5)
@@ -2451,8 +2582,8 @@ for (let def of firstTier) {
 	Class[newDef].BATCH_UPGRADES = true
 	
 	// Save to upgrades
-	util.forcePush(Class.dreadnought_dreadsV2, 'UPGRADES_TIER_0', [newDef, "dreadBody_dreadsV2"])
-	util.forcePush(Class.dreadWeapon_dreadsV2, 'UPGRADES_TIER_0', originalDef)
+	util.forcePush(Class.dreadnought_dreadsV2, 'UPGRADES_TIER_6', [newDef, "dreadBody_dreadsV2"])
+	util.forcePush(Class.dreadWeapon_dreadsV2, 'UPGRADES_TIER_6', originalDef)
 }
 
 /*
@@ -2466,113 +2597,113 @@ Class.dreadnought_dreadsV2.UPGRADES_TIER_0 = [
 	["centaur2_dreadsV2", "dreadBody_dreadsV2"],
 ]
 
-Class.dreadWeapon_dreadsV2.UPGRADES_TIER_0 = ["sword_dreadsV2", "pacifier_dreadsV2", "peacekeeper_dreadsV2", "invader_dreadsV2", "centaur_dreadsV2"]
+Class.dreadWeapon_dreadsV2.UPGRADES_TIER_0 = ["sword", "pacifier", "peacekeeper", "invader", "centaur"].map(x => x + "_dreadsV2")
 */
 
 Class.menu_addons.UPGRADES_TIER_0.push("dreadnought_dreadsV2")
 
-	Class.sword2_dreadsV2.UPGRADES_TIER_0 = ["sword"].map(x => x + "_dreadsV2")
-	Class.pacifier2_dreadsV2.UPGRADES_TIER_0 = ["pacifier"].map(x => x + "_dreadsV2")
-	Class.peacekeeper2_dreadsV2.UPGRADES_TIER_0 = ["peacekeeper"].map(x => x + "_dreadsV2")
-	Class.invader2_dreadsV2.UPGRADES_TIER_0 = ["invader"].map(x => x + "_dreadsV2")
-	Class.centaur2_dreadsV2.UPGRADES_TIER_0 = ["centaur"].map(x => x + "_dreadsV2")
+	Class.sword2_dreadsV2.UPGRADES_TIER_6 = ["sword"].map(x => x + "_dreadsV2")
+	Class.pacifier2_dreadsV2.UPGRADES_TIER_6 = ["pacifier"].map(x => x + "_dreadsV2")
+	Class.peacekeeper2_dreadsV2.UPGRADES_TIER_6 = ["peacekeeper"].map(x => x + "_dreadsV2")
+	Class.invader2_dreadsV2.UPGRADES_TIER_6 = ["invader"].map(x => x + "_dreadsV2")
+	Class.centaur2_dreadsV2.UPGRADES_TIER_6 = ["centaur"].map(x => x + "_dreadsV2")
 
-		Class.sword_dreadsV2.UPGRADES_TIER_0 = ["gladius", "sabre"].map(x => x + "_dreadsV2")
-			Class.gladius_dreadsV2.UPGRADES_TIER_0 = ["blade"].map(x => x + "_dreadsV2")
-				Class.blade_dreadsV2.UPGRADES_TIER_0 = ["rapier"].map(x => x + "_dreadsV2")
-					Class.rapier_dreadsV2.UPGRADES_TIER_0 = []
-			Class.sabre_dreadsV2.UPGRADES_TIER_0 = ["bayonet"].map(x => x + "_dreadsV2")
-				Class.bayonet_dreadsV2.UPGRADES_TIER_0 = ["javelin"].map(x => x + "_dreadsV2")
-					Class.javelin_dreadsV2.UPGRADES_TIER_0 = []
+		Class.sword_dreadsV2.UPGRADES_TIER_8 = ["gladius", "sabre"].map(x => x + "_dreadsV2")
+			Class.gladius_dreadsV2.UPGRADES_TIER_10 = ["blade"].map(x => x + "_dreadsV2")
+				Class.blade_dreadsV2.UPGRADES_TIER_12 = ["rapier"].map(x => x + "_dreadsV2")
+					Class.rapier_dreadsV2.UPGRADES_TIER_16 = []
+			Class.sabre_dreadsV2.UPGRADES_TIER_10 = ["bayonet"].map(x => x + "_dreadsV2")
+				Class.bayonet_dreadsV2.UPGRADES_TIER_12 = ["javelin"].map(x => x + "_dreadsV2")
+					Class.javelin_dreadsV2.UPGRADES_TIER_16 = []
 
-		Class.pacifier_dreadsV2.UPGRADES_TIER_0 = ["mediator", "negotiator"].map(x => x + "_dreadsV2")
-			Class.mediator_dreadsV2.UPGRADES_TIER_0 = ["mitigator"].map(x => x + "_dreadsV2")
-				Class.mitigator_dreadsV2.UPGRADES_TIER_0 = ["diplomat"].map(x => x + "_dreadsV2")
-					Class.diplomat_dreadsV2.UPGRADES_TIER_0 = []
-			Class.negotiator_dreadsV2.UPGRADES_TIER_0 = ["appeaser"].map(x => x + "_dreadsV2")
-				Class.appeaser_dreadsV2.UPGRADES_TIER_0 = ["arbitrator"].map(x => x + "_dreadsV2")
-					Class.arbitrator_dreadsV2.UPGRADES_TIER_0 = []
+		Class.pacifier_dreadsV2.UPGRADES_TIER_8 = ["mediator", "negotiator"].map(x => x + "_dreadsV2")
+			Class.mediator_dreadsV2.UPGRADES_TIER_10 = ["mitigator"].map(x => x + "_dreadsV2")
+				Class.mitigator_dreadsV2.UPGRADES_TIER_12 = ["diplomat"].map(x => x + "_dreadsV2")
+					Class.diplomat_dreadsV2.UPGRADES_TIER_16 = []
+			Class.negotiator_dreadsV2.UPGRADES_TIER_10 = ["appeaser"].map(x => x + "_dreadsV2")
+				Class.appeaser_dreadsV2.UPGRADES_TIER_12 = ["arbitrator"].map(x => x + "_dreadsV2")
+					Class.arbitrator_dreadsV2.UPGRADES_TIER_16 = []
 
-		Class.peacekeeper_dreadsV2.UPGRADES_TIER_0 = ["enforcer", "executor"].map(x => x + "_dreadsV2")
-			Class.enforcer_dreadsV2.UPGRADES_TIER_0 = ["suppressor"].map(x => x + "_dreadsV2")
-				Class.suppressor_dreadsV2.UPGRADES_TIER_0 = ["retardant"].map(x => x + "_dreadsV2")
-					Class.retardant_dreadsV2.UPGRADES_TIER_0 = []
-			Class.executor_dreadsV2.UPGRADES_TIER_0 = ["inhibitor"].map(x => x + "_dreadsV2")
-				Class.inhibitor_dreadsV2.UPGRADES_TIER_0 = ["tyrant"].map(x => x + "_dreadsV2")
-					Class.tyrant_dreadsV2.UPGRADES_TIER_0 = []
+		Class.peacekeeper_dreadsV2.UPGRADES_TIER_8 = ["enforcer", "executor"].map(x => x + "_dreadsV2")
+			Class.enforcer_dreadsV2.UPGRADES_TIER_10 = ["suppressor"].map(x => x + "_dreadsV2")
+				Class.suppressor_dreadsV2.UPGRADES_TIER_12 = ["retardant"].map(x => x + "_dreadsV2")
+					Class.retardant_dreadsV2.UPGRADES_TIER_16 = []
+			Class.executor_dreadsV2.UPGRADES_TIER_10 = ["inhibitor"].map(x => x + "_dreadsV2")
+				Class.inhibitor_dreadsV2.UPGRADES_TIER_12 = ["tyrant"].map(x => x + "_dreadsV2")
+					Class.tyrant_dreadsV2.UPGRADES_TIER_16 = []
 
-		Class.invader_dreadsV2.UPGRADES_TIER_0 = ["inquisitor", "assailant"].map(x => x + "_dreadsV2")
-			Class.inquisitor_dreadsV2.UPGRADES_TIER_0 = ["infiltrator"].map(x => x + "_dreadsV2")
-				Class.infiltrator_dreadsV2.UPGRADES_TIER_0 = ["raider"].map(x => x + "_dreadsV2")
-					Class.raider_dreadsV2.UPGRADES_TIER_0 = []
-			Class.assailant_dreadsV2.UPGRADES_TIER_0 = ["aggressor"].map(x => x + "_dreadsV2")
-				Class.aggressor_dreadsV2.UPGRADES_TIER_0 = ["gladiator"].map(x => x + "_dreadsV2")
-					Class.gladiator_dreadsV2.UPGRADES_TIER_0 = []
+		Class.invader_dreadsV2.UPGRADES_TIER_8 = ["inquisitor", "assailant"].map(x => x + "_dreadsV2")
+			Class.inquisitor_dreadsV2.UPGRADES_TIER_10 = ["infiltrator"].map(x => x + "_dreadsV2")
+				Class.infiltrator_dreadsV2.UPGRADES_TIER_12 = ["raider"].map(x => x + "_dreadsV2")
+					Class.raider_dreadsV2.UPGRADES_TIER_16 = []
+			Class.assailant_dreadsV2.UPGRADES_TIER_10 = ["aggressor"].map(x => x + "_dreadsV2")
+				Class.aggressor_dreadsV2.UPGRADES_TIER_12 = ["gladiator"].map(x => x + "_dreadsV2")
+					Class.gladiator_dreadsV2.UPGRADES_TIER_16 = []
 
-		Class.centaur_dreadsV2.UPGRADES_TIER_0 = ["daemon", "minotaur"].map(x => x + "_dreadsV2")
-			Class.daemon_dreadsV2.UPGRADES_TIER_0 = ["hydra"].map(x => x + "_dreadsV2")
-				Class.hydra_dreadsV2.UPGRADES_TIER_0 = ["cerberus"].map(x => x + "_dreadsV2")
-					Class.cerberus_dreadsV2.UPGRADES_TIER_0 = []
-			Class.minotaur_dreadsV2.UPGRADES_TIER_0 = ["beelzebub"].map(x => x + "_dreadsV2")
-				Class.beelzebub_dreadsV2.UPGRADES_TIER_0 = ["lucifer"].map(x => x + "_dreadsV2")
-					Class.lucifer_dreadsV2.UPGRADES_TIER_0 = []
+		Class.centaur_dreadsV2.UPGRADES_TIER_8 = ["daemon", "minotaur"].map(x => x + "_dreadsV2")
+			Class.daemon_dreadsV2.UPGRADES_TIER_10 = ["hydra"].map(x => x + "_dreadsV2")
+				Class.hydra_dreadsV2.UPGRADES_TIER_12 = ["cerberus"].map(x => x + "_dreadsV2")
+					Class.cerberus_dreadsV2.UPGRADES_TIER_16 = []
+			Class.minotaur_dreadsV2.UPGRADES_TIER_10 = ["beelzebub"].map(x => x + "_dreadsV2")
+				Class.beelzebub_dreadsV2.UPGRADES_TIER_12 = ["lucifer"].map(x => x + "_dreadsV2")
+					Class.lucifer_dreadsV2.UPGRADES_TIER_16 = []
 
-	Class.dreadBody_dreadsV2.UPGRADES_TIER_0 = ["byte", "atmosphere", "juggernaut"].map(x => x + "_dreadsV2")
+	Class.dreadBody_dreadsV2.UPGRADES_TIER_6 = ["byte", "atmosphere", "juggernaut"].map(x => x + "_dreadsV2")
 
-		Class.byte_dreadsV2.UPGRADES_TIER_0 = ["automation", "kilobyte"].map(x => x + "_dreadsV2")
+		Class.byte_dreadsV2.UPGRADES_TIER_8 = ["automation", "kilobyte"].map(x => x + "_dreadsV2")
 
-			Class.automation_dreadsV2.UPGRADES_TIER_0 = ["mechanism", "fusion", "binary", "exosphere"].map(x => x + "_dreadsV2")
-				Class.mechanism_dreadsV2.UPGRADES_TIER_0 = ["skynet"].map(x => x + "_dreadsV2")
-					Class.skynet_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("skynet_dreadsV2")
-				Class.fusion_dreadsV2.UPGRADES_TIER_0 = ["supernova"].map(x => x + "_dreadsV2")
-					Class.supernova_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("supernova_dreadsV2")
-				Class.binary_dreadsV2.UPGRADES_TIER_0 = ["cipher"].map(x => x + "_dreadsV2")
-					Class.cipher_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("cipher_dreadsV2")
-				Class.exosphere_dreadsV2.UPGRADES_TIER_0 = ["interstellar"].map(x => x + "_dreadsV2")
-					Class.interstellar_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("interstellar_dreadsV2")
+			Class.automation_dreadsV2.UPGRADES_TIER_10 = ["mechanism", "fusion", "binary", "exosphere"].map(x => x + "_dreadsV2")
+				Class.mechanism_dreadsV2.UPGRADES_TIER_12 = ["skynet"].map(x => x + "_dreadsV2")
+					Class.skynet_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("skynet_dreadsV2")
+				Class.fusion_dreadsV2.UPGRADES_TIER_12 = ["supernova"].map(x => x + "_dreadsV2")
+					Class.supernova_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("supernova_dreadsV2")
+				Class.binary_dreadsV2.UPGRADES_TIER_12 = ["cipher"].map(x => x + "_dreadsV2")
+					Class.cipher_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("cipher_dreadsV2")
+				Class.exosphere_dreadsV2.UPGRADES_TIER_12 = ["interstellar"].map(x => x + "_dreadsV2")
+					Class.interstellar_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("interstellar_dreadsV2")
 
-			Class.kilobyte_dreadsV2.UPGRADES_TIER_0 = ["megabyte", "binary", "trojan", "hardware"].map(x => x + "_dreadsV2")
-				Class.megabyte_dreadsV2.UPGRADES_TIER_0 = ["gigabyte"].map(x => x + "_dreadsV2")
-					Class.gigabyte_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("gigabyte_dreadsV2")
+			Class.kilobyte_dreadsV2.UPGRADES_TIER_10 = ["megabyte", "binary", "trojan", "hardware"].map(x => x + "_dreadsV2")
+				Class.megabyte_dreadsV2.UPGRADES_TIER_12 = ["gigabyte"].map(x => x + "_dreadsV2")
+					Class.gigabyte_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("gigabyte_dreadsV2")
 				//Class.binary_dreadsV2
-				Class.trojan_dreadsV2.UPGRADES_TIER_0 = ["malware"].map(x => x + "_dreadsV2")
-					Class.malware_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("malware_dreadsV2")
-				Class.hardware_dreadsV2.UPGRADES_TIER_0 = ["software"].map(x => x + "_dreadsV2")
-					Class.software_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("software_dreadsV2")
+				Class.trojan_dreadsV2.UPGRADES_TIER_12 = ["malware"].map(x => x + "_dreadsV2")
+					Class.malware_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("malware_dreadsV2")
+				Class.hardware_dreadsV2.UPGRADES_TIER_12 = ["software"].map(x => x + "_dreadsV2")
+					Class.software_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("software_dreadsV2")
 
-		Class.atmosphere_dreadsV2.UPGRADES_TIER_0 = ["corona", "thermosphere"].map(x => x + "_dreadsV2")
+		Class.atmosphere_dreadsV2.UPGRADES_TIER_8 = ["corona", "thermosphere"].map(x => x + "_dreadsV2")
 
-			Class.corona_dreadsV2.UPGRADES_TIER_0 = ["chromosphere", "fusion", "trojan", "planet"].map(x => x + "_dreadsV2")
-				Class.chromosphere_dreadsV2.UPGRADES_TIER_0 = ["photosphere"].map(x => x + "_dreadsV2")
-					Class.photosphere_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("photosphere_dreadsV2")
+			Class.corona_dreadsV2.UPGRADES_TIER_10 = ["chromosphere", "fusion", "trojan", "planet"].map(x => x + "_dreadsV2")
+				Class.chromosphere_dreadsV2.UPGRADES_TIER_12 = ["photosphere"].map(x => x + "_dreadsV2")
+					Class.photosphere_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("photosphere_dreadsV2")
 				//Class.fusion_dreadsV2
 				//Class.trojan_dreadsV2
-				Class.planet_dreadsV2.UPGRADES_TIER_0 = ["astronomic"].map(x => x + "_dreadsV2")
-					Class.astronomic_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("astronomic_dreadsV2")
+				Class.planet_dreadsV2.UPGRADES_TIER_12 = ["astronomic"].map(x => x + "_dreadsV2")
+					Class.astronomic_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("astronomic_dreadsV2")
 
-			Class.thermosphere_dreadsV2.UPGRADES_TIER_0 = ["mesosphere", "exosphere", "hardware", "moon"].map(x => x + "_dreadsV2")
-				Class.mesosphere_dreadsV2.UPGRADES_TIER_0 = ["stratosphere"].map(x => x + "_dreadsV2")
-					Class.stratosphere_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("stratosphere_dreadsV2")
+			Class.thermosphere_dreadsV2.UPGRADES_TIER_10 = ["mesosphere", "exosphere", "hardware", "moon"].map(x => x + "_dreadsV2")
+				Class.mesosphere_dreadsV2.UPGRADES_TIER_12 = ["stratosphere"].map(x => x + "_dreadsV2")
+					Class.stratosphere_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("stratosphere_dreadsV2")
 				//Class.exosphere_dreadsV2
 				//Class.hardware_dreadsV2
-				Class.moon_dreadsV2.UPGRADES_TIER_0 = ["grandiose"].map(x => x + "_dreadsV2")
-					Class.grandiose_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("grandiose_dreadsV2")
+				Class.moon_dreadsV2.UPGRADES_TIER_12 = ["grandiose"].map(x => x + "_dreadsV2")
+					Class.grandiose_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("grandiose_dreadsV2")
 
-		Class.juggernaut_dreadsV2.UPGRADES_TIER_0 = ["jumbo", "colossus"].map(x => x + "_dreadsV2")
+		Class.juggernaut_dreadsV2.UPGRADES_TIER_8 = ["jumbo", "colossus"].map(x => x + "_dreadsV2")
 
-			Class.jumbo_dreadsV2.UPGRADES_TIER_0 = ["goliath", "planet", "moon"].map(x => x + "_dreadsV2")
-				Class.goliath_dreadsV2.UPGRADES_TIER_0 = ["behemoth"].map(x => x + "_dreadsV2")
-					Class.behemoth_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("behemoth_dreadsV2")
+			Class.jumbo_dreadsV2.UPGRADES_TIER_10 = ["goliath", "planet", "moon"].map(x => x + "_dreadsV2")
+				Class.goliath_dreadsV2.UPGRADES_TIER_12 = ["behemoth"].map(x => x + "_dreadsV2")
+					Class.behemoth_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("behemoth_dreadsV2")
 				//Class.planet_dreadsV2
 				//Class.moon_dreadsV2
 
-			Class.colossus_dreadsV2.UPGRADES_TIER_0 = ["titan", "siren", "harpy"].map(x => x + "_dreadsV2")
-				Class.titan_dreadsV2.UPGRADES_TIER_0 = ["leviathan"].map(x => x + "_dreadsV2")
-					Class.leviathan_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("leviathan_dreadsV2")
-				Class.siren_dreadsV2.UPGRADES_TIER_0 = ["valrayvn"].map(x => x + "_dreadsV2")
-					Class.valrayvn_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("valrayvn_dreadsV2")
-				Class.harpy_dreadsV2.UPGRADES_TIER_0 = ["pegasus"].map(x => x + "_dreadsV2")
-					Class.pegasus_dreadsV2.UPGRADES_TIER_0 = makeHexnoughtBodyV2("pegasus_dreadsV2")
+			Class.colossus_dreadsV2.UPGRADES_TIER_10 = ["titan", "siren", "harpy"].map(x => x + "_dreadsV2")
+				Class.titan_dreadsV2.UPGRADES_TIER_12 = ["leviathan"].map(x => x + "_dreadsV2")
+					Class.leviathan_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("leviathan_dreadsV2")
+				Class.siren_dreadsV2.UPGRADES_TIER_12 = ["valrayvn"].map(x => x + "_dreadsV2")
+					Class.valrayvn_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("valrayvn_dreadsV2")
+				Class.harpy_dreadsV2.UPGRADES_TIER_12 = ["pegasus"].map(x => x + "_dreadsV2")
+					Class.pegasus_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("pegasus_dreadsV2")
 
 if (Config.arms_race) {
 	//console.log('[dreadv2.js]: Dreadnoughts v2 Arms Race addon enabled. Credit to Frostbyte.')
@@ -3035,7 +3166,7 @@ function mergeHexnoughtWeaponV2(weapon1, weapon2) {
 		}
 	}
 
-	for (let g in weapon2GunsOnOneSide) weapon2GunsOnOneSide[g].POSITION[5] += 60;
+	for (let g in weapon2GunsOnOneSide) weapon2GunsOnOneSide[g].POSITION.ANGLE += 60;
 	gunsOnOneSide.push(...weapon2GunsOnOneSide)
 
 	// Turrets -------------------
@@ -3050,28 +3181,28 @@ function mergeHexnoughtWeaponV2(weapon1, weapon2) {
 		}
 	}
 
-	for (let t in weapon2TurretsOnOneSide) weapon2TurretsOnOneSide[t].POSITION[3] += 60;
+	for (let t in weapon2TurretsOnOneSide) weapon2TurretsOnOneSide[t].POSITION.ANGLE += 60;
 	turretsOnOneSide.push(...weapon2TurretsOnOneSide)
 
 	// Scale to fit size constraints
 	for (let g in gunsOnOneSide) {
-		gunsOnOneSide[g].POSITION[1] *= hexnoughtScaleFactor ** 2;
-		gunsOnOneSide[g].POSITION[4] *= hexnoughtScaleFactor ** 2;
+		gunsOnOneSide[g].POSITION.WIDTH *= hexnoughtScaleFactor ** 2;
+		gunsOnOneSide[g].POSITION.Y *= hexnoughtScaleFactor ** 2;
 	}
 
 	for (let t in turretsOnOneSide) {
-		turretsOnOneSide[t].POSITION[0] *= hexnoughtScaleFactor ** 2;
+		turretsOnOneSide[t].POSITION.SIZE *= hexnoughtScaleFactor ** 2;
 	}
 
 	for (let i = 0; i < 3; i++) {
 		for (let g in gunsOnOneSide) {
 			let gun = JSON.parse(JSON.stringify(gunsOnOneSide[g]));
-			gun.POSITION[5] += 120 * i;
+			gun.POSITION.ANGLE += 120 * i;
 			GUNS.push(gun);
 		}
 		for (let t in turretsOnOneSide) {
 			let turret = JSON.parse(JSON.stringify(turretsOnOneSide[t]));
-			turret.POSITION[3] += 120 * i;
+			turret.POSITION.ANGLE += 120 * i;
 			TURRETS.push(turret);
 		}
 	};
@@ -3124,13 +3255,13 @@ function makeHexnoughtBodyV2(body) {
 		// Turret adding
 		for (let t = 0; t < body.TURRETS.length; t++) {
 			let turret = body.TURRETS[t];
-			if (turret.POSITION[1]) { // Do whole turret loop at once
+			if (turret.POSITION.X) { // Do whole turret loop at once
 				for (let i = 0; i < turretRingLoopLength; i++) {
 					for (let j = 0; j < 6; j++) {
 						turret = body.TURRETS[t + i * 5 + 1];
 						TURRETS.push(
 							{
-								POSITION: [turret.POSITION[0] * hexnoughtScaleFactor, turret.POSITION[1] * hexnoughtScaleFactor ** 0.5, turret.POSITION[2], turret.POSITION[3] / 6 * 5 + 60 * j, turret.POSITION[4], turret.POSITION[5]],
+								POSITION: [turret.POSITION.SIZE * hexnoughtScaleFactor, turret.POSITION.X * hexnoughtScaleFactor ** 0.5, turret.POSITION.Y, turret.POSITION.ANGLE / 6 * 5 + 60 * j, turret.POSITION.ARC, turret.POSITION.LAYER],
 								TYPE: turret.TYPE,
 							}
 						)
@@ -3140,7 +3271,7 @@ function makeHexnoughtBodyV2(body) {
 			} else { // Centered turrets
 				TURRETS.push(
 					{
-						POSITION: [turret.POSITION[0] * hexnoughtScaleFactor ** 0.5, 0, 0, turret.POSITION[3], turret.POSITION[4], turret.POSITION[5]],
+						POSITION: [turret.POSITION.SIZE * hexnoughtScaleFactor ** 0.5, 0, 0, turret.POSITION.ANGLE, turret.POSITION.ARC, turret.POSITION.LAYER],
 						TYPE: turret.TYPE,
 					}
 				) 
@@ -3157,7 +3288,7 @@ function makeHexnoughtBodyV2(body) {
 			type[0] = type[0].replace("pentagon", "hexagon");
 			PROPS.push(
 				{
-					POSITION: [prop.POSITION[0], 0, 0, prop.POSITION[3], prop.POSITION[4]],
+					POSITION: [prop.POSITION.SIZE, 0, 0, prop.POSITION.ANGLE, prop.POSITION.LAYER],
 					TYPE: type
 				}
 			);
@@ -3193,7 +3324,7 @@ if (Config.arms_race) {
 if(buildHexnoughts) {
 	for (let i of pentanoughtWeapons) {
 		for (let j of pentanoughtWeapons) {
-			Class[i].UPGRADES_TIER_0.push(mergeHexnoughtWeaponV2(i, j));
+			Class[i].UPGRADES_TIER_16.push(mergeHexnoughtWeaponV2(i, j));
 		}
 	}
 }
