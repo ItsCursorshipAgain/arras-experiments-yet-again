@@ -138,10 +138,20 @@ let initializeFilter = () => {
     for (let s of servers) {
         // Regions
         global.filters.regions.all.push(s);
+
+        // USA
         if (s.region.toLowerCase() == "usa" || s.region.toLowerCase() == "us west" || s.region.toLowerCase() == "us central" || s.region.toLowerCase() == "us east") global.filters.regions.america.push(s);
+
+        // Europe
         if (s.region.toLowerCase() == "europe") global.filters.regions.europe.push(s);
+
+        // Asia
         if (s.region.toLowerCase() == "asia") global.filters.regions.asia.push(s);
+
+        // Oceania
         if (s.region.toLowerCase() == "oceania") global.filters.regions.oceania.push(s);
+
+        // Other
         if (
             !global.filters.regions.america.includes(s) &&
             !global.filters.regions.europe.includes(s) &&
@@ -152,10 +162,20 @@ let initializeFilter = () => {
 
         // Gamemodes
         global.filters.gamemodeFilters.all.push(s);
+
+        // FFA
         if (s.gameMode.includes("FFA")) global.filters.gamemodeFilters.ffa.push(s);
+
+        // Squads
         if (s.gameMode.includes("Duos") || s.gameMode.includes("Squads") || s.gameMode.includes("Wars")) global.filters.gamemodeFilters.squads.push(s);
+
+        // TDM
         if (s.gameMode.includes("TDM")) global.filters.gamemodeFilters.tdm.push(s);
+
+        // Sandbox
         if (s.gameMode.includes("Sandbox")) global.filters.gamemodeFilters.sandbox.push(s);
+
+        // Minigames
         if (
             !global.filters.gamemodeFilters.ffa.includes(s) &&
             !global.filters.gamemodeFilters.squads.includes(s) &&
