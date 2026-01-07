@@ -18,11 +18,14 @@ module.exports = {
             host: "localhost:3001", // Server host location.
             port: 3001, // The port on the server.
             id: "la", // (<host>/#<id>)
-            featured: true, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
             gamemode: ["tdm"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
+
+            featured: false, // Whether the server is featured or not.
+            unlisted: false, // Whether the server shows up in the server list (if its id isn't in the url).
+            private: false, // Whether the server requires a privileged token to join (except through server travel).
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 4,
@@ -37,11 +40,14 @@ module.exports = {
             host: "localhost:3002", // Server host location.
             port: 3002, // The port on the server.
             id: "lb", // (<host>/#<id>)
-            featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
             gamemode: ["ffa"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
+
+            featured: false, // Whether the server is featured or not.
+            unlisted: false, // Whether the server shows up in the server list (if its id isn't in the url).
+            private: false, // Whether the server requires a privileged token to join (except through server travel).
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 //teams: 4,
@@ -69,11 +75,14 @@ module.exports = {
             host: "localhost:3003", // Server host location.
             port: 3003, // The port on the server.
             id: "lx", // (<host>/#<id>)
-            featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
             gamemode: ["nexus"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
+
+            featured: false, // Whether the server is featured or not.
+            unlisted: true, // Whether the server shows up in the server list (if its id isn't in the url).
+            private: true, // Whether the server requires a privileged token to join (except through server travel).
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 1,
@@ -89,11 +98,14 @@ module.exports = {
             host: "localhost:3099", // Server host location.
             port: 3099, // The port on the server.
             id: "lz", // (<host>/#<id>)
-            featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
             gamemode: ["sandbox"], // The selected gamemode.
             player_cap: 16, // Not including bots. Set to 0 to disable.
+
+            featured: false, // Whether the server is featured or not.
+            unlisted: false, // Whether the server shows up in the server list (if its id isn't in the url).
+            private: false, // Whether the server requires a privileged token to join (except through server travel).
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 //teams: 4,
