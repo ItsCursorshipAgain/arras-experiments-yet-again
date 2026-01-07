@@ -29,7 +29,23 @@ module.exports = {
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 4,
-                bot_cap: 36
+                bot_cap: 36,
+                daily_tank: {
+                    tank: "whirlwind",
+                    tier: 3,
+                    ads: false,
+                    ad_sources: [
+                        {
+                            file: "testadvideo.mp4",
+                            use_regular_ad_size: true,
+                        },
+                        {
+                            file: "testadimage.png",
+                            image_wait_time: 3,
+                            use_regular_ad_size: true,
+                        }
+                    ]
+                }
             }
         },
         {
@@ -109,23 +125,7 @@ module.exports = {
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 //teams: 4,
-                bot_cap: 0,
-                daily_tank: {
-                    tank: "whirlwind",
-                    tier: 3,
-                    ads: false,
-                    ad_sources: [
-                        {
-                            file: "testadvideo.mp4",
-                            use_regular_ad_size: true,
-                        },
-                        {
-                            file: "testadimage.png",
-                            image_wait_time: 3,
-                            use_regular_ad_size: true,
-                        }
-                    ]
-                }
+                //bot_cap: 0,
             }
         },
     ],
