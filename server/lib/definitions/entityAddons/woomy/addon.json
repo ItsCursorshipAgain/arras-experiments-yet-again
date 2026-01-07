@@ -1,0 +1,10 @@
+{
+	"name": "Woomy Addon",
+	"description": "The official woomy-arras.io addon for Open Source Arras",
+	"author": "TGS",
+	"version": "v0.1.0-dev",
+	"osa-version": {
+		"minimum": "v2.0.11",
+		"target": "v2.0.11"
+	}
+}
