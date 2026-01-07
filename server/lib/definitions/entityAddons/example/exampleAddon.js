@@ -3,8 +3,8 @@
 // Addons that are dependant on other addons should be named something like
 // "[PARENT ADDON NAME]-[EXTENSION NAME].js", to make sure that it would run after that addon ran.
 
-const {base} = require('../constants.js');
-const {makeMenu} = require("../facilitators");
+const {base} = require('../../constants.js');
+const {makeMenu} = require("../../facilitators");
 
 // This addon is disabled by default.
 // You can also disable addons by not making them end with '.js'

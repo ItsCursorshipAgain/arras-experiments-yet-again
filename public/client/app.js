@@ -328,6 +328,7 @@ import * as socketStuff from "./socketinit.js";
                 document.getElementById("tabOptions"),
                 document.getElementById("tabControls"),
                 document.getElementById("tabLinks"),
+                document.getElementById("tabAddons"),
             ];
         for (let g = 1; g < tabOptions.length; g++) tabOptions[g].style.display = "none";
         let e = 0;
