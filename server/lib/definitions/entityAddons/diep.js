@@ -1,15 +1,17 @@
 const {combineStats, dereference, makeTurret, weaponArray, weaponMirror} = require('../facilitators.js')
-const {base, statnames} = require('../constants.js')
+const {base, smshskl, statnames} = require('../constants.js')
 const g = require('../gunvals.js')
 g.droneSizeOffset = {size: 2}
 g.necroSizeOffset = {size: 1.75}
+g.trapSizeOffset = {size: 1.5}
+g.megaTrapSizeOffset = {reload: 2, damage: 2, recoil: 2, size: 2}
 
 // LEGAL DISCLAIMER
 // - All tank and boss stats were sourced from diepcustom, which is licensed under GNU AGPLv3. (https://github.com/abcxff/diepcustom)
 // - This addon DOES NOT use any other code from diepcustom or diep.io.
 
 // Settings
-const split_predator = true // Splits Predator into X Hunter (predator with no zoom) and OG Predator (hunter with zoom)
+const split_predator = false // Splits Predator into X Hunter (predator with no zoom) and OG Predator (hunter with zoom)
 
 // Menu/Generics
 Class.arrasMenu_diep.UPGRADES_TIER_0.push("tank_diep")
@@ -165,10 +167,11 @@ const diep2arras = (pos) => { // stolen from woomy
     let borderWidth = 5; // Very specific value
     let scale = 100 / (100 - borderWidth) * 20 / 100;
     let tau = 2 * Math.PI
+    let isTrapezoid = pos.isTrapezoid ?? false
 
-    if (pos.isTrapezoid && !pos.invertAspect) {
+    if (isTrapezoid && !pos.invertAspect) {
         aspect = 1.75
-    } else if (pos.isTrapezoid && pos.invertAspect) {
+    } else if (isTrapezoid && pos.invertAspect) {
         aspect = -1.75
     } else {
         aspect = 1
@@ -177,11 +180,11 @@ const diep2arras = (pos) => { // stolen from woomy
     return {
         LENGTH: (pos.size - borderWidth / 2) * scale,
         WIDTH: (pos.width - borderWidth) * scale,
-        ASPECT: aspect,
-        X: pos.distance * scale,
-        Y: pos.offset * scale,
-        ANGLE: (pos.angle / tau) * 360,
-        DELAY: pos.delay
+        ASPECT: aspect ?? 1,
+        X: (pos.distance * scale) ?? 0,
+        Y: (pos.offset * scale) ?? 0,
+        ANGLE: ((pos.angle / tau) * 360) ?? 0,
+        DELAY: pos.delay ?? 0
     }
 }
 
@@ -200,6 +203,20 @@ Class.mountedTurret_diep = makeTurret({
         },
     ],
 }, {label: "Mounted Turret", fov: 0.8, extraStats: []})
+Class.autoGun_diep = makeTurret({
+    GUNS: [
+        {
+            POSITION: diep2arras({
+                size: 110,
+                width: 50.4
+            }),
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, { recoil: 1.15 }, g.turret]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+}, {canRepel: true, limitFov: true, fov: 3})
 
 // Basic Tank
 Class.tank_diep = {
@@ -346,7 +363,7 @@ Class.assassin_diep = {
         }
     ]
 }
-Class.auto3_diep = makeRadialAuto("autoTankGun", {isTurret: true, danger: 6, label: "Auto 3"})
+Class.auto3_diep = makeRadialAuto("autoGun_diep", {isTurret: true, danger: 6, label: "Auto 3"})
 Class.destroyer_diep = {
     PARENT: "diep",
     LABEL: "Destroyer",
@@ -493,11 +510,8 @@ Class.smasher_diep = {
     DANGER: 6,
     TURRETS: [
         {
-            POSITION: {
-                SIZE: 21.5,
-                ARC: 360
-            },
-            TYPE: ["hexagonHat_spin", { COLOR: "black" }]
+            TYPE: ["hexagonHat_spin", {COLOR: "black"}],
+            POSITION: {SIZE: 21.5}
         }
     ]
 }
@@ -505,23 +519,33 @@ Class.trapper_diep = {
     PARENT: "diep",
     LABEL: "Trapper",
     DANGER: 6,
+    BODY: {
+        FOV: 1.1 * base.FOV
+    },
     STAT_NAMES: statnames.trap,
     GUNS: [
         {
-            POSITION: {
-                LENGTH: 13,
-                WIDTH: 8.25
-            }
+            POSITION: diep2arras({
+                angle: 0,
+                offset: 0,
+                size: 60,
+                width: 42,
+                delay: 0,
+                isTrapezoid: false
+            }),
         },
         {
-            POSITION: {
-                LENGTH: 3.3,
-                WIDTH: 8.25,
-                ASPECT: 1.6,
-                X: 13
-            },
+            POSITION: diep2arras({
+                angle: 0,
+                distance: 60,
+                offset: 0,
+                size: 20,
+                width: 42,
+                delay: 0,
+                isTrapezoid: true
+            }),
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.trapSizeOffset]),
                 TYPE: "trap",
                 STAT_CALCULATOR: "trap"
             }
@@ -621,9 +645,43 @@ Class.twinFlank_diep = {
 }
 
 // Tier 3
-Class.auto5_diep = makeRadialAuto("autoTankGun", {isTurret: true, danger: 7, label: "Auto 5", count: 5})
+Class.annihilator_diep = {
+    PARENT: "diep",
+    LABEL: "Annihilator",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: diep2arras({
+                angle: 0,
+                offset: 0,
+                size: 95,
+                width: 96.6,
+                delay: 0,
+                isTrapezoid: false
+            }),
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.annihilator]),
+                TYPE: "bullet",
+            }
+        }
+    ]
+}
+Class.auto5_diep = makeRadialAuto("autoGun_diep", {isTurret: true, danger: 7, label: "Auto 5", count: 5})
 Class.autoGunner_diep = makeAuto("gunner_diep")
+Class.autoSmasher_diep = makeAuto({
+    PARENT: "diepSmasher",
+    LABEL: "Smasher",
+    DANGER: 6,
+    SKILL_CAP: Array(10).fill(smshskl),
+    TURRETS: [
+        {
+            TYPE: ["hexagonHat_spin", {COLOR: "black"}],
+            POSITION: {SIZE: 21.5}
+        }
+    ]
+})
 Class.autoTank_diep = makeAuto("tank_diep")
+Class.autoTrapper_diep = makeAuto("trapper_diep")
 Class.booster_diep = {
     PARENT: "diep",
     LABEL: "Booster",
@@ -676,6 +734,36 @@ Class.booster_diep = {
                 }
             }
         ])
+    ]
+}
+Class.factory_diep = {
+    PARENT: "diep",
+    LABEL: "Factory",
+    DANGER: 7,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        FOV: base.FOV * 1.1
+    },
+    SHAPE: 4,
+    GUNS: [
+        {
+            POSITION: diep2arras({
+                angle: 0,
+                offset: 0,
+                size: 70,
+                width: 42,
+                delay: 0,
+                isTrapezoid: true
+            }),
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.factory, g.necroSizeOffset]),
+                TYPE: "minion",
+                MAX_CHILDREN: 6,
+                STAT_CALCULATOR: "drone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true
+            }
+        }
     ]
 }
 Class.fighter_diep = {
@@ -736,39 +824,46 @@ Class.gunnerTrapper_diep = {
     PARENT: "diep",
     LABEL: "Gunner Trapper",
     DANGER: 7,
-    STAT_NAMES: statnames.mixed,
     BODY: {
-        FOV: 1.25 * base.FOV
+        FOV: 1.1 * base.FOV
     },
     GUNS: [
         ...weaponMirror({
-            POSITION: {
-                LENGTH: 14.75,
-                WIDTH: 3.1,
-                Y: -3
-            },
+            POSITION: diep2arras({
+                angle: 0,
+                offset: -16,
+                size: 75,
+                width: 21,
+                delay: 1/3,
+                isTrapezoid: false
+            }),
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, { recoil: 4 }, { recoil: 1.8 }]),
                 TYPE: "bullet"
             }
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 1/3}),
         {
-            POSITION: {
-                LENGTH: 12.75,
-                WIDTH: 10.5,
-                ANGLE: 180
-            }
+            POSITION: diep2arras({
+                angle: 3.141592653589793,
+                offset: 0,
+                size: 60,
+                width: 54.6,
+                delay: 0,
+                isTrapezoid: false
+            }),
         },
         {
-            POSITION: {
-                LENGTH: 4.25,
-                WIDTH: 10.5,
-                ASPECT: 1.6,
-                X: 12.75,
-                ANGLE: 180
-            },
+            POSITION: diep2arras({
+                angle: 3.141592653589793,
+                distance: 60,
+                offset: 0,
+                size: 20,
+                width: 54.6,
+                delay: 0,
+                isTrapezoid: true
+            }),
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, { speed: 1.2 }, { recoil: 0.5 }]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.trapSizeOffset]),
                 TYPE: "trap",
                 STAT_CALCULATOR: "trap"
             }
@@ -801,6 +896,27 @@ Class.hybrid_diep = {
         }
     ]
 }
+Class.landmine_diep = {
+    PARENT: "diepSmasher",
+    LABEL: "Landmine",
+    DANGER: 7,
+    INVISIBLE: [0.06, 0.01],
+    TURRETS: [
+        {
+            TYPE: ["hexagonHat_spin", {COLOR: "black"}],
+            POSITION: {
+                SIZE: 21.5
+            }
+        },
+        {
+            TYPE: ["hexagonHat_spinFaster", {COLOR: "black"}],
+            POSITION: {
+                SIZE: 21.5,
+                ANGLE: 90
+            }
+        }
+    ]
+}
 Class.manager_diep = {
     PARENT: "diep",
     LABEL: "Manager",
@@ -823,6 +939,43 @@ Class.manager_diep = {
                 SYNCS_SKILLS: true,
                 STAT_CALCULATOR: "drone",
                 MAX_CHILDREN: 8
+            }
+        }
+    ]
+}
+Class.megaTrapper_diep = {
+    PARENT: "diep",
+    LABEL: "Mega Trapper",
+    DANGER: 7,
+    BODY: {
+        FOV: 1.1 * base.FOV
+    },
+    STAT_NAMES: statnames.trap,
+    GUNS: [
+        {
+            POSITION: diep2arras({
+                angle: 0,
+                offset: 0,
+                size: 60,
+                width: 54.6,
+                delay: 0,
+                isTrapezoid: false
+            }),
+        },
+        {
+            POSITION: diep2arras({
+                angle: 0,
+                distance: 60,
+                offset: 0,
+                size: 20,
+                width: 54.6,
+                delay: 0,
+                isTrapezoid: true
+            }),
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.megaTrapSizeOffset]),
+                TYPE: "trap",
+                STAT_CALCULATOR: "trap"
             }
         }
     ]
@@ -919,6 +1072,61 @@ Class.overlord_diep = {
             MAX_CHILDREN: 2
         }
     }, 4)
+}
+Class.overtrapper_diep = {
+    PARENT: "diep",
+    LABEL: "Overtrapper",
+    DANGER: 7,
+    BODY: {
+        FOV: 1.1 * base.FOV
+    },
+    STAT_NAMES: statnames.trap,
+    GUNS: [
+        {
+            POSITION: diep2arras({
+                angle: 0,
+                offset: 0,
+                size: 60,
+                width: 42,
+                delay: 0,
+                isTrapezoid: false
+            }),
+        },
+        {
+            POSITION: diep2arras({
+                angle: 0,
+                distance: 60,
+                offset: 0,
+                size: 20,
+                width: 42,
+                delay: 0,
+                isTrapezoid: true
+            }),
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.trapSizeOffset]),
+                TYPE: "trap",
+                STAT_CALCULATOR: "trap"
+            }
+        },
+        ...weaponMirror({
+            POSITION: diep2arras({
+                angle: 2.0943951023931953,
+                offset: 0,
+                size: 70,
+                width: 42,
+                delay: 0,
+                isTrapezoid: true
+            }),
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, g.overseer, g.droneSizeOffset]),
+                TYPE: "drone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: "drone",
+                MAX_CHILDREN: 1
+            }
+        })
+    ]
 }
 Class.pentaShot_diep = {
     PARENT: "diep",
@@ -1111,6 +1319,21 @@ Class.ranger_diep = {
         }
     ]
 }
+Class.spike_diep = {
+    PARENT: "diepSmasher",
+    LABEL: "Spike",
+    DANGER: 7,
+    BODY: {
+        SPEED: base.SPEED * 0.9,
+        DAMAGE: base.DAMAGE * 1.1
+    },
+    TURRETS: weaponArray([
+        {
+            TYPE: ["triangleHat_spin", {COLOR: "black"}],
+            POSITION: {SIZE: 18}
+        }
+    ], 4)
+}
 Class.sprayer_diep = {
     PARENT: "diep",
     LABEL: "Sprayer",
@@ -1235,6 +1458,43 @@ Class.streamliner_diep = {
             }
         }
     ]
+}
+Class.triTapper_diep = {
+    PARENT: "diep",
+    LABEL: "Tri-Tapper",
+    DANGER: 7,
+    BODY: {
+        FOV: 1.1 * base.FOV
+    },
+    STAT_NAMES: statnames.trap,
+    GUNS: weaponArray([
+        {
+            POSITION: diep2arras({
+                angle: 0,
+                offset: 0,
+                size: 60,
+                width: 42,
+                delay: 0,
+                isTrapezoid: false
+            }),
+        },
+        {
+            POSITION: diep2arras({
+                angle: 0,
+                distance: 60,
+                offset: 0,
+                size: 20,
+                width: 42,
+                delay: 0,
+                isTrapezoid: true
+            }),
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.flankGuard, g.trapSizeOffset]),
+                TYPE: "trap",
+                STAT_CALCULATOR: "trap"
+            }
+        }
+    ], 3)
 }
 Class.tripleTwin_diep = {
     PARENT: "diep",
@@ -1400,30 +1660,31 @@ Class.defender_diep = {
 
 // Class Tree
 Class.tank_diep.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard"].map(x => x + "_diep")
-    //Class.tank_diep.UPGRADES_TIER_2 = [].map(x => x + "_diep")
+    Class.tank_diep.UPGRADES_TIER_2 = ["smasher"].map(x => x + "_diep")
         Class.tank_diep.UPGRADES_TIER_3 = ["autoTank"].map(x => x + "_diep")
+        Class.smasher_diep.UPGRADES_TIER_3 = ["landmine", "autoSmasher", "spike"].map(x => x + "_diep")
 
     Class.twin_diep.UPGRADES_TIER_2 = ["tripleShot", "quadTank", "twinFlank"].map(x => x + "_diep")
-        Class.tripleShot_diep.UPGRADES_TIER_3 = ["triplet", "pentaShot"].map(x => x + "_diep")
-        Class.quadTank_diep.UPGRADES_TIER_3 = ["octoTank"/*, "auto5"*/].map(x => x + "_diep")
-        Class.twinFlank_diep.UPGRADES_TIER_3 = ["tripleTwin"].map(x => x + "_diep")
+        Class.tripleShot_diep.UPGRADES_TIER_3 = ["triplet", "pentaShot"/*, "spreadShot"*/].map(x => x + "_diep")
+        Class.quadTank_diep.UPGRADES_TIER_3 = ["octoTank", "auto5"].map(x => x + "_diep")
+        Class.twinFlank_diep.UPGRADES_TIER_3 = ["tripleTwin"/*, "battleship"*/].map(x => x + "_diep")
 
-    Class.sniper_diep.UPGRADES_TIER_2 = ["assassin", "overseer", "hunter"].map(x => x + "_diep")
+    Class.sniper_diep.UPGRADES_TIER_2 = ["assassin", "overseer", "hunter", "trapper"].map(x => x + "_diep")
         Class.assassin_diep.UPGRADES_TIER_3 = ["ranger", "stalker"].map(x => x + "_diep")
-        Class.overseer_diep.UPGRADES_TIER_3 = ["overlord", "necromancer", "manager"].map(x => x + "_diep")
-        Class.hunter_diep.UPGRADES_TIER_3 = ["predator"].map(x => x + "_diep")
-        //Class.trapper_diep.UPGRADES_TIER_3 = [].map(x => x + "_diep")
+        Class.overseer_diep.UPGRADES_TIER_3 = ["overlord", "necromancer", "manager", "overtrapper"/*, "battleship"*/, "factory"].map(x => x + "_diep")
+        Class.hunter_diep.UPGRADES_TIER_3 = ["predator"/*, "streamliner"*/].map(x => x + "_diep")
+        Class.trapper_diep.UPGRADES_TIER_3 = ["triTapper", "gunnerTrapper", "overtrapper", "megaTrapper", "autoTrapper"].map(x => x + "_diep")
 
     Class.machineGun_diep.UPGRADES_TIER_2 = ["destroyer", "gunner"].map(x => x + "_diep")
         Class.machineGun_diep.UPGRADES_TIER_3 = ["sprayer"].map(x => x + "_diep")
-        Class.destroyer_diep.UPGRADES_TIER_3 = ["hybrid"].map(x => x + "_diep")
-        Class.gunner_diep.UPGRADES_TIER_3 = ["autoGunner"].map(x => x + "_diep")
+        Class.destroyer_diep.UPGRADES_TIER_3 = ["hybrid", "annihilator"].map(x => x + "_diep")
+        Class.gunner_diep.UPGRADES_TIER_3 = ["autoGunner", "gunnerTrapper"/*, "streamliner"*/].map(x => x + "_diep")
 
-    Class.flankGuard_diep.UPGRADES_TIER_2 = ["triAngle", "quadTank", "twinFlank"/*, "auto3"*/].map(x => x + "_diep")
+    Class.flankGuard_diep.UPGRADES_TIER_2 = ["triAngle", "quadTank", "twinFlank", "auto3"].map(x => x + "_diep")
         Class.triAngle_diep.UPGRADES_TIER_3 = ["booster", "fighter"].map(x => x + "_diep")
         //Class.quadTank_diep.UPGRADES_TIER_3
         //Class.twinFlank_diep.UPGRADES_TIER_3
-        //Class.auto3_diep.UPGRADES_TIER_3 = [].map(x => x + "_diep")
+        Class.auto3_diep.UPGRADES_TIER_3 = ["auto5", "autoGunner"].map(x => x + "_diep")
 
 for (let i = 0; i < Class.hunter_diep.UPGRADES_TIER_3.length; i++) {
     let string = Class.hunter_diep.UPGRADES_TIER_3[i];
