@@ -140,8 +140,7 @@ module.exports = {
 	swarmDrive: {hatType: "triangleHat", hatSize: 8, hatAngle: 180},
 
 	// makeOver
-	hybrid: {count: 1, independent: true, cycle: false},
-	hybridBehind: {count: 1, independent: true, cycle: false, inFront: false},
+	hybrid: {count: 1, independent: true, cycle: false, renderBehind: true},
 	sideOver: {angle: 90},
 	cross: {count: 3, angle: 90},
 

@@ -3185,7 +3185,7 @@ Class.hewnDouble = {
                 LENGTH: 19,
                 WIDTH: 8,
                 Y: -5.5,
-                ANGLE: -205
+                ANGLE: 155
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),

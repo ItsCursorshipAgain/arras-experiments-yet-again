@@ -1007,7 +1007,8 @@ Class.doubleFlankTwin_AR = {
             POSITION: {
                 LENGTH: 20,
                 WIDTH: 8,
-                ANGLE: 90
+                ANGLE: 90,
+                DELAY: 0.5
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard]),
@@ -1024,7 +1025,7 @@ Class.doubleFlankTwin_AR = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
                 TYPE: "bullet"
             }
-        }, { delayIncrement: 0.5 })
+        }, {delayIncrement: 0.5})
     ], 2)
 }
 Class.doubleGatling_AR = {
@@ -1768,7 +1769,7 @@ Class.inception_AR = {
         }
     ]
 }
-Class.integrator_AR = makeOver("triAngle", "Integrator", preset.hybridBehind)
+Class.integrator_AR = makeOver("triAngle", "Integrator", preset.hybrid)
 Class.interner_AR = makeOver("pen_AR", "Interner", preset.hybrid)
 Class.issuer_AR = {
     PARENT: "genericTank",
@@ -3038,7 +3039,7 @@ Class.warkwark_AR = {
                 STAT_CALCULATOR: "trap"
             }
         }
-    ], { delayIncrement: 0.5 }), 2)
+    ], {delayIncrement: 0.5}), 2)
 }
 Class.widget_AR = {
     PARENT: "genericTank",
@@ -3559,6 +3560,36 @@ Class.chemist_AR = {
         }
     ], 3)
 }
+Class.cleft_AR = {
+    PARENT: "genericTank",
+    LABEL: "Cleft",
+    DANGER: 8,
+    GUNS: weaponArray(weaponMirror([
+        {
+            POSITION: {
+                LENGTH: 19,
+                WIDTH: 8,
+                Y: -5.5,
+                ANGLE: -25
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),
+                TYPE: "bullet"
+            }
+        }, 
+        {
+            POSITION: {
+                LENGTH: 20,
+                WIDTH: 8,
+                Y: 5.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin, g.hewnDouble]),
+                TYPE: "bullet"
+            }
+        }
+    ], {delayIncrement: 0.5}), 2)
+}
 Class.clerk_AR = {
     PARENT: "genericHealer",
     LABEL: "Clerk",
@@ -3782,6 +3813,42 @@ Class.doubleCoil_AR = {
         }
     ], 2)
 }
+Class.doubleDual_AR = {
+    PARENT: "genericTank",
+    LABEL: "Double Dual",
+    DANGER: 8,
+    BODY: {
+        FOV: 1.1 * base.FOV
+    },
+    CONTROLLERS: ["zoom"],
+    TOOLTIP: "Hold right click to zoom.",
+    GUNS: weaponArray(weaponMirror([
+        {
+            POSITION: {
+                LENGTH: 18,
+                WIDTH: 7,
+                Y: 5.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin, g.dual, g.lowPower]),
+                TYPE: "bullet",
+                LABEL: "Small"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 16,
+                WIDTH: 8.5,
+                Y: 5.5,
+                DELAY: 0.25
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin, g.dual]),
+                TYPE: "bullet"
+            }
+        }
+    ], {delayIncrement: 0.5}), 2)
+}
 Class.doubleDuplicator_AR = {
     PARENT: "genericTank",
     LABEL: "Double Duplicator",
@@ -3858,6 +3925,67 @@ Class.doubleFaucet_AR = {
                 TYPE: "bullet"
             }
         }
+    ], 2)
+}
+Class.doubleFlankHelix_AR = {
+    PARENT: "genericTank",
+    LABEL: "Double Flank Helix",
+    DANGER: 8,
+    STAT_NAMES: statnames.desmos,
+    GUNS: weaponArray([
+        {
+            POSITION: {
+                LENGTH: 20,
+                WIDTH: 8,
+                ANGLE: 90,
+                DELAY: 0.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 20,
+                WIDTH: 6,
+                ASPECT: -1.5,
+                Y: -5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin, g.desmos]),
+                TYPE: ["bullet", {CONTROLLERS: ['snake']}]
+            },
+        },
+        {
+            POSITION: {
+                LENGTH: 20,
+                WIDTH: 6,
+                ASPECT: -1.5,
+                Y: 5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin, g.desmos]),
+                TYPE: ["bullet", {CONTROLLERS: [['snake', {invert: true}]]}]
+            },
+        },
+        {
+            POSITION: {
+                LENGTH: 16.5,
+                WIDTH: 2,
+                ASPECT: -9.25
+            }
+        },
+        ...weaponMirror({
+            POSITION: {
+                LENGTH: 4,
+                WIDTH: 5,
+                ASPECT: -4,
+                X: -9.5,
+                Y: -7,
+                ANGLE: 90
+            }
+        }, { delayIncrement: 0.5 })
     ], 2)
 }
 Class.doubleFocal_AR = {
@@ -3949,6 +4077,34 @@ Class.doubleFrother_AR = {
     ], 2)
 }
 Class.doubleMunition_AR = makeWhirlwind("doubleArtillery_AR", {label: "Double Munition"})
+Class.doubleMusket_AR = {
+    PARENT: "genericTank",
+    LABEL: "Double Musket",
+    DANGER: 8,
+    BODY: {
+        FOV: base.FOV * 1.225
+    },
+    GUNS: weaponArray(weaponMirror([
+        {
+            POSITION: {
+                LENGTH: 15.5,
+                WIDTH: 7,
+                Y: 6.15
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 18,
+                WIDTH: 7,
+                Y: 4.15
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.twin, g.doubleTwin]),
+                TYPE: "bullet"
+            }
+        }
+    ], {delayIncrement: 0.5}), 2)
+}
 Class.doubleRedistributor_AR = {
     PARENT: "genericTank",
     LABEL: "Double Redistributor",
@@ -4411,6 +4567,48 @@ Class.healer3_AR = {
                 LAYER: 1
             }
         }
+    ]
+}
+Class.hewnFlankDouble_AR = {
+    PARENT: "genericTank",
+    LABEL: "Hewn Flank Double",
+    DANGER: 8,
+    GUNS: [
+        ...weaponMirror({
+            POSITION: {
+                LENGTH: 20,
+                WIDTH: 8,
+                ANGLE: 90,
+                DELAY: 0.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard]),
+                TYPE: "bullet"
+            }
+        }),
+        ...weaponMirror({
+            POSITION: {
+                LENGTH: 19,
+                WIDTH: 8,
+                Y: -5.5,
+                ANGLE: 155
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),
+                TYPE: "bullet"
+            }
+        }, {delayIncrement: 0.5}),
+        ...weaponArray(weaponMirror({
+            POSITION: {
+                LENGTH: 20,
+                WIDTH: 8,
+                Y: 5.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin, g.hewnDouble]),
+                TYPE: "bullet"
+            }
+        }, {delayIncrement: 0.5}), 2)
     ]
 }
 Class.hewnTriple_AR = {
@@ -5482,6 +5680,50 @@ Class.sharpshooter_AR = {
         }
     ]
 }
+Class.skewnDouble_AR = {
+    PARENT: "genericTank",
+    LABEL: "Skewn Double",
+    DANGER: 8,
+    GUNS: [
+        ...weaponMirror([
+            {
+                POSITION: {
+                    LENGTH: 16,
+                    WIDTH: 8,
+                    Y: 5.5,
+                    ANGLE: 225
+                },
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),
+                    TYPE: "bullet"
+                }
+            },
+            {
+                POSITION: {
+                    LENGTH: 19,
+                    WIDTH: 8,
+                    Y: -5.5,
+                    ANGLE: -205
+                },
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),
+                    TYPE: "bullet"
+                }
+            }
+        ], {delayIncrement: 0.5}),
+        ...weaponArray(weaponMirror({
+            POSITION: {
+                LENGTH: 20,
+                WIDTH: 8,
+                Y: 5.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin, g.hewnDouble]),
+                TYPE: "bullet"
+            }
+        }, {delayIncrement: 0.5}), 2)
+    ]
+}
 Class.slabNSlab_AR = {
     PARENT: "genericTank",
     LABEL: "Slab 'n Slab",
@@ -5952,7 +6194,8 @@ Class.tripleFlankTwin_AR = {
             POSITION: {
                 LENGTH: 20,
                 WIDTH: 8,
-                ANGLE: 60
+                ANGLE: 60,
+                DELAY: 0.5
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard]),
@@ -5969,7 +6212,7 @@ Class.tripleFlankTwin_AR = {
                 SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin, g.tripleTwin]),
                 TYPE: "bullet"
             }
-        }, { delayIncrement: 0.5 })
+        }, {delayIncrement: 0.5})
     ], 3)
 }
 Class.tripleGatling_AR = {
@@ -6263,6 +6506,64 @@ Class.warkwarkwark_AR = {
         }
     ], { delayIncrement: 0.5 }), 3)
 }
+Class.warkwawarkrk_AR = {
+    PARENT: "genericTank",
+    LABEL: "Warkwawarkrk",
+    DANGER: 8,
+    STAT_NAMES: statnames.trap,
+    GUNS: [
+        ...weaponMirror([
+            {
+                POSITION: {
+                    LENGTH: 15,
+                    WIDTH: 8,
+                    Y: -5.5,
+                    ANGLE: 155,
+                }
+            },
+            {
+                POSITION: {
+                    LENGTH: 3.25,
+                    WIDTH: 8,
+                    ASPECT: 1.7,
+                    X: 14,
+                    Y: -5.5,
+                    ANGLE: 155,
+                },
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.twin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),
+                    TYPE: "trap",
+                    STAT_CALCULATOR: "trap"
+                }
+            }
+        ], {delayIncrement: 0.5}),
+        ...weaponArray(weaponMirror([
+            {
+                POSITION: {
+                    LENGTH: 15,
+                    WIDTH: 8,
+                    Y: 5.5,
+                    ANGLE: 5
+                }
+            },
+            {
+                POSITION: {
+                    LENGTH: 3.25,
+                    WIDTH: 8,
+                    ASPECT: 1.7,
+                    X: 14,
+                    Y: 5.5,
+                    ANGLE: 5
+                },
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.doubleTwin, g.hewnDouble]),
+                    TYPE: "trap",
+                    STAT_CALCULATOR: "trap"
+                }
+            }
+        ], {delayIncrement: 0.5}), 2)
+    ]
+}
 Class.whirl4_AR = makeWhirlwind("auto4", {label: "Whirl-4"})
 Class.whirl5_AR = makeWhirlwind("auto5", {label: "Whirl-5"})
 Class.whirlbar_AR = makeWhirlwind("crowbar_AR", {label: "Whirlbar"})
@@ -6337,17 +6638,18 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
         Class.twin.UPGRADES_TIER_3.splice(1, 1) //remove bulwark
             Class.twin.UPGRADES_TIER_3.push("duo_AR")
         Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin_AR", "doubleGunner_AR", "doubleHelix_AR", "warkwark_AR")
-            Class.tripleTwin.UPGRADES_TIER_3 = ["quadTwin", "autoTriple", "bentTriple", "hewnTriple", "tripleFlankTwin", "tripleGunner", "tripleHelix", "warkwarkwark"].map(x => x + "_AR")
-            Class.hewnDouble.UPGRADES_TIER_3 = ["hewnTriple", "autoHewnDouble"].map(x => x + "_AR")
+            Class.doubleTwin.UPGRADES_TIER_3.push("doubleDual_AR", "doubleMusket_AR", "overdoubleTwin_AR")
+            Class.tripleTwin.UPGRADES_TIER_3 = ["quadTwin", "hewnTriple", "autoTriple", "bentTriple", "tripleFlankTwin", "tripleGunner", "tripleHelix", "warkwarkwark"].map(x => x + "_AR")
+            Class.hewnDouble.UPGRADES_TIER_3 = ["skewnDouble", "hewnTriple", "autoHewnDouble", "cleft", "hewnFlankDouble"/*, "hewnGunner", "hewnHelix"*/, "warkwawarkrk"].map(x => x + "_AR")
             Class.autoDouble.UPGRADES_TIER_3 = ["megaAutoDouble", "tripleAutoDouble", "autoTriple", "autoHewnDouble", "autoBentDouble", "autoDoubleFlank", "autoDoubleGunner", "autoDoubleHelix", "autoWarkwark"].map(x => x + "_AR")
-            Class.bentDouble.UPGRADES_TIER_3 = ["bentTriple", "autoBentDouble", "doubleTriplet", "doubleTriplex"].map(x => x + "_AR")
-            Class.doubleFlankTwin_AR.UPGRADES_TIER_3 = ["tripleFlankTwin", "autoDoubleFlank"].map(x => x + "_AR")
+            Class.bentDouble.UPGRADES_TIER_3 = ["bentTriple"/*, "flexedDouble"*/, "autoBentDouble", "doubleTriplet", "doubleTriplex", "cleft"/*, "doubleSpreadshot", "bentFlankDouble", "bentDoubleGunner", "bentDoubleMinigun", "splitDouble", "waarrkwaarrk"*/].map(x => x + "_AR")
+            Class.doubleFlankTwin_AR.UPGRADES_TIER_3 = ["quadTwin", "tripleFlankTwin", "hewnFlankDouble", "autoDoubleFlank", "doubleFlankHelix"].map(x => x + "_AR")
             Class.doubleGunner_AR.UPGRADES_TIER_3 = ["tripleGunner", "autoDoubleGunner"].map(x => x + "_AR")
-            Class.doubleHelix_AR.UPGRADES_TIER_3 = ["tripleHelix", "autoDoubleHelix", "doubleTriplex"].map(x => x + "_AR")
-            Class.warkwark_AR.UPGRADES_TIER_3 = ["warkwarkwark", "autoWarkwark"].map(x => x + "_AR")
+            Class.doubleHelix_AR.UPGRADES_TIER_3 = ["tripleHelix"/*, "hewnHelix"*/, "autoDoubleHelix", "doubleTriplex", "doubleFlankHelix"].map(x => x + "_AR")
+            Class.warkwark_AR.UPGRADES_TIER_3 = ["warkwarkwark", "warkwawarkrk", "autoWarkwark"].map(x => x + "_AR")
         Class.tripleShot.UPGRADES_TIER_3.push("splitShot_AR", "autoTripleShot_AR", "bentGunner_AR", "bentMinigun_AR", "defect_AR", "waarrk_AR")
             Class.pentaShot.UPGRADES_TIER_3 = ["flexedHybrid"].map(x => x + "_AR")
-            Class.spreadshot.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.spreadshot.UPGRADES_TIER_3 = ["bozo"].map(x => x + "_AR")
             Class.bentHybrid.UPGRADES_TIER_3 = ["overshot", "flexedHybrid", "smearer", "triprid", "triprix", "splitHybrid", "autoBentHybrid", "spambrid", "junker", "bentCatcher"].map(x => x + "_AR")
             //Class.bentDouble.UPGRADES_TIER_3
             Class.triplet.UPGRADES_TIER_3 = ["quintuplet", "triprid", "doubleTriplet", "autoTriplet", "nitwit"].map(x => x + "_AR")
@@ -6371,7 +6673,7 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             Class.blower.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             Class.rimfire_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             Class.volley_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
-            Class.doubleGunner_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            //Class.doubleGunner_AR.UPGRADES_TIER_3
             //Class.bentGunner_AR.UPGRADES_TIER_3
             Class.equalizer_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.hexaTank.UPGRADES_TIER_3.push("autoHexaTank_AR", "mingler_AR", "combo_AR")

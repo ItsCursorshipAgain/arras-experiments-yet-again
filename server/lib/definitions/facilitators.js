@@ -119,7 +119,7 @@ exports.makeOver = (type, name = -1, options = {}) => {
     let stats = options.extraStats ?? []
 
     options.spawnerType ??= "drone"
-    options.inFront ??= true
+    options.renderBehind ??= false
 
     let spawners = [];
     if (options.spawnerType == "swarm") {
@@ -204,7 +204,7 @@ exports.makeOver = (type, name = -1, options = {}) => {
             }))
         }
     }
-    if (options.inFront == false) {
+    if (options.renderBehind) {
         output.GUNS = type.GUNS == null ? spawners : spawners.concat(type.GUNS)
     } else {
         output.GUNS = type.GUNS == null ? spawners : type.GUNS.concat(spawners)
