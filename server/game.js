@@ -53,6 +53,7 @@ const getName = (name, gamemodeData) => {
         arms_race: "Arms Race",
         blackout: "Blackout",
         classic: "Classic",
+        diep: "Diep",
         //dreadnoughts: "Dreadnoughts",
             old_dreadnoughts: "Old Dreadnoughts",
         growth: "Growth",
@@ -70,7 +71,6 @@ const getName = (name, gamemodeData) => {
         //skinwalkers: "Skinwalkers",
         space: "Space",
         //tartarus: "Tartarus",
-        //worlds_collide: "Worlds Collide",
     };
     return nameMap[name];
 }

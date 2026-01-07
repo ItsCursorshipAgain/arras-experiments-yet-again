@@ -26,7 +26,7 @@ module.exports = {
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 4,
-                bot_cap: 40
+                bot_cap: 16
             }
         },
         {
@@ -40,12 +40,12 @@ module.exports = {
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["retrograde", "old_dreadnoughts", "tdm"], // The selected gamemode.
-            player_cap: 50, // Not including bots. Set to 0 to disable.
+            gamemode: ["diep", "tdm"], // The selected gamemode.
+            player_cap: 80, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 4,
-                bot_cap: 40
+                bot_cap: 64
             }
         },
         {
@@ -248,6 +248,7 @@ module.exports = {
     arms_race: false,
     blackout: false,
     clan_wars: false,
+    diep: false,
     domination: false,
     growth: false,
     groups: false,

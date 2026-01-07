@@ -6378,6 +6378,7 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             Class.hexaTank.UPGRADES_TIER_3.push("tripleFlankTwin_AR", "hextuplex_AR")
             Class.octoTank.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             //Class.cyclone.UPGRADES_TIER_3
+            Class.hexaTrapper.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             Class.deathStar.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             Class.autoHexaTank_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             Class.mingler_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
@@ -6489,7 +6490,6 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             //Class.combo_AR.UPGRADES_TIER_3
         Class.trapGuard.UPGRADES_TIER_3.push("peashooter_AR", "incarcerator_AR", "mechGuard_AR", "autoTrapGuard_AR", "machineGuard_AR", "triTrapGuard_AR")
         Class.triTrapper.UPGRADES_TIER_3.push("triPen_AR", "triMech_AR", "triMachine_AR", "triTrapGuard_AR")
-            Class.hexaTrapper.UPGRADES_TIER_3 = [].map(x => x + "_AR")
 
     Class.director.UPGRADES_TIER_2.push("directordrive_AR", "honcho_AR", "doper_AR")
         Class.director.UPGRADES_TIER_3.splice(1, 1) //remove bigCheese
