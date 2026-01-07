@@ -11,7 +11,8 @@ g.swarmSizeOffset = {size: 1.5}
 // - This addon DOES NOT use any other code from diepcustom or diep.io.
 
 // Settings
-const split_predator = false // Splits Predator into X Hunter (predator with no zoom) and OG Predator (hunter with zoom)
+const split_predator = false // Splits Predator into X Hunter (predator with no zoom) and OG Predator (hunter with zoom).
+const havre_tanks = false // Adds tanks from havre.io to the class tree.
 
 // Menu/Generics
 Class.arrasMenu_diep.UPGRADES_TIER_0.push("tank_diep")
@@ -1859,6 +1860,41 @@ Class.triplet_diep = {
         }
     ]
 }
+Class.twinGuard_havre = {
+    PARENT: "diep",
+    LABEL: "Twin Guard",
+    DANGER: 7,
+    GUNS: weaponArray([
+        {
+            POSITION: diep2arras({
+                angle: 1.5707963267948966,
+                offset: 0,
+                size: 80,
+                width: 42,
+                delay: 0,
+                isTrapezoid: false
+            }),
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard, {reload: 2}]),
+                TYPE: "bullet"
+            }
+        },
+        ...weaponMirror({
+            POSITION: diep2arras({
+                angle: 0,
+                offset: -26,
+                size: 95,
+                width: 42,
+                delay: 0,
+                isTrapezoid: false
+            }),
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet"
+            }
+        }, {delayIncrement: 0.5})
+    ], 2)
+}
 Class.xHunter_diep = {
     PARENT: "diep",
     LABEL: "X Hunter",
@@ -2000,4 +2036,9 @@ for (let i = 0; i < Class.hunter_diep.UPGRADES_TIER_3.length; i++) {
     if (split_predator && string === "predator_diep") {
         Class.hunter_diep.UPGRADES_TIER_3.splice(i, 1, "xHunter_diep", "predator_old_diep")
     }
+}
+
+if (havre_tanks) {
+    Class.quadTank_diep.UPGRADES_TIER_3.splice(1, 0, "twinGuard_havre")
+    Class.twinFlank_diep.UPGRADES_TIER_3.push("twinGuard_havre")
 }
