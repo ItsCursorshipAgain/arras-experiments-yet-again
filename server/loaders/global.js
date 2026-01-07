@@ -58,7 +58,7 @@ global.teamColors = [
     "brown",
     "cyan"
 ]
-global.getTeamName = team => [...global.teamNames, , "DREADNOUGHT"][-team - 1] ?? "An unknown team";
+global.getTeamName = team => [...global.teamNames, , "DREADNOUGHT"][-team - 1] ?? "NEUTRAL";
 global.getTeamColor = (team, fixMode = false) => {
     let color = ([...global.teamColors, , "aqua"][-team - 1] ?? 3);
     if (fixMode) color = color + " 0 1 0 false";

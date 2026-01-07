@@ -21,12 +21,12 @@ module.exports = {
             featured: true, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["arms_race", "tdm"], // The selected gamemode.
+            gamemode: ["tdm"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 4,
-                bot_cap: 16
+                bot_cap: 36
             }
         },
         {
@@ -40,12 +40,25 @@ module.exports = {
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["diep", "tdm"], // The selected gamemode.
+            gamemode: ["ffa"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
-                teams: 4,
-                bot_cap: 64
+                //teams: 4,
+                bot_cap: 36,
+                server_travel_properties: {
+                    loop_interval: 10_000, // how often the portal loop executes in seconds
+                    portals: 1, // amount of portals to spawn
+                },
+                server_travel: [
+                    {
+                        ip: "localhost:3003", // destination server host, don't add "https://" or any slashes to it
+                        portal_properties: {
+                            spawn_chance: 3, // chance for a portal to spawn somewhere in the map each loop iteration (higher = more chances)
+                            color: "red", // portal color
+                        }
+                    }
+                ]
             }
         },
         {
@@ -59,12 +72,13 @@ module.exports = {
             featured: false, // Whether the server is featured or not.
 
             region: "Local", // The region the server is on.
-            gamemode: ["arms_race", "retrograde", "nexus"], // The selected gamemode.
+            gamemode: ["nexus"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
                 teams: 1,
                 bot_cap: 0,
+                allow_server_travel: true
             }
         },
         {
@@ -82,7 +96,7 @@ module.exports = {
             player_cap: 16, // Not including bots. Set to 0 to disable.
 
             properties: { // This overrides settings in the config.js file, assuming the selected gamemode doesn't also override it.
-                teams: 4,
+                //teams: 4,
                 bot_cap: 0,
                 daily_tank: {
                     tank: "whirlwind",

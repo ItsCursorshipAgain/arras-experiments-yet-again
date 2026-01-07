@@ -1,6 +1,6 @@
-tileClass.nexus_red = new Tile({
-    COLOR: "red",
-    NAME: "Nexus 90 level tile",
+tileClass.nexus = new Tile({
+    COLOR: "white",
+    NAME: "Level 90 tile",
     TICK: (tile) => {
         for (let i = 0; i < tile.entities.length; i++) {
             let entity = tile.entities[i];
