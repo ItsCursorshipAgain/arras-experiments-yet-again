@@ -5989,26 +5989,28 @@ Class.meOnMyWayToDoYourMom = {
 Class.protector = {
     PARENT: "genericTank",
     LABEL: "Protector",
+    DANGER: 8,
     GUNS: [
-        {
+        ...weaponMirror({
             POSITION: {
                 LENGTH: 18,
-                WIDTH: 12
+                WIDTH: 5.5,
+                Y: 3.25
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap]),
-                TYPE: "setTrap",
-                STAT_CALCULATOR: "block"
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.pounder]),
+                TYPE: "bullet"
             }
-        },
+        }, {delayIncrement: 0.5}),
         {
             POSITION: {
                 LENGTH: 17,
                 WIDTH: 13
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder]),
-                TYPE: "bullet"
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap]),
+                TYPE: "setTrap",
+                STAT_CALCULATOR: "block"
             }
         },
         {
