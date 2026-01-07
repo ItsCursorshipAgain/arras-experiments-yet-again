@@ -11,7 +11,7 @@ g.swarmSizeOffset = {size: 1.5}
 // - This addon DOES NOT use any other code from diepcustom or diep.io.
 
 // Settings
-const split_predator = true // Splits Predator into X Hunter (predator with no zoom) and OG Predator (hunter with zoom)
+const split_predator = false // Splits Predator into X Hunter (predator with no zoom) and OG Predator (hunter with zoom)
 
 // Menu/Generics
 Class.arrasMenu_diep.UPGRADES_TIER_0.push("tank_diep")
