@@ -6712,6 +6712,54 @@ Class.xPredator_AR = {
         }
     ]
 }
+Class.yHunter_AR = {
+    PARENT: "genericTank",
+    LABEL: "Y-Hunter",
+    DANGER: 8,
+    BODY: {
+        SPEED: base.SPEED * 0.9,
+        FOV: base.FOV * 1.25
+    },
+    CONTROLLERS: [["zoom", { distance: 775 }]],
+    TOOLTIP: "Hold right click to zoom.",
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 24,
+                WIDTH: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter, g.hunterSecondary]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 21,
+                WIDTH: 11,
+                DELAY: 0.25
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 10.5,
+                WIDTH: 11,
+                ASPECT: -1.95,
+                X: 7
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 13.5,
+                WIDTH: 15
+            }
+        }
+    ]
+}
 
 // Tier 5 (are we deadass)
 Class.custodian_AR = {
@@ -6865,7 +6913,7 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             Class.courser_AR.UPGRADES_TIER_3 = ["subduer", "xCourser"].map(x => x + "_AR")
         Class.hunter.UPGRADES_TIER_3.push("autoHunter_AR", "megaHunter_AR", "prober_AR", "courser_AR")
             Class.predator.UPGRADES_TIER_3 = ["xPredator"].map(x => x + "_AR")
-            Class.xHunter.UPGRADES_TIER_3 = ["xPredator", "xPoacher", "xNimrod", "autoXHunter", "xCourser"].map(x => x + "_AR")
+            Class.xHunter.UPGRADES_TIER_3 = ["yHunter", "xPredator", "xPoacher", "xNimrod", "autoXHunter", "xCourser"].map(x => x + "_AR")
             Class.poacher.UPGRADES_TIER_3 = ["xPoacher", "nacho"].map(x => x + "_AR")
             Class.ordnance.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             Class.dual.UPGRADES_TIER_3 = [].map(x => x + "_AR")

@@ -92,7 +92,7 @@ function combineBodyStats(...bodies) {
 // Set the below variable to true to enable hex dreadnought building.
 const buildHexnoughts = true
 
-// Set the below variable to true to enable photosphere with 12 auras instead of 7.
+// Set the below variable to true to enable photosphere with 10-12 auras instead of 6-7.
 const useOldPhotosphere = false
 
 // For hexnought merging
@@ -2709,19 +2709,19 @@ if (Config.arms_race) {
 	//console.log('[dreadv2.js]: Dreadnoughts v2 Arms Race addon enabled. Credit to Frostbyte.')
 	//Class.dreadWeapon_dreadsV2
 
-		Class.sword_dreadsV2.UPGRADES_TIER_0.push("sling_dreadsV2")
-			Class.sling_dreadsV2.UPGRADES_TIER_0 = ["atlatl"].map(x => x + "_dreadsV2")
-				Class.atlatl_dreadsV2.UPGRADES_TIER_0 = ["woomera"].map(x => x + "_dreadsV2")
-					Class.woomera_dreadsV2.UPGRADES_TIER_0 = []
+		Class.sword_dreadsV2.UPGRADES_TIER_8.push("sling_dreadsV2")
+			Class.sling_dreadsV2.UPGRADES_TIER_10 = ["atlatl"].map(x => x + "_dreadsV2")
+				Class.atlatl_dreadsV2.UPGRADES_TIER_12 = ["woomera"].map(x => x + "_dreadsV2")
+					Class.woomera_dreadsV2.UPGRADES_TIER_16 = []
 
-	Class.dreadBody_dreadsV2.UPGRADES_TIER_0.splice(1, 0, "shower_dreadsV2")
-	Class.dreadBody_dreadsV2.UPGRADES_TIER_0.push("stomper_dreadsV2", "dropper_dreadsV2", "spotter_dreadsV2")
+	Class.dreadBody_dreadsV2.UPGRADES_TIER_6.splice(1, 0, "shower_dreadsV2")
+	Class.dreadBody_dreadsV2.UPGRADES_TIER_6.push("stomper_dreadsV2", "dropper_dreadsV2", "spotter_dreadsV2")
 
 		//Class.atmosphere_dreadsV2
 
-			Class.corona_dreadsV2.UPGRADES_TIER_0.push("siren_dreadsV2")
+			Class.corona_dreadsV2.UPGRADES_TIER_10.push("siren_dreadsV2")
 
-			Class.thermosphere_dreadsV2.UPGRADES_TIER_0.push("harpy_dreadsV2")
+			Class.thermosphere_dreadsV2.UPGRADES_TIER_10.push("harpy_dreadsV2")
 }
 
 const hexDreadNames = {
