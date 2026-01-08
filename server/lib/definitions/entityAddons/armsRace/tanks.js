@@ -2233,6 +2233,34 @@ Class.pentaseer_AR = {
         }
     })
 }
+Class.piercer_AR = {
+    PARENT: "genericTank",
+    LABEL: "Piercer",
+    DANGER: 7,
+    BODY: {
+        FOV: 1.2 * base.FOV
+    },
+    GUNS: [
+        ...weaponStack({
+            POSITION: {
+                LENGTH: 13,
+                WIDTH: 5,
+                ASPECT: 2.2,
+                X: 7
+            }
+        }, 3, {xPosOffset: 5}),
+        ...weaponStack({
+            POSITION: {
+                LENGTH: 21,
+                WIDTH: 8
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.marksman]),
+                TYPE: "bullet"
+            }
+        }, 3, {lengthOffset: 2, delayIncrement: 1/3})
+    ]
+}
 Class.pitcher_AR = {
     PARENT: "genericTank",
     LABEL: "Pitcher",
@@ -3386,11 +3414,30 @@ Class.antidote_AR = {
 }
 Class.assistant_AR = makeOver("single", "Assistant", preset.hybrid)
 Class.autoAccurator_AR = makeAuto("accurator")
+Class.autoArmsman_AR = makeAuto("armsman")
 Class.autoAtomizer_AR = makeAuto("atomizer")
-Class.autoBentDouble_AR = makeAuto("bentDouble", "Auto-Bent Double")
-Class.autoBentHybrid_AR = makeAuto("bentHybrid", "Auto-Bent Hybrid")
+Class.autoAuto4_AR = makeAuto("auto4")
+Class.autoAuto5_AR = makeAuto("auto5")
+Class.autoBarricade_AR = makeAuto("barricade")
+Class.autoBattery_AR = makeAuto("battery")
+Class.autoBentDouble_AR = makeAuto("bentDouble")
+Class.autoBentGunner_AR = makeAuto("bentGunner_AR")
+Class.autoBentHybrid_AR = makeAuto("bentHybrid")
+Class.autoBentMinigun_AR = makeAuto("bentMinigun_AR")
+Class.autoBlower_AR = makeAuto("blower")
+Class.autoBulwark_AR = makeAuto("bulwark")
+Class.autoBushwhacker_AR = makeAuto("bushwhacker")
+Class.autoButtbuttin_AR = makeAuto("buttbuttin")
+Class.autoCoalesce_AR = makeAuto("coalesce_AR")
+Class.autoCog_AR = makeAuto("cog_AR")
 Class.autoCoil_AR = makeAuto("coil")
+Class.autoCombo_AR = makeAuto("combo_AR")
+Class.autoCourser_AR = makeAuto("courser_AR")
+Class.autoCropDuster_AR = makeAuto("cropDuster")
+Class.autoCrossbow_AR = makeAuto("crossbow")
+Class.autoCyclone_AR = makeAuto("cyclone")
 Class.autoDeadeye_AR = makeAuto("deadeye")
+Class.autoDeathStar_AR = makeAuto("deathStar")
 Class.autoDefect_AR = makeAuto("defect_AR")
 Class.autoDirectorstorm_AR = makeAuto("directorstorm_AR", "Auto-Directorstorm", stormAuto_options)
 Class.autoDoubleArtillery_AR = makeAuto("doubleArtillery_AR")
@@ -3402,7 +3449,12 @@ Class.autoDoubleGunner_AR = makeAuto("doubleGunner_AR")
 Class.autoDoubleHelix_AR = makeAuto("doubleHelix_AR")
 Class.autoDoubleMinigun_AR = makeAuto("doubleMinigun_AR")
 Class.autoDoubleSprayer_AR = makeAuto("doubleSprayer_AR")
+Class.autoDual_AR = makeAuto("dual")
 Class.autoDuplicator_AR = makeAuto("duplicator")
+Class.autoEnforcer_AR = makeAuto("enforcer_AR")
+Class.autoEqualizer_AR = makeAuto("equalizer_AR")
+Class.autoExpeller_AR = makeAuto("expeller_AR")
+Class.autoFalcon_AR = makeAuto("falcon")
 Class.autoFaucet_AR = makeAuto("faucet_AR")
 Class.autoFlamethrower_AR = makeAuto("flamethrower")
 Class.autoFoamer_AR = makeAuto("foamer_AR")
@@ -3411,23 +3463,46 @@ Class.autoFork_AR = makeAuto("fork")
 Class.autoFrother_AR = makeAuto("frother_AR")
 Class.autoHalfNHalf_AR = makeAuto("halfNHalf")
 Class.autoHexaWhirl_AR = makeWhirlwind(makeAuto("hexaTank", "", whirlAuto_options), {label: "Auto-Hexa Whirl"})
-Class.autoHewnDouble_AR = makeAuto("hewnDouble", "Auto-Hewn Double")
+Class.autoHewnDouble_AR = makeAuto("hewnDouble")
+Class.autoHitman_AR = makeAuto("hitman_AR")
+Class.autoHutch_AR = makeAuto("hutch_AR")
 Class.autoIterator_AR = makeAuto("iterator")
+Class.autoMachineGunner_AR = makeAuto("machineGunner")
 Class.autoManager_AR = makeAuto("manager")
+Class.autoMegaHunter_AR = makeAuto("megaHunter_AR")
+Class.autoMingler_AR = makeAuto("mingler_AR")
+Class.autoMortar_AR = makeAuto("mortar")
 Class.autoMunition_AR = makeWhirlwind(makeAuto("artillery", "", whirlAuto_options), {label: "Auto-Munition"})
+Class.autoMusket_AR = makeAuto("musket")
+Class.autoNailgun_AR = makeAuto("nailgun")
 Class.autoNimrod_AR = makeAuto("nimrod")
+Class.autoOctoTank_AR = makeAuto("octoTank")
+Class.autoOrdnance_AR = makeAuto("ordnance")
 Class.autoOverdrive_AR = makeAuto("overdrive", "Auto-Overdrive", driveAuto_options)
 Class.autoOvergunner_AR = makeAuto("overgunner")
 Class.autoOvertrapper_AR = makeAuto("overtrapper")
+Class.autoPentaShot_AR = makeAuto("pentaShot")
 Class.autoPhoenix_AR = makeAuto("phoenix")
+Class.autoPoacher_AR = makeAuto("poacher")
+Class.autoPredator_AR = makeAuto("predator")
+Class.autoProber_AR = makeAuto("prober_AR")
 Class.autoProphet_AR = makeWhirlwind(makeAuto("underseer", "", whirlAuto_options), {label: "Auto-Prophet"})
 Class.autoQuadruplex_AR = makeAuto("quadruplex")
+Class.autoRailgun_AR = makeAuto("railgun_AR")
+Class.autoRanger_AR = makeAuto("ranger")
 Class.autoRedistributor_AR = makeAuto("redistributor")
 Class.autoRevolver_AR = makeAuto("revolver")
+Class.autoRimfire_AR = makeAuto("rimfire_AR")
 Class.autoShower_AR = makeAuto("shower_AR")
 Class.autoSingle_AR = makeAuto("single")
+Class.autoSniper3_AR = makeAuto("sniper3_AR")
 Class.autoSplasher_AR = makeAuto("splasher")
+Class.autoSplitShot_AR = makeAuto("splitShot_AR")
+Class.autoSpreadshot_AR = makeAuto("spreadshot")
+Class.autoStalker_AR = makeAuto("stalker")
 Class.autoStormer_AR = makeAuto("stormer_AR")
+Class.autoStreamliner_AR = makeAuto("streamliner")
+Class.autoSubverter_AR = makeAuto("subverter")
 Class.autoSuperSpiral_AR = makeAuto("superSpiral")
 Class.autoTriBlaster_AR = makeAuto("triBlaster")
 Class.autoTriple_AR = makeAuto("tripleTwin", "Auto-Triple")
@@ -3435,11 +3510,16 @@ Class.autoTripleMachine_AR = makeAuto("tripleMachine")
 Class.autoTriplet_AR = makeAuto("triplet")
 Class.autoTriplex_AR = makeAuto("triplex")
 Class.autoUnderdrive_AR = makeAuto("underdrive_AR", "Auto-Underdrive", driveAuto_options)
+Class.autoVolley_AR = makeAuto("volley_AR")
 Class.autoVortex_AR = makeWhirlwind(makeAuto("launcher", "", whirlAuto_options), {label: "Auto-Vortex"})
+Class.autoVulture_AR = makeAuto("vulture")
+Class.autoWaarrk_AR = makeAuto("waarrk_AR")
 Class.autoWarkwark_AR = makeAuto("warkwark_AR")
 Class.autoWhirl3_AR = makeWhirlwind(makeAuto("auto3", "", whirlAuto_options), {label: "Auto-Whirl-3"})
 Class.autoWhirlGuard_AR = makeWhirlwind(makeAuto("trapGuard", "", whirlAuto_options), {label: "Auto-Whirl Guard"})
+Class.autoWidget_AR = makeAuto("widget_AR")
 Class.autoXHunter_AR = makeAuto("xHunter")
+Class.autoZipper_AR = makeAuto("zipper_AR")
 Class.avian_AR = makeBird("single", "Avian")
 Class.bansheedrive_AR = makeDrive("banshee")
 Class.battledrive_AR = makeDrive("battleship", {...preset.driveSwarm, label: "Battledrive"})
@@ -3663,6 +3743,7 @@ Class.concentrator_AR = {
         }
     ]
 }
+Class.contriver_AR = makeOver("cog_AR", "Contriver", preset.hybrid)
 Class.coordinator_AR = {
     PARENT: "genericTank",
     LABEL: "Coordinator",
@@ -4549,6 +4630,7 @@ Class.guru_AR = {
         }
     ]
 }
+Class.harbinger_AR = makeOver("rimfire_AR", "Harbinger")
 Class.healer3_AR = {
     PARENT: "genericHealer",
     LABEL: "Healer-3",
@@ -4999,6 +5081,7 @@ Class.leader_AR = {
     ]
 }
 Class.managerdrive_AR = makeDrive("manager")
+Class.matchlock_AR = makeOver("musket", "Matchlock", preset.hybrid)
 Class.medicare_AR = {
     PARENT: "genericHealer",
     LABEL: "Medicare",
@@ -5169,6 +5252,7 @@ Class.ointment_AR = {
         }
     ]
 }
+Class.oracle_AR = makeOver("gunnerTrapper", "Oracle", preset.sideOver)
 Class.orifice_AR = {
     PARENT: "genericTank",
     LABEL: "Orifice",
@@ -5194,6 +5278,7 @@ Class.overmarksman_AR = makeOver("marksman")
 Class.overmach_AR = makeOver("machineTrapper_AR", "Overmach")
 Class.overmech_AR = makeOver("mech_AR")
 Class.overminigun_AR = makeOver("minigun")
+Class.overnailer_AR = makeOver("nailgun", "Overnailer")
 Class.overgunnerdrive_AR = makeDrive("overgunner")
 Class.overpen_AR = makeOver("pen_AR")
 Class.overrifle_AR = makeOver("rifle")
@@ -5559,6 +5644,7 @@ Class.ransacker_AR = {
         ...preset.trapGuard
     ]
 }
+Class.ravisher_AR = makeOver("dual", "Ravisher", preset.hybrid)
 Class.renovator_AR = {
     PARENT: "genericHealer",
     LABEL: "Renovator",
@@ -5586,6 +5672,7 @@ Class.renovator_AR = {
         }
     ]
 }
+Class.retainer_AR = makeOver("hutch_AR", "Retainer", preset.hybrid)
 Class.rotator_AR = makeOver("rotaryGun_AR", "Rotator", preset.hybrid)
 Class.scatterer_AR = {
     PARENT: "genericTank",
@@ -6008,6 +6095,7 @@ Class.therapist_AR = {
         }
     ], { delayIncrement: 0.5 })
 }
+Class.throttler_AR = makeOver("expeller_AR", "Throttler", preset.hybrid)
 Class.tommy_AR = {
     PARENT: "genericTank",
     LABEL: "Tommy",
@@ -6746,15 +6834,15 @@ Class.yHunter_AR = {
         },
         {
             POSITION: {
-                LENGTH: 10.5,
+                LENGTH: 3,
                 WIDTH: 11,
-                ASPECT: -1.95,
-                X: 7
+                ASPECT: -1.35,
+                X: 12.5
             }
         },
         {
             POSITION: {
-                LENGTH: 13.5,
+                LENGTH: 11.5,
                 WIDTH: 15
             }
         }
@@ -6816,38 +6904,40 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             //Class.cocci.UPGRADES_TIER_3 = ["megaCocci"].map(x => x + "_AR")
             //Class.banger_AR.UPGRADES_TIER_3 = ["megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"].map(x => x + "_AR")
             //Class.drifter_AR.UPGRADES_TIER_3 = ["buncher", "megaDrifter", "autoDrifter", "vessel", "cauldron", "sharper", "bundler"].map(x => x + "_AR")
-        Class.healer.UPGRADES_TIER_3 = ["nurse_AR", "medic", "psychiatrist_AR", "triHealer_AR", "soother_AR", "analyzer_AR", "scientist_AR", "recalibrator_AR"]
+        Class.healer.UPGRADES_TIER_3 = ["medic", "scientist_AR", "nurse_AR", "triHealer_AR", "analyzer_AR", "psychiatrist_AR", "soother_AR", "recalibrator_AR"]
             Class.healer.UPGRADES_TIER_3.push("physician_AR", "renovator_AR")
-            Class.nurse_AR.UPGRADES_TIER_3 = ["clinician_AR", "paramedic", "therapist_AR", "hexaHealer_AR", "geneticist_AR", "kraw_AR"]
-            Class.medic.UPGRADES_TIER_3 = ["intern", "injection", "actuary", "ointment"].map(x => x + "_AR")
-            Class.psychiatrist_AR.UPGRADES_TIER_3 = ["guru", "actuary", "therapist", "PLACEHOLDER_healerSprayer"/*, [DIESEL HEALER], [MACHTRAP HEALER]*/].map(x => x + "_AR")
-            Class.triHealer_AR.UPGRADES_TIER_3 = ["hexaHealer_AR", "ambulance", "healer3_AR", "professor_AR", "chemist_AR"]
-            Class.soother_AR.UPGRADES_TIER_3 = ["PLACEHOLDER_healerOverseer", "antidote", "PLACEHOLDER_healerUnderseer", "medicare", "sootherdrive", "doctor", "spiker"].map(x => x + "_AR")
-            Class.analyzer_AR.UPGRADES_TIER_3 = ["accountant_AR", "surgeon", "guru_AR", "clerk_AR"]
-            Class.scientist_AR.UPGRADES_TIER_3 = ["surgeon", "chemist_AR", "professor_AR", "scribble_AR"/*, [MECH HEALER], [MACHTRAP HEALER]*/, "kraw_AR"]
+            Class.medic.UPGRADES_TIER_3 = ["intern", "ointment", "injection", "actuary"].map(x => x + "_AR")
+            Class.scientist_AR.UPGRADES_TIER_3 = ["surgeon", "professor_AR", "chemist_AR", "scribble_AR"/*, [MECH HEALER], [MACHTRAP HEALER]*/, "kraw_AR"]
+            Class.nurse_AR.UPGRADES_TIER_3 = ["paramedic", "therapist_AR", "clinician_AR", "hexaHealer_AR", "geneticist_AR", "kraw_AR"]
+            Class.triHealer_AR.UPGRADES_TIER_3 = ["ambulance", "healer3_AR", "hexaHealer_AR", "chemist_AR", "professor_AR"]
+            Class.analyzer_AR.UPGRADES_TIER_3 = ["accountant_AR", "clerk_AR", "guru_AR", "surgeon"]
+            Class.psychiatrist_AR.UPGRADES_TIER_3 = ["therapist", "guru", "actuary", "PLACEHOLDER_healerSprayer"/*, [DIESEL HEALER], [MACHTRAP HEALER]*/].map(x => x + "_AR")
+            Class.soother_AR.UPGRADES_TIER_3 = ["doctor", "antidote", "medicare", "PLACEHOLDER_healerOverseer", "PLACEHOLDER_healerUnderseer", "sootherdrive", "spiker"].map(x => x + "_AR")
             Class.recalibrator_AR.UPGRADES_TIER_3 = ["geneticist"].map(x => x + "_AR")
 
     Class.twin.UPGRADES_TIER_2.push("wark_AR")
         Class.twin.UPGRADES_TIER_3.splice(1, 1) //remove bulwark
             Class.twin.UPGRADES_TIER_3.push("duo_AR")
+            Class.dual.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            Class.musket.UPGRADES_TIER_3 = [].map(x => x + "_AR")
         Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin_AR", "doubleGunner_AR", "doubleHelix_AR", "warkwark_AR")
             Class.doubleTwin.UPGRADES_TIER_3.push("doubleDual_AR", "doubleMusket_AR", "overdoubleTwin_AR")
-            Class.tripleTwin.UPGRADES_TIER_3 = ["quadTwin", "hewnTriple", "autoTriple", "bentTriple", "tripleFlankTwin", "tripleGunner", "tripleHelix", "warkwarkwark"].map(x => x + "_AR")
-            Class.hewnDouble.UPGRADES_TIER_3 = ["skewnDouble", "hewnTriple", "autoHewnDouble", "cleft", "hewnFlankDouble"/*, "hewnGunner", "hewnHelix"*/, "warkwawarkrk"].map(x => x + "_AR")
+            Class.tripleTwin.UPGRADES_TIER_3 = ["quadTwin", "autoTriple", "bentTriple", "hewnTriple", "tripleFlankTwin", "tripleGunner", "tripleHelix", "warkwarkwark"].map(x => x + "_AR")
+            Class.hewnDouble.UPGRADES_TIER_3 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble"/*, "hewnGunner", "hewnHelix"*/, "warkwawarkrk"].map(x => x + "_AR")
             Class.autoDouble.UPGRADES_TIER_3 = ["megaAutoDouble", "tripleAutoDouble", "autoTriple", "autoHewnDouble", "autoBentDouble", "autoDoubleFlank", "autoDoubleGunner", "autoDoubleHelix", "autoWarkwark"].map(x => x + "_AR")
             Class.bentDouble.UPGRADES_TIER_3 = ["bentTriple"/*, "flexedDouble"*/, "autoBentDouble", "doubleTriplet", "doubleTriplex", "cleft"/*, "doubleSpreadshot", "bentFlankDouble", "bentDoubleGunner", "bentDoubleMinigun", "splitDouble", "waarrkwaarrk"*/].map(x => x + "_AR")
-            Class.doubleFlankTwin_AR.UPGRADES_TIER_3 = ["quadTwin", "tripleFlankTwin", "hewnFlankDouble", "autoDoubleFlank", "doubleFlankHelix"].map(x => x + "_AR")
-            Class.doubleGunner_AR.UPGRADES_TIER_3 = ["tripleGunner", "autoDoubleGunner"].map(x => x + "_AR")
+            Class.doubleFlankTwin_AR.UPGRADES_TIER_3 = ["quadTwin", "tripleFlankTwin", "hewnFlankDouble", "autoDoubleFlank"/*, "bentFlankDouble", "doubleFlankGunner*/, "doubleFlankHelix"/*, "hipwatch", "scuffler", "warkwawawark"*/].map(x => x + "_AR")
+            Class.doubleGunner_AR.UPGRADES_TIER_3 = ["tripleGunner"/*, "hewnGunner"*/, "autoDoubleGunner"/*, "bentDoubleGunner", "doubleFlankGunner", "doubleNailgun", "doubleMachineGunner", "overdoubleGunner", "doubleBattery", "doubleRimfire", "doubleVolley", "doubleEqualizer"*/].map(x => x + "_AR")
             Class.doubleHelix_AR.UPGRADES_TIER_3 = ["tripleHelix"/*, "hewnHelix"*/, "autoDoubleHelix", "doubleTriplex", "doubleFlankHelix"].map(x => x + "_AR")
-            Class.warkwark_AR.UPGRADES_TIER_3 = ["warkwarkwark", "warkwawarkrk", "autoWarkwark"].map(x => x + "_AR")
+            Class.warkwark_AR.UPGRADES_TIER_3 = ["warkwarkwark", "warkwawarkrk", "autoWarkwark"/*, "waarrkwaarrk", "warkwawawark", "doubleEqualizer", "guardrail", "sealer", "setup"*/].map(x => x + "_AR")
         Class.tripleShot.UPGRADES_TIER_3.push("splitShot_AR", "autoTripleShot_AR", "bentGunner_AR", "bentMinigun_AR", "defect_AR", "waarrk_AR")
-            Class.pentaShot.UPGRADES_TIER_3 = ["flexedHybrid"].map(x => x + "_AR")
-            Class.spreadshot.UPGRADES_TIER_3 = ["bozo"].map(x => x + "_AR")
-            Class.bentHybrid.UPGRADES_TIER_3 = ["overshot", "flexedHybrid", "smearer", "triprid", "triprix", "splitHybrid", "autoBentHybrid", "spambrid", "junker", "bentCatcher"].map(x => x + "_AR")
+            Class.pentaShot.UPGRADES_TIER_3 = [/*"heptaShot", "flexedDouble", */"flexedHybrid", "quintuplet", "quintuplex"/*, "crackshot"*/, "autoPentaShot"/*, "flexedGunner", "flexedMinigun"*/, "deficiency"/*, "waarararrk"*/].map(x => x + "_AR")
+            Class.spreadshot.UPGRADES_TIER_3 = [/*"doubleSpreadshot", "*/"smearer", "autoSpreadshot"/*, "dauber", "ballista"*/, "bozo"/*, "fungus"*/].map(x => x + "_AR")
+            Class.bentHybrid.UPGRADES_TIER_3 = ["overshot"/*, "bentSynthesis", "hatcher", "bentHybriddrive", "bentCrossbreed"*/, "flexedHybrid", "smearer", "splitHybrid", "autoBentHybrid", "spambrid", "junker", "triprid", "triprix", "bentCatcher"].map(x => x + "_AR")
             //Class.bentDouble.UPGRADES_TIER_3
-            Class.triplet.UPGRADES_TIER_3 = ["quintuplet", "triprid", "doubleTriplet", "autoTriplet", "nitwit"].map(x => x + "_AR")
-            Class.triplex.UPGRADES_TIER_3 = ["triprix", "doubleTriplex", "autoTriplex", "nitwix"].map(x => x + "_AR")
-            Class.splitShot_AR.UPGRADES_TIER_3 = ["splitHybrid"].map(x => x + "_AR")
+            Class.triplet.UPGRADES_TIER_3 = ["quintuplet", "triprid", "doubleTriplet", "autoTriplet"/*, "lasher", "minilet"*/, "nitwit"/*, "warklet"*/].map(x => x + "_AR")
+            Class.triplex.UPGRADES_TIER_3 = ["quintuplex", "triprix", "doubleTriplex", "autoTriplex", "nitwix"].map(x => x + "_AR")
+            Class.splitShot_AR.UPGRADES_TIER_3 = [/*"slitShot", "crackshot", */"splitHybrid"/*, "splitDouble"*/, "autoSplitShot"/*, "hackshot"*/, "dork"/*, "splinterShot*/].map(x => x + "_AR")
             Class.autoTripleShot_AR.UPGRADES_TIER_3 = ["autoTriplex"].map(x => x + "_AR")
             Class.bentGunner_AR.UPGRADES_TIER_3 = ["spambrid"].map(x => x + "_AR")
             Class.bentMinigun_AR.UPGRADES_TIER_3 = ["junker"].map(x => x + "_AR")
@@ -6916,13 +7006,13 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             Class.xHunter.UPGRADES_TIER_3 = ["yHunter", "xPredator", "xPoacher", "xNimrod", "autoXHunter", "xCourser"].map(x => x + "_AR")
             Class.poacher.UPGRADES_TIER_3 = ["xPoacher", "nacho"].map(x => x + "_AR")
             Class.ordnance.UPGRADES_TIER_3 = [].map(x => x + "_AR")
-            Class.dual.UPGRADES_TIER_3 = [].map(x => x + "_AR")
+            //Class.dual.UPGRADES_TIER_3
             Class.nimrod.UPGRADES_TIER_3 = ["xNimrod", "nacho", "autoNimrod"].map(x => x + "_AR")
             Class.autoHunter_AR.UPGRADES_TIER_3 = ["autoXHunter", "autoNimrod"].map(x => x + "_AR")
             Class.megaHunter_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             Class.prober_AR.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             //Class.courser_AR.UPGRADES_TIER_3
-        Class.minigun.UPGRADES_TIER_3.push("zipper_AR", "bentMinigun_AR", "autoMinigun_AR", "widget_AR")
+        Class.minigun.UPGRADES_TIER_3.push("zipper_AR", "bentMinigun_AR", "autoMinigun_AR", "widget_AR", "piercer_AR")
             Class.streamliner.UPGRADES_TIER_3 = [].map(x => x + "_AR")
             //Class.nailgun.UPGRADES_TIER_3
             Class.cropDuster.UPGRADES_TIER_3 = [].map(x => x + "_AR")
@@ -6940,7 +7030,7 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             Class.autoRifle_AR.UPGRADES_TIER_3 = ["autoRevolver"].map(x => x + "_AR")
             //Class.enforcer_AR
             //Class.prober_AR
-        Class.marksman.UPGRADES_TIER_3.push("PLACEHOLDER_hybridMarksman_AR", "autoMarksman_AR")
+        Class.marksman.UPGRADES_TIER_3.push("piercer_AR", "PLACEHOLDER_hybridMarksman_AR", "autoMarksman_AR")
             //Class.deadeye.UPGRADES_TIER_3
             //Class.nimrod.UPGRADES_TIER_3
             //Class.revolver.UPGRADES_TIER_3
