@@ -2616,35 +2616,6 @@ Class.rimfire_AR = {
         }
     ]
 }
-Class.rocketeer_AR = {
-    PARENT: "genericTank",
-    LABEL: "Rocketeer",
-    DANGER: 7,
-    BODY: {
-        FOV: 1.15 * base.FOV
-    },
-    GUNS: [
-        {
-            POSITION: {
-                LENGTH: 19,
-                WIDTH: 7.73,
-                ASPECT: 1.5
-            },
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer]),
-                TYPE: "rocketeerMissile",
-                STAT_CALCULATOR: "sustained",
-            }
-        },
-        {
-            POSITION: {
-                LENGTH: 16,
-                WIDTH: 11,
-                ASPECT: -1.5
-            }
-        }
-    ]
-}
 Class.rotaryGun_AR = {
     PARENT: "genericTank",
     LABEL: "Rotary Gun",
@@ -7262,7 +7233,7 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
         Class.destroyer.UPGRADES_TIER_3.push("megaTrapper_AR", "queller_AR", "autoDestroyer_AR", "hurler_AR", "slinker_AR")
         Class.builder.UPGRADES_TIER_3.push("forger_AR", "stall_AR", "fashioner_AR", "charger_AR")
         //Class.artillery.UPGRADES_TIER_3
-        Class.launcher.UPGRADES_TIER_3.push("rocketeer_AR", "pitcher_AR", "cluster_AR", "projector_AR", "heaver_AR", "autoLauncher_AR", "hurler_AR", "inception_AR")
+        Class.launcher.UPGRADES_TIER_3.push("rocketeer", "pitcher_AR", "cluster_AR", "projector_AR", "heaver_AR", "autoLauncher_AR", "hurler_AR", "inception_AR")
             //UPGRADES_TIER_4 = ["shaver", "bazooka", "catapult", "myriad", "leviathan", "bulker", "bombard", "python", "claimant", "incline", "autoHurler", "mongrel", "bunger", "deliverer", "slingshot"].map(x => x + "_AR")
 
     Class.trapper.UPGRADES_TIER_2.push("pen_AR", "mech_AR", "machineTrapper_AR", "wark_AR")

@@ -93,7 +93,7 @@ module.exports = {
             id: "lx", // (<host>/#<id>)
 
             region: "Local", // The region the server is on.
-            gamemode: ["arms_race", "nexus"], // The selected gamemode.
+            gamemode: ["arms_race", "retrograde", "nexus"], // The selected gamemode.
             player_cap: 80, // Not including bots. Set to 0 to disable.
 
             featured: false, // Whether the server is featured or not.

@@ -961,7 +961,7 @@ Class.superSplitterBullet = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
-                    { size: 2.4, range: 0.1 },
+                    { size: 2.4, range: /*0.*/1 },
                     g.weak,
                 ]),
                 TYPE: ["splitterBullet", { PERSISTS_AFTER_DEATH: true }],
@@ -973,7 +973,7 @@ Class.superSplitterBullet = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
-                    { size: 2.4, range: 0.1 },
+                    { size: 2.4, range: /*0.*/1 },
                     g.weak,
                 ]),
                 TYPE: ["splitterBullet", { PERSISTS_AFTER_DEATH: true }],
@@ -985,7 +985,7 @@ Class.superSplitterBullet = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
-                    { size: 2.4, range: 0.1 },
+                    { size: 2.4, range: /*0.*/1 },
                     g.weak,
                 ]),
                 TYPE: ["splitterBullet", { PERSISTS_AFTER_DEATH: true }],
