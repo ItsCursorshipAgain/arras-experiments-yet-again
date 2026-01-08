@@ -6088,38 +6088,38 @@ Class.undercoverCop = {
     LABEL: "Undercover Cop",
     UPGRADE_COLOR: 20,
     UPGRADE_TOOLTIP: "WOOP WOOP! That's the sound of da police!",
-    TURRETS: [
+    PROPS: [
         {
+            TYPE: "hexagonBlue",
             POSITION: {
                 SIZE: 6,
                 Y: 8,
                 LAYER: 1
-            },
-            TYPE: "hexagonBlue"
+            }
         },
         {
+            TYPE: "hexagonRed",
             POSITION: {
                 SIZE: 6,
                 Y: -8,
                 LAYER: 1
-            },
-            TYPE: "hexagonRed"
+            }
         },
         {
+            TYPE: "squareBlue",
             POSITION: {
                 SIZE: 6,
                 Y: 3,
                 LAYER: 1
-            },
-            TYPE: "squareBlue"
+            }
         },
         {
+            TYPE: "squareRed",
             POSITION: {
                 SIZE: 6,
                 Y: -3,
                 LAYER: 1
-            },
-            TYPE: "squareRed"
+            }
         }
     ]
 }
