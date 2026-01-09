@@ -4319,7 +4319,6 @@ import * as socketStuff from "./socketinit.js";
                     // Extra
                     { id: "smoothCamera",           label: "Smooth Camera",         column: 0, row: 0, section: "extra", tooltip: "Make the camera follow your tank instead of being fixed at it." },
                     { id: "autoLevelUp",            label: "Auto-Level Up",         column: 0, row: 1, section: "extra", tooltip: "Automatically level you up to level 45 upon joining the game." },
-                    { id: "optUnscaledPanel",    label: "Unscaled Old Spawn Panel", column: 0, row: 2, section: "extra", tooltip: "Scale the original spawn panel to look the same regardless of display size." },
 
                     { id: "optFancy",               label: "Fading Animation",      column: 1, row: 0, section: "extra", tooltip: "Make dying entities fade out instead of shrinking until disappearing.\n" + "May slightly lower the frame rate." },
                     { id: "optIncognitoMode",       label: "Incognito Mode",        column: 1, row: 1, section: "extra", tooltip: "Hide you from the leaderboard and make your score appear low to other players." },

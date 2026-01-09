@@ -423,7 +423,6 @@ Class.PLACEHOLDER_autoHybridMarksman_AR = makeAuto("PLACEHOLDER_hybridMarksman_A
 Class.analyzer_AR = {
     PARENT: "genericHealer",
     LABEL: "Analyzer",
-    ...todo_placeholder_guns,
     GUNS: [
         {
             POSITION: {
@@ -437,6 +436,10 @@ Class.analyzer_AR = {
             POSITION: {
                 LENGTH: 18,
                 WIDTH: 13
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.healer]),
+                TYPE: "healerBullet"
             }
         }
     ]
@@ -2172,7 +2175,6 @@ Class.mosey_AR = {
 Class.nurse_AR = {
     PARENT: "genericHealer",
     LABEL: "Nurse",
-    ...todo_placeholder_guns,
     GUNS: weaponMirror([
         {
             POSITION: {
@@ -2188,6 +2190,10 @@ Class.nurse_AR = {
                 LENGTH: 18,
                 WIDTH: 9,
                 Y: 5.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.healer]),
+                TYPE: "healerBullet"
             }
         }
     ], {delayIncrement: 0.5})
@@ -3318,7 +3324,6 @@ Class.PLACEHOLDER_whirlSniper3_AR = makeWhirlwind("sniper3_AR", {label: ""})
 Class.accountant_AR = {
     PARENT: "genericHealer",
     LABEL: "Accountant",
-    ...todo_placeholder_guns,
     GUNS: [
         {
             POSITION: {
@@ -3332,6 +3337,10 @@ Class.accountant_AR = {
             POSITION: {
                 LENGTH: 18,
                 WIDTH: 15
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.healer]),
+                TYPE: "healerBullet"
             }
         }
     ]
@@ -3732,7 +3741,6 @@ Class.clerk_AR = {
 Class.clinician_AR = {
     PARENT: "genericHealer",
     LABEL: "Clinician",
-    ...todo_placeholder_guns,
     GUNS: weaponArray(weaponMirror([
         {
             POSITION: {
@@ -3748,6 +3756,10 @@ Class.clinician_AR = {
                 LENGTH: 18,
                 WIDTH: 9,
                 Y: 5.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin, g.healer]),
+                TYPE: "healerBullet"
             }
         }
     ], {delayIncrement: 0.5}), 2)
