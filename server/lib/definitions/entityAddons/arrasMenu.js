@@ -2,6 +2,9 @@ const {combineStats, makeHat, makeMenu} = require('../facilitators.js')
 const {base} = require('../constants.js')
 const g = require('../gunvals.js')
 
+Class.menu_addons.UPGRADES_TIER_0.push("arrasMenu")
+Class.arrasMenu = makeMenu("Arras Menus", {upgrades: ["arrasMenu_special", "arrasMenu_youtuber", "arrasMenu_retrograde"]})
+
 // Presets
 const healerMenuGuns = [
     {
@@ -110,6 +113,3 @@ Class.arrasMenu_youtuber = {
     ],
     UPGRADES_TIER_0: Class.arrasMenu_shinyMember.UPGRADES_TIER_0
 }
-
-// Push everything to addons
-Class.menu_addons.UPGRADES_TIER_0.push("arrasMenu_special", "arrasMenu_youtuber", "arrasMenu_retrograde")

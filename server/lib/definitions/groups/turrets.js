@@ -777,7 +777,7 @@ Class.autoSmasherTurret = makeTurret({
             TYPE: "bullet",
             STAT_CALCULATOR: "fixedReload",
         },
-    }, { delayIncrement: 0.5 })
+    }, {delayIncrement: 0.5})
 }, {label: "Turret", fov: 0.8, extraStats: []})
 Class.pillboxTurret = makeTurret({
     HAS_NO_RECOIL: true,
@@ -1519,7 +1519,7 @@ Class.warkTurret = makeTurret({
                 STAT_CALCULATOR: "trap"
             }
         },
-    ], { delayIncrement: 0.5 })
+    ], {delayIncrement: 0.5})
 }, {canRepel: true, limitFov: true, extraStats: []})
 Class.ullrLowerTurret = makeTurret({
     GUNS: weaponMirror([
@@ -1540,7 +1540,7 @@ Class.ullrLowerTurret = makeTurret({
         {
             POSITION: [11.5, 8, 1, 0, -5.5, 0, 0],
         },
-    ], { delayIncrement: 0.5 })
+    ], {delayIncrement: 0.5})
 }, {canRepel: true, limitFov: true, extraStats: []})
 Class.isisLowerTurret = makeTurret({
     GUNS: [
@@ -1659,7 +1659,7 @@ Class.bentBuilderTurret = makeTurret({
                 STAT_CALCULATOR: "block"
             }
         }
-    ], { delayIncrement: 0.5 }),
+    ], {delayIncrement: 0.5}),
 }, {canRepel: true, limitFov: true, extraStats: []})
 Class.volleyTurret = makeTurret({
     GUNS: [

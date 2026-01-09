@@ -584,7 +584,8 @@ if (!classic_3D_shapes) {
 
 Class.sphere = {
     PARENT: "food",
-    LABEL: "The Sphere",
+    LABEL: "Sphere",
+    NAME: "The Sphere",
     FACING_TYPE: "noFacing",
     VALUE: 1e7,
     SHAPE: 0,
@@ -625,7 +626,8 @@ Class.sphere = {
 }
 Class.cube = {
     PARENT: "food",
-    LABEL: "The Cube",
+    LABEL: "Cube",
+    NAME: "The Cube",
     VALUE: 2e7,
     SIZE: 10,
     COLOR: "egg",
@@ -644,7 +646,8 @@ Class.cube = {
 }
 Class.tetrahedron = {
     PARENT: "food",
-    LABEL: "The Tetrahedron",
+    LABEL: "Tetrahedron",
+    NAME: "The Tetrahedron",
     VALUE: 3e7,
     SIZE: 12,
     COLOR: "egg",
@@ -662,7 +665,8 @@ Class.tetrahedron = {
 }
 Class.octahedron = {
     PARENT: "food",
-    LABEL: "The Octahedron",
+    LABEL: "Octahedron",
+    NAME: "The Octahedron",
     VALUE: 4e7,
     SIZE: 13,
     COLOR: "egg",
@@ -680,7 +684,8 @@ Class.octahedron = {
 }
 Class.dodecahedron = {
     PARENT: "food",
-    LABEL: "The Dodecahedron",
+    LABEL: "Dodecahedron",
+    NAME: "The Dodecahedron",
     VALUE: 5e7,
     SIZE: 18,
     COLOR: "egg",
@@ -698,7 +703,8 @@ Class.dodecahedron = {
 }
 Class.icosahedron = {
     PARENT: "food",
-    LABEL: "The Icosahedron",
+    LABEL: "Icosahedron",
+    NAME: "The Icosahedron",
     VALUE: 1e8,
     SIZE: 20,
     COLOR: "egg",
@@ -718,7 +724,8 @@ Class.icosahedron = {
 // 4D
 Class.tesseract = {
     PARENT: "food",
-    LABEL: "The Tesseract",
+    LABEL: "Tesseract",
+    NAME: "The Tesseract",
     VALUE: 42e7,
     SIZE: 25,
     COLOR: "egg",
@@ -766,17 +773,17 @@ for (let [gemColor, name] of [
         }
     }
 
-    Class[name + "EggRelic"] = makeRelic("egg", 0.5, gem, 7);
-    Class[name + "SquareRelic"] = makeRelic("square", 1, gem);
-    Class[name + "TriangleRelic"] = makeRelic("triangle", 1.45, gem);
-    Class[name + "PentagonRelic"] = makeRelic("pentagon", -0.6, gem);
-    Class[name + "BetaPentagonRelic"] = makeRelic("betaPentagon", -0.6, gem);
-    Class[name + "AlphaPentagonRelic"] = makeRelic("alphaPentagon", -0.6, gem);
-    Class[name + "HexagonRelic"] = makeRelic("hexagon", -0.4, gem, undefined, 6.25);
-    Class[name + "Hexagon_oldRelic"] = makeRelic("hexagon_old", -0.4, gem, undefined, 6.25);
-    Class[name + "SeptagonRelic"] = makeRelic("septagon", -0.4, gem, undefined, 6.25);
-    Class[name + "OctagonRelic"] = makeRelic("octagon", -0.4, gem, undefined, 6.25);
-    Class[name + "NonagonRelic"] = makeRelic("nonagon", -0.4, gem, undefined, 6.25);
+    Class[name + "EggRelic"] = makeRelic("egg", 0.5, gem, 7)
+    Class[name + "SquareRelic"] = makeRelic("square", 1, gem)
+    Class[name + "TriangleRelic"] = makeRelic("triangle", 1.45, gem)
+    Class[name + "PentagonRelic"] = makeRelic("pentagon", -0.6, gem)
+    Class[name + "BetaPentagonRelic"] = makeRelic("betaPentagon", -0.6, gem)
+    Class[name + "AlphaPentagonRelic"] = makeRelic("alphaPentagon", -0.6, gem)
+    Class[name + "HexagonRelic"] = makeRelic("hexagon", -0.4, gem, undefined, 6.25)
+    Class[name + "Hexagon_oldRelic"] = makeRelic("hexagon_old", -0.4, gem, undefined, 6.25)
+    Class[name + "SeptagonRelic"] = makeRelic("septagon", -0.325, gem, undefined, 5.25)
+    Class[name + "OctagonRelic"] = makeRelic("octagon", -0.3, gem, undefined, 4.75)
+    Class[name + "NonagonRelic"] = makeRelic("nonagon", -0.25, gem, undefined, 4)
 }
 
 // Tiered Food

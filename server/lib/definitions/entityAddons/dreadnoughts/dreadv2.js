@@ -86,9 +86,6 @@ function combineBodyStats(...bodies) {
 	return output;
 }
 
-// Comment out the line below to enable this addon, uncomment it to disable this addon.
-//return console.log('--- Dreadnoughts v2 addon [dreadv2.js] is disabled. See lines 87-88 to enable it. ---');
-
 // Set the below variable to true to enable hex dreadnought building.
 const buildHexnoughts = true
 
@@ -853,7 +850,7 @@ Class.daemon_dreadsV2 = {
 				STAT_CALCULATOR: "trap"
 			}
 		}
-	], { delayIncrement: 0.5 }), 4)
+	], {delayIncrement: 0.5}), 4)
 }
 Class.enforcer_dreadsV2 = {
 	PARENT: "genericSquarenought",
@@ -956,7 +953,7 @@ Class.mediator_dreadsV2 = {
 			SHOOT_SETTINGS: combineStats([g.basic, g.twin, { health: 1.09, range: 0.9 }]),
 			TYPE: "bullet"
 		}
-	}, { delayIncrement: 0.5 }), 4)
+	}, {delayIncrement: 0.5}), 4)
 }
 Class.minotaur_dreadsV2 = {
 	PARENT: "genericSquarenought",
@@ -1379,7 +1376,7 @@ Class.blade_dreadsV2 = {
 				SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.twin, {speed: 1.09, maxSpeed: 1.09, health: 1.09, range: 0.65}]),
 				TYPE: "bullet"
 			}
-		}, { delayIncrement: 0.5 })
+		}, {delayIncrement: 0.5})
 	], 3)
 }
 Class.hydra_dreadsV2 = {
@@ -2600,110 +2597,102 @@ Class.dreadnought_dreadsV2.UPGRADES_TIER_0 = [
 Class.dreadWeapon_dreadsV2.UPGRADES_TIER_0 = ["sword", "pacifier", "peacekeeper", "invader", "centaur"].map(x => x + "_dreadsV2")
 */
 
-Class.menu_addons.UPGRADES_TIER_0.push("dreadnought_dreadsV2")
+Class.sword2_dreadsV2.UPGRADES_TIER_6 = ["sword"].map(x => x + "_dreadsV2")
+Class.pacifier2_dreadsV2.UPGRADES_TIER_6 = ["pacifier"].map(x => x + "_dreadsV2")
+Class.peacekeeper2_dreadsV2.UPGRADES_TIER_6 = ["peacekeeper"].map(x => x + "_dreadsV2")
+Class.invader2_dreadsV2.UPGRADES_TIER_6 = ["invader"].map(x => x + "_dreadsV2")
+Class.centaur2_dreadsV2.UPGRADES_TIER_6 = ["centaur"].map(x => x + "_dreadsV2")
 
-	Class.sword2_dreadsV2.UPGRADES_TIER_6 = ["sword"].map(x => x + "_dreadsV2")
-	Class.pacifier2_dreadsV2.UPGRADES_TIER_6 = ["pacifier"].map(x => x + "_dreadsV2")
-	Class.peacekeeper2_dreadsV2.UPGRADES_TIER_6 = ["peacekeeper"].map(x => x + "_dreadsV2")
-	Class.invader2_dreadsV2.UPGRADES_TIER_6 = ["invader"].map(x => x + "_dreadsV2")
-	Class.centaur2_dreadsV2.UPGRADES_TIER_6 = ["centaur"].map(x => x + "_dreadsV2")
+	Class.sword_dreadsV2.UPGRADES_TIER_8 = ["gladius", "sabre"].map(x => x + "_dreadsV2")
+		Class.gladius_dreadsV2.UPGRADES_TIER_10 = ["blade"].map(x => x + "_dreadsV2")
+			Class.blade_dreadsV2.UPGRADES_TIER_12 = ["rapier"].map(x => x + "_dreadsV2")
+				Class.rapier_dreadsV2.UPGRADES_TIER_16 = []
+		Class.sabre_dreadsV2.UPGRADES_TIER_10 = ["bayonet"].map(x => x + "_dreadsV2")
+			Class.bayonet_dreadsV2.UPGRADES_TIER_12 = ["javelin"].map(x => x + "_dreadsV2")
+				Class.javelin_dreadsV2.UPGRADES_TIER_16 = []
 
-		Class.sword_dreadsV2.UPGRADES_TIER_8 = ["gladius", "sabre"].map(x => x + "_dreadsV2")
-			Class.gladius_dreadsV2.UPGRADES_TIER_10 = ["blade"].map(x => x + "_dreadsV2")
-				Class.blade_dreadsV2.UPGRADES_TIER_12 = ["rapier"].map(x => x + "_dreadsV2")
-					Class.rapier_dreadsV2.UPGRADES_TIER_16 = []
-			Class.sabre_dreadsV2.UPGRADES_TIER_10 = ["bayonet"].map(x => x + "_dreadsV2")
-				Class.bayonet_dreadsV2.UPGRADES_TIER_12 = ["javelin"].map(x => x + "_dreadsV2")
-					Class.javelin_dreadsV2.UPGRADES_TIER_16 = []
+	Class.pacifier_dreadsV2.UPGRADES_TIER_8 = ["mediator", "negotiator"].map(x => x + "_dreadsV2")
+		Class.mediator_dreadsV2.UPGRADES_TIER_10 = ["mitigator"].map(x => x + "_dreadsV2")
+			Class.mitigator_dreadsV2.UPGRADES_TIER_12 = ["diplomat"].map(x => x + "_dreadsV2")
+				Class.diplomat_dreadsV2.UPGRADES_TIER_16 = []
+		Class.negotiator_dreadsV2.UPGRADES_TIER_10 = ["appeaser"].map(x => x + "_dreadsV2")
+			Class.appeaser_dreadsV2.UPGRADES_TIER_12 = ["arbitrator"].map(x => x + "_dreadsV2")
+				Class.arbitrator_dreadsV2.UPGRADES_TIER_16 = []
 
-		Class.pacifier_dreadsV2.UPGRADES_TIER_8 = ["mediator", "negotiator"].map(x => x + "_dreadsV2")
-			Class.mediator_dreadsV2.UPGRADES_TIER_10 = ["mitigator"].map(x => x + "_dreadsV2")
-				Class.mitigator_dreadsV2.UPGRADES_TIER_12 = ["diplomat"].map(x => x + "_dreadsV2")
-					Class.diplomat_dreadsV2.UPGRADES_TIER_16 = []
-			Class.negotiator_dreadsV2.UPGRADES_TIER_10 = ["appeaser"].map(x => x + "_dreadsV2")
-				Class.appeaser_dreadsV2.UPGRADES_TIER_12 = ["arbitrator"].map(x => x + "_dreadsV2")
-					Class.arbitrator_dreadsV2.UPGRADES_TIER_16 = []
+	Class.peacekeeper_dreadsV2.UPGRADES_TIER_8 = ["enforcer", "executor"].map(x => x + "_dreadsV2")
+		Class.enforcer_dreadsV2.UPGRADES_TIER_10 = ["suppressor"].map(x => x + "_dreadsV2")
+			Class.suppressor_dreadsV2.UPGRADES_TIER_12 = ["retardant"].map(x => x + "_dreadsV2")
+				Class.retardant_dreadsV2.UPGRADES_TIER_16 = []
+		Class.executor_dreadsV2.UPGRADES_TIER_10 = ["inhibitor"].map(x => x + "_dreadsV2")
+			Class.inhibitor_dreadsV2.UPGRADES_TIER_12 = ["tyrant"].map(x => x + "_dreadsV2")
+				Class.tyrant_dreadsV2.UPGRADES_TIER_16 = []
 
-		Class.peacekeeper_dreadsV2.UPGRADES_TIER_8 = ["enforcer", "executor"].map(x => x + "_dreadsV2")
-			Class.enforcer_dreadsV2.UPGRADES_TIER_10 = ["suppressor"].map(x => x + "_dreadsV2")
-				Class.suppressor_dreadsV2.UPGRADES_TIER_12 = ["retardant"].map(x => x + "_dreadsV2")
-					Class.retardant_dreadsV2.UPGRADES_TIER_16 = []
-			Class.executor_dreadsV2.UPGRADES_TIER_10 = ["inhibitor"].map(x => x + "_dreadsV2")
-				Class.inhibitor_dreadsV2.UPGRADES_TIER_12 = ["tyrant"].map(x => x + "_dreadsV2")
-					Class.tyrant_dreadsV2.UPGRADES_TIER_16 = []
+	Class.invader_dreadsV2.UPGRADES_TIER_8 = ["inquisitor", "assailant"].map(x => x + "_dreadsV2")
+		Class.inquisitor_dreadsV2.UPGRADES_TIER_10 = ["infiltrator"].map(x => x + "_dreadsV2")
+			Class.infiltrator_dreadsV2.UPGRADES_TIER_12 = ["raider"].map(x => x + "_dreadsV2")
+				Class.raider_dreadsV2.UPGRADES_TIER_16 = []
+		Class.assailant_dreadsV2.UPGRADES_TIER_10 = ["aggressor"].map(x => x + "_dreadsV2")
+			Class.aggressor_dreadsV2.UPGRADES_TIER_12 = ["gladiator"].map(x => x + "_dreadsV2")
+				Class.gladiator_dreadsV2.UPGRADES_TIER_16 = []
 
-		Class.invader_dreadsV2.UPGRADES_TIER_8 = ["inquisitor", "assailant"].map(x => x + "_dreadsV2")
-			Class.inquisitor_dreadsV2.UPGRADES_TIER_10 = ["infiltrator"].map(x => x + "_dreadsV2")
-				Class.infiltrator_dreadsV2.UPGRADES_TIER_12 = ["raider"].map(x => x + "_dreadsV2")
-					Class.raider_dreadsV2.UPGRADES_TIER_16 = []
-			Class.assailant_dreadsV2.UPGRADES_TIER_10 = ["aggressor"].map(x => x + "_dreadsV2")
-				Class.aggressor_dreadsV2.UPGRADES_TIER_12 = ["gladiator"].map(x => x + "_dreadsV2")
-					Class.gladiator_dreadsV2.UPGRADES_TIER_16 = []
+	Class.centaur_dreadsV2.UPGRADES_TIER_8 = ["daemon", "minotaur"].map(x => x + "_dreadsV2")
+		Class.daemon_dreadsV2.UPGRADES_TIER_10 = ["hydra"].map(x => x + "_dreadsV2")
+			Class.hydra_dreadsV2.UPGRADES_TIER_12 = ["cerberus"].map(x => x + "_dreadsV2")
+				Class.cerberus_dreadsV2.UPGRADES_TIER_16 = []
+		Class.minotaur_dreadsV2.UPGRADES_TIER_10 = ["beelzebub"].map(x => x + "_dreadsV2")
+			Class.beelzebub_dreadsV2.UPGRADES_TIER_12 = ["lucifer"].map(x => x + "_dreadsV2")
+				Class.lucifer_dreadsV2.UPGRADES_TIER_16 = []
 
-		Class.centaur_dreadsV2.UPGRADES_TIER_8 = ["daemon", "minotaur"].map(x => x + "_dreadsV2")
-			Class.daemon_dreadsV2.UPGRADES_TIER_10 = ["hydra"].map(x => x + "_dreadsV2")
-				Class.hydra_dreadsV2.UPGRADES_TIER_12 = ["cerberus"].map(x => x + "_dreadsV2")
-					Class.cerberus_dreadsV2.UPGRADES_TIER_16 = []
-			Class.minotaur_dreadsV2.UPGRADES_TIER_10 = ["beelzebub"].map(x => x + "_dreadsV2")
-				Class.beelzebub_dreadsV2.UPGRADES_TIER_12 = ["lucifer"].map(x => x + "_dreadsV2")
-					Class.lucifer_dreadsV2.UPGRADES_TIER_16 = []
+Class.dreadBody_dreadsV2.UPGRADES_TIER_6 = ["byte", "atmosphere", "juggernaut"].map(x => x + "_dreadsV2")
 
-	Class.dreadBody_dreadsV2.UPGRADES_TIER_6 = ["byte", "atmosphere", "juggernaut"].map(x => x + "_dreadsV2")
+	Class.byte_dreadsV2.UPGRADES_TIER_8 = ["automation", "kilobyte"].map(x => x + "_dreadsV2")
+		Class.automation_dreadsV2.UPGRADES_TIER_10 = ["mechanism", "fusion", "binary", "exosphere"].map(x => x + "_dreadsV2")
+			Class.mechanism_dreadsV2.UPGRADES_TIER_12 = ["skynet"].map(x => x + "_dreadsV2")
+				Class.skynet_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("skynet_dreadsV2")
+			Class.fusion_dreadsV2.UPGRADES_TIER_12 = ["supernova"].map(x => x + "_dreadsV2")
+				Class.supernova_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("supernova_dreadsV2")
+			Class.binary_dreadsV2.UPGRADES_TIER_12 = ["cipher"].map(x => x + "_dreadsV2")
+				Class.cipher_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("cipher_dreadsV2")
+			Class.exosphere_dreadsV2.UPGRADES_TIER_12 = ["interstellar"].map(x => x + "_dreadsV2")
+				Class.interstellar_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("interstellar_dreadsV2")
+		Class.kilobyte_dreadsV2.UPGRADES_TIER_10 = ["megabyte", "binary", "trojan", "hardware"].map(x => x + "_dreadsV2")
+			Class.megabyte_dreadsV2.UPGRADES_TIER_12 = ["gigabyte"].map(x => x + "_dreadsV2")
+				Class.gigabyte_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("gigabyte_dreadsV2")
+			//Class.binary_dreadsV2
+			Class.trojan_dreadsV2.UPGRADES_TIER_12 = ["malware"].map(x => x + "_dreadsV2")
+				Class.malware_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("malware_dreadsV2")
+			Class.hardware_dreadsV2.UPGRADES_TIER_12 = ["software"].map(x => x + "_dreadsV2")
+				Class.software_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("software_dreadsV2")
 
-		Class.byte_dreadsV2.UPGRADES_TIER_8 = ["automation", "kilobyte"].map(x => x + "_dreadsV2")
+	Class.atmosphere_dreadsV2.UPGRADES_TIER_8 = ["corona", "thermosphere"].map(x => x + "_dreadsV2")
+		Class.corona_dreadsV2.UPGRADES_TIER_10 = ["chromosphere", "fusion", "trojan", "planet"].map(x => x + "_dreadsV2")
+			Class.chromosphere_dreadsV2.UPGRADES_TIER_12 = ["photosphere"].map(x => x + "_dreadsV2")
+				Class.photosphere_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("photosphere_dreadsV2")
+			//Class.fusion_dreadsV2
+			//Class.trojan_dreadsV2
+			Class.planet_dreadsV2.UPGRADES_TIER_12 = ["astronomic"].map(x => x + "_dreadsV2")
+				Class.astronomic_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("astronomic_dreadsV2")
+		Class.thermosphere_dreadsV2.UPGRADES_TIER_10 = ["mesosphere", "exosphere", "hardware", "moon"].map(x => x + "_dreadsV2")
+			Class.mesosphere_dreadsV2.UPGRADES_TIER_12 = ["stratosphere"].map(x => x + "_dreadsV2")
+				Class.stratosphere_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("stratosphere_dreadsV2")
+			//Class.exosphere_dreadsV2
+			//Class.hardware_dreadsV2
+			Class.moon_dreadsV2.UPGRADES_TIER_12 = ["grandiose"].map(x => x + "_dreadsV2")
+				Class.grandiose_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("grandiose_dreadsV2")
 
-			Class.automation_dreadsV2.UPGRADES_TIER_10 = ["mechanism", "fusion", "binary", "exosphere"].map(x => x + "_dreadsV2")
-				Class.mechanism_dreadsV2.UPGRADES_TIER_12 = ["skynet"].map(x => x + "_dreadsV2")
-					Class.skynet_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("skynet_dreadsV2")
-				Class.fusion_dreadsV2.UPGRADES_TIER_12 = ["supernova"].map(x => x + "_dreadsV2")
-					Class.supernova_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("supernova_dreadsV2")
-				Class.binary_dreadsV2.UPGRADES_TIER_12 = ["cipher"].map(x => x + "_dreadsV2")
-					Class.cipher_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("cipher_dreadsV2")
-				Class.exosphere_dreadsV2.UPGRADES_TIER_12 = ["interstellar"].map(x => x + "_dreadsV2")
-					Class.interstellar_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("interstellar_dreadsV2")
-
-			Class.kilobyte_dreadsV2.UPGRADES_TIER_10 = ["megabyte", "binary", "trojan", "hardware"].map(x => x + "_dreadsV2")
-				Class.megabyte_dreadsV2.UPGRADES_TIER_12 = ["gigabyte"].map(x => x + "_dreadsV2")
-					Class.gigabyte_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("gigabyte_dreadsV2")
-				//Class.binary_dreadsV2
-				Class.trojan_dreadsV2.UPGRADES_TIER_12 = ["malware"].map(x => x + "_dreadsV2")
-					Class.malware_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("malware_dreadsV2")
-				Class.hardware_dreadsV2.UPGRADES_TIER_12 = ["software"].map(x => x + "_dreadsV2")
-					Class.software_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("software_dreadsV2")
-
-		Class.atmosphere_dreadsV2.UPGRADES_TIER_8 = ["corona", "thermosphere"].map(x => x + "_dreadsV2")
-
-			Class.corona_dreadsV2.UPGRADES_TIER_10 = ["chromosphere", "fusion", "trojan", "planet"].map(x => x + "_dreadsV2")
-				Class.chromosphere_dreadsV2.UPGRADES_TIER_12 = ["photosphere"].map(x => x + "_dreadsV2")
-					Class.photosphere_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("photosphere_dreadsV2")
-				//Class.fusion_dreadsV2
-				//Class.trojan_dreadsV2
-				Class.planet_dreadsV2.UPGRADES_TIER_12 = ["astronomic"].map(x => x + "_dreadsV2")
-					Class.astronomic_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("astronomic_dreadsV2")
-
-			Class.thermosphere_dreadsV2.UPGRADES_TIER_10 = ["mesosphere", "exosphere", "hardware", "moon"].map(x => x + "_dreadsV2")
-				Class.mesosphere_dreadsV2.UPGRADES_TIER_12 = ["stratosphere"].map(x => x + "_dreadsV2")
-					Class.stratosphere_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("stratosphere_dreadsV2")
-				//Class.exosphere_dreadsV2
-				//Class.hardware_dreadsV2
-				Class.moon_dreadsV2.UPGRADES_TIER_12 = ["grandiose"].map(x => x + "_dreadsV2")
-					Class.grandiose_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("grandiose_dreadsV2")
-
-		Class.juggernaut_dreadsV2.UPGRADES_TIER_8 = ["jumbo", "colossus"].map(x => x + "_dreadsV2")
-
-			Class.jumbo_dreadsV2.UPGRADES_TIER_10 = ["goliath", "planet", "moon"].map(x => x + "_dreadsV2")
-				Class.goliath_dreadsV2.UPGRADES_TIER_12 = ["behemoth"].map(x => x + "_dreadsV2")
-					Class.behemoth_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("behemoth_dreadsV2")
-				//Class.planet_dreadsV2
-				//Class.moon_dreadsV2
-
-			Class.colossus_dreadsV2.UPGRADES_TIER_10 = ["titan", "siren", "harpy"].map(x => x + "_dreadsV2")
-				Class.titan_dreadsV2.UPGRADES_TIER_12 = ["leviathan"].map(x => x + "_dreadsV2")
-					Class.leviathan_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("leviathan_dreadsV2")
-				Class.siren_dreadsV2.UPGRADES_TIER_12 = ["valrayvn"].map(x => x + "_dreadsV2")
-					Class.valrayvn_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("valrayvn_dreadsV2")
-				Class.harpy_dreadsV2.UPGRADES_TIER_12 = ["pegasus"].map(x => x + "_dreadsV2")
-					Class.pegasus_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("pegasus_dreadsV2")
+	Class.juggernaut_dreadsV2.UPGRADES_TIER_8 = ["jumbo", "colossus"].map(x => x + "_dreadsV2")
+		Class.jumbo_dreadsV2.UPGRADES_TIER_10 = ["goliath", "planet", "moon"].map(x => x + "_dreadsV2")
+			Class.goliath_dreadsV2.UPGRADES_TIER_12 = ["behemoth"].map(x => x + "_dreadsV2")
+				Class.behemoth_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("behemoth_dreadsV2")
+			//Class.planet_dreadsV2
+			//Class.moon_dreadsV2
+		Class.colossus_dreadsV2.UPGRADES_TIER_10 = ["titan", "siren", "harpy"].map(x => x + "_dreadsV2")
+			Class.titan_dreadsV2.UPGRADES_TIER_12 = ["leviathan"].map(x => x + "_dreadsV2")
+				Class.leviathan_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("leviathan_dreadsV2")
+			Class.siren_dreadsV2.UPGRADES_TIER_12 = ["valrayvn"].map(x => x + "_dreadsV2")
+				Class.valrayvn_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("valrayvn_dreadsV2")
+			Class.harpy_dreadsV2.UPGRADES_TIER_12 = ["pegasus"].map(x => x + "_dreadsV2")
+				Class.pegasus_dreadsV2.UPGRADES_TIER_16 = makeHexnoughtBodyV2("pegasus_dreadsV2")
 
 if (Config.arms_race) {
 	//console.log('[dreadv2.js]: Dreadnoughts v2 Arms Race addon enabled. Credit to Frostbyte.')

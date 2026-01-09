@@ -52,9 +52,6 @@ g.dreadv1Trap = {
 	size: 1.25,
 }
 
-// Comment out the line below to enable this addon, uncomment it to disable this addon.
-//return console.log('--- Dreadnoughts v1 addon [dreadv1.js] is disabled. See lines 32-33 to enable it. ---');
-
 // Set the below variable to true to enable the Medicare/Medicaid healing bodies.
 const enable_medicare_branch = true
 
@@ -646,15 +643,14 @@ if (Config.tier_cap < 10) {
 	tier2 = 0;
 }
 
-Class.menu_addons.UPGRADES_TIER_0.push("dreadnought_dreadsV1")
-	Class.dreadnought_dreadsV1[`UPGRADES_TIER_${tier1}`] = ["sword", "pacifier", "invader", "centaur"].map(x => x + "_dreadsV1")
-		Class.sword_dreadsV1.UPGRADES_TIER_M1 = ["sabre", "gladius"].map(x => x + "_dreadsV1")
-		Class.pacifier_dreadsV1.UPGRADES_TIER_M1 = ["appeaser", "peacekeeper", "diplomat"].map(x => x + "_dreadsV1")
-		Class.invader_dreadsV1.UPGRADES_TIER_M1 = ["inquisitor", "assailant", "infiltrator"].map(x => x + "_dreadsV1")
-		Class.centaur_dreadsV1.UPGRADES_TIER_M1 = ["cerberus", "minotaur", "siren"].map(x => x + "_dreadsV1")
-		Class.automation_dreadsV1.UPGRADES_TIER_M1 = ["mechanism"].map(x => x + "_dreadsV1")
-		Class.juggernaut_dreadsV1.UPGRADES_TIER_M1 = ["behemoth"].map(x => x + "_dreadsV1")
-		Class.medicare_dreadsV1.UPGRADES_TIER_M1 = ["medicaid"].map(x => x + "_dreadsV1")
+Class.dreadnought_dreadsV1[`UPGRADES_TIER_${tier1}`] = ["sword", "pacifier", "invader", "centaur"].map(x => x + "_dreadsV1")
+	Class.sword_dreadsV1.UPGRADES_TIER_M1 = ["sabre", "gladius"].map(x => x + "_dreadsV1")
+	Class.pacifier_dreadsV1.UPGRADES_TIER_M1 = ["appeaser", "peacekeeper", "diplomat"].map(x => x + "_dreadsV1")
+	Class.invader_dreadsV1.UPGRADES_TIER_M1 = ["inquisitor", "assailant", "infiltrator"].map(x => x + "_dreadsV1")
+	Class.centaur_dreadsV1.UPGRADES_TIER_M1 = ["cerberus", "minotaur", "siren"].map(x => x + "_dreadsV1")
+	Class.automation_dreadsV1.UPGRADES_TIER_M1 = ["mechanism"].map(x => x + "_dreadsV1")
+	Class.juggernaut_dreadsV1.UPGRADES_TIER_M1 = ["behemoth"].map(x => x + "_dreadsV1")
+	Class.medicare_dreadsV1.UPGRADES_TIER_M1 = ["medicaid"].map(x => x + "_dreadsV1")
 
 const t1Bodies = ["sword", "pacifier", "invader", "centaur", "medicare", "automation", "juggernaut"].map(x => x + "_dreadsV1")
 if (!enable_medicare_branch) {

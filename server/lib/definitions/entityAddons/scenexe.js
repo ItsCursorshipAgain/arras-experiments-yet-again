@@ -299,7 +299,7 @@ Class.scenexeTurretTurret = makeTurret({
                 SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, { recoil: 1.15 }, g.turret]),
                 TYPE: "bullet",
             },
-        }, { delayIncrement: 0.5 }),
+        }, {delayIncrement: 0.5}),
 }, {label: "Turret", fov: 0.8, extraStats: []})
 Class.scenexeArtilleryTurret = makeTurret({
     GUNS: [
@@ -424,7 +424,7 @@ Class.scenexeDuo = {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin]),
             TYPE: "bullet"
         }
-    }, { delayIncrement: 0.5 })
+    }, {delayIncrement: 0.5})
 }
 
 Class.scenexeFlank = {

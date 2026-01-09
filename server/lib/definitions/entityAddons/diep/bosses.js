@@ -59,5 +59,3 @@ Class.defender_diep = {
     }, 3),
     AI: { NO_LEAD: false },
 }
-
-Class.menu_addons.UPGRADES_TIER_0.push("guardian_diep", "defender_diep")

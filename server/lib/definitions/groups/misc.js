@@ -455,7 +455,7 @@ Class.sentinelSwarm = {
             TYPE: "swarm",
             STAT_CALCULATOR: "swarm",
         },
-    }, { delayIncrement: 0.5 })
+    }, {delayIncrement: 0.5})
 }
 Class.sentinelGun = makeAuto("sentry", "Sentinel", {
     type: "ultraAutoTankGun",
