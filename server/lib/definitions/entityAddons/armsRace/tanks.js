@@ -2034,18 +2034,32 @@ Class.megaHunter_AR = {
     PARENT: "genericTank",
     LABEL: "Mega Hunter",
     DANGER: 7,
-    ...todo_placeholder_guns,
+    BODY: {
+        SPEED: base.SPEED * 0.9,
+        FOV: base.FOV * 1.25
+    },
+    CONTROLLERS: ["zoom"],
+    TOOLTIP: "Hold right click to zoom.",
     GUNS: [
         {
             POSITION: {
                 LENGTH: 24,
                 WIDTH: 12
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.pounder, g.hunter, g.hunterSecondary]),
+                TYPE: "bullet"
             }
         },
         {
             POSITION: {
                 LENGTH: 21,
-                WIDTH: 15
+                WIDTH: 15,
+                DELAY: 0.25
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.pounder, g.hunter]),
+                TYPE: "bullet"
             }
         }
     ]
