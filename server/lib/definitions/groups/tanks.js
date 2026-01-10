@@ -5641,10 +5641,10 @@ Class.twister = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer, {speed: 0.6, reload: 4/3, shudder: 0.1}]),
                 TYPE: "spinmissile",
-                STAT_CALCULATOR: "sustained+lowspeed",
-            },
-        },
-    ],
+                STAT_CALCULATOR: "sustained+lowspeed"
+            }
+        }
+    ]
 }
 Class.typhoon = makeWhirlwind("genericTank", {hat: "decagonHat_spin", satellites: 10, label: "Typhoon", danger: 7})
 Class.typhoon_old = makeWhirlwind("genericTank", {dualLayer: true, hat: "circleHat", hatSize: 28, hatLayer: 0, hat2: "circleHat", hat2Size: 24, hat2Layer: 0, satellites: 6, satelliteType: "satellite_old", label: "Typhoon"})

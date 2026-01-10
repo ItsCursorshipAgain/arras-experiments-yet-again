@@ -269,7 +269,31 @@ Class.machineTripleTurret = {
     }, 3)
 }
 Class.launcherTurret = makeTurret('launcher', {canRepel: true, limitFov: true, extraStats: []})
+Class.eliteLauncherTurret = makeTurret('launcher', {canRepel: true, limitFov: true, extraStats: [], color: 'mirror'})
 Class.skimmerTurret = makeTurret('skimmer', {canRepel: true, limitFov: true, extraStats: [], color: 'mirror'})
+Class.hyperSkimmerTurret = makeTurret({
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 10,
+                WIDTH: 14,
+                ASPECT: -0.5,
+                X: 9
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 17,
+                WIDTH: 15
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer]),
+                TYPE: "hypermissile",
+                STAT_CALCULATOR: "sustained",
+            },
+        },
+    ],
+}, {canRepel: true, limitFov: true, extraStats: [], color: 'mirror'})
 Class.kronosSkimmerTurret = makeTurret({
     GUNS: [
         {
@@ -302,16 +326,26 @@ Class.twisterTurret = makeTurret('twister', {canRepel: true, limitFov: true, col
 Class.hyperTwisterTurret = makeTurret({
     GUNS: [
         {
-            POSITION: [10, 13, -0.5, 9, 0, 0, 0],
-        }, {
-            POSITION: [17, 14, -1.4, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer, { speed: 1.3, maxSpeed: 1.3 }, { reload: 4/3 }]),
-                TYPE: "hyperspinmissile",
-                STAT_CALCULATOR: "sustained",
-            },
+            POSITION: {
+                LENGTH: 10,
+                WIDTH: 13,
+                ASPECT: -0.5,
+                X: 9
+            }
         },
-    ],
+        {
+            POSITION: {
+                LENGTH: 17,
+                WIDTH: 14,
+                ASPECT: -1.4
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer, {speed: 0.6, reload: 4/3, shudder: 0.1}]),
+                TYPE: "hyperspinmissile",
+                STAT_CALCULATOR: "sustained+lowspeed"
+            }
+        }
+    ]
 }, {canRepel: true, limitFov: true, color: 'mirror', extraStats: []})
 Class.rocketeerTurret = makeTurret({
     PARENT: "genericTank",
@@ -342,6 +376,35 @@ Class.rocketeerTurret = makeTurret({
         }
     ]
 }, {canRepel: true, limitFov: true})
+Class.eliteRocketeerTurret = makeTurret({
+    PARENT: "genericTank",
+    LABEL: "Rocketeer",
+    DANGER: 7,
+    BODY: {
+        FOV: 1.15 * base.FOV
+    },
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 19,
+                WIDTH: 7.73,
+                ASPECT: 1.5
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer]),
+                TYPE: "rocketeerMissile",
+                STAT_CALCULATOR: "sustained",
+            }
+        },
+        {
+            POSITION: {
+                LENGTH: 16,
+                WIDTH: 11,
+                ASPECT: -1.5
+            }
+        }
+    ]
+}, {canRepel: true, limitFov: true, color: 'mirror'})
 Class.boomerTurret = makeTurret('boomer', {canRepel: true, limitFov: true, color: 'mirror', extraStats: []})
 Class.ultraBoomerTurret = makeTurret({
     GUNS: [
@@ -646,6 +709,7 @@ Class.juliusLowerTurret = makeTurret({
     ],
 }, {canRepel: true, limitFov: true, extraStats: []})
 Class.swarmerTurret = makeTurret('swarmer', {canRepel: true, limitFov: true, extraStats: []})
+Class.eliteSwarmerTurret = makeTurret('swarmer', {canRepel: true, limitFov: true, extraStats: [], color: "mirror"})
 Class.basicTurret = makeTurret({
     GUNS: [
         {

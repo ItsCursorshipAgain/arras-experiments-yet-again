@@ -1,7 +1,46 @@
-const {combineStats, weaponArray} = require('../../facilitators.js')
+const {combineStats, makeMenu, weaponArray} = require('../../facilitators.js')
 const {base} = require('../../constants.js')
 const g = require('../../gunvals.js')
 
+// Dev Menus
+Class.menu_elites = makeMenu("Elites", {upgrades: [
+    "eliteLauncher",
+    "eliteTwister",
+    "eliteSkimmer",
+    "eliteSwarmer",
+    "eliteRocketeer",
+    "menu_eliteCrashers",
+], color: "triangle", boxColor: "triangle", shape: 3.5})
+
+Class.menu_eliteCrashers = makeMenu("Elite Crashers", {upgrades: [
+    "eliteDestroyer",
+    "eliteGunner",
+    "eliteSprayer",
+    "eliteBattleship",
+    "eliteSpawner",
+    "eliteTrapGuard",
+    "eliteSpinner",
+    "menu_legions",
+    "menu_deltas",
+], color: "pink", boxColor: "pink", shape: 3.5})
+
+Class.menu_legions = makeMenu("Crasher Legions", {upgrades: [
+    "destroyerLegion",
+    "gunnerLegion",
+    "sprayerLegion",
+    "battleshipLegion",
+    "spawnerLegion",
+    "legionaryCrasher",
+], color: "pink", boxColor: "pink", boxLabel: "Legions", shape: 3.5})
+
+Class.menu_deltas = makeMenu("Delta Crashers", {upgrades: [
+    "deltaDestroyer",
+    "deltaGunner",
+    "deltaSprayer",
+    "deltaBattleship",
+], color: "pink", boxColor: "pink", boxLabel: "Deltas", shape: 3.5})
+
+// Basic Elites
 Class.elite = {
     PARENT: "miniboss",
     LABEL: "Elite Crasher",
@@ -18,6 +57,72 @@ Class.elite = {
         REGEN: 0.5 * base.REGEN,
     },
 }
+Class.eliteLauncher = {
+    PARENT: "elite",
+    LABEL: "Elite Launcher",
+    NAME: "Elite Launcher",
+    DISPLAY_NAME: false,
+    COLOR: "egg",
+    UPGRADE_COLOR: "egg",
+    SHAPE: 0,
+    TURRETS: weaponArray({
+        TYPE: "eliteLauncherTurret",
+        POSITION: [15, 5, 0, 0, 240, 0]
+    }, 2)
+}
+Class.eliteTwister = {
+    PARENT: "elite",
+    LABEL: "Elite Twister",
+    NAME: "Elite Twister",
+    DISPLAY_NAME: false,
+    COLOR: "square",
+    UPGRADE_COLOR: "square",
+    SHAPE: 4,
+    TURRETS: weaponArray({
+        TYPE: "hyperTwisterTurret",
+        POSITION: [15, 5, 0, 0, 170, 0]
+    }, 4)
+}
+Class.eliteSkimmer = {
+    PARENT: "elite",
+    LABEL: "Elite Skimmer",
+    NAME: "Elite Skimmer",
+    DISPLAY_NAME: false,
+    COLOR: "triangle",
+    UPGRADE_COLOR: "triangle",
+    TURRETS: weaponArray({
+        TYPE: "hyperSkimmerTurret",
+        POSITION: [15, 5, 0, 60, 170, 0]
+    }, 3)
+}
+Class.eliteSwarmer = {
+    PARENT: "elite",
+    LABEL: "Elite Swarmer",
+    NAME: "Elite Swarmer",
+    DISPLAY_NAME: false,
+    COLOR: "pentagon",
+    UPGRADE_COLOR: "pentagon",
+    SHAPE: 5,
+    TURRETS: weaponArray({
+        TYPE: "eliteSwarmerTurret",
+        POSITION: [15, 5, 0, 36, 170, 0]
+    }, 5)
+}
+Class.eliteRocketeer = {
+    PARENT: "elite",
+    LABEL: "Elite Rocketeer",
+    NAME: "Elite Rocketeer",
+    DISPLAY_NAME: false,
+    COLOR: "hexagon",
+    UPGRADE_COLOR: "hexagon",
+    SHAPE: 6,
+    TURRETS: weaponArray({
+        TYPE: "eliteRocketeerTurret",
+        POSITION: [14, 5, 0, 0, 170, 0]
+    }, 6)
+}
+
+// Elite Crashers
 Class.eliteDestroyer = {
     PARENT: "elite",
     UPGRADE_LABEL: "Elite Destroyer",
@@ -278,18 +383,6 @@ Class.eliteSpinner = {
             TYPE: ["eliteSpinnerCyclone", {COLOR: -1}],
         },
     ],
-}
-Class.eliteSkimmer = {
-    PARENT: "elite",
-    LABEL: "Elite Skimmer",
-    NAME: "Elite Skimmer",
-    DISPLAY_NAME: false,
-    COLOR: "orange",
-    UPGRADE_COLOR: "orange",
-    TURRETS: weaponArray({
-        TYPE: "skimmerTurret",
-        POSITION: [15, 5, 0, 60, 170, 0]
-    }, 3)
 }
 
 // Deltas (moving to Arms Race addon later)

@@ -145,69 +145,69 @@ Class.guillotine = {
     TURRETS: [
         {
             POSITION: {
-                SIZE: 2.0000000298023224,
+                SIZE: 2,
                 X: 35,
                 LAYER: 1
             },
-            TYPE: "genericEntity"
-        }
-    ],
-    ON: [ // todo: fix this crap
-        {
-            event: "fire",
-            handler: ({ body }) => {
-                if (body == null) return;
-                let target = {
-                    x: body.x + body.control.target.x,
-                    y: body.y + body.control.target.y
-                };
-                let selected = null;
-                for (let entity of entities) {
-                    if (((entity.x - target.x) ** 2 + (entity.y - target.y) ** 2) < entity.size ** 2) {
-                        selected = entity;
-                        break;
-                    }
-                }
-                if (selected) {
-                    body.store.guillotineSelection = selected;
-                    body.socket.talk("m", `Selected ${selected.name ? `${selected.name}'s` : "an unnamed"} ${selected.label} (ID #${selected.id}). Score: ${Math.floor(selected.skill.score)}; Build: ${selected.skill.raw.join("/")};`);
-                } else {
-                    delete body.store.guillotineSelection;
-                    body.socket.talk("m", "Cleared selection.");
-                }
-            }
-        },
-        {
-            event: "altFire",
-            handler: ({ body }) => {
-                body.x = body.x + body.control.target.x
-                body.y = body.y + body.control.target.y
-            }
-        },
-        {
-            event: "action",
-            handler: ({ body }) => {
-                if (body == null) return;
-                    if (body.store.guillotineSelection && !body.store.guillotineSelection.isDead()) {
-                    body.store.guillotineSelection.kill();
-                    body.socket.talk("m", "Killed selection!");
-                } else body.socket.talk("m", "Nothing was selected!");
-            }
+            TYPE: ["circleHat", {COLOR: "grey"}]
         }
     ]
 }
 Class.banHammer = {
-    PARENT: "spectator",
+    PARENT: "genericTank",
     LABEL: "Ban Hammer",
+    ALPHA: 0,
+    CAN_BE_ON_LEADERBOARD: false,
     CAN_GO_OUTSIDE_ROOM: true,
+    ACCEPTS_SCORE: false,
+    DRAW_HEALTH: false,
+    HITS_OWN_TYPE: "never",
+    IGNORED_BY_AI: true,
+    ARENA_CLOSER: true,
+    IS_IMMUNE_TO_TILES: true,
+    CAN_SEE_INVISIBLE_ENTITIES: true,
     TOOLTIP: "Use left click to inspect and right click to teleport. Press F to ban the selected player.",
+    SKILL_CAP: [0, 0, 0, 0, 0, 0, 0, 0, 0, 255],
+    BODY: {
+        PUSHABILITY: 0,
+        SPEED: 5,
+        FOV: 2.5,
+        DAMAGE: 0,
+        HEALTH: 1e100,
+        SHIELD: 1e100,
+        REGEN: 1e100,
+    },
     GUNS: [
         {POSITION: [30, 7, 1.3, 0, 0, 0, 0]},
         {POSITION: [3, 11, 0.75, 7.5, -36, 90, 0]},
         {POSITION: [3, 11, 0.75, 7.5, 36, -90, 0]},
         {POSITION: [11, 14, 1, 30.5, 0, 0, 0]},
         {POSITION: [13, 10.5, -1.2, 0, 0, 0, 0]},
-    ]
+        /*{
+            POSITION: [0,0,0,0,0,0,0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, {reload: 0.25}, g.fake]),
+                TYPE: "bullet",
+                ALPHA: 0
+            }
+        },*/
+        {
+            POSITION: [0, 0, 0, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, {reload: 0.2}, g.fake]),
+                TYPE: "bullet",
+                ALPHA: 0,
+                ALT_FIRE: true
+            }
+        }
+    ],
+    ON: [{
+        event: "altFire",
+        handler: ({ body }) => {
+            body.x = body.x + body.control.target.x
+            body.y = body.y + body.control.target.y
+        }
+    }]
 }
 
 // Tank Menu(s)
@@ -226,8 +226,7 @@ Class.menu_tanks = makeMenu("Tanks", {upgrades: [Config.spawn_class, "menu_unuse
     Class.menu_fun = makeMenu("Fun", {upgrades: ["alas"/*, "average4tdmScore", "averageL39Hunt", "beeman"*/, "bigBalls", "cxATMG", "damoclone", "fat456", "heptaAutoBasic", "machineShot", "meDoingYourMom", "meOnMyWayToDoYourMom", "protector"/*, "quadCyclone"*/, "rapture", "riptide"/*, "schoolShooter", "smasher3"*/, "tetraGunner"/*, "theAmalgamation", "theConglomerate"*/, "tracker3", "undercoverCop", "wifeBeater", "worstTank"], tooltip: "Tanks that, let's be honest, aren't used for a good reason.\n" + "DISCLAIMER: Some of the content in here may be in poor taste. Blame the arras.io devs, not us."})
 Class.menu_bosses = makeMenu("Bosses", {upgrades: ["sentries", "elites", "mysticals", "nesters", "rogues", "rammers", "terrestrials", "celestials", "eternals", "devBosses"].map(x => "menu_" + x), rerootTree: "menu_bosses"})
     Class.menu_sentries = makeMenu("Sentries", {upgrades: ["sentrySwarm", "sentryGun", "sentryTrap", "sentinelSwarm", "sentinelGun", "sentinelTrap", "shinySentrySwarm", "shinySentryGun", "shinySentryTrap", "sentinelMinigun", "sentinelLauncher", "sentinelCrossbow"], color: "pink", boxColor: "pink", shape: 3.5, props: [{POSITION: [12, 0, 0, 0, 360, 1], TYPE: ["circleHat", {COLOR: "grey"}]}]})
-    Class.menu_elites = makeMenu("Elites", {upgrades: ["eliteDestroyer", "eliteGunner", "eliteSprayer", "eliteBattleship", "eliteSpawner", "eliteTrapGuard", "eliteSpinner", "eliteSkimmer", "legionaryCrasher", "sprayerLegion", "menu_deltas"], color: "pink", boxColor: "pink", shape: 3.5})
-        Class.menu_deltas = makeMenu("Deltas", {upgrades: ["Destroyer", "Gunner", "Sprayer", "Battleship"].map(x => "delta" + x), color: "pink", boxColor: "pink", shape: 3})
+
     Class.menu_mysticals = makeMenu("Mysticals", {upgrades: ["sorcerer", "summoner", "enchantress", "exorcistor", "shaman", "sangoma", "preacher", "herbalist", "witch"], color: "gold", boxColor: "gold", shape: 4})
     Class.menu_nesters = makeMenu("Nesters", {upgrades: ["nestKeeper", "nestWarden", "nestGuardian", "nestCurator", "nestDeacon", "nestChampion"], color: "purple", boxColor: "purple", shape: 5.5})
     Class.menu_rogues = makeMenu("Rogues", {upgrades: ["roguePalisade", "rogueArmada", "julius", "genghis", "napoleon"], color: "darkGrey", boxColor: "darkGrey", shape: 6})

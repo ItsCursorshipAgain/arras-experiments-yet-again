@@ -7051,6 +7051,11 @@ const quickMake = (type, options = {}) => {
     name = ensureIsClass(type)
     label = name.LABEL
     classLabel = label.replaceAll(' ', '').replaceAll('-', '').replaceAll("'n", 'N') // delete whitespaces and hyphens + special case for halfnhalf
+    if (options.bird) {
+        let birdLabel = options.bird
+        let birdClassLabel = birdLabel.charAt(0).toLowerCase() + birdLabel.slice(1).replaceAll(' ', '').replaceAll('-', '')
+        Class[birdClassLabel + "_AR"] = makeBird(type, birdLabel)
+    }
     if (options.hybrid) {
         let hybridLabel = options.hybrid ??= `Hybrid ${label}`
         let hybridClassLabel = hybridLabel.charAt(0).toLowerCase() + hybridLabel.slice(1).replaceAll(' ', '').replaceAll('-', '')
@@ -7081,7 +7086,7 @@ quickMake("bentMinigun_AR", {hybrid: "Junker"})
 quickMake("blaster", {over: "Overblaster"})
 quickMake("builder", {hybrid: "Fashioner", over: "Overbuilder"})
 quickMake("cog_AR", {hybrid: "Contriver"})
-quickMake("destroyer", {over: "Overdestroyer"})
+quickMake("destroyer", {bird: "Harrier", over: "Overdestroyer"})
 quickMake("diesel_AR", {hybrid: "Polluter", over: "Overdiesel"})
 quickMake("dual", {hybrid: "Ravisher"})
 quickMake("expeller_AR", {hybrid: "Throttler"})
@@ -7094,11 +7099,13 @@ quickMake("machineTrapper_AR", {hybrid: "Deviation", over: "Overmach"})
 quickMake("marksman", {hybrid: "Hybrid Marksman", over: "Overmarksman"})
 quickMake("minigun", {over: "Overminigun"})
 quickMake("mech_AR", {hybrid: "Cobbler", over: "Overmech"})
+quickMake("megaTrapper_AR", {bird: "Shoebill"})
 quickMake("musket", {hybrid: "Matchlock"})
 quickMake("nailgun", {over: "Overnailer"})
 quickMake("nimrod", {hybrid: "Nacho"})
 quickMake("pen_AR", {hybrid: "Interner", over: "Overpen"})
 quickMake("pentaShot", {hybrid: "Flexed Hybrid"})
+quickMake("railgun_AR", {bird: "Raven"})
 quickMake("rifle", {over: "Overrifle"})
 quickMake("rotaryGun_AR", {hybrid: "Rotator"})
 quickMake("single", {hybrid: "Assistant"})
@@ -7114,7 +7121,7 @@ quickMake("waarrk_AR", {hybrid: "Bent Catcher"})
 quickMake("wark_AR", {hybrid: "Coalesce", over: "Overwark"})
 quickMake("xHunter", {hybrid: "X-Poacher"})
 
-quickMakeAuto(["accurator", "armsman", "artillery", "assassin", "atomizer", "auto3", "auto4", "auto5", "barricade", "battery", "bentDouble", "bentGunner_AR", "bentHybrid", "bentMinigun_AR", "blaster", "blower", "builder", "bulwark", "bushwhacker", "buttbuttin", "coalesce_AR", "cog_AR", "coil", "combo_AR", "courser_AR", "cropDuster", "crossbow", "cruiser", "cyclone", "deadeye", "deathStar", "defect_AR", "destroyer", "diesel_AR", "doper_AR", "doubleArtillery_AR", "doubleBlaster_AR", "doubleDiesel_AR", "doubleGatling_AR", "doubleGunner_AR", "doubleHelix_AR", "doubleMachine", "doubleMinigun_AR", "doubleSprayer_AR", "dual", "duplicator", "enforcer_AR", "equalizer_AR", "expeller_AR", "falcon", "faucet_AR", "flamethrower", "foamer_AR", "focal", "fork", "frother_AR", "gatlingGun", "gunner", "gunnerTrapper", "halfNHalf", "helix", "hewnDouble", "hexaTank", "hitman_AR", "honcho_AR", "hunter", "hutch_AR", "hybridMarksman_AR", "iterator", "launcher", "machineGunner", "machineTrapper_AR", "marksman", "manager", "mech_AR", "megaHunter_AR", "minigun", "mingler_AR", "mortar", "musket", "nailgun", "nimrod", "octoTank", "ordnance", "overlord", "overgunner", "overseer", "overtrapper", "pen_AR", "pentaShot", "phoenix", "poacher", "predator", "prober_AR", "quadruplex", "railgun_AR", "ranger", "redistributor", "repeater", "revolver", "rifle", "rimfire_AR", "shower_AR", "single", "sniper3_AR", "spawner", "spiral", "splasher", "splitShot_AR", "sprayer", "spreadshot", "stalker", "stormer_AR", "streamliner", "subverter", "superSpiral", "trapGuard", "triAngle", "triBlaster", "tripleMachine", "tripleShot", "triplet", "triplex", "underseer", "volley_AR", "volute", "vulture", "waarrk_AR", "wark_AR", "warkwark_AR", "widget_AR", "xHunter", "zipper_AR"])
+quickMakeAuto(["accurator", "armsman", "artillery", "assassin", "atomizer", "auto3", "auto4", "auto5", "barricade", "battery", "bentDouble", "bentGunner_AR", "bentHybrid", "bentMinigun_AR", "blaster", "blower", "bomber", "booster", "builder", "bulwark", "bushwhacker", "buttbuttin", "coalesce_AR", "cockatiel_AR", "cog_AR", "coil", "combo_AR", "courser_AR", "cropDuster", "crossbow", "cruiser", "cyclone", "deadeye", "deathStar", "defect_AR", "destroyer", "diesel_AR", "doper_AR", "doubleArtillery_AR", "doubleBlaster_AR", "doubleDiesel_AR", "doubleGatling_AR", "doubleGunner_AR", "doubleHelix_AR", "doubleMachine", "doubleMinigun_AR", "doubleSprayer_AR", "dual", "duplicator", "eagle", "enforcer_AR", "equalizer_AR", "expeller_AR", "falcon", "faucet_AR", "fighter", "flamethrower", "foamer_AR", "focal", "fork", "frother_AR", "gatlingGun", "gunner", "gunnerTrapper", "halfNHalf", "helix", "hewnDouble", "hexaTank", "hitman_AR", "honcho_AR", "hunter", "hutch_AR", "hybridMarksman_AR", "integrator_AR", "iterator", "launcher", "machineGunner", "machineTrapper_AR", "marksman", "manager", "mech_AR", "megaHunter_AR", "minigun", "mingler_AR", "mortar", "musket", "nailgun", "nimrod", "octoTank", "ordnance", "overlord", "overgunner", "overseer", "overtrapper", "pen_AR", "pentaShot", "phoenix", "poacher", "predator", "prober_AR", "quadAngle_AR", "quadruplex", "railgun_AR", "ranger", "redistributor", "repeater", "revolver", "rifle", "rimfire_AR", "shower_AR", "single", "sniper3_AR", "spawner", "spiral", "splasher", "splitShot_AR", "sprayer", "spreadshot", "stalker", "stormer_AR", "streamliner", "subverter", "superSpiral", "surfer", "trapGuard", "triAngle", "triBlaster", "tripleMachine", "tripleShot", "triplet", "triplex", "underseer", "volley_AR", "volute", "vulture", "waarrk_AR", "wark_AR", "warkwark_AR", "widget_AR", "xHunter", "zipper_AR"])
 
 // UNSORTED
 Class.schwartz_AR = makeWhirlwind("force_AR", {label: "Schwartz"})
@@ -7230,10 +7237,11 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
     //Class.sniper.UPGRADES_TIER_2
         Class.sniper.UPGRADES_TIER_3.push("railgun_AR")
             Class.sniper.UPGRADES_TIER_4 = ["sharpshooter"].map(x => x + "_AR")
+            Class.railgun_AR.UPGRADES_TIER_4 = ["raven"].map(x => x + "_AR")
         Class.assassin.UPGRADES_TIER_3.push("hitman_AR", "sniper3_AR", "enforcer_AR", "courser_AR")
             Class.ranger.UPGRADES_TIER_4 = ["mono"].map(x => x + "_AR")
             Class.stalker.UPGRADES_TIER_4 = ["spy"].map(x => x + "_AR")
-            Class.falcon.UPGRADES_TIER_4 = ["avian"].map(x => x + "_AR")
+            Class.falcon.UPGRADES_TIER_4 = ["avian", "autoFalcon"].map(x => x + "_AR")
             Class.autoAssassin.UPGRADES_TIER_4 = ["megaAutoAssassin", "tripleAutoAssassin", "autoSingle", "autoDeadeye"].map(x => x + "_AR")
             Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker"/*, [DESMOS SINGLE]*/, "mono", "avian", "assistant", "autoSingle", "spy", "cyclops", "orifice", "pistol", "subduer"].map(x => x + "_AR") // custodian is overtiered garbage :fire:
                 //Class.ternion.UPGRADES_TIER_5 = ["custodian"].map(x => x + "_AR")
@@ -7333,19 +7341,20 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             Class.flankGuard.UPGRADES_TIER_4 = ["ternion"].map(x => x + "_AR")
         //Class.hexaTank.UPGRADES_TIER_3
         Class.triAngle.UPGRADES_TIER_3.push("cockatiel_AR", "integrator_AR", "defect_AR", "quadAngle_AR")
-            Class.fighter.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.booster.UPGRADES_TIER_4 = [].map(x => x + "_AR")
+            Class.triAngle.UPGRADES_TIER_4 = ["raven", "shoebill"].map(x => x + "_AR")
+            Class.fighter.UPGRADES_TIER_4 = ["autoFighter"].map(x => x + "_AR")
+            Class.booster.UPGRADES_TIER_4 = ["autoBooster"].map(x => x + "_AR")
             //Class.falcon.UPGRADES_TIER_4
-            Class.bomber.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.autoTriAngle.UPGRADES_TIER_4 = ["megaAutoTriAngle", "tripleAutoTriAngle"].map(x => x + "_AR")
-            Class.surfer.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.eagle.UPGRADES_TIER_4 = [].map(x => x + "_AR")
+            Class.bomber.UPGRADES_TIER_4 = ["autoBomber"].map(x => x + "_AR")
+            Class.autoTriAngle.UPGRADES_TIER_4 = ["megaAutoTriAngle", "tripleAutoTriAngle", "autoFighter", "autoBooster", "autoFalcon", "autoBomber", "autoSurfer", "autoEagle", "autoPhoenix", "autoVulture", "autoCockatiel", "autoIntegrator", "autoDefect", "autoQuadAngle"].map(x => x + "_AR")
+            Class.surfer.UPGRADES_TIER_4 = ["autoSurfer"].map(x => x + "_AR")
+            Class.eagle.UPGRADES_TIER_4 = ["harrier", "autoEagle"].map(x => x + "_AR")
             //Class.phoenix.UPGRADES_TIER_4
-            Class.vulture.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.cockatiel_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
-            Class.integrator_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
+            Class.vulture.UPGRADES_TIER_4 = ["autoVulture"].map(x => x + "_AR")
+            Class.cockatiel_AR.UPGRADES_TIER_4 = ["autoCockatiel"].map(x => x + "_AR")
+            Class.integrator_AR.UPGRADES_TIER_4 = ["autoIntegrator"].map(x => x + "_AR")
             //Class.defect_AR.UPGRADES_TIER_4
-            Class.quadAngle_AR.UPGRADES_TIER_4 = [].map(x => x + "_AR")
+            Class.quadAngle_AR.UPGRADES_TIER_4 = ["autoQuadAngle"].map(x => x + "_AR")
         Class.auto3.UPGRADES_TIER_3.push("sniper3_AR", "crowbar_AR", "autoAuto3_AR", "combo_AR")
             Class.auto5.UPGRADES_TIER_4 = [].map(x => x + "_AR")
             Class.mega3.UPGRADES_TIER_4 = [].map(x => x + "_AR")
@@ -7413,6 +7422,7 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
         Class.trapper.UPGRADES_TIER_3.splice(0, 1) //remove barricade
         Class.trapper.UPGRADES_TIER_3.push("megaTrapper_AR")
             Class.trapper.UPGRADES_TIER_4 = [/*"sawedOff", */"tricker"].map(x => x + "_AR")
+            Class.megaTrapper_AR.UPGRADES_TIER_4 = ["shoebill"].map(x => x + "_AR")
         //Class.builder.UPGRADES_TIER_3
         //Class.triTrapper.UPGRADES_TIER_3
         //Class.trapGuard.UPGRADES_TIER_3
