@@ -418,8 +418,6 @@ Class.wark_AR = {
 }
 
 // Tier 3
-Class.PLACEHOLDER_hybridMarksman_AR = makeOver("marksman", "", preset.hybrid)
-Class.PLACEHOLDER_autoHybridMarksman_AR = makeAuto("PLACEHOLDER_hybridMarksman_AR")
 Class.analyzer_AR = {
     PARENT: "genericHealer",
     LABEL: "Analyzer",
@@ -685,8 +683,6 @@ Class.cluster_AR = {
         }
     ]
 }
-Class.coalesce_AR = makeOver("wark_AR", "Coalesce", preset.hybrid)
-Class.cobbler_AR = makeOver("mech_AR", "Cobbler", preset.hybrid)
 Class.cog_AR = {
     PARENT: "genericTank",
     LABEL: "Cog",
@@ -842,7 +838,6 @@ Class.crowbar_AR = {
 }
 Class.cruiserdrive_AR = makeDrive("cruiser", preset.driveSwarm)
 Class.defect_AR = makeBird("tripleShot", "Defect")
-Class.deviation_AR = makeOver("machineTrapper_AR", "Deviation", preset.hybrid)
 Class.dieselTrapper_AR = {
     PARENT: "genericTank",
     LABEL: "Diesel Trapper",
@@ -1335,7 +1330,6 @@ Class.expeller_AR = {
         }
     ], {delayIncrement: 0.5})
 }
-Class.fashioner_AR = makeOver("builder", "Fashioner", preset.hybrid)
 Class.faucet_AR = {
     PARENT: "genericTank",
     LABEL: "Faucet",
@@ -1454,7 +1448,6 @@ Class.foctillery_AR = {
         }
     ]
 }
-Class.force_AR = makeOver("artillery", "Force", preset.hybrid)
 Class.forger_AR = {
     PARENT: "genericTank",
     LABEL: "Forger",
@@ -1568,7 +1561,6 @@ Class.frother_AR = {
         }
     ]
 }
-Class.gator_AR = makeOver("gatlingGun", "Gator", preset.hybrid)
 Class.hangar_AR = {
     PARENT: "genericTank",
     LABEL: "Hangar",
@@ -1613,7 +1605,6 @@ Class.hangar_AR = {
         }
     ]
 }
-Class.heaver_AR = makeOver("launcher", "Heaver", preset.hybrid)
 Class.helicopter_AR = {
     PARENT: "genericTank",
     LABEL: "Helicopter",
@@ -1659,7 +1650,6 @@ Class.helicopter_AR = {
         return output
     })()
 }
-Class.hitman_AR = makeOver("assassin", "Hitman", preset.hybrid)
 Class.honchodrive_AR = makeDrive("honcho_AR")
 Class.hurler_AR = {
     PARENT: "genericTank",
@@ -1711,7 +1701,6 @@ Class.hutch_AR = {
         }
     ], {delayIncrement: 0.5})
 }
-Class.hybrix_AR = makeOver("helix", "Hybrix", preset.hybrid)
 Class.incarcerator_AR = {
     PARENT: "genericTank",
     LABEL: "Incarcerator",
@@ -1780,8 +1769,6 @@ Class.inception_AR = {
         }
     ]
 }
-Class.integrator_AR = makeOver("triAngle", "Integrator", preset.hybrid)
-Class.interner_AR = makeOver("pen_AR", "Interner", preset.hybrid)
 Class.issuer_AR = {
     PARENT: "genericTank",
     LABEL: "Issuer",
@@ -2339,7 +2326,6 @@ Class.pitcher_AR = {
         }
     ]
 }
-Class.polluter_AR = makeOver("diesel_AR", "Polluter", preset.hybrid)
 Class.prober_AR = {
     PARENT: "genericTank",
     LABEL: "Prober",
@@ -2707,7 +2693,6 @@ Class.scientist_AR = {
         }
     ]
 }
-Class.shower_AR = makeOver("sprayer", "Shower", preset.hybrid)
 Class.slinker_AR = {
     PARENT: "genericTank",
     LABEL: "Slinker",
@@ -3332,7 +3317,6 @@ Class.accountant_AR = {
         }
     ]
 }
-Class.accugator_AR = makeOver("accurator", "Accugator", preset.hybrid)
 Class.actuary_AR = {
     PARENT: "genericHealer",
     LABEL: "Actuary",
@@ -3444,7 +3428,6 @@ Class.antidote_AR = {
         }
     ], {delayIncrement: 0.5})
 }
-Class.assistant_AR = makeOver("single", "Assistant", preset.hybrid)
 Class.autoDirectorstorm_AR = makeAuto("directorstorm_AR", "Auto-Directorstorm", stormAuto_options)
 Class.autoDoubleFlank_AR = makeAuto("doubleFlankTwin_AR", "Auto-Double Flank")
 Class.autoHexaWhirl_AR = makeWhirlwind(makeAuto("hexaTank", "", whirlAuto_options), {label: "Auto-Hexa Whirl"})
@@ -3459,7 +3442,6 @@ Class.autoWhirlGuard_AR = makeWhirlwind(makeAuto("trapGuard", "", whirlAuto_opti
 Class.avian_AR = makeBird("single", "Avian")
 Class.bansheedrive_AR = makeDrive("banshee")
 Class.battledrive_AR = makeDrive("battleship", {...preset.driveSwarm, label: "Battledrive"})
-Class.bentCatcher_AR = makeOver("waarrk_AR", "Bent Catcher", preset.hybrid)
 Class.bentSubverter_AR = {
     PARENT: "genericTank",
     LABEL: "Bent Subverter",
@@ -3719,7 +3701,6 @@ Class.concentrator_AR = {
         }
     ]
 }
-Class.contriver_AR = makeOver("cog_AR", "Contriver", preset.hybrid)
 Class.coordinator_AR = {
     PARENT: "genericTank",
     LABEL: "Coordinator",
@@ -3790,7 +3771,6 @@ Class.cyclops_AR = {
     ]
 }
 Class.deficiency_AR = makeBird("pentaShot", "Deficiency")
-Class.deposer_AR = makeOver("subverter", "Deposer", preset.hybrid)
 Class.doctor_AR = {
     PARENT: "genericHealer",
     LABEL: "Doctor",
@@ -4560,7 +4540,6 @@ Class.flexedDouble_AR = {
         }
     ], 2)
 }
-Class.flexedHybrid_AR = makeOver("pentaShot", "Flexed Hybrid", preset.hybrid)
 Class.foredrive_AR = makeDrive("foreman_AR", {label: "Foredrive"})
 Class.fortdrive_AR = makeDrive("fortress", {...preset.driveSwarm, label: "Fortdrive"})
 Class.gadgetGun_AR = {
@@ -5073,7 +5052,6 @@ Class.instructor_AR.GUNS.push(...weaponArray({
         STAT_CALCULATOR: "swarm"
     }
 }, 3, 1/3))
-Class.junker_AR = makeOver("bentMinigun_AR", "Junker", preset.hybrid)
 Class.prescriber_AR = makeDrive({
     PARENT: "genericTank",
     STAT_NAMES: statnames.drone,
@@ -5217,7 +5195,6 @@ Class.leader_AR = {
     ]
 }
 Class.managerdrive_AR = makeDrive("manager")
-Class.matchlock_AR = makeOver("musket", "Matchlock", preset.hybrid)
 Class.medicare_AR = {
     PARENT: "genericHealer",
     LABEL: "Medicare",
@@ -5352,7 +5329,6 @@ Class.mono_AR = {
         }
     ]
 }
-Class.nacho_AR = makeOver("nimrod", "Nacho", preset.hybrid)
 Class.necrodrive_AR = makeDrive("necromancer", {label: "Necrodrive"})
 Class.nitwit_AR = makeBird("triplet", "Nitwit")
 Class.nitwix_AR = makeBird("triplex", "Nitwix")
@@ -5395,31 +5371,12 @@ Class.orifice_AR = {
     ]
 }
 Class.overangle_AR = makeOver("triAngle", "Overangle", preset.sideOver)
-Class.overartillery_AR = makeOver("artillery")
-Class.overassassin_AR = makeOver("assassin")
-Class.overblaster_AR = makeOver("blaster")
-Class.overbuilder_AR = makeOver("builder")
-Class.overdestroyer_AR = makeOver("destroyer")
-Class.overdiesel_AR = makeOver("diesel_AR")
 Class.overdoubleMachine_AR = makeOver("doubleMachine", "Overdouble Machine", preset.sideOver)
 Class.overdoubleTwin_AR = makeOver("doubleTwin", "Overdouble Twin", preset.sideOver)
-Class.overgatling_AR = makeOver("gatlingGun", "Overgatling")
-Class.overhunter_AR = makeOver("hunter")
-Class.overlauncher_AR = makeOver("launcher")
-Class.overmarksman_AR = makeOver("marksman")
-Class.overmach_AR = makeOver("machineTrapper_AR", "Overmach")
-Class.overmech_AR = makeOver("mech_AR")
-Class.overminigun_AR = makeOver("minigun")
-Class.overnailer_AR = makeOver("nailgun", "Overnailer")
 Class.overgunnerdrive_AR = makeDrive("overgunner")
-Class.overpen_AR = makeOver("pen_AR")
-Class.overrifle_AR = makeOver("rifle")
-Class.overshot_AR = makeOver("tripleShot", "Overshot")
-Class.oversprayer_AR = makeOver("sprayer")
 Class.overstorm_AR = makeDrive("overseer", {...storm_options, label: "Overstorm"})
 Class.overtrapperdrive_AR = makeDrive("overtrapper")
 Class.overtrapGuard_AR = makeOver("trapGuard", "Overtrap Guard", preset.sideOver)
-Class.overwark_AR = makeOver("wark_AR", "Overwark")
 Class.peaceMoon_AR = makeWhirlwind("deathStar", {label: "Peace Moon"})
 Class.pentaBlaster_AR = {
     PARENT: "genericTank",
@@ -5807,7 +5764,6 @@ Class.ransacker_AR = {
         ...preset.trapGuard
     ]
 }
-Class.ravisher_AR = makeOver("dual", "Ravisher", preset.hybrid)
 Class.renovator_AR = {
     PARENT: "genericHealer",
     LABEL: "Renovator",
@@ -5836,8 +5792,6 @@ Class.renovator_AR = {
         }
     ]
 }
-Class.retainer_AR = makeOver("hutch_AR", "Retainer", preset.hybrid)
-Class.rotator_AR = makeOver("rotaryGun_AR", "Rotator", preset.hybrid)
 Class.scatterer_AR = {
     PARENT: "genericTank",
     LABEL: "Scatterer",
@@ -5870,7 +5824,6 @@ Class.scatterer_AR = {
         }
     ]
 }
-Class.schwartz_AR = makeWhirlwind("force_AR", {label: "Schwartz"})
 Class.scribble_AR = {
     PARENT: "genericHealer",
     LABEL: "Scribble",
@@ -6009,7 +5962,6 @@ Class.slabNSlab_AR = {
         }
     ], 2)
 }
-Class.smearer_AR = makeOver("spreadshot", "Smearer", preset.hybrid)
 Class.sootherdrive_AR = {
     PARENT: "genericHealer",
     LABEL: "Sootherdrive",
@@ -6051,7 +6003,6 @@ Class.sootherdrive_AR = {
         }
     ]
 }
-Class.spambrid_AR = makeOver("bentGunner_AR", "Spambrid", preset.hybrid)
 Class.spawnerstorm_AR = makeDrive("spawner", storm_options)
 Class.spiker_AR = {
     PARENT: "genericHealer",
@@ -6080,7 +6031,6 @@ Class.spiker_AR = {
         }
     ]
 }
-Class.splitHybrid_AR = makeOver("splitShot_AR", "Split Hybrid", preset.hybrid)
 Class.sprayNSpray_AR = {
     PARENT: "genericTank",
     LABEL: "Spray 'n Spray",
@@ -6262,7 +6212,6 @@ Class.therapist_AR = {
         }
     ], {delayIncrement: 0.5})
 }
-Class.throttler_AR = makeOver("expeller_AR", "Throttler", preset.hybrid)
 Class.tommy_AR = {
     PARENT: "genericTank",
     LABEL: "Tommy",
@@ -6668,8 +6617,6 @@ Class.tripleSprayer_AR = {
         }
     ], 3)
 }
-Class.triprid_AR = makeOver("triplet", "Triprid", preset.hybrid)
-Class.triprix_AR = makeOver("triplex", "Triprix", preset.hybrid)
 Class.tyrant_AR = makeDrive("overlord", {label: "Tyrant"})
 Class.understorm_AR = makeDrive("underseer", {...storm_options, label: "Understorm"})
 Class.ultraTornado_AR = {
@@ -6969,7 +6916,6 @@ Class.xNimrod_AR = {
         }
     ]
 }
-Class.xPoacher_AR = makeOver("xHunter", "X-Poacher", preset.hybrid)
 Class.xPredator_AR = {
     PARENT: "genericTank",
     LABEL: "X-Predator",
@@ -7101,17 +7047,77 @@ Class.custodian_AR = {
 }
 
 // Quick Defining
-const quickMakeAuto = (type) => {
-    for (let i = 0; i < type.length; i++) {
-        name = ensureIsClass(type[i])
-        label = name.LABEL
-        classLabel = label.replaceAll(' ', '').replaceAll('-', '').replaceAll('', '').replaceAll("'n", 'N') // delete whitespaces and hyphens + special case for halfnhalf
-        Class["auto" + classLabel + "_AR"] = makeAuto(type[i])
-        Class["megaAuto" + classLabel + "_AR"] = makeAuto(type[i], `Mega Auto-${label}`, preset.megaAuto)
-        Class["tripleAuto" + classLabel + "_AR"] = makeAuto(type[i], `Triple Auto-${label}`, preset.tripleAuto)
+const quickMake = (type, options = {}) => {
+    name = ensureIsClass(type)
+    label = name.LABEL
+    classLabel = label.replaceAll(' ', '').replaceAll('-', '').replaceAll("'n", 'N') // delete whitespaces and hyphens + special case for halfnhalf
+    if (options.hybrid) {
+        let hybridLabel = options.hybrid ??= `Hybrid ${label}`
+        let hybridClassLabel = hybridLabel.charAt(0).toLowerCase() + hybridLabel.slice(1).replaceAll(' ', '').replaceAll('-', '')
+        Class[hybridClassLabel + "_AR"] = makeOver(type, hybridLabel, preset.hybrid)
+    }
+    if (options.over) {
+        let overLabel = options.over ??= `Over${label.charAt(0).toLowerCase() + label.slice(1)}`
+        let overClassLabel = overLabel.replaceAll(' ', '').replaceAll('-', '')
+        Class[overLabel.charAt(0).toLowerCase() + overLabel.slice(1) + "_AR"] = makeOver(type, overLabel)
     }
 }
-quickMakeAuto(["accurator", "armsman", "artillery", "assassin", "atomizer", "auto3", "auto4", "auto5", "barricade", "battery", "bentDouble", "bentGunner_AR", "bentHybrid", "bentMinigun_AR", "blaster", "blower", "builder", "bulwark", "bushwhacker", "buttbuttin", "coalesce_AR", "cog_AR", "coil", "combo_AR", "courser_AR", "cropDuster", "crossbow", "cruiser", "cyclone", "deadeye", "deathStar", "defect_AR", "destroyer", "diesel_AR", "doper_AR", "doubleArtillery_AR", "doubleBlaster_AR", "doubleDiesel_AR", "doubleGatling_AR", "doubleGunner_AR", "doubleHelix_AR", "doubleMachine", "doubleMinigun_AR", "doubleSprayer_AR", "dual", "duplicator", "enforcer_AR", "equalizer_AR", "expeller_AR", "falcon", "faucet_AR", "flamethrower", "foamer_AR", "focal", "fork", "frother_AR", "gatlingGun", "gunner", "gunnerTrapper", "halfNHalf", "helix", "hewnDouble", "hexaTank", "hitman_AR", "honcho_AR", "hunter", "hutch_AR", "iterator", "launcher", "machineGunner", "machineTrapper_AR", "marksman", "manager", "mech_AR", "megaHunter_AR", "minigun", "mingler_AR", "mortar", "musket", "nailgun", "nimrod", "octoTank", "ordnance", "overlord", "overgunner", "overseer", "overtrapper", "pen_AR", "pentaShot", "phoenix", "poacher", "predator", "prober_AR", "quadruplex", "railgun_AR", "ranger", "redistributor", "repeater", "revolver", "rifle", "rimfire_AR", "shower_AR", "single", "sniper3_AR", "spawner", "spiral", "splasher", "splitShot_AR", "sprayer", "spreadshot", "stalker", "stormer_AR", "streamliner", "subverter", "superSpiral", "trapGuard", "triAngle", "triBlaster", "tripleMachine", "tripleShot", "triplet", "triplex", "underseer", "volley_AR", "volute", "vulture", "waarrk_AR", "wark_AR", "warkwark_AR", "widget_AR", "xHunter", "zipper_AR"])
+const quickMakeAuto = (type) => {
+    for (const types of type) {
+        name = ensureIsClass(types)
+        label = name.LABEL
+        classLabel = label.replaceAll(' ', '').replaceAll('-', '').replaceAll("'n", 'N') // delete whitespaces and hyphens + special case for halfnhalf
+
+        Class["auto" + classLabel + "_AR"] = makeAuto(types)
+        Class["megaAuto" + classLabel + "_AR"] = makeAuto(types, `Mega Auto-${label}`, preset.megaAuto)
+        Class["tripleAuto" + classLabel + "_AR"] = makeAuto(types, `Triple Auto-${label}`, preset.tripleAuto)
+    }
+}
+quickMake("accurator", {hybrid: "Accugator"})
+quickMake("artillery", {hybrid: "Force", over: "Overartillery"})
+quickMake("assassin", {hybrid: "Hitman", over: "Overassassin"})
+quickMake("bentGunner_AR", {hybrid: "Spambrid"})
+quickMake("bentMinigun_AR", {hybrid: "Junker"})
+quickMake("blaster", {over: "Overblaster"})
+quickMake("builder", {hybrid: "Fashioner", over: "Overbuilder"})
+quickMake("cog_AR", {hybrid: "Contriver"})
+quickMake("destroyer", {over: "Overdestroyer"})
+quickMake("diesel_AR", {hybrid: "Polluter", over: "Overdiesel"})
+quickMake("dual", {hybrid: "Ravisher"})
+quickMake("expeller_AR", {hybrid: "Throttler"})
+quickMake("gatlingGun", {hybrid: "Gator", over: "Overgatling"})
+quickMake("helix", {hybrid: "Hybrix"})
+quickMake("hunter", {over: "Overhunter"})
+quickMake("hutch_AR", {hybrid: "Retainer"})
+quickMake("launcher", {hybrid: "Heaver", over: "Overlauncher"})
+quickMake("machineTrapper_AR", {hybrid: "Deviation", over: "Overmach"})
+quickMake("marksman", {hybrid: "Hybrid Marksman", over: "Overmarksman"})
+quickMake("minigun", {over: "Overminigun"})
+quickMake("mech_AR", {hybrid: "Cobbler", over: "Overmech"})
+quickMake("musket", {hybrid: "Matchlock"})
+quickMake("nailgun", {over: "Overnailer"})
+quickMake("nimrod", {hybrid: "Nacho"})
+quickMake("pen_AR", {hybrid: "Interner", over: "Overpen"})
+quickMake("pentaShot", {hybrid: "Flexed Hybrid"})
+quickMake("rifle", {over: "Overrifle"})
+quickMake("rotaryGun_AR", {hybrid: "Rotator"})
+quickMake("single", {hybrid: "Assistant"})
+quickMake("splitShot_AR", {hybrid: "Split Hybrid"})
+quickMake("sprayer", {hybrid: "Shower", over: "Oversprayer"})
+quickMake("spreadshot", {hybrid: "Smearer"})
+quickMake("subverter", {hybrid: "Deposer"})
+quickMake("triAngle", {hybrid: "Integrator"})
+quickMake("tripleShot", {over: "Overshot"})
+quickMake("triplet", {hybrid: "Triprid"})
+quickMake("triplex", {hybrid: "Triprix"})
+quickMake("waarrk_AR", {hybrid: "Bent Catcher"})
+quickMake("wark_AR", {hybrid: "Coalesce", over: "Overwark"})
+quickMake("xHunter", {hybrid: "X-Poacher"})
+
+quickMakeAuto(["accurator", "armsman", "artillery", "assassin", "atomizer", "auto3", "auto4", "auto5", "barricade", "battery", "bentDouble", "bentGunner_AR", "bentHybrid", "bentMinigun_AR", "blaster", "blower", "builder", "bulwark", "bushwhacker", "buttbuttin", "coalesce_AR", "cog_AR", "coil", "combo_AR", "courser_AR", "cropDuster", "crossbow", "cruiser", "cyclone", "deadeye", "deathStar", "defect_AR", "destroyer", "diesel_AR", "doper_AR", "doubleArtillery_AR", "doubleBlaster_AR", "doubleDiesel_AR", "doubleGatling_AR", "doubleGunner_AR", "doubleHelix_AR", "doubleMachine", "doubleMinigun_AR", "doubleSprayer_AR", "dual", "duplicator", "enforcer_AR", "equalizer_AR", "expeller_AR", "falcon", "faucet_AR", "flamethrower", "foamer_AR", "focal", "fork", "frother_AR", "gatlingGun", "gunner", "gunnerTrapper", "halfNHalf", "helix", "hewnDouble", "hexaTank", "hitman_AR", "honcho_AR", "hunter", "hutch_AR", "hybridMarksman_AR", "iterator", "launcher", "machineGunner", "machineTrapper_AR", "marksman", "manager", "mech_AR", "megaHunter_AR", "minigun", "mingler_AR", "mortar", "musket", "nailgun", "nimrod", "octoTank", "ordnance", "overlord", "overgunner", "overseer", "overtrapper", "pen_AR", "pentaShot", "phoenix", "poacher", "predator", "prober_AR", "quadruplex", "railgun_AR", "ranger", "redistributor", "repeater", "revolver", "rifle", "rimfire_AR", "shower_AR", "single", "sniper3_AR", "spawner", "spiral", "splasher", "splitShot_AR", "sprayer", "spreadshot", "stalker", "stormer_AR", "streamliner", "subverter", "superSpiral", "trapGuard", "triAngle", "triBlaster", "tripleMachine", "tripleShot", "triplet", "triplex", "underseer", "volley_AR", "volute", "vulture", "waarrk_AR", "wark_AR", "warkwark_AR", "widget_AR", "xHunter", "zipper_AR"])
+
+// UNSORTED
+Class.schwartz_AR = makeWhirlwind("force_AR", {label: "Schwartz"})
 
 // Class Tree
 if (!Config.arms_race == true) {return}
@@ -7267,13 +7273,13 @@ Class.menu_unused_AR = makeMenu("Unused (Tier 4)", {upgrades: ["custodian_AR", "
             Class.autoRifle_AR.UPGRADES_TIER_4 = ["megaAutoRifle", "tripleAutoRifle", "autoRevolver"].map(x => x + "_AR")
             //Class.enforcer_AR.UPGRADES_TIER_4
             //Class.prober_AR.UPGRADES_TIER_4
-        Class.marksman.UPGRADES_TIER_3.push("piercer_AR", "PLACEHOLDER_hybridMarksman_AR", "autoMarksman_AR")
+        Class.marksman.UPGRADES_TIER_3.push("piercer_AR", "hybridMarksman_AR", "autoMarksman_AR")
             //Class.deadeye.UPGRADES_TIER_4
             //Class.nimrod.UPGRADES_TIER_4
             //Class.revolver.UPGRADES_TIER_4
             Class.fork.UPGRADES_TIER_4 = ["autoFork"].map(x => x + "_AR")
-            Class.PLACEHOLDER_hybridMarksman_AR.UPGRADES_TIER_4 = ["overmarksman", "PLACEHOLDER_autoHybridMarksman"].map(x => x + "_AR")
-            Class.autoMarksman_AR.UPGRADES_TIER_4 = ["megaAutoMarksman", "tripleAutoMarksman", "autoDeadeye", "autoNimrod", "autoRevolver", "autoFork", "PLACEHOLDER_autoHybridMarksman"].map(x => x + "_AR")
+            Class.hybridMarksman_AR.UPGRADES_TIER_4 = ["overmarksman", "autoHybridMarksman"].map(x => x + "_AR")
+            Class.autoMarksman_AR.UPGRADES_TIER_4 = ["megaAutoMarksman", "tripleAutoMarksman", "autoDeadeye", "autoNimrod", "autoRevolver", "autoFork", "autoHybridMarksman"].map(x => x + "_AR")
 
     Class.machineGun.UPGRADES_TIER_2.push("diesel_AR", "machineTrapper_AR")
         //Class.machineGun.UPGRADES_TIER_3
