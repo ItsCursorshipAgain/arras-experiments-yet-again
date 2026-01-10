@@ -4,15 +4,6 @@ const g = require('../../gunvals.js')
 
 // Dev Menus
 Class.menu_elites = makeMenu("Elites", {upgrades: [
-    "eliteLauncher",
-    "eliteTwister",
-    "eliteSkimmer",
-    "eliteSwarmer",
-    "eliteRocketeer",
-    "menu_eliteCrashers",
-], color: "triangle", boxColor: "triangle", shape: 3.5})
-
-Class.menu_eliteCrashers = makeMenu("Elite Crashers", {upgrades: [
     "eliteDestroyer",
     "eliteGunner",
     "eliteSprayer",
@@ -20,6 +11,11 @@ Class.menu_eliteCrashers = makeMenu("Elite Crashers", {upgrades: [
     "eliteSpawner",
     "eliteTrapGuard",
     "eliteSpinner",
+    "eliteLauncher",
+    "eliteTwister",
+    "eliteSkimmer",
+    "eliteSwarmer",
+    "eliteRocketeer",
     "menu_legions",
     "menu_deltas",
 ], color: "pink", boxColor: "pink", shape: 3.5})
