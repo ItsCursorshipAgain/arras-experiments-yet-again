@@ -2959,7 +2959,7 @@ Class.flamethrower = {
                 X: 13
             },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.blaster, [1.75, 1.33, 2, 0.25, 10, 0.2, 4, 2, 0, 3, 0.25, 1, 1, 5]]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.blaster, g.flamethrower]),
                 TYPE: "growBullet"
             }
         },
@@ -4321,7 +4321,8 @@ Class.redistributor = {
         {
             POSITION: {
                 LENGTH: 26,
-                WIDTH: 7
+                WIDTH: 7,
+                DELAY: 2/3
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.lowPower, g.machineGun, { recoil: 1.15 }]),
@@ -4332,7 +4333,7 @@ Class.redistributor = {
             POSITION: {
                 LENGTH: 23,
                 WIDTH: 10,
-                DELAY: 0.5
+                DELAY: 1/3
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.lowPower, g.machineGun, { recoil: 1.15 }]),
@@ -6222,7 +6223,7 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
     Class.machineGun.UPGRADES_TIER_2 = ["artillery", "minigun", "gunner", "sprayer"]
         Class.minigun.UPGRADES_TIER_3 = ["streamliner", "nailgun", "cropDuster", "barricade", "vulture"]
         Class.sprayer.UPGRADES_TIER_3 = ["redistributor", "phoenix", "atomizer", "focal"]
-        Class.blaster.UPGRADES_TIER_3 = ["triBlaster", "splasher", "flamethrower", "halfNHalf"]
+        Class.blaster.UPGRADES_TIER_3 = ["triBlaster", "splasher", "flamethrower", "halfNHalf", "subverter"]
         Class.gatlingGun.UPGRADES_TIER_3 = ["focal", "accurator", "halfNHalf"]
         Class.doubleMachine.UPGRADES_TIER_3 = ["tripleMachine", "halfNHalf"]
 
