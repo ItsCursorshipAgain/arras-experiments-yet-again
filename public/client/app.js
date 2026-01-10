@@ -3080,7 +3080,7 @@ import * as socketStuff from "./socketinit.js";
 
             // Skill value
             if (level) {
-                drawText(textcolor === col ? "MAX" : "+" + level, Math.round(x + len + 4) - 5.5, y + height / 2, height - 5, col, "left", true);
+                drawText("+" + level, Math.round(x + len + 4) - 5.5, y + height / 2, height - 5, col, "left", true);
             }
 
             // Move on
@@ -3751,7 +3751,7 @@ import * as socketStuff from "./socketinit.js";
                 }
 
                 if (amount > 0) {
-                    drawText(amount < softcap ? `+${amount}` : "MAX", x + t / 2, spacing + q * 1.3, q / 4, skillColor, "center");
+                    drawText(x + t / 2, spacing + q * 1.3, q / 4, skillColor, "center");
                 }
 
                 ctx[2].strokeStyle = color.black;
