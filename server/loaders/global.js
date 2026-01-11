@@ -707,7 +707,7 @@ global.activateTieredFood = () => {
 	// Constructs a four-dimensional array of shape types
 
 	// 3-wide dimension of the 3 base shape types - egg, square, triangle
-	Config.food_types = Array(3).fill().map((_, i, a) => [
+	Config.classic_food_types = Array(3).fill().map((_, i, a) => [
 		// Chance of spawning in exponents of 4
 		4 ** (a.length - i),
 		// 4-wide dimension of the 4 shape tiers - regular, beta, alpha, omega
@@ -737,7 +737,7 @@ global.activateTieredFood = () => {
 	//laby_${poly}_${tier}_${shiny}_${rank}
 
 	// 2-wide dimension of the 2 base shape types - pentagon, hexagon
-	Config.food_types_nest = Array(2).fill().map((_, i, a) => [
+	Config.classic_food_types_nest = Array(2).fill().map((_, i, a) => [
 		// Chance of spawning in exponents of 4
 		4 ** (a.length - i),
 		// 4-wide dimension of the 4 shape tiers - regular, beta, alpha, omega

@@ -197,7 +197,7 @@ module.exports = {
     enable_food: true,
     classic_food: false, // Disables tiered (norm/Beta/Alpha/Omega) food, enables editing the below arrays
 
-    food_types: [ // Possible food types outside the nest
+    classic_food_types: [ // Possible food types outside the nest
         [1, [
             [65, "egg"], [64, "triangle"], [45, "square"], [7, "pentagon"]//, [1, "hexagon"]
         ]],
@@ -208,12 +208,12 @@ module.exports = {
             [1296, "jewel"], [216, "legendaryTriangle"], [36, "legendarySquare"], [6, "legendaryPentagon"]//, [1, "legendaryHexagon"]
         ]]
     ],
-    food_types_nest: [ // Possible food types in the nest
+    classic_food_types_nest: [ // Possible food types in the nest
         [1, [
             [16, "pentagon"], [ 4, "betaPentagon"], [ 1, "alphaPentagon"]/*, [16, "presentRY"], [16, "presentRP"], [16, "presentRW"], [16, "presentGY"], [16, "presentGP"], [16, "presentGW"], [16, "presentBY"], [16, "presentBP"], [16, "presentBW"],*/
         ]]
     ],
-    enemy_types_nest: [ // Possible enemy food types in the nest
+    classic_enemy_types_nest: [ // Possible enemy food types in the nest
         [1, [
             [1, "crasher"]
         ]],

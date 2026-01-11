@@ -328,7 +328,7 @@ class gameHandler {
             // Enemy spawn
             if (Math.random() < 1 / 3 && this.enemyFoods.length < Config.enemy_cap_nest) {
                 const tile = ran.choose(global.gameManager.room.spawnable[TEAM_ENEMIES]).randomInside();
-                const o = spawnFoodEntity(tile, Config.enemy_types_nest);
+                const o = spawnFoodEntity(tile, Config.classic_enemy_types_nest);
                 this.enemyFoods.push(o);
                 setupCleanup(this.enemyFoods, o);
             }
@@ -336,7 +336,7 @@ class gameHandler {
             if (this.nestFoods.length < Config.food_cap_nest) {
                 const tile = ran.choose(global.gameManager.room.spawnable[TEAM_ENEMIES]).randomInside();
                 for (let i = 0; i < totalFoods; i++) {
-                    const o = spawnFoodEntity(tile, Config.food_types_nest);
+                    const o = spawnFoodEntity(tile, Config.classic_food_types_nest);
                     this.nestFoods.push(o);
                     setupCleanup(this.nestFoods, o);
                 }
@@ -345,7 +345,7 @@ class gameHandler {
             // Regular food spawn
             const tile = ran.choose(global.gameManager.room.spawnableDefault).randomInside();
             for (let i = 0; i < totalFoods; i++) {
-                const o = spawnFoodEntity(tile, Config.food_types);
+                const o = spawnFoodEntity(tile, Config.classic_food_types);
                 this.foods.push(o);
                 setupCleanup(this.foods, o);
             }

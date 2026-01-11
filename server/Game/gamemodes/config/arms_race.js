@@ -1,6 +1,6 @@
 module.exports = {
     arms_race: true,
-    enemy_types_nest: [
+    classic_enemy_types_nest: [
         [1, [
             [1, "crasher"]
         ]],
