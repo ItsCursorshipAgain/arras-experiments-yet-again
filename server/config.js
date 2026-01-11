@@ -195,9 +195,9 @@ module.exports = {
 
     // Food
     enable_food: true,
-    classic_food: false, // Disables tiered (norm/Beta/Alpha/Omega) food, enables editing the below arrays
 
-    classic_food_types: [ // Possible food types outside the nest
+    classic_food: false, // Enables classic (Old Dreadnoughts) food and the below arrays
+    classic_food_types: [ // Possible classic food types outside the nest
         [1, [
             [65, "egg"], [64, "triangle"], [45, "square"], [7, "pentagon"]//, [1, "hexagon"]
         ]],
@@ -208,12 +208,12 @@ module.exports = {
             [1296, "jewel"], [216, "legendaryTriangle"], [36, "legendarySquare"], [6, "legendaryPentagon"]//, [1, "legendaryHexagon"]
         ]]
     ],
-    classic_food_types_nest: [ // Possible food types in the nest
+    classic_food_types_nest: [ // Possible classic food types in the nest
         [1, [
-            [16, "pentagon"], [ 4, "betaPentagon"], [ 1, "alphaPentagon"]/*, [16, "presentRY"], [16, "presentRP"], [16, "presentRW"], [16, "presentGY"], [16, "presentGP"], [16, "presentGW"], [16, "presentBY"], [16, "presentBP"], [16, "presentBW"],*/
+            [16, "pentagon"], [4, "betaPentagon"], [1, "alphaPentagon"]/*, [16, "presentRY"], [16, "presentRP"], [16, "presentRW"], [16, "presentGY"], [16, "presentGP"], [16, "presentGW"], [16, "presentBY"], [16, "presentBP"], [16, "presentBW"],*/
         ]]
     ],
-    classic_enemy_types_nest: [ // Possible enemy food types in the nest
+    classic_enemy_types_nest: [ // Possible classic enemy food types in the nest
         [1, [
             [1, "crasher"]
         ]],
@@ -250,12 +250,12 @@ module.exports = {
             bosses: ["paladin", "freyja", "zaphkiel", "nyx", "theia"],
             amount: [1], chance: 0.01,
             message: "The world tremors as the celestials are reborn anew!",
-        },*/
+        },
         {
             bosses: ["julius", "genghis", "napoleon"],
             amount: [1], chance: 0.1,
             message: "The darkness arrives as the realms are torn apart!",
-        }
+        }*/
     ],
 
     // How many members a team can have in comparison to an unweighed team.
