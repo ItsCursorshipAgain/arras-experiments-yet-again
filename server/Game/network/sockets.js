@@ -512,8 +512,12 @@ class socketManager {
                     socket.permissions &&
                     socket.permissions.class
                 ) {
-                    player.body.define({ RESET_UPGRADES: true, BATCH_UPGRADES: false });
+                    player.body.define({RESET_UPGRADES: true, BATCH_UPGRADES: false});
                     player.body.define(socket.permissions.class);
+                }
+                let msg = Config.token_message.split("\n");
+                for (let i = 0; i < msg.length; i++) {
+                    player.body.sendMessage(msg[i]); // todo: make this only fire once
                 }
             } break;
             case "1": {

@@ -141,6 +141,7 @@ module.exports = {
     spawn_message: "You have spawned! Welcome to the game.\n"
                  + "You will be invulnerable until you move or shoot.\n"
                  + "Please report any bugs you encounter!",
+    token_message: "Friendly reminder: Please do not repeatedly kill others with an overpowered tank.",
 
     chat_message_duration: 15_000, // How long a chat message lasts in milliseconds. Includes the fade-out period.
     popup_message_duration: 10_000, // How long (in milliseconds) a popup message lasts before fading out.
