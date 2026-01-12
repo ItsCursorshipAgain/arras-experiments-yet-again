@@ -1,6 +1,6 @@
 # Update [2025-03-26]
-- Change 1
-- Change 2
+- Added Boxer.
+- Reaching Level 30 now nets you 2 skill points.
 - Change 3 - <b><font color="#000000">Special Change</font></b>
 
 # Update [2025-03-23]
