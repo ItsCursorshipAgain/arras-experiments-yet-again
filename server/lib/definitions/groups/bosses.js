@@ -1031,7 +1031,7 @@ Class.eliteSkimmer = {
 Class.thaumaturge = {
     PARENT: "miniboss",
     LABEL: "Thaumaturge",
-    NAME: "Elite Skimmer",
+    NAME: "Thaumaturge",
     DISPLAY_NAME: false,
     DANGER: 11,
     SHAPE: 4,
