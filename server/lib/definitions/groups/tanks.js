@@ -356,6 +356,37 @@ Class.assassin = {
 Class.auto3 = makeRadialAuto("autoTankGun", {isTurret: true, danger: 6, label: "Auto-3"})
 Class.autoTrapper = makeAuto("trapper")
 Class.autoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "hexaTrapper"]
+Class.boxer = {
+    PARENT: "genericTank",
+    LABEL: "Boxer",
+    DANGER: 6,
+    GUNS: [
+        {
+            POSITION: {
+                LENGTH: 20.5,
+                WIDTH: 12
+            },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder]),
+                TYPE: "bullet"
+            }
+        },
+        ...weaponMirror(
+            {
+                POSITION: {
+                    LENGTH: 20,
+                    WIDTH: 8,
+                    Y: 5.5,
+                    ANGLE: 180
+                },
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.basic, g.twin]),
+                    TYPE: "bullet"
+                }
+            }
+        )
+    ]
+}
 Class.builder = {
     PARENT: "genericTank",
     LABEL: "Builder",
@@ -5130,7 +5161,7 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
     Class.basic.UPGRADES_TIER_2 = ["smasher"]
         Class.smasher.UPGRADES_TIER_3 = ["megaSmasher", "spike", "autoSmasher", "landmine"]
 
-    Class.twin.UPGRADES_TIER_2 = ["doubleTwin", "tripleShot", "gunner", "hexaTank", "helix"]
+    Class.twin.UPGRADES_TIER_2 = ["doubleTwin", "tripleShot", "gunner", "hexaTank", "helix", "boxer"]
         Class.twin.UPGRADES_TIER_3 = ["dual", "bulwark", "musket"]
         Class.doubleTwin.UPGRADES_TIER_3 = ["tripleTwin", "hewnDouble", "autoDouble", "bentDouble"]
         Class.tripleShot.UPGRADES_TIER_3 = ["pentaShot", "spreadshot", "bentHybrid", "bentDouble", "triplet", "triplex"]
@@ -5160,7 +5191,7 @@ Class.basic.UPGRADES_TIER_1 = ["twin", "sniper", "machineGun", "flankGuard", "di
         Class.underseer.UPGRADES_TIER_3 = ["necromancer", "maleficitor", "infestor"]
         Class.spawner.UPGRADES_TIER_3 = ["factory", "autoSpawner"/*, "bender"*/]
 
-    Class.pounder.UPGRADES_TIER_2 = ["destroyer", "builder", "artillery", "launcher"]
+    Class.pounder.UPGRADES_TIER_2 = ["destroyer", "builder", "artillery", "launcher", "boxer"]
         Class.pounder.UPGRADES_TIER_3 = ["shotgun", "eagle"]
         Class.destroyer.UPGRADES_TIER_3 = ["conqueror", "annihilator", "hybrid", "construct"]
         Class.artillery.UPGRADES_TIER_3 = ["mortar", "ordnance", "beekeeper", "fieldGun"]
