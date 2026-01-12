@@ -95,7 +95,7 @@ module.exports = {
     bullet_spawn_offset: 1, // Where the bullet spawns, where 1 is fully outside the barrel and -1 is fully inside the barrel, and 0 is halfway between.
     damage_multiplier: 1, // General damage multiplier everytime damage is dealt.
     knockback_multiplier: 1.1, // General knockback multiplier everytime knockback is applied.
-    glass_health_factor: 2, // TODO: Figure out how the math behind this works.
+    glass_health_factor: 4, // TODO: Figure out how the math behind this works.
     room_bound_force: 0.01,// How strong the force is that confines entities to the map and portals apply to entities.
     soft_max_skill: 0.59, // TODO: Find out what the intention behind the implementation of this configuration is.
 
