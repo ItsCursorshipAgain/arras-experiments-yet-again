@@ -102,7 +102,7 @@ module.exports = {
     // When an entity reaches a level, this function is called and returns how many skill points that entity gets for reaching that level.
     defineLevelSkillPoints: level => {
         if (level < 2) return 0;
-        if (level <= 40) return 1;
+        if (level === 30) return 2;
         if (level <= 45 && level && 1 === 1) return 1;
         return 0;
     },
