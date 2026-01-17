@@ -74,7 +74,7 @@ module.exports = {
 			BULLET_PEN: 'Ball Sharpness',
 			BULLET_DAMAGE: 'Ball Damage',
 			RELOAD: 'Ball Density',
-		},
+		}
 	},
 	base: {
 	    ACCEL: 1.6,
@@ -85,7 +85,7 @@ module.exports = {
 	    PENETRATION: 1.05,
 	    SHIELD: 5.75,
 	    REGEN: 0.01,
-	    FOV: 1.02,
+	    FOV: 1,
 	    DENSITY: 0.5,
 	}
 };
